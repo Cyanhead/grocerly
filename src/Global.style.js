@@ -1,5 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
+import '@fontsource/quicksand/300.css';
+import '@fontsource/quicksand/400.css';
+import '@fontsource/quicksand/500.css';
+import '@fontsource/quicksand/600.css';
+import '@fontsource/quicksand/700.css';
+
 export const GlobalStyle = createGlobalStyle`
     /*
     1. Use a more-intuitive box-sizing model.
@@ -31,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
+        font-family: "Quicksand", sans-serif;
     }
 
     /*

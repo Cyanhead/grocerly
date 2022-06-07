@@ -4,6 +4,9 @@ const primary = props => props.theme.color.primary;
 const white = props => props.theme.color.white;
 const grey = props => props.theme.color.grey;
 
+const semibold = props => props.theme.fontWght.semibold;
+const medium = props => props.theme.fontWght.medium;
+
 export const SearchbarWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -29,6 +32,8 @@ export const CategoryBtn = styled.button`
 
   padding: 12px;
 
+  font-weight: ${semibold};
+
   border: none;
   outline: none;
 
@@ -42,6 +47,8 @@ export const SearchInput = styled.input`
   background-color: inherit;
 
   padding-left: 12px;
+
+  font-weight: ${medium};
 
   min-width: 300px;
 

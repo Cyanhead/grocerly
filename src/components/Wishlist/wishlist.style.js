@@ -3,6 +3,8 @@ import styled from 'styled-components';
 const primary = props => props.theme.color.primary;
 const white = props => props.theme.color.white;
 
+const medium = props => props.theme.fontWght.medium;
+
 export const WishlistWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -10,8 +12,6 @@ export const WishlistWrap = styled.div`
 
   padding: 8px 8px 8px 4px;
   margin-right: 20px;
-
-  border: 1px solid black;
 `;
 
 export const WishlistCounterWrap = styled.div`
@@ -49,4 +49,7 @@ export const WishCount = styled.p`
 
 export const WishlistP = styled.p`
   margin-left: 2px;
+
+  font-size: 0.75rem;
+  font-weight: ${medium};
 `;

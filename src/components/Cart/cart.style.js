@@ -3,14 +3,14 @@ import styled from 'styled-components';
 const primary = props => props.theme.color.primary;
 const white = props => props.theme.color.white;
 
+const medium = props => props.theme.fontWght.medium;
+
 export const CartWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 
   padding: 8px 8px 8px 4px;
-
-  border: 1px solid black;
 `;
 
 export const CartCounterWrap = styled.div`
@@ -49,5 +49,6 @@ export const CartCount = styled.p`
 export const CartText = styled.div``;
 
 export const CartP = styled.p`
-  /* margin-left: 2px; */
+  font-size: 0.75rem;
+  font-weight: ${medium};
 `;
