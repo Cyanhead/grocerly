@@ -6,8 +6,8 @@ import {
   SearchInput,
   SearchbarRight,
 } from './searchbar.style';
-import { FiChevronDown, FiSearch } from 'react-icons/fi';
-import { IconWrap } from '../others.style';
+import { FiSearch } from 'react-icons/fi';
+import ChevronDown from '../ChevronDown';
 
 const Searchbar = () => {
   return (
@@ -15,9 +15,7 @@ const Searchbar = () => {
       <SearchbarLeft>
         <CategoryBtn>
           All Categories
-          <IconWrap>
-            <FiChevronDown />
-          </IconWrap>
+          <ChevronDown />
         </CategoryBtn>
         <SearchInput type="text" placeholder="Search for items..." />
       </SearchbarLeft>
