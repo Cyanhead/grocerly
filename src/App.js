@@ -1,13 +1,15 @@
-import SearchbarBottom from './samples/SearchbarBottom';
-import SearchbarTop from './samples/SearchbarTop';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './Global.style';
+import { theme } from './theme';
+
+import Header from './components/Header';
 
 function App() {
   return (
-    <>
-      <div className="App">Hello World, I am here!</div>
-      <SearchbarTop />
-      <SearchbarBottom />
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Header />
+    </ThemeProvider>
   );
 }
 
