@@ -15,7 +15,7 @@ export const IconWrap = styled.div`
   margin: ${props => props.mar || '0'};
   padding: ${props => props.pad || '4px'};
   border: ${props => props.bord || ''};
-  border-radius: ${props => props.bordR || ''};
+  border-radius: ${props => props.bordR || 'inherit'};
 
   font-size: ${props => props.fontSize || '1.5rem'};
 `;

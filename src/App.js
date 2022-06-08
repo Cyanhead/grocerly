@@ -4,12 +4,14 @@ import { theme } from './theme';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Hero from './components/Hero';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Header />
+      <Hero />
       <Footer />
     </ThemeProvider>
   );
