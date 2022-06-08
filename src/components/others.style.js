@@ -7,13 +7,15 @@ export const IconWrap = styled.div`
   justify-content: center;
   align-items: center;
 
+  position: ${props => props.pos || ''};
+
   background-color: ${props => props.bg || 'inherit'};
   color: ${props => props.fg || 'inherit'};
 
-  padding: ${props => props.pad || '4px'};
   margin: ${props => props.mar || '0'};
-
-  position: ${props => props.pos || ''};
+  padding: ${props => props.pad || '4px'};
+  border: ${props => props.bord || ''};
+  border-radius: ${props => props.bordR || ''};
 
   font-size: ${props => props.fontSize || '1.5rem'};
 `;
