@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+const primaryLite = props => props.theme.color.primaryLite;
 const black = props => props.theme.color.black;
 const white = props => props.theme.color.white;
 
@@ -59,6 +60,10 @@ export const HeaderNavLink = styled.a`
   border-radius: ${props => props.borR || 'inherit'};
 
   text-decoration: none;
+
+  &:hover {
+    background-color: ${({ bg }) => (bg ? primaryLite : '')};
+  }
 `;
 
 export const NavP = styled.p`

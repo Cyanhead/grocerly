@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const primary = props => props.theme.color.primary;
+const primaryLite = props => props.theme.color.primaryLite;
 const white = props => props.theme.color.white;
 const grey = props => props.theme.color.grey;
 
@@ -72,4 +73,10 @@ export const SearchbarRight = styled.div`
 
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${primaryLite};
+  }
 `;

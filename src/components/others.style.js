@@ -18,6 +18,10 @@ export const IconWrap = styled.div`
   border-radius: ${props => props.bordR || 'inherit'};
 
   font-size: ${props => props.fontSize || '1.5rem'};
+
+  &:hover {
+    background-color: ${props => props.bgHover || 'inherit'};
+  }
 `;
 
 export const GreenSpan = styled.span`
