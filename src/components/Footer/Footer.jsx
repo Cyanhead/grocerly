@@ -145,7 +145,7 @@ const Footer = () => {
             <SocialLink key={i} href={medium.url}>
               <IconWrap
                 bg={props => props.theme.color.primary}
-                bgHover={props => props.theme.color.primaryLite}
+                bgHover={props => props.theme.color.primaryHover}
                 fg={props => props.theme.color.white}
                 mar="0 0 0 16px"
                 pad="10px"

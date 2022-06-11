@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const primaryLite = props => props.theme.color.primaryLite;
+const primaryHover = props => props.theme.color.primaryHover;
 const black = props => props.theme.color.black;
 const white = props => props.theme.color.white;
 
@@ -62,7 +62,7 @@ export const HeaderNavLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    background-color: ${({ bg }) => (bg ? primaryLite : '')};
+    background-color: ${({ bg }) => (bg ? primaryHover : '')};
   }
 `;
 
