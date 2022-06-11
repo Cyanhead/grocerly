@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const primary = props => props.theme.color.primary;
+const white = props => props.theme.color.white;
 
 export const IconWrap = styled.div`
   display: flex;
@@ -21,6 +22,28 @@ export const IconWrap = styled.div`
 
   &:hover {
     background-color: ${props => props.bgHover || 'inherit'};
+  }
+`;
+
+export const ColoredBtn = styled.button`
+  display: ${({ visibility }) => (visibility ? visibility : 'flex')};
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${props => props.bg || primary};
+  color: ${props => props.fg || white};
+
+  margin: ${props => props.mar || '0'};
+  padding: ${props => props.pad || '4px'};
+  border: none;
+  outline: none;
+  border-radius: ${props => props.bordR || 'inherit'};
+
+  font-size: ${props => props.fontSize || '1rem'};
+
+  &:hover {
+    background-color: ${props => props.bgHover || 'inherit'};
+    color: ${props => props.fgHover || white};
   }
 `;
 
