@@ -19,7 +19,7 @@ const Searchbar = () => {
         </CategoryBtn>
         <SearchInput type="text" placeholder="Search for items..." />
       </SearchbarLeft>
-      <SearchbarRight>
+      <SearchbarRight to="search">
         <FiSearch />
       </SearchbarRight>
     </SearchbarWrap>

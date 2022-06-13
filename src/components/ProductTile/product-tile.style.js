@@ -15,6 +15,10 @@ export const ProductTileWrap = styled.div`
   padding: 10px;
 
   border: 1px solid rgba(173, 173, 173, 0.25);
+
+  &:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const ProductImg = styled.img`

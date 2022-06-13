@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { LogoWrap, Link, LogoImg } from './logo.style';
-import logo from '../../assets/images/Logo.svg'
+import { LogoWrap, HomeLink, LogoImg } from './logo.style';
+import logo from '../../assets/images/Logo.svg';
 
 const Logo = () => {
   return (
     <LogoWrap>
-      <Link href="#">
+      <HomeLink to="/">
         <LogoImg src={logo} alt="" />
-      </Link>
+      </HomeLink>
     </LogoWrap>
   );
 };

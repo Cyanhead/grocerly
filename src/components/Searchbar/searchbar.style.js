@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Link } from 'react-router-dom';
+
 const primary = props => props.theme.color.primary;
 const primaryHover = props => props.theme.color.primaryHover;
 const white = props => props.theme.color.white;
@@ -58,7 +60,7 @@ export const SearchInput = styled.input`
   border-left: 1px solid ${grey};
 `;
 
-export const SearchbarRight = styled.div`
+export const SearchbarRight = styled(Link)`
   background-color: ${primary};
   color: ${white};
 

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const LogoWrap = styled.div`
   display: flex;
@@ -6,6 +7,6 @@ export const LogoWrap = styled.div`
   align-items: center;
 `;
 
-export const Link = styled.a``;
+export const HomeLink = styled(Link)``;
 
 export const LogoImg = styled.img``;

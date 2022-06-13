@@ -1,7 +1,9 @@
 import React from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
-import ChevronDown from '../ChevronDown';
+
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import ChevronDown from '../../components/ChevronDown';
+import ProductTile from '../../components/ProductTile';
 
 import {
   SearchPageContainer,
@@ -20,7 +22,6 @@ import {
   CategoryLink,
   CategoryP,
 } from './search-page.style';
-import ProductTile from '../ProductTile';
 
 const SearchPage = () => {
   const CategoryGenerator = () => {
