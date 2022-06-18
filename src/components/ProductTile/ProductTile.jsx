@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  ProductLink,
   ProductTileWrap,
   ProductImg,
   ProductInfo,
@@ -17,7 +18,15 @@ import { FiShoppingCart } from 'react-icons/fi';
 
 // todo: remember to implement review component later
 
-const ProductTile = props => {
+const ProductTile = ({
+  product: {
+    id,
+    name,
+    //  image, details,
+    price,
+    discountPrice,
+  },
+}) => {
   const [visible, setVisible] = useState('none');
 
   const showAddButton = () => {
@@ -29,34 +38,49 @@ const ProductTile = props => {
   };
 
   return (
-    <ProductTileWrap onMouseEnter={showAddButton} onMouseLeave={hideAddButton}>
-      <ProductImg src={props.image || dummy} alt={props.imgAlt || 'img'} />
-      <ProductInfo>
-        <ProductCategory> {props.category || 'category'} </ProductCategory>
-        <ProductName> {props.productName || 'name'} </ProductName>
-        <PurchaseWrap>
-          <PriceWrap>
-            <CurrentPrice> ${props.currentPrice || '0.00'} </CurrentPrice>
-            <OldPrice> ${props.oldPrice || '0.00'} </OldPrice>
-          </PriceWrap>
-          <ColoredBtn
-            visibility={visible}
-            fontSize="0.875rem"
-            pad="8px 22px"
-            bg={props => props.theme.color.primaryLite}
-            bgHover={props => props.theme.color.primary}
-            fg={props => props.theme.color.primary}
-            fgHover={props => props.theme.color.white}
-            bordR="2px"
-          >
-            <IconWrap fontSize="0.875rem">
-              <FiShoppingCart />
-            </IconWrap>
-            Add
-          </ColoredBtn>
-        </PurchaseWrap>
-      </ProductInfo>
-    </ProductTileWrap>
+    <ProductLink to={`/products/${id}`}>
+      <ProductTileWrap
+        onMouseEnter={showAddButton}
+        onMouseLeave={hideAddButton}
+      >
+        <ProductImg
+          //
+          // src={image || dummy}
+          src={dummy}
+          // alt={imgAlt || 'img'}
+          alt=""
+        />
+        <ProductInfo>
+          <ProductCategory>
+            {/* {props.category || 'category'} */}
+            category
+          </ProductCategory>
+          <ProductName> {name || 'name'} </ProductName>
+          <PurchaseWrap>
+            <PriceWrap>
+              <CurrentPrice> ${price || '0.00'} </CurrentPrice>
+              <OldPrice> ${discountPrice || '0.00'} </OldPrice>
+            </PriceWrap>
+            <ColoredBtn
+              visibility={visible}
+              fontSize="0.875rem"
+              pad="8px 22px"
+              bg={props => props.theme.color.primaryLite}
+              bgHover={props => props.theme.color.primary}
+              fg={props => props.theme.color.primary}
+              fgHover={props => props.theme.color.white}
+              bordR="2px"
+              cursor="true"
+            >
+              <IconWrap fontSize="0.875rem">
+                <FiShoppingCart />
+              </IconWrap>
+              Add
+            </ColoredBtn>
+          </PurchaseWrap>
+        </ProductInfo>
+      </ProductTileWrap>
+    </ProductLink>
   );
 };
 

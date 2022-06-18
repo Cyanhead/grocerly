@@ -1,10 +1,16 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const primary = props => props.theme.color.primary;
 const grey = props => props.theme.color.grey;
 
 const semibold = props => props.theme.fontWght.semibold;
 const medium = props => props.theme.fontWght.medium;
+
+export const ProductLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
 
 export const ProductTileWrap = styled.div`
   display: flex;
@@ -15,6 +21,10 @@ export const ProductTileWrap = styled.div`
   padding: 10px;
 
   border: 1px solid rgba(173, 173, 173, 0.25);
+
+  transition: 150ms ease-in;
+
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);

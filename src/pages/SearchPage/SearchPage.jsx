@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ChevronDown from '../../components/ChevronDown';
 import ProductTile from '../../components/ProductTile';
+
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 
 import {
   SearchPageContainer,
@@ -23,7 +25,27 @@ import {
   CategoryP,
 } from './search-page.style';
 
-const SearchPage = () => {
+const SearchPage = ({ products, setProducts }) => {
+  const fetchProducts = () => {
+    // initialize services
+    const db = getFirestore();
+
+    // collection ref
+    const colRef = collection(db, 'products');
+
+    onSnapshot(colRef, snapshot => {
+      let productsList = [];
+      snapshot.docs.forEach(doc => {
+        productsList.push({ ...doc.data(), id: doc.id });
+      });
+      setProducts(productsList);
+    });
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const CategoryGenerator = () => {
     const productCategories = [
       { name: 'fruits', url: '' },
@@ -58,6 +80,7 @@ const SearchPage = () => {
   return (
     <>
       <Header />
+      {/* todo */}
       {/* <BreadCrumb /> */}
       <SearchPageContainer>
         <SearchPageWrap>
@@ -72,17 +95,21 @@ const SearchPage = () => {
               </SortButton>
             </RowOne>
             <RowTwo>
-              <ResultCount> 4353 items found </ResultCount>
+              <ResultCount>
+                {products.length} item{products.length === 1 ? '' : 's'} found
+              </ResultCount>
             </RowTwo>
             <SearchedProductsGrid>
-              <ProductTile />
-              <ProductTile />
-              <ProductTile />
-              <ProductTile />
-              <ProductTile />
-              <ProductTile />
+              {products.length !== 0 ? (
+                products.map(product => {
+                  return <ProductTile key={product.id} product={product} />;
+                })
+              ) : (
+                <p>Loading...</p>
+              )}
             </SearchedProductsGrid>
 
+            {/* todo */}
             {/* <PageControl /> */}
           </SearchResult>
         </SearchPageWrap>

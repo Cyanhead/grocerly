@@ -41,6 +41,10 @@ export const ColoredBtn = styled.button`
 
   font-size: ${props => props.fontSize || '1rem'};
 
+  cursor: ${props => (props.cursor ? 'pointer' : '')};
+
+  transition: 150ms ease-in;
+
   &:hover {
     background-color: ${props => props.bgHover || 'inherit'};
     color: ${props => props.fgHover || white};
