@@ -60,6 +60,28 @@ export const Category = styled.p`
 
 export const PreviewBottom = styled.div`
   display: flex;
-  justify-content: space-between;
+
+  position: relative;
+`;
+
+export const Arrow = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
+
+  background-color: #f2f3f4;
+
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  padding: 4px;
+  border-radius: 50%;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: ${props => props.direction === 'left' && '-90px'};
+  right: ${props => props.direction === 'right' && '-90px'};
+
+  cursor: pointer;
 `;

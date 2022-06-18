@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import {
   PreviewContainer,
   PreviewWrap,
@@ -7,9 +7,23 @@ import {
   CategoryList,
   Category,
   PreviewBottom,
+  Arrow,
 } from './preview.style';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+
+export const SliderContext = createContext();
 
 const Preview = props => {
+  const [sliderIndex, setSliderIndex] = useState(0);
+
+  const handleClick = direction => {
+    if (direction === 'left') {
+      setSliderIndex(sliderIndex > 0 ? sliderIndex - 1 : 2);
+    } else {
+      setSliderIndex(sliderIndex < 2 ? sliderIndex + 1 : 0);
+    }
+  };
+
   return (
     <PreviewContainer>
       <PreviewWrap>
@@ -22,8 +36,17 @@ const Preview = props => {
             <Category>meat</Category>
           </CategoryList>
         </PreviewTop>
-        <PreviewBottom>{props.children}</PreviewBottom>
-        {/* arrows */}
+        <PreviewBottom>
+          <Arrow direction="left" onClick={() => handleClick('left')}>
+            <FiArrowLeft />
+          </Arrow>
+          <Arrow direction="right" onClick={() => handleClick('right')}>
+            <FiArrowRight />
+          </Arrow>
+          <SliderContext.Provider value={sliderIndex}>
+            {props.children}
+          </SliderContext.Provider>
+        </PreviewBottom>
       </PreviewWrap>
     </PreviewContainer>
   );
