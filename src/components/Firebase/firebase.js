@@ -22,7 +22,7 @@ export const db = getFirestore();
 export const colRef = collection(db, 'products');
 
 // access storage
-const storage = getStorage();
+export const storage = getStorage();
 
 // acces products folder in cloud store
 export const productsImagesRef = ref(storage, 'products');

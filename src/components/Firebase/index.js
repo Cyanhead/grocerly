@@ -1,14 +1,5 @@
 import FirebaseContext from './context';
-import Firebase, {
-  db,
-  colRef,
-  productsImagesRef,
-} from './firebase';
+import Firebase, { db, colRef, productsImagesRef, storage } from './firebase';
 
 export default Firebase;
-export {
-  db,
-  FirebaseContext,
-  colRef,
-  productsImagesRef,
-};
+export { db, colRef, productsImagesRef, storage, FirebaseContext };
