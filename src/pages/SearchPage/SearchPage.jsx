@@ -5,7 +5,8 @@ import Footer from '../../components/Footer';
 import ChevronDown from '../../components/ChevronDown';
 import ProductTile from '../../components/ProductTile';
 
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { colRef } from '../../components/Firebase';
+import { onSnapshot } from 'firebase/firestore';
 
 import {
   SearchPageContainer,
@@ -27,12 +28,6 @@ import {
 
 const SearchPage = ({ products, setProducts }) => {
   const fetchProducts = () => {
-    // initialize services
-    const db = getFirestore();
-
-    // collection ref
-    const colRef = collection(db, 'products');
-
     onSnapshot(colRef, snapshot => {
       let productsList = [];
       snapshot.docs.forEach(doc => {
@@ -58,9 +53,9 @@ const SearchPage = ({ products, setProducts }) => {
     return (
       <CategoryListWrap>
         <CategoryListHeading>category</CategoryListHeading>
-        {productCategories.map((type, i) => {
+        {productCategories.map((type, index) => {
           return (
-            <CategoryLink key={i} href={type.url}>
+            <CategoryLink key={index} href={type.url}>
               <CategoryP> {type.name} </CategoryP>
             </CategoryLink>
           );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   ProductLink,
   ProductTileWrap,
@@ -12,21 +13,13 @@ import {
   OldPrice,
 } from './product-tile.style';
 
-import dummy from '../../assets/images/fruits/potato.png';
+import dummy from '../../assets/images/default_product.svg';
 import { ColoredBtn, IconWrap } from '../others.style';
 import { FiShoppingCart } from 'react-icons/fi';
 
 // todo: remember to implement review component later
 
-const ProductTile = ({
-  product: {
-    id,
-    name,
-    //  image, details,
-    price,
-    discountPrice,
-  },
-}) => {
+const ProductTile = ({ product: { id, name, images, price, oldPrice } }) => {
   const [visible, setVisible] = useState('none');
 
   const showAddButton = () => {
@@ -44,10 +37,8 @@ const ProductTile = ({
         onMouseLeave={hideAddButton}
       >
         <ProductImg
-          //
-          // src={image || dummy}
-          src={dummy}
-          // alt={imgAlt || 'img'}
+          src={images ? images[0] : dummy}
+          // todo: add alt string to database
           alt=""
         />
         <ProductInfo>
@@ -59,7 +50,7 @@ const ProductTile = ({
           <PurchaseWrap>
             <PriceWrap>
               <CurrentPrice> ${price || '0.00'} </CurrentPrice>
-              <OldPrice> ${discountPrice || '0.00'} </OldPrice>
+              <OldPrice> ${oldPrice || '0.00'} </OldPrice>
             </PriceWrap>
             <ColoredBtn
               visibility={visible}

@@ -1,4 +1,6 @@
 import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, doc } from 'firebase/firestore';
+import { getStorage, ref } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,3 +14,15 @@ const firebaseConfig = {
 // initialize firebase app
 const Firebase = initializeApp(firebaseConfig);
 export default Firebase;
+
+// initialize services
+export const db = getFirestore();
+
+// collection ref
+export const colRef = collection(db, 'products');
+
+// access storage
+const storage = getStorage();
+
+// acces products folder in cloud store
+export const productsImagesRef = ref(storage, 'products');
