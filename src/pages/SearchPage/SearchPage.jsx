@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -26,7 +26,9 @@ import {
   CategoryP,
 } from './search-page.style';
 
-const SearchPage = ({ products, setProducts }) => {
+const SearchPage = () => {
+  const [products, setProducts] = useState([]);
+
   const fetchProducts = () => {
     onSnapshot(colRef, snapshot => {
       let productsList = [];
