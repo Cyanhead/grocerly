@@ -19,7 +19,9 @@ import { FiShoppingCart } from 'react-icons/fi';
 
 // todo: remember to implement review component later
 
-const ProductTile = ({ product: { id, name, images, price, oldPrice } }) => {
+const ProductTile = ({
+  product: { id, name, images, price, oldPrice, category },
+}) => {
   const [visible, setVisible] = useState('none');
 
   const showAddButton = () => {
@@ -42,10 +44,7 @@ const ProductTile = ({ product: { id, name, images, price, oldPrice } }) => {
           alt=""
         />
         <ProductInfo>
-          <ProductCategory>
-            {/* {props.category || 'category'} */}
-            category
-          </ProductCategory>
+          <ProductCategory>{category || 'category'}</ProductCategory>
           <ProductName> {name || 'name'} </ProductName>
           <PurchaseWrap>
             <PriceWrap>
