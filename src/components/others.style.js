@@ -45,7 +45,7 @@ export const ColoredBtn = styled.button`
   padding: ${props => props.pad || '4px'};
   border: none;
   outline: none;
-  border-radius: ${props => props.bordR || 'inherit'};
+  border-radius: ${props => props.bordRad || 'inherit'};
 
   font-size: ${props => props.fontSize || '1rem'};
 
