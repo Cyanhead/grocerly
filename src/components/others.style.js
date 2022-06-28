@@ -16,12 +16,20 @@ export const IconWrap = styled.div`
   margin: ${props => props.mar || '0'};
   padding: ${props => props.pad || '4px'};
   border: ${props => props.bord || ''};
-  border-radius: ${props => props.bordR || 'inherit'};
+  border-top: ${props => props.bordT || ''};
+  border-right: ${props => props.bordR || ''};
+  border-bottom: ${props => props.bordB || ''};
+  border-left: ${props => props.bordL || ''};
+  border-radius: ${props => props.bordRad || 'inherit'};
 
   font-size: ${props => props.fontSize || '1.5rem'};
 
   &:hover {
     background-color: ${props => props.bgHover || 'inherit'};
+  }
+
+  &:active {
+    background-color: ${props => props.bgActive || 'inherit'};
   }
 `;
 
@@ -53,4 +61,13 @@ export const ColoredBtn = styled.button`
 
 export const GreenSpan = styled.span`
   color: ${primary};
+`;
+
+export const Disabler = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: ${({ disabled }) => (disabled ? '0.5' : '')};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : '')};
 `;
