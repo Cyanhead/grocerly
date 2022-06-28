@@ -117,10 +117,17 @@ export const Price = styled.p`
   font-weight: ${bold};
 `;
 
+export const QuantityWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 16px;
+`;
+
 export const DiscountWrap = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
 `;
 
 export const OldPrice = styled.p`
@@ -148,6 +155,7 @@ export const AddToCartBtn = styled.button`
   background-color: ${primary};
   color: ${white};
 
+  width: 100%;
   margin-bottom: 16px;
   padding: 16px;
   border: none;
