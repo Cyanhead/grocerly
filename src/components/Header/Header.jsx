@@ -1,5 +1,5 @@
 import React from 'react';
-import Cart from '../Cart';
+import CartButton from '../CartButton';
 import Logo from '../Logo';
 import { GreenSpan, IconWrap } from '../others.style';
 import Searchbar from '../Searchbar';
@@ -46,7 +46,7 @@ const Header = () => {
           <Searchbar />
           <WishlistAndCart>
             <Wishlist />
-            <Cart />
+            <CartButton />
           </WishlistAndCart>
           <User />
         </HeaderTop>
