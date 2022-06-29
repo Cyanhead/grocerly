@@ -1,10 +1,18 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  //  useEffect
+} from 'react';
 import { toast } from 'react-hot-toast';
 
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
-  const [showCart, setShowCart] = useState(false);
+  const [
+    showCart,
+    //  setShowCart
+  ] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState();
   const [totalQuantity, setTotalQuantity] = useState();
@@ -21,7 +29,7 @@ export const StateContext = ({ children }) => {
     setTotalQuantity(previousQuantity => previousQuantity + quantity);
 
     if (checkProductInCart) {
-      const updatedCartItems = cartItems.map(cartProduct => {
+      const updatedCartItems = cartItems.forEach(cartProduct => {
         if (cartProduct.id === product.id)
           return {
             ...cartProduct,
