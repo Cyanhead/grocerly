@@ -19,6 +19,7 @@ import {
   ProductCategory,
   ProductBrief,
   Price,
+  QuantityWrap,
   DiscountWrap,
   OldPrice,
   DiscountPercent,
@@ -40,11 +41,15 @@ import SimilarProductTile from '../../components/SimilarProductTile/SimilarProdu
 
 import { query, where, getDocs, getDoc, doc } from 'firebase/firestore';
 import { colRef } from '../../components/Firebase/firebase';
+import ItemQuantityCounter from '../../components/ItemQuantityCounter';
+import { useStateContext } from '../../context/StateContext';
 
 const ProductPage = () => {
   const [previewImage, setPreviewImage] = useState(0);
   const [similarProductList, setSimilarProductList] = useState([]);
   const [currentProduct, setCurrentProduct] = useState([]);
+
+  const { onAdd, qty } = useStateContext();
 
   let params = useParams();
   const [productUrl, setProductUrl] = useState(params.productId);
@@ -99,17 +104,20 @@ const ProductPage = () => {
                   />
                 </ProductImagePreviewWrap>
                 <ProductImageSlide>
-                  {currentProduct?.images.map((image, i) => {
-                    return (
-                      <ProductImageWrap
-                        key={i}
-                        onMouseEnter={() => setPreviewImage(i)}
-                        active={i === previewImage ? 'active' : ''}
-                      >
-                        <ProductImage src={image} alt="" />
-                      </ProductImageWrap>
-                    );
-                  })}
+                  {
+                    // ? consider the max amount of product photos uploadable
+                    currentProduct?.images.map((image, i) => {
+                      return (
+                        <ProductImageWrap
+                          key={i}
+                          onMouseEnter={() => setPreviewImage(i)}
+                          active={i === previewImage ? 'active' : ''}
+                        >
+                          <ProductImage src={image} alt="" />
+                        </ProductImageWrap>
+                      );
+                    })
+                  }
                 </ProductImageSlide>
               </ProductPageLeft>
               <ProductPageRight>
@@ -134,22 +142,24 @@ const ProductPage = () => {
                   &#36;
                   {currentProduct?.price}
                 </Price>
-                <DiscountWrap>
-                  <OldPrice>
-                    &#36; {currentProduct?.oldPrice || 'old price'}
-                  </OldPrice>
-                  <DiscountPercent>
-                    &#45;
-                    {Math.floor(
-                      ((currentProduct?.oldPrice - currentProduct?.price) /
-                        currentProduct?.oldPrice) *
-                        100
-                    )}
-                    &#37;
-                  </DiscountPercent>
-                </DiscountWrap>
-                {/* todo: item quantity component */}
-                <AddToCartBtn>
+                <QuantityWrap>
+                  <DiscountWrap>
+                    <OldPrice>
+                      &#36; {currentProduct?.oldPrice || 'old price'}
+                    </OldPrice>
+                    <DiscountPercent>
+                      &#45;
+                      {Math.floor(
+                        ((currentProduct?.oldPrice - currentProduct?.price) /
+                          currentProduct?.oldPrice) *
+                          100
+                      )}
+                      &#37;
+                    </DiscountPercent>
+                  </DiscountWrap>
+                  <ItemQuantityCounter />
+                </QuantityWrap>
+                <AddToCartBtn onClick={() => onAdd(currentProduct, qty)}>
                   <IconWrap>
                     <FiShoppingCart />
                   </IconWrap>

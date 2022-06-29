@@ -149,7 +149,7 @@ const Footer = () => {
                 fg={props => props.theme.color.white}
                 mar="0 0 0 16px"
                 pad="10px"
-                bordR="50%"
+                bordRad="50%"
               >
                 {medium.icon}
               </IconWrap>

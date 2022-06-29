@@ -117,10 +117,17 @@ export const Price = styled.p`
   font-weight: ${bold};
 `;
 
+export const QuantityWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 16px;
+`;
+
 export const DiscountWrap = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
 `;
 
 export const OldPrice = styled.p`
@@ -148,6 +155,7 @@ export const AddToCartBtn = styled.button`
   background-color: ${primary};
   color: ${white};
 
+  width: 100%;
   margin-bottom: 16px;
   padding: 16px;
   border: none;
@@ -209,7 +217,8 @@ export const SimilarProductsMarquee = styled.div`
 
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 20s linear infinite;
+  /* animation: marquee 20s linear infinite; */
+  animation: marquee 5s linear infinite;
   /* width: 140%; */
 
   &:hover {
@@ -219,8 +228,9 @@ export const SimilarProductsMarquee = styled.div`
     from {
       transform: translateX(5%);
     }
+    // todo: tweak some more to allow more products and marquee restarts at last product
     to {
-      transform: translateX(-50%);
+      transform: translateX(-10%);
     }
   }
 `;

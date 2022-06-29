@@ -59,7 +59,7 @@ const ProductTile = ({
               bgHover={props => props.theme.color.primary}
               fg={props => props.theme.color.primary}
               fgHover={props => props.theme.color.white}
-              bordR="2px"
+              bordRad="2px"
               cursor="true"
             >
               <IconWrap fontSize="0.875rem">
