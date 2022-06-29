@@ -42,11 +42,14 @@ import SimilarProductTile from '../../components/SimilarProductTile/SimilarProdu
 import { query, where, getDocs, getDoc, doc } from 'firebase/firestore';
 import { colRef } from '../../components/Firebase/firebase';
 import ItemQuantityCounter from '../../components/ItemQuantityCounter';
+import { useStateContext } from '../../context/StateContext';
 
 const ProductPage = () => {
   const [previewImage, setPreviewImage] = useState(0);
   const [similarProductList, setSimilarProductList] = useState([]);
   const [currentProduct, setCurrentProduct] = useState([]);
+
+  const { onAdd, qty } = useStateContext();
 
   let params = useParams();
   const [productUrl, setProductUrl] = useState(params.productId);
@@ -156,7 +159,7 @@ const ProductPage = () => {
                   </DiscountWrap>
                   <ItemQuantityCounter />
                 </QuantityWrap>
-                <AddToCartBtn>
+                <AddToCartBtn onClick={() => onAdd(currentProduct, qty)}>
                   <IconWrap>
                     <FiShoppingCart />
                   </IconWrap>

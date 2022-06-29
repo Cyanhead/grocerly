@@ -217,7 +217,8 @@ export const SimilarProductsMarquee = styled.div`
 
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 20s linear infinite;
+  /* animation: marquee 20s linear infinite; */
+  animation: marquee 5s linear infinite;
   /* width: 140%; */
 
   &:hover {
@@ -227,8 +228,9 @@ export const SimilarProductsMarquee = styled.div`
     from {
       transform: translateX(5%);
     }
+    // todo: tweak some more to allow more products and marquee restarts at last product
     to {
-      transform: translateX(-50%);
+      transform: translateX(-10%);
     }
   }
 `;
