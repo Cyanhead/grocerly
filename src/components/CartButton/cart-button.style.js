@@ -11,6 +11,17 @@ export const CartButtonWrap = styled.div`
   align-items: center;
 
   padding: 8px 8px 8px 4px;
+
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.color.greyHover};
+  }
+  &:active {
+    background-color: ${props => props.theme.color.greyActive};
+  }
 `;
 
 export const CartButtonCounterWrap = styled.div`

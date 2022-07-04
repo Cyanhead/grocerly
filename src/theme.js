@@ -6,7 +6,10 @@ export const theme = {
 
     black: '#253D4E',
     white: '#fff',
+
     grey: '#adadad',
+    greyHover: '#eeeeeebb',
+    greyActive: '#ddddddbb',
   },
 
   fontWght: {
