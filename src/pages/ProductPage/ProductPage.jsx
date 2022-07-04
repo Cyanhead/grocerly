@@ -49,18 +49,17 @@ const ProductPage = () => {
   const [similarProductList, setSimilarProductList] = useState([]);
   const [currentProduct, setCurrentProduct] = useState([]);
 
-  const { onAdd, qty } = useStateContext();
+  const { onAdd, qty, setQty } = useStateContext();
 
   let params = useParams();
   const [productUrl, setProductUrl] = useState(params.productId);
 
   const fetchProductMatchedById = async () => {
-    // const docRef = doc(colRef, params.productId);
     const docRef = doc(colRef, productUrl);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      setCurrentProduct(docSnap.data());
+      setCurrentProduct({ ...docSnap.data(), id: docSnap.id });
 
       // fetches similar products
       fetchSimilarProducts(docSnap.data().category);
@@ -75,13 +74,21 @@ const ProductPage = () => {
 
     const querySnapshot = await getDocs(q);
 
-    let fetchedData = [];
+    const fetchedData = [];
     querySnapshot.forEach(doc => {
       fetchedData.push({ ...doc.data(), id: doc.id });
     });
-    setSimilarProductList(fetchedData);
 
-    // ? will it be possible to exclude this product from the list?
+    // returns a list of products that doesn't contain the currently viewed product
+    const productListExceptThisProduct = fetchedData.filter(
+      item => item.id !== productUrl
+    );
+    setSimilarProductList(productListExceptThisProduct);
+  };
+
+  const handleAddToCart = () => {
+    onAdd(currentProduct, qty);
+    setQty(1);
   };
 
   useEffect(() => {
@@ -135,8 +142,8 @@ const ProductPage = () => {
                   Category: {currentProduct?.category || 'category'}
                 </ProductCategory>
                 rating
-                {/* todo: star rating */}
-                {/* todo: label */}
+                {/* // todo: star rating */}
+                {/* // todo: label */}
                 <ProductBrief>{currentProduct?.brief || 'brief'}</ProductBrief>
                 <Price>
                   &#36;
@@ -159,7 +166,7 @@ const ProductPage = () => {
                   </DiscountWrap>
                   <ItemQuantityCounter />
                 </QuantityWrap>
-                <AddToCartBtn onClick={() => onAdd(currentProduct, qty)}>
+                <AddToCartBtn onClick={handleAddToCart}>
                   <IconWrap>
                     <FiShoppingCart />
                   </IconWrap>

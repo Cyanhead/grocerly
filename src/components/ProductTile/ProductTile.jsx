@@ -17,12 +17,18 @@ import dummy from '../../assets/images/default_product.svg';
 import { ColoredBtn, IconWrap } from '../others.style';
 import { FiShoppingCart } from 'react-icons/fi';
 
+import { useStateContext } from '../../context/StateContext';
+
 // todo: remember to implement review component later
 
 const ProductTile = ({
   product: { id, name, images, price, oldPrice, category },
+  product,
 }) => {
   const [visible, setVisible] = useState('none');
+  const [onBtnHover, setOnBtnHover] = useState(false);
+
+  const { onAdd } = useStateContext();
 
   const showAddButton = () => {
     setVisible('flex');
@@ -33,16 +39,12 @@ const ProductTile = ({
   };
 
   return (
-    <ProductLink to={`/products/${id}`}>
+    <ProductLink to={onBtnHover ? '' : `/products/${id}`}>
       <ProductTileWrap
         onMouseEnter={showAddButton}
         onMouseLeave={hideAddButton}
       >
-        <ProductImg
-          src={images ? images[0] : dummy}
-          // todo: add alt string to database
-          alt=""
-        />
+        <ProductImg src={images ? images[0] : dummy} alt="" />
         <ProductInfo>
           <ProductCategory>{category || 'category'}</ProductCategory>
           <ProductName> {name || 'name'} </ProductName>
@@ -60,7 +62,10 @@ const ProductTile = ({
               fg={props => props.theme.color.primary}
               fgHover={props => props.theme.color.white}
               bordRad="2px"
-              cursor="true"
+              cursor="pointer"
+              onClick={() => onAdd(product)}
+              onMouseEnter={() => setOnBtnHover(true)}
+              onMouseLeave={() => setOnBtnHover(false)}
             >
               <IconWrap fontSize="0.875rem">
                 <FiShoppingCart />

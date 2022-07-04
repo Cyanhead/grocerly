@@ -168,6 +168,9 @@ export const AddToCartBtn = styled.button`
   &:hover {
     background-color: ${primaryHover};
   }
+  &:active {
+    background-color: ${primary};
+  }
 `;
 
 export const BtnSpan = styled.span`
