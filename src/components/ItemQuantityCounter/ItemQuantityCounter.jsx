@@ -1,58 +1,65 @@
-import React, { useState } from 'react';
-
 import { Wrap, CounterText } from './item-quantity-counter.style';
 import { Disabler, IconWrap } from '../others.style';
 import { FiMinus, FiPlus } from 'react-icons/fi';
 import { useStateContext } from '../../context/StateContext';
 
-const ItemQuantityCounter = () => {
-  // const [counter, setCounter] = useState(1);
+const ItemQuantityCounter = props => {
+  const { qty, incQty, decQty, toggleCartItemQuanitity } = useStateContext();
 
-  const { qty, incQty, decQty } = useStateContext();
-
-  // const handleIncrement = () => {
-  //   setCounter(counter + 1);
-  // };
-
-  // const handleDecrement = () => {
-  //   if (counter > 1) {
-  //     setCounter(counter - 1);
-  //   }
-  // };
-
-  return (
-    <Wrap>
-      <Disabler
-        // onClick={handleDecrement}
-        // disabled={counter > 1 ? false : true}
-        onClick={decQty}
-        disabled={qty > 1 ? false : true}
-      >
+  const ReuseableCounter = props => {
+    return (
+      <>
+        <Disabler
+          onClick={props.onClickMinus}
+          disabled={props.disablerCheck > 1 ? false : true}
+        >
+          <IconWrap
+            bgHover={props => props.theme.color.greyHover}
+            bgActive={props => props.theme.color.greyActive}
+            pad="8px"
+            bordRad="0"
+            bordR="1px solid rgba(0, 0, 0, 0.2)"
+          >
+            <FiMinus />
+          </IconWrap>
+        </Disabler>
+        <CounterText>{props.counter}</CounterText>
         <IconWrap
-          bgHover="#eeeeeebb"
-          bgActive="#ddddddbb"
+          bgHover={props => props.theme.color.greyHover}
+          bgActive={props => props.theme.color.greyActive}
           pad="8px"
           bordRad="0"
-          bordR="1px solid rgba(0, 0, 0, 0.2)"
+          bordL="1px solid rgba(0, 0, 0, 0.2)"
+          onClick={props.onClickPlus}
         >
-          <FiMinus />
+          <FiPlus />
         </IconWrap>
-      </Disabler>
-      {/* <CounterText>{counter}</CounterText> */}
-      <CounterText>{qty}</CounterText>
-      <IconWrap
-        bgHover="#eeeeeebb"
-        bgActive="#ddddddbb"
-        pad="8px"
-        bordRad="0"
-        bordL="1px solid rgba(0, 0, 0, 0.2)"
-        //
-        // onClick={handleIncrement}
-        onClick={incQty}
-      >
-        <FiPlus />
-      </IconWrap>
-    </Wrap>
+      </>
+    );
+  };
+
+  return (
+    <>
+      {props.cart ? (
+        <Wrap mar={props.mar} width="150px">
+          <ReuseableCounter
+            onClickMinus={() => toggleCartItemQuanitity(props?.item.id, 'dec')}
+            onClickPlus={() => toggleCartItemQuanitity(props?.item.id, 'inc')}
+            disablerCheck={props.item.quantity}
+            counter={props.item.quantity}
+          />
+        </Wrap>
+      ) : (
+        <Wrap>
+          <ReuseableCounter
+            onClickMinus={decQty}
+            onClickPlus={incQty}
+            disablerCheck={qty}
+            counter={qty}
+          />
+        </Wrap>
+      )}
+    </>
   );
 };
 
