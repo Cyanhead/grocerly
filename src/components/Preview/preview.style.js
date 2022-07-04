@@ -80,8 +80,17 @@ export const Arrow = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: ${props => props.direction === 'left' && '-90px'};
-  right: ${props => props.direction === 'right' && '-90px'};
+  left: ${props => props.direction === 'left' && '0px'};
+  right: ${props => props.direction === 'right' && '0px'};
+
+  z-index: 10;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: #eeeeee;
+  }
+  &:active {
+    background-color: ${props => props.theme.color.greyActive};
+  }
 `;

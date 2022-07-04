@@ -14,7 +14,7 @@ export const SlideWrap = styled.div`
 
 export const Slide = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   transition: 1s ease;
@@ -33,7 +33,16 @@ export const TileWrap = styled.div`
 
   width: 148px;
   height: auto;
+  margin: 0 16px;
   padding: 12px 24px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 export const TileImg = styled.img`

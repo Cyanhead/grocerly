@@ -28,7 +28,6 @@ const Categories = () => {
     { image: apple, name: 'apple', count: 30 },
     { image: orange, name: 'orange', count: 10 },
     { image: potato, name: 'potato', count: 1 },
-    { image: carrot, name: 'carrot', count: 13 },
   ];
   const dummy1 = [
     { image: peach, name: 'peach2', count: 1 },
@@ -37,7 +36,6 @@ const Categories = () => {
     { image: apple, name: 'apple2', count: 30 },
     { image: orange, name: 'orange2', count: 10 },
     { image: potato, name: 'potato2', count: 1 },
-    { image: carrot, name: 'carrot2', count: 13 },
   ];
   const dummy2 = [
     { image: peach, name: 'peach3', count: 1 },
@@ -46,7 +44,6 @@ const Categories = () => {
     { image: apple, name: 'apple3', count: 30 },
     { image: orange, name: 'orange3', count: 10 },
     { image: potato, name: 'potato3', count: 1 },
-    { image: carrot, name: 'carrot3', count: 13 },
   ];
 
   const CategoryTileGenerator = props => {
@@ -66,7 +63,6 @@ const Categories = () => {
             </TileWrap>
           );
         })}
-        {/* </SliderContext.Consumer> */}
       </Slide>
     );
   };
