@@ -24,8 +24,13 @@ export const IconWrap = styled.div`
 
   font-size: ${props => props.fontSize || '1.5rem'};
 
+  /* transition: 150ms; */
+
+  cursor: ${props => props.cursor || ''};
+
   &:hover {
     background-color: ${props => props.bgHover || 'inherit'};
+    color: ${props => props.fgHover || 'inherit'};
   }
 
   &:active {
@@ -61,6 +66,8 @@ export const ColoredBtn = styled.button`
 
 export const GreenSpan = styled.span`
   color: ${primary};
+
+  font-weight: ${props => props.fontWght || ''};
 `;
 
 export const Disabler = styled.div`

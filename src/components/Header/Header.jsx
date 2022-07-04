@@ -1,4 +1,5 @@
 import React from 'react';
+import Cart from '../Cart';
 import CartButton from '../CartButton';
 import Logo from '../Logo';
 import { GreenSpan, IconWrap } from '../others.style';
@@ -15,6 +16,7 @@ import {
   HeaderNavLink,
   NavP,
 } from './header.style';
+
 import { FiHome, FiPercent, FiPhone, FiGrid } from 'react-icons/fi';
 import { HiOutlineFire } from 'react-icons/hi';
 import { VscMegaphone } from 'react-icons/vsc';
@@ -78,6 +80,7 @@ const Header = () => {
           </HeaderNavLink>
         </HeaderBottom>
       </HeaderWrap>
+      <Cart />
     </HeaderContainer>
   );
 };
