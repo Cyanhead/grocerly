@@ -54,44 +54,44 @@ const ProductPage = () => {
   let params = useParams();
   const [productUrl, setProductUrl] = useState(params.productId);
 
-  const fetchProductMatchedById = async () => {
-    const docRef = doc(colRef, productUrl);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      setCurrentProduct({ ...docSnap.data(), id: docSnap.id });
-
-      // fetches similar products
-      fetchSimilarProducts(docSnap.data().category);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log('No such document!');
-    }
-  };
-
-  const fetchSimilarProducts = async category => {
-    const q = query(colRef, where('category', '==', category));
-
-    const querySnapshot = await getDocs(q);
-
-    const fetchedData = [];
-    querySnapshot.forEach(doc => {
-      fetchedData.push({ ...doc.data(), id: doc.id });
-    });
-
-    // returns a list of products that doesn't contain the currently viewed product
-    const productListExceptThisProduct = fetchedData.filter(
-      item => item.id !== productUrl
-    );
-    setSimilarProductList(productListExceptThisProduct);
-  };
-
   const handleAddToCart = () => {
     onAdd(currentProduct, qty);
     setQty(1);
   };
 
   useEffect(() => {
+    const fetchSimilarProducts = async category => {
+      const q = query(colRef, where('category', '==', category));
+
+      const querySnapshot = await getDocs(q);
+
+      const fetchedData = [];
+      querySnapshot.forEach(doc => {
+        fetchedData.push({ ...doc.data(), id: doc.id });
+      });
+
+      // returns a list of products that doesn't contain the currently viewed product
+      const productListExceptThisProduct = fetchedData.filter(
+        item => item.id !== productUrl
+      );
+      setSimilarProductList(productListExceptThisProduct);
+    };
+
+    const fetchProductMatchedById = async () => {
+      const docRef = doc(colRef, productUrl);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setCurrentProduct({ ...docSnap.data(), id: docSnap.id });
+
+        // fetches similar products
+        fetchSimilarProducts(docSnap.data().category);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('No such document!');
+      }
+    };
+
     fetchProductMatchedById();
   }, [productUrl]);
 

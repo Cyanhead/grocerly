@@ -53,7 +53,7 @@ export const StateContext = ({ children }) => {
     toast.error(
       // todo: remove the 's' conditional
       `${product.quantity} ${product.name}${
-        qty === 1 ? '' : 's'
+        product.quantity === 1 ? '' : 's'
       } removed from cart.`
     );
   };
