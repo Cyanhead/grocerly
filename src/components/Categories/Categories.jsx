@@ -13,7 +13,7 @@ import {
 import { generateLightColorHsla as randomColorGenerator } from '../../helpers/generateColor';
 
 import apple from '../../assets/images/fruits/apple.png';
-import carrot from '../../assets/images/fruits/carrot.png';
+// import carrot from '../../assets/images/fruits/carrot.png';
 import peach from '../../assets/images/fruits/peach.png';
 import orange from '../../assets/images/fruits/orange.png';
 import potato from '../../assets/images/fruits/potato.png';
