@@ -1,3 +1,5 @@
+<!-- ? change order of some content, and maybe reduce the number of images -->
+
 # Grocerly
 
 > Get the freshest groceries at the best prices
@@ -5,10 +7,10 @@
 Grocerly is an e-commerce shopping patform for groceries.
 A visiting user is able to do the following:
 
-- [x] arrive at the home page
+- [x] arrive at the home page via [https://grocerly-store.netlify.app](https://grocerly-store.netlify.app)
 - [ ] search products :mag:
 - [x] view product page for more details
-- [ ] sign up/sign in
+- [ ] sign up/sign in :bust_in_silhouette:
 - [ ] add products to wishlist :hearts:
 - [x] add products to cart :shopping_cart:
 - [ ] checkout :tada:
@@ -19,8 +21,9 @@ A visiting user is able to do the following:
 - [Firebase](https://firebase.google.com/) for database
 - [React Router](https://reactrouter.com/) for routing
 - [Styled Components](https://www.styled-components.com/) for styling
-- [Fontsource](https://fontsource.org/) for font
-- [React Hot Toast](https://react-hot-toast.com/) for icons
+- [Fontsource](https://fontsource.org/) for fonts
+- [React Icons](https://react-icons.github.io/react-icons) for icons
+- [React Hot Toast](https://react-hot-toast.com/) for pop-up notificatoins
 
 #### Home page
 
@@ -44,21 +47,21 @@ My goal was to simulate a professional work environment.
 
 - I built this app based on Figma designs:
   ![figma design](/src/assets/screenshots/figma-home-page.jpeg)
-  ![figma design](/src/assets/screenshots/figma-header.jpeg)
-  ![figma design](/src/assets/screenshots/figma-footer.jpeg)
+  <!-- ![figma design](/src/assets/screenshots/figma-header.jpeg)
+  ![figma design](/src/assets/screenshots/figma-footer.jpeg) -->
 
-- I worked with tasks on a Kanban board: [Screenshot of tasks]
+- I worked with tasks on a Kanban board:
   ![kanban board view of tasks](/src/assets/screenshots/github-tasks.jpeg)
   ![header task details](/src/assets/screenshots/github-tasks-header.jpeg)
 
-- I used feature branches and Pull Requests: Here is a PR example #2
+- I used feature branches and Pull Requests: Here is a [PR example](https://github.com/Cyanhead/grocerly/pull/2)
 
 ## How to navigate this project
 
-- [x] Somewhat complex stateful logic: [Link to example code on GitHub](https://github.com/Cyanhead/grocerly/blob/main/src/context/StateContext.js#:~:text=const%20onAdd%20%3D,%7D%3B)
-- [ ] Responsive CSS using styled-components: [Link to example code on GitHub]
-- [x] The application fetches data from Firebase: [Example for the request data transformation ](https://github.com/Cyanhead/grocerly/blob/main/src/pages/SearchPage/SearchPage.jsx#L30:~:text=const%20fetchProducts%20%3D,%7D%3B)
-- [ ] Integration tests using React Testing Library: [Link to example test on GitHub]
+- [x] Somewhat complex stateful logic: [Link to example code](https://github.com/Cyanhead/grocerly/blob/main/src/context/StateContext.js#:~:text=const%20onAdd%20%3D,%7D%3B)
+- [ ] Responsive CSS using styled-components: [Link to example code]
+- [x] The application fetches data from Firebase: [Example for the request data and transformation ](https://github.com/Cyanhead/grocerly/blob/main/src/pages/SearchPage/SearchPage.jsx#L30:~:text=const%20fetchProducts%20%3D,%7D%3B)
+- [ ] Integration tests using React Testing Library: [Link to example code]
 
 ## Why I built the project this way
 
