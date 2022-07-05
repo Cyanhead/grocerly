@@ -7,7 +7,6 @@ import {
   Routes,
   Route,
   Outlet,
-  Link,
 } from 'react-router-dom';
 
 import SearchPage from './pages/SearchPage/SearchPage';
@@ -27,8 +26,6 @@ function App() {
             path="/products"
             element={
               <>
-                {/* Link is to be removed. Outlet stays */}
-                <Link to="/addproducts">Add Products</Link>
                 <Outlet />
               </>
             }
