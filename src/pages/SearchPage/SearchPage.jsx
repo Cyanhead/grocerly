@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react';
-
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ChevronDown from '../../components/ChevronDown';
 import ProductTile from '../../components/ProductTile';
-
-import { colRef } from '../../components/Firebase';
-import { onSnapshot } from 'firebase/firestore';
 
 import {
   SearchPageContainer,
@@ -26,22 +21,10 @@ import {
   CategoryP,
 } from './search-page.style';
 
+import { useStateContext } from '../../context/StateContext';
+
 const SearchPage = () => {
-  const [products, setProducts] = useState([]);
-
-  const fetchProducts = () => {
-    onSnapshot(colRef, snapshot => {
-      let productsList = [];
-      snapshot.docs.forEach(doc => {
-        productsList.push({ ...doc.data(), id: doc.id });
-      });
-      setProducts(productsList);
-    });
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  const { products } = useStateContext();
 
   const CategoryGenerator = () => {
     const productCategories = [

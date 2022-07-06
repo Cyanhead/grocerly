@@ -1,4 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+import { colRef } from '../components/Firebase';
+import { onSnapshot } from 'firebase/firestore';
+
 import { toast } from 'react-hot-toast';
 
 const Context = createContext();
@@ -9,6 +13,22 @@ export const StateContext = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [qty, setQty] = useState(1);
+
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = () => {
+    onSnapshot(colRef, snapshot => {
+      let productsList = [];
+      snapshot.docs.forEach(doc => {
+        productsList.push({ ...doc.data(), id: doc.id });
+      });
+      setProducts(productsList);
+    });
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const incQty = () => {
     setQty(prevQty => prevQty + 1);
@@ -21,7 +41,7 @@ export const StateContext = ({ children }) => {
     setTotalPrice(previousPrice => previousPrice + product.price * quantity);
     setTotalQuantity(previousQuantity => previousQuantity + quantity);
 
-    // * if product exists...
+    // * if product exists, increase the quantity only, else add a new product entry
     if (checkProductInCart) {
       const updatedCartItems = [...cartItems];
 
@@ -92,6 +112,7 @@ export const StateContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        products,
         showCart,
         setShowCart,
         cartItems,
