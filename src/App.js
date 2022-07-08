@@ -13,14 +13,16 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import HomePage from './pages/HomePage/HomePage';
 import ProductPage from './pages/ProductPage';
 import AddProduct from './pages/AddProduct';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
+        <Header />
         <Routes>
-          {/* <Route path="/" element={<HomePage />} /> */}
           <Route index element={<HomePage />} />
           <Route
             path="/products"
@@ -30,15 +32,12 @@ function App() {
               </>
             }
           >
-            <Route
-              // path="search"
-              index
-              element={<SearchPage />}
-            />
+            <Route index element={<SearchPage />} />
             <Route path=":productId" element={<ProductPage />} />
           </Route>
           <Route path="/addproducts" element={<AddProduct />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );

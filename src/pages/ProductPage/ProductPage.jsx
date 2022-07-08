@@ -34,8 +34,6 @@ import {
   SimilarProductsMarquee,
 } from './product-page.style';
 
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import { IconWrap } from '../../components/others.style';
 import SimilarProductTile from '../../components/SimilarProductTile/SimilarProductTile';
 
@@ -96,8 +94,6 @@ const ProductPage = () => {
 
   return (
     <>
-      <Header />
-
       {currentProduct.length !== 0 ? (
         <ProductPageContainer>
           <ProductPageWrap>
@@ -193,7 +189,6 @@ const ProductPage = () => {
           </ProductPageWrap>
         </ProductPageContainer>
       ) : (
-        // * replace with loading component
         <div
           style={{
             maxWidth: '1200px',
@@ -204,8 +199,6 @@ const ProductPage = () => {
           <h2>loading...</h2>
         </div>
       )}
-
-      <Footer />
     </>
   );
 };
