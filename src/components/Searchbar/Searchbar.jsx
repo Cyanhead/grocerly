@@ -27,34 +27,26 @@ import {
   Configure,
 } from 'react-instantsearch-hooks-web';
 import { useProductsListContext } from '../../context/ProductsListContext';
-// import { useUrlContext } from '../../context/UrlContext';
 
 function Hit({ hit }) {
-  // const { setProductUrl } = useUrlContext();
   return (
-    <>
-      <HitLink
-        //
-        to={`/products/${hit.id}`}
-        // onClick={() => setProductUrl(hit.id)}
-      >
-        <HitWrap>
-          <HitLeft>
-            <HitImage src={hit.images[0]} alt={hit.name} />
-          </HitLeft>
+    <HitLink to={`/products/${hit.id}`}>
+      <HitWrap>
+        <HitLeft>
+          <HitImage src={hit.images[0]} alt={hit.name} />
+        </HitLeft>
 
-          <HitRight>
-            <div>
-              <HitP>{hit.category}</HitP>
-              <HitH1>
-                <Highlight attribute="name" hit={hit} />
-              </HitH1>
-            </div>
-            <HitP>${hit.price}</HitP>
-          </HitRight>
-        </HitWrap>
-      </HitLink>
-    </>
+        <HitRight>
+          <div>
+            <HitP>{hit.category}</HitP>
+            <HitH1>
+              <Highlight attribute="name" hit={hit} />
+            </HitH1>
+          </div>
+          <HitP>${hit.price}</HitP>
+        </HitRight>
+      </HitWrap>
+    </HitLink>
   );
 }
 
@@ -81,7 +73,7 @@ const Searchbar = () => {
     sendDataToAlgolia();
   }, [searchClient, products]);
 
-  const BetterCustomSearchBox = () => {
+  const SearchBox = () => {
     const [searchValue, setSearchValue] = useState('');
 
     return (
@@ -106,7 +98,7 @@ const Searchbar = () => {
         </CategoryBtn>
         <InstantSearch searchClient={searchClient} indexName="dev_grocerly">
           <Configure hitsPerPage={5} />
-          <BetterCustomSearchBox />
+          <SearchBox />
         </InstantSearch>
       </SearchbarLeft>
       <SearchbarRight to="/products">
