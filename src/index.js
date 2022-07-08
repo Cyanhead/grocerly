@@ -4,16 +4,19 @@ import App from './App';
 import { Toaster } from 'react-hot-toast';
 
 import Firebase, { FirebaseContext } from './components/Firebase';
-import { StateContext } from './context/StateContext';
+import { CartContext } from './context/CartContext';
+import { ProductsListContext } from './context/ProductsListContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <FirebaseContext.Provider value={Firebase}>
-      <StateContext>
-        <Toaster />
-        <App />
-      </StateContext>
+      <ProductsListContext>
+        <CartContext>
+          <Toaster />
+          <App />
+        </CartContext>
+      </ProductsListContext>
     </FirebaseContext.Provider>
   </React.StrictMode>
 );

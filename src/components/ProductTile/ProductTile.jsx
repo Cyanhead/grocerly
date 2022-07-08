@@ -17,7 +17,7 @@ import dummy from '../../assets/images/default_product.svg';
 import { ColoredBtn, IconWrap } from '../others.style';
 import { FiShoppingCart } from 'react-icons/fi';
 
-import { useStateContext } from '../../context/StateContext';
+import { useCartContext } from '../../context/CartContext';
 
 // todo: remember to implement review component later
 
@@ -28,7 +28,7 @@ const ProductTile = ({
   const [visible, setVisible] = useState('none');
   const [onBtnHover, setOnBtnHover] = useState(false);
 
-  const { onAdd } = useStateContext();
+  const { onAdd } = useCartContext();
 
   const showAddButton = () => {
     setVisible('flex');

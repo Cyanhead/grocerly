@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useStateContext } from '../../context/StateContext';
+import { useCartContext } from '../../context/CartContext';
 import {
   CartWrap,
   CartTop,
@@ -35,7 +35,7 @@ const Cart = () => {
     showCart,
     setShowCart,
     onRemove,
-  } = useStateContext();
+  } = useCartContext();
 
   const EmptyCart = () => {
     return (

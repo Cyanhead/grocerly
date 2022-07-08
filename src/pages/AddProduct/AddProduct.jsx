@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../../components/Header';
 
-import { addDoc, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { colRef, db, storage } from '../../components/Firebase';
 
@@ -228,10 +228,12 @@ const AddProduct = () => {
     const productsList = [
       {
         name: 'apple',
+        otherNames: [],
         category: 'fruit',
         price: Number(3),
         oldPrice: Number(5),
         details: `One a day, keeps the doctors away`,
+        timestamp: serverTimestamp(),
       },
     ];
 

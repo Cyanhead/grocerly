@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
+
 import { toast } from 'react-hot-toast';
 
 const Context = createContext();
 
-export const StateContext = ({ children }) => {
+export const CartContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -21,7 +22,7 @@ export const StateContext = ({ children }) => {
     setTotalPrice(previousPrice => previousPrice + product.price * quantity);
     setTotalQuantity(previousQuantity => previousQuantity + quantity);
 
-    // * if product exists...
+    // * if product exists, increase the quantity only, else add a new product entry
     if (checkProductInCart) {
       const updatedCartItems = [...cartItems];
 
@@ -114,4 +115,4 @@ export const StateContext = ({ children }) => {
   );
 };
 
-export const useStateContext = () => useContext(Context);
+export const useCartContext = () => useContext(Context);
