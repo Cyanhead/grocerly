@@ -42,22 +42,21 @@ import SimilarProductTile from '../../components/SimilarProductTile/SimilarProdu
 import { query, where, getDocs, getDoc, doc } from 'firebase/firestore';
 import { colRef } from '../../components/Firebase/firebase';
 import ItemQuantityCounter from '../../components/ItemQuantityCounter';
-import { useStateContext } from '../../context/StateContext';
+import { useCartContext } from '../../context/CartContext';
 
 const ProductPage = () => {
   const [previewImage, setPreviewImage] = useState(0);
   const [similarProductList, setSimilarProductList] = useState([]);
   const [currentProduct, setCurrentProduct] = useState([]);
 
-  const { onAdd, qty, setQty } = useStateContext();
-
-  let params = useParams();
-  const [productUrl, setProductUrl] = useState(params.productId);
+  const { onAdd, qty, setQty } = useCartContext();
 
   const handleAddToCart = () => {
     onAdd(currentProduct, qty);
     setQty(1);
   };
+
+  const { productId } = useParams();
 
   useEffect(() => {
     const fetchSimilarProducts = async category => {
@@ -72,13 +71,13 @@ const ProductPage = () => {
 
       // returns a list of products that doesn't contain the currently viewed product
       const productListExceptThisProduct = fetchedData.filter(
-        item => item.id !== productUrl
+        item => item.id !== productId
       );
       setSimilarProductList(productListExceptThisProduct);
     };
 
     const fetchProductMatchedById = async () => {
-      const docRef = doc(colRef, productUrl);
+      const docRef = doc(colRef, productId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -93,7 +92,7 @@ const ProductPage = () => {
     };
 
     fetchProductMatchedById();
-  }, [productUrl]);
+  }, [productId]);
 
   return (
     <>
@@ -186,11 +185,7 @@ const ProductPage = () => {
               <SimilarProductsMarquee>
                 {similarProductList.slice(0, 10).map(product => {
                   return (
-                    <SimilarProductTile
-                      key={product.id}
-                      product={product}
-                      setProductUrl={setProductUrl}
-                    />
+                    <SimilarProductTile key={product.id} product={product} />
                   );
                 })}
               </SimilarProductsMarquee>

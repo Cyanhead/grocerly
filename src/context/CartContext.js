@@ -1,34 +1,15 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-
-import { colRef } from '../components/Firebase';
-import { onSnapshot } from 'firebase/firestore';
+import React, { createContext, useContext, useState } from 'react';
 
 import { toast } from 'react-hot-toast';
 
 const Context = createContext();
 
-export const StateContext = ({ children }) => {
+export const CartContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [qty, setQty] = useState(1);
-
-  const [products, setProducts] = useState([]);
-
-  const fetchProducts = () => {
-    onSnapshot(colRef, snapshot => {
-      let productsList = [];
-      snapshot.docs.forEach(doc => {
-        productsList.push({ ...doc.data(), id: doc.id });
-      });
-      setProducts(productsList);
-    });
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   const incQty = () => {
     setQty(prevQty => prevQty + 1);
@@ -112,7 +93,6 @@ export const StateContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        products,
         showCart,
         setShowCart,
         cartItems,
@@ -135,4 +115,4 @@ export const StateContext = ({ children }) => {
   );
 };
 
-export const useStateContext = () => useContext(Context);
+export const useCartContext = () => useContext(Context);

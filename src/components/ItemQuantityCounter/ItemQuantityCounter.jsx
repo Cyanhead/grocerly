@@ -1,10 +1,10 @@
 import { Wrap, CounterText } from './item-quantity-counter.style';
 import { Disabler, IconWrap } from '../others.style';
 import { FiMinus, FiPlus } from 'react-icons/fi';
-import { useStateContext } from '../../context/StateContext';
+import { useCartContext } from '../../context/CartContext';
 
 const ItemQuantityCounter = props => {
-  const { qty, incQty, decQty, toggleCartItemQuanitity } = useStateContext();
+  const { qty, incQty, decQty, toggleCartItemQuanitity } = useCartContext();
 
   const ReuseableCounter = props => {
     return (

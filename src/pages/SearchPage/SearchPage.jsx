@@ -21,10 +21,10 @@ import {
   CategoryP,
 } from './search-page.style';
 
-import { useStateContext } from '../../context/StateContext';
+import { useProductsListContext } from '../../context/ProductsListContext';
 
 const SearchPage = () => {
-  const { products } = useStateContext();
+  const { products } = useProductsListContext();
 
   const CategoryGenerator = () => {
     const productCategories = [

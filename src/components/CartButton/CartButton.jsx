@@ -8,14 +8,13 @@ import {
   CartButtonP,
 } from './cart-button.style';
 
-import { useStateContext } from '../../context/StateContext';
+import { useCartContext } from '../../context/CartContext';
 
 import { GreenSpan, IconWrap } from '../others.style';
 import { FiShoppingCart } from 'react-icons/fi';
 
 const CartButton = () => {
-  const { showCart, setShowCart, totalQuantity, totalPrice } =
-    useStateContext();
+  const { showCart, setShowCart, totalQuantity, totalPrice } = useCartContext();
 
   return (
     <CartButtonWrap onClick={() => setShowCart(!showCart)}>

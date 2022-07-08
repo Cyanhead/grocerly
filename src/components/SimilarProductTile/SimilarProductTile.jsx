@@ -9,16 +9,9 @@ import {
   CurrentPrice,
 } from '../SimilarProductTile/similar-product-tile.style';
 
-const SimilarProductTile = ({
-  product: { id, images, name, price },
-  setProductUrl,
-}) => {
+const SimilarProductTile = ({ product: { id, images, name, price } }) => {
   return (
-    <SimilarProductLink
-      key={id}
-      to={`/products/${id}`}
-      onClick={() => setProductUrl(id)}
-    >
+    <SimilarProductLink key={id} to={`/products/${id}`}>
       <SimilarProductTileWrap>
         <SimilarProductImg src={images ? images[0] : 'dummy'} alt="" />
         <SimilarProductInfo>
