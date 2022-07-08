@@ -6,6 +6,8 @@ import '@fontsource/quicksand/500.css';
 import '@fontsource/quicksand/600.css';
 import '@fontsource/quicksand/700.css';
 
+import 'instantsearch.css/themes/satellite.css';
+
 export const GlobalStyle = createGlobalStyle`
     /*
     1. Use a more-intuitive box-sizing model.
