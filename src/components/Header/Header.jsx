@@ -2,7 +2,7 @@ import React from 'react';
 import Cart from '../Cart';
 import CartButton from '../CartButton';
 import Logo from '../Logo';
-import { GreenSpan, IconWrap } from '../others.style';
+import { GreenSpan, IconWrap, MobileIcon } from '../others.style';
 import Searchbar from '../Searchbar';
 import User from '../User';
 import Wishlist from '../Wishlist';
@@ -17,7 +17,7 @@ import {
   NavP,
 } from './header.style';
 
-import { FiHome, FiPercent, FiPhone, FiGrid } from 'react-icons/fi';
+import { FiHome, FiPercent, FiPhone, FiGrid, FiSearch } from 'react-icons/fi';
 import { HiOutlineFire } from 'react-icons/hi';
 import { VscMegaphone } from 'react-icons/vsc';
 
@@ -50,7 +50,14 @@ const Header = () => {
             <Wishlist />
             <CartButton />
           </WishlistAndCart>
-          <User />
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <MobileIcon>
+              <IconWrap fontSize="2rem">
+                <FiSearch />
+              </IconWrap>
+            </MobileIcon>
+            <User />
+          </div>
         </HeaderTop>
         <HeaderBottom>
           <HeaderNavLink href="" bg={primary} fg={white} borR="2px">

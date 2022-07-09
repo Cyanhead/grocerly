@@ -2,12 +2,7 @@ import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 
-import {
-  SearchBox,
-  // InstantSearch,
-  // Hits,
-  // Highlight,
-} from 'react-instantsearch-hooks-web';
+import { SearchBox } from 'react-instantsearch-hooks-web';
 
 const primary = props => props.theme.color.primary;
 const primaryLite = props => props.theme.color.primaryLite;
@@ -23,6 +18,10 @@ export const SearchbarWrap = styled.div`
   justify-content: center;
 
   border-radius: 3px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}px) {
+    display: none;
+  }
 `;
 
 export const SearchbarLeft = styled.div`
@@ -37,16 +36,6 @@ export const SearchbarLeft = styled.div`
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
 `;
-
-// export const SearchbarLeft2 = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-
-//   /* position: relative; */
-
-//   /* border: 2px solid red; */
-// `;
 
 export const CategoryBtn = styled.button`
   display: flex;
@@ -65,26 +54,6 @@ export const CategoryBtn = styled.button`
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
 `;
-
-// // ? will probably delete
-// export const Wrap = styled.div``;
-
-// export const SearchInput = styled.input`
-//   background-color: inherit;
-
-//   padding-left: 12px;
-
-//   font-weight: ${medium};
-
-//   min-width: 300px;
-
-//   border: none;
-//   outline: none;
-//   border-left: 1px solid ${grey};
-// `;
-// // ? will probably delete
-
-// let bool = false;
 
 export const CustomSearchBox = styled(SearchBox)`
   display: flex;
@@ -144,53 +113,33 @@ export const SearchbarRight = styled(Link)`
 
 export const HitContainer = styled.div`
   display: ${({ showResults }) => (showResults ? 'block' : 'none')};
-  /* ${CustomSearchBox} > input:focus & { */
-  /* display: none;
-  ${SearchbarLeft}:hover & {
-    display: block;
-  } */
 
   position: absolute;
-  /* top: 100px; */
   top: 56px;
-  /* bottom: 0; */
 
   z-index: 20;
 
   width: 100%;
 
   li {
-    /* border: 5px solid red; */
-
     &:hover {
       background-color: ${primaryLite};
     }
   }
-
-  /* border: 2px solid green; */
 `;
 
 export const HitLink = styled(Link)`
-  /* border: 1px solid red; */
-
   color: inherit;
 
   width: 100%;
   height: 100%;
 
   text-decoration: none;
-
-  /* &:hover {
-    background-color: ${primary};
-  } */
 `;
 
 export const HitWrap = styled.article`
   display: flex;
   width: 100%;
-  /* border: 1px solid black; */
-
-  /* margin: -10px; */
 `;
 
 export const HitLeft = styled.div``;
@@ -200,8 +149,6 @@ export const HitRight = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  /* border: 1px solid blue; */
 `;
 
 export const HitImage = styled.img`
@@ -209,12 +156,9 @@ export const HitImage = styled.img`
   height: auto;
 
   margin-right: 20px;
-  /* border: 3px solid red; */
 `;
 
-export const HitP = styled.p`
-  /* border: 3px solid red; */
-`;
+export const HitP = styled.p``;
 
 export const HitH1 = styled.h1`
   margin: 8px 0;

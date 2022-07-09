@@ -78,3 +78,15 @@ export const Disabler = styled.div`
   opacity: ${({ disabled }) => (disabled ? '0.5' : '')};
   pointer-events: ${({ disabled }) => (disabled ? 'none' : '')};
 `;
+
+export const MobileIcon = styled.div`
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  padding: 8px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}px) {
+    display: flex;
+  }
+`;

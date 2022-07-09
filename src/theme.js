@@ -19,4 +19,10 @@ export const theme = {
     semibold: 600,
     bold: 700,
   },
+
+  breakpoint: {
+    large: 1100,
+    medium: 900,
+    small: 480,
+  },
 };
