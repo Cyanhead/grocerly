@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Header from '../../components/Header';
 
 import { addDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
@@ -256,7 +255,6 @@ const AddProduct = () => {
 
   return (
     <>
-      <Header />
       <AddProductByForm />
       <br /> <hr /> <br />
       <AddProductsByArray />

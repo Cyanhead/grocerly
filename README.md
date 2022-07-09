@@ -8,7 +8,7 @@ Grocerly is an e-commerce shopping patform for groceries.
 A visiting user is able to do the following:
 
 - [x] arrive at the home page via [https://grocerly-store.netlify.app](https://grocerly-store.netlify.app)
-- [ ] search products :mag:
+- [x] search products :mag:
 - [x] view product page for more details
 - [ ] sign up/sign in :bust_in_silhouette:
 - [ ] add products to wishlist :hearts:
@@ -21,6 +21,7 @@ A visiting user is able to do the following:
 - [Firebase](https://firebase.google.com/) for database
 - [React Router](https://reactrouter.com/) for routing
 - [Styled Components](https://www.styled-components.com/) for styling
+- [Algolia](https://www.algolia.com/) for product search handling
 - [Fontsource](https://fontsource.org/) for fonts
 - [React Icons](https://react-icons.github.io/react-icons) for icons
 - [React Hot Toast](https://react-hot-toast.com/) for pop-up notificatoins

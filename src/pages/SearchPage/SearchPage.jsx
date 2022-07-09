@@ -1,5 +1,3 @@
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import ChevronDown from '../../components/ChevronDown';
 import ProductTile from '../../components/ProductTile';
 
@@ -49,53 +47,36 @@ const SearchPage = () => {
     );
   };
 
-  // const PageControl = () => {
-  //   return (
-  //     <>
-  //       <p>page_control</p>
-  //     </>
-  //   );
-  // };
-
   return (
-    <>
-      <Header />
-      {/* todo */}
-      {/* <BreadCrumb /> */}
-      <SearchPageContainer>
-        <SearchPageWrap>
-          <SearchPageAside>
-            <CategoryGenerator />
-          </SearchPageAside>
-          <SearchResult>
-            <RowOne>
-              <ResultHeading>buy fresh with grocerly</ResultHeading>
-              <SortButton>
-                Sort by: popularity <ChevronDown />
-              </SortButton>
-            </RowOne>
-            <RowTwo>
-              <ResultCount>
-                {products.length} item{products.length === 1 ? '' : 's'} found
-              </ResultCount>
-            </RowTwo>
-            <SearchedProductsGrid>
-              {products.length !== 0 ? (
-                products.map(product => {
-                  return <ProductTile key={product.id} product={product} />;
-                })
-              ) : (
-                <p>Loading...</p>
-              )}
-            </SearchedProductsGrid>
-
-            {/* todo */}
-            {/* <PageControl /> */}
-          </SearchResult>
-        </SearchPageWrap>
-      </SearchPageContainer>
-      <Footer />
-    </>
+    <SearchPageContainer>
+      <SearchPageWrap>
+        <SearchPageAside>
+          <CategoryGenerator />
+        </SearchPageAside>
+        <SearchResult>
+          <RowOne>
+            <ResultHeading>buy fresh with grocerly</ResultHeading>
+            <SortButton>
+              Sort by: popularity <ChevronDown />
+            </SortButton>
+          </RowOne>
+          <RowTwo>
+            <ResultCount>
+              {products.length} item{products.length === 1 ? '' : 's'} found
+            </ResultCount>
+          </RowTwo>
+          <SearchedProductsGrid>
+            {products.length !== 0 ? (
+              products.map(product => {
+                return <ProductTile key={product.id} product={product} />;
+              })
+            ) : (
+              <p>Loading...</p>
+            )}
+          </SearchedProductsGrid>
+        </SearchResult>
+      </SearchPageWrap>
+    </SearchPageContainer>
   );
 };
 
