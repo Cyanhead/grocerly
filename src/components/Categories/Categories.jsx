@@ -13,9 +13,8 @@ import {
 import { generateLightColorHsla as randomColorGenerator } from '../../helpers/generateColor';
 
 import apple from '../../assets/images/fruits/apple.png';
-// import carrot from '../../assets/images/fruits/carrot.png';
+import carrot from '../../assets/images/fruits/carrot.png';
 import peach from '../../assets/images/fruits/peach.png';
-import orange from '../../assets/images/fruits/orange.png';
 import potato from '../../assets/images/fruits/potato.png';
 import vegetable from '../../assets/images/fruits/vegetable.png';
 import strawberry from '../../assets/images/fruits/strawberry.png';
@@ -26,7 +25,7 @@ const Categories = () => {
     { image: vegetable, name: 'vegetable', count: 20 },
     { image: strawberry, name: 'strawberry', count: 12 },
     { image: apple, name: 'apple', count: 30 },
-    { image: orange, name: 'orange', count: 10 },
+    { image: carrot, name: 'carrot', count: 10 },
     { image: potato, name: 'potato', count: 1 },
   ];
   const dummy1 = [
@@ -34,7 +33,7 @@ const Categories = () => {
     { image: vegetable, name: 'vegetable2', count: 20 },
     { image: strawberry, name: 'strawberry2', count: 12 },
     { image: apple, name: 'apple2', count: 30 },
-    { image: orange, name: 'orange2', count: 10 },
+    { image: carrot, name: 'carrot2', count: 10 },
     { image: potato, name: 'potato2', count: 1 },
   ];
   const dummy2 = [
@@ -42,7 +41,7 @@ const Categories = () => {
     { image: vegetable, name: 'vegetable3', count: 20 },
     { image: strawberry, name: 'strawberry3', count: 12 },
     { image: apple, name: 'apple3', count: 30 },
-    { image: orange, name: 'orange3', count: 10 },
+    { image: carrot, name: 'carrot3', count: 10 },
     { image: potato, name: 'potato3', count: 1 },
   ];
 
