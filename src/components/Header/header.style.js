@@ -33,7 +33,7 @@ export const HeaderTop = styled.div`
 export const WishlistAndCart = styled.div`
   display: flex;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     display: none;
   }
 `;
@@ -45,7 +45,7 @@ export const HeaderBottom = styled.div`
   padding: 18px 0;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     display: none;
   }
 `;

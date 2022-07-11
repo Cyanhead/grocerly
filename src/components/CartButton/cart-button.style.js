@@ -23,7 +23,7 @@ export const CartButtonWrap = styled.div`
     background-color: ${props => props.theme.color.greyActive};
   }
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     justify-content: start;
 
     padding: 0;
@@ -72,7 +72,7 @@ export const CartButtonCount = styled.p`
 `;
 
 export const CartButtonText = styled.div`
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     display: none;
   }
 `;
@@ -85,7 +85,7 @@ export const CartButtonP = styled.p`
 export const CartMobileP = styled.p`
   display: none;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     display: flex;
 
     margin-left: 8px;

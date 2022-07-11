@@ -13,7 +13,7 @@ export const WishlistWrap = styled.div`
   padding: 8px 8px 8px 4px;
   margin-right: 20px;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     justify-content: start;
 
     padding: 0;
@@ -60,7 +60,7 @@ export const WishlistP = styled.p`
   font-size: 0.75rem;
   font-weight: ${medium};
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     margin-left: 8px;
 
     font-size: 0.875rem;

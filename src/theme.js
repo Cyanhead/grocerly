@@ -21,8 +21,8 @@ export const theme = {
   },
 
   breakpoint: {
-    large: 1100,
-    medium: 900,
-    small: 480,
+    large: '1100px',
+    medium: '900px',
+    small: '480px',
   },
 };

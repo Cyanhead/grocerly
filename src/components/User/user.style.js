@@ -42,7 +42,7 @@ export const UserPhoto = styled.img`
 export const UserName = styled.p`
   font-weight: ${semibold};
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.small}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
     display: none;
   }
 `;
@@ -75,7 +75,7 @@ export const MenuItem = styled.li`
     background-color: ${primaryLite};
   }
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     display: flex;
   }
 `;

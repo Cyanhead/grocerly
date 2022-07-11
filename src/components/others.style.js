@@ -86,7 +86,7 @@ export const MobileIcon = styled.div`
 
   padding: 8px;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}px) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
     display: flex;
   }
 `;
