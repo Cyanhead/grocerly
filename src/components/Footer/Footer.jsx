@@ -55,15 +55,23 @@ const Footer = () => {
         {contactInfo.map((info, i) => {
           return (
             <ContactRow key={i}>
-              <IconWrap fg={props => props.theme.color.primary}>
-                {info.icon}
-              </IconWrap>
-              <FooterP
-                fontWght={props => props.theme.fontWght.semibold}
-                mar="0 8px 0 0"
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                }}
               >
-                {info.title}:
-              </FooterP>
+                <IconWrap fg={props => props.theme.color.primary}>
+                  {info.icon}
+                </IconWrap>
+                <FooterP
+                  fontWght={props => props.theme.fontWght.semibold}
+                  mar="0 8px 0 0"
+                >
+                  {info.title}:
+                </FooterP>
+              </div>
               <FooterP textTrans={info.anotherCase ? 'lowercase' : ''}>
                 {info.content}
               </FooterP>
