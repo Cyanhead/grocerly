@@ -57,6 +57,7 @@ const ProductTile = ({
               visibility={visible}
               fontSize="0.875rem"
               pad="8px 22px"
+              padMid="8px 16px"
               bg={props => props.theme.color.primaryLite}
               bgHover={props => props.theme.color.primary}
               fg={props => props.theme.color.primary}

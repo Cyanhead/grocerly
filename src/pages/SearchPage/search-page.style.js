@@ -17,7 +17,7 @@ export const SearchPageWrap = styled.div`
 
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 0 80px 0;
+  padding: 40px 8px 80px 8px;
 `;
 
 export const SearchPageAside = styled.aside`
@@ -29,11 +29,18 @@ export const SearchPageAside = styled.aside`
   background-color: ${white};
 
   width: 280px;
-  /* max-width: 280px; */
   margin-right: 16px;
   padding: 8px 0;
 
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    width: 220px;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    display: none;
+  }
 `;
 
 export const SearchResult = styled.div`
@@ -56,9 +63,14 @@ export const RowOne = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 4px 8px;
+  padding: 12px 0;
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const RowTwo = styled.div`
@@ -66,18 +78,58 @@ export const RowTwo = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 4px 8px;
+  padding: 8px;
 `;
 
 export const ResultHeading = styled.p`
   font-size: 1.25rem;
   font-weight: ${semibold};
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    font-size: 1.125rem;
+  }
 `;
 
-export const SortButton = styled.button`
+export const CategorySelect = styled.select`
+  display: none;
+
+  padding: 4px 0;
+
+  text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    display: flex;
+  }
+`;
+
+export const CategoryOption = styled.option`
+  text-transform: capitalize;
+`;
+
+export const SortWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+`;
+
+export const SortP = styled.p`
+  margin-right: 8px;
+`;
+
+export const SortButton = styled.select`
   display: flex;
   align-items: center;
+
+
+  padding: 4px 0;
+
+  text-transform: capitalize;
+`;
+
+export const SortOption = styled.option`
+  text-transform: capitalize;
 `;
 
 export const ResultCount = styled.p``;
@@ -86,6 +138,14 @@ export const SearchedProductsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 8px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 // * CATEGORY LIST

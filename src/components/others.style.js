@@ -24,8 +24,6 @@ export const IconWrap = styled.div`
 
   font-size: ${props => props.fontSize || '1.5rem'};
 
-  /* transition: 150ms; */
-
   cursor: ${props => props.cursor || ''};
 
   &:hover {
@@ -61,6 +59,14 @@ export const ColoredBtn = styled.button`
   &:hover {
     background-color: ${props => props.bgHover || 'inherit'};
     color: ${props => props.fgHover || white};
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: flex;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    padding: ${props => props.padMid || ''};
   }
 `;
 

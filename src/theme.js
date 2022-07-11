@@ -23,6 +23,7 @@ export const theme = {
   breakpoint: {
     large: '1100px',
     mediumHigh: '900px',
+    medium: '768px',
     mediumLow: '600px',
     small: '480px',
   },
