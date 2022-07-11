@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ChevronDownWrap = styled.div`
   display: flex;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     display: ${({ mobile }) => (mobile ? 'none' : 'flex')};
   }
 

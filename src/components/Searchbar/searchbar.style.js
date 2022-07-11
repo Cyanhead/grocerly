@@ -19,7 +19,7 @@ export const SearchbarWrap = styled.div`
 
   border-radius: 3px;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     display: none;
   }
 `;

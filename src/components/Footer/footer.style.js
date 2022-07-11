@@ -32,7 +32,7 @@ export const FooterTop = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -114,7 +114,7 @@ export const ContactRow = styled.div`
     margin-bottom: 0;
   }
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     flex-direction: column;
     align-items: stretch;
   }
@@ -127,7 +127,7 @@ export const FooterBottom = styled.div`
 
   padding: 40px 0;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     flex-direction: column-reverse;
   }
 `;

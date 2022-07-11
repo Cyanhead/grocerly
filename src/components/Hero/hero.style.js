@@ -62,7 +62,7 @@ export const HeroH1 = styled.h1`
 
   font-size: 3rem;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     font-size: 2rem;
   }
 
@@ -75,7 +75,7 @@ export const HeroP = styled.p`
   font-size: 1.25rem;
   font-weight: ${medium};
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     font-size: 1rem;
   }
 
@@ -110,7 +110,7 @@ export const InputWrap = styled.div`
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     padding: 12px 8px;
   }
 `;
