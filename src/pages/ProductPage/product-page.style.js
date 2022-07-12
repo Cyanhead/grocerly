@@ -20,6 +20,7 @@ export const ProductPageWrap = styled.div`
 
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
 `;
 
 export const ProductLanding = styled.div`
@@ -27,11 +28,14 @@ export const ProductLanding = styled.div`
   align-items: stretch;
 
   width: 100%;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    flex-direction: column;
+  } ;
 `;
 
 export const ProductPageLeft = styled.div`
   flex: 2;
-  /* border: 1px solid black; */
 `;
 
 export const ProductImagePreviewWrap = styled.div`
@@ -39,9 +43,11 @@ export const ProductImagePreviewWrap = styled.div`
   justify-content: center;
   align-items: center;
 
-  /* background-color: blanchedalmond; */
-
   padding: 16px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    display: none;
+  } ;
 `;
 
 export const ProductImagePreview = styled.img`
@@ -50,12 +56,22 @@ export const ProductImagePreview = styled.img`
 `;
 
 export const ProductImageSlide = styled.div`
-  display: flex;
+  display: ${({ mobile }) => (mobile ? 'none' : 'flex')};
   align-items: center;
 
   margin-top: 16px;
 
-  /* border: 1px solid black; */
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    display: ${({ mobile }) => (mobile ? 'flex' : 'none')};
+    align-items: center;
+    justify-content: start;
+
+    width: 100%;
+    margin-top: 0;
+    padding: 8px 0;
+
+    overflow-x: scroll;
+  } ;
 `;
 
 export const ProductImageWrap = styled.div`
@@ -73,6 +89,19 @@ export const ProductImageWrap = styled.div`
 export const ProductImage = styled.img`
   width: 80px;
   height: auto;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    min-width: 70vw;
+    margin: 4px;
+    padding: 8px;
+
+    border: ${greyBorder};
+    border-radius: 3px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  } ;
 `;
 
 export const ProductPageRight = styled.div`
@@ -83,7 +112,10 @@ export const ProductPageRight = styled.div`
 
   padding: 10px 0;
   padding-left: 20px;
-  /* border: 1px solid black; */
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    padding-left: 0;
+  } ;
 `;
 
 export const TopRow = styled.div`
@@ -123,11 +155,20 @@ export const QuantityWrap = styled.div`
   align-items: center;
 
   margin-bottom: 16px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    flex-direction: column;
+    align-items: stretch;
+  } ;
 `;
 
 export const DiscountWrap = styled.div`
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    margin-bottom: 16px;
+  } ;
 `;
 
 export const OldPrice = styled.p`
@@ -220,9 +261,7 @@ export const SimilarProductsMarquee = styled.div`
 
   white-space: nowrap;
   will-change: transform;
-  /* animation: marquee 20s linear infinite; */
   animation: marquee 5s linear infinite;
-  /* width: 140%; */
 
   &:hover {
     animation-play-state: paused;
@@ -231,7 +270,7 @@ export const SimilarProductsMarquee = styled.div`
     from {
       transform: translateX(5%);
     }
-    // todo: tweak some more to allow more products and marquee restarts at last product
+    // TODO: tweak some more to allow more products and marquee restarts at last product
     to {
       transform: translateX(-10%);
     }

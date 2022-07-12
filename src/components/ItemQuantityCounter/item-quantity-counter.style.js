@@ -13,6 +13,10 @@ export const Wrap = styled.div`
 
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    width: 100%;
+  }
 `;
 
 export const CounterText = styled.p`

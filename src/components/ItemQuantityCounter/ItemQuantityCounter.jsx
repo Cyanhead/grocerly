@@ -17,6 +17,7 @@ const ItemQuantityCounter = props => {
             bgHover={props => props.theme.color.greyHover}
             bgActive={props => props.theme.color.greyActive}
             pad="8px"
+            mobilePad="16px"
             bordRad="0"
             bordR="1px solid rgba(0, 0, 0, 0.2)"
           >
@@ -28,6 +29,7 @@ const ItemQuantityCounter = props => {
           bgHover={props => props.theme.color.greyHover}
           bgActive={props => props.theme.color.greyActive}
           pad="8px"
+          mobilePad="16px"
           bordRad="0"
           bordL="1px solid rgba(0, 0, 0, 0.2)"
           onClick={props.onClickPlus}

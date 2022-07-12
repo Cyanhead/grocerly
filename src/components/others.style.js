@@ -34,6 +34,10 @@ export const IconWrap = styled.div`
   &:active {
     background-color: ${props => props.bgActive || 'inherit'};
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    padding: ${props => props.mobilePad || ''};
+  } ;
 `;
 
 export const ColoredBtn = styled.button`

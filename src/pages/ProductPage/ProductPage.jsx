@@ -99,6 +99,14 @@ const ProductPage = () => {
           <ProductPageWrap>
             <ProductLanding>
               <ProductPageLeft>
+                <ProductImageSlide mobile>
+                  {
+                    // TODO consider the max amount of product photos uploadable
+                    currentProduct?.images.map((image, i) => {
+                      return <ProductImage key={i} src={image} alt="" />;
+                    })
+                  }
+                </ProductImageSlide>
                 <ProductImagePreviewWrap>
                   <ProductImagePreview
                     src={currentProduct?.images[previewImage] || ''}
@@ -107,7 +115,7 @@ const ProductPage = () => {
                 </ProductImagePreviewWrap>
                 <ProductImageSlide>
                   {
-                    // ? consider the max amount of product photos uploadable
+                    // TODO consider the max amount of product photos uploadable
                     currentProduct?.images.map((image, i) => {
                       return (
                         <ProductImageWrap
@@ -137,8 +145,9 @@ const ProductPage = () => {
                   Category: {currentProduct?.category || 'category'}
                 </ProductCategory>
                 rating
-                {/* // todo: star rating */}
-                {/* // todo: label */}
+                {/* TODO: add star rating */}
+                {/* TODO: add label */}
+                {/* TODO add wishlist button beside rating */}
                 <ProductBrief>{currentProduct?.brief || 'brief'}</ProductBrief>
                 <Price>
                   &#36;
