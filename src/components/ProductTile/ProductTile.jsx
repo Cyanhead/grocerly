@@ -19,7 +19,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 
 import { useCartContext } from '../../context/CartContext';
 
-// todo: remember to implement review component later
+// TODO: remember to implement review component later
 
 const ProductTile = ({
   product: { id, name, images, price, oldPrice, category },
@@ -57,7 +57,7 @@ const ProductTile = ({
               visibility={visible}
               fontSize="0.875rem"
               pad="8px 22px"
-              padMid="8px 16px"
+              padMid="12px 16px"
               bg={props => props.theme.color.primaryLite}
               bgHover={props => props.theme.color.primary}
               fg={props => props.theme.color.primary}

@@ -66,12 +66,24 @@ export const PurchaseWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 38px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
 `;
 
 export const PriceWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    align-self: flex-start;
+
+    margin-bottom: 8px;
+  }
 `;
 
 export const CurrentPrice = styled.p`
