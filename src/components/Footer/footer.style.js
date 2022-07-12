@@ -20,6 +20,7 @@ export const FooterWrap = styled.div`
 
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
 `;
 
 export const FooterTop = styled.div`
@@ -30,6 +31,20 @@ export const FooterTop = styled.div`
   padding: 72px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 16px;
+    grid-row-gap: 28px;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const Column = styled.div`
@@ -37,6 +52,10 @@ export const Column = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    margin-bottom: 16px;
+  }
 `;
 
 export const ColHead = styled.p`
@@ -45,6 +64,10 @@ export const ColHead = styled.p`
   font-size: 1.5rem;
   font-weight: ${semibold};
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    margin-bottom: 16px;
+  }
 `;
 
 export const ColBody = styled.div`
@@ -90,6 +113,11 @@ export const ContactRow = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const FooterBottom = styled.div`
@@ -98,6 +126,10 @@ export const FooterBottom = styled.div`
   align-items: center;
 
   padding: 40px 0;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    flex-direction: column-reverse;
+  }
 `;
 
 export const Copyright = styled.div``;
@@ -105,6 +137,7 @@ export const Copyright = styled.div``;
 export const PaymentImg = styled.img`
   height: 32px;
   width: auto;
+  margin: 28px;
 `;
 
 export const SocialWrap = styled.div`

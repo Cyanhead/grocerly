@@ -6,6 +6,7 @@ import {
   CartTop,
   CartTopLeft,
   EmptyCartButton,
+  EmptyCartButtonSpan,
   CartMid,
   CartHeading,
   CartP,
@@ -40,7 +41,7 @@ const Cart = () => {
   const EmptyCart = () => {
     return (
       <CartMid>
-        {/* // todo: replace icon with svg */}
+        {/* TODO: replace icon with svg */}
         <IconWrap fontSize="8rem">
           <FiShoppingCart />
         </IconWrap>
@@ -150,7 +151,7 @@ const Cart = () => {
             <IconWrap fontSize="1.25rem" bg="transparent" bgHover="transparent">
               <FiTrash />
             </IconWrap>
-            Empty Cart
+            <EmptyCartButtonSpan>Empty Cart</EmptyCartButtonSpan>
           </EmptyCartButton>
         </Disabler>
       </CartTop>

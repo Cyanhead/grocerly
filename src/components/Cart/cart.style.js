@@ -28,6 +28,10 @@ export const CartWrap = styled.div`
   transform: ${({ showCart }) =>
     showCart ? 'translateX(0)' : 'translateX(520px)'};
   opacity: ${({ showCart }) => (showCart ? '1' : '0')};
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    width: 100%;
+  } ;
 `;
 
 export const CartTop = styled.div`
@@ -66,10 +70,20 @@ export const EmptyCartButton = styled.button`
   }
 `;
 
+export const EmptyCartButtonSpan = styled.span`
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    display: none;
+  }
+`;
+
 export const CartHeading = styled.h2`
   margin: 8px 0;
 
   text-align: center;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    font-size: 1.25rem;
+  }
 `;
 
 export const CartMid = styled.div`
@@ -156,6 +170,10 @@ export const CartItemWrap = styled.div`
 
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    margin: 0 4px;
+  }
 `;
 
 export const CartItemLeft = styled.div`
@@ -171,6 +189,10 @@ export const ItemImg = styled.img`
   height: auto;
 
   margin-right: 12px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    width: 100px;
+  }
 `;
 
 export const ItemDetails = styled.div`

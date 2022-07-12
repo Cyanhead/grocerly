@@ -19,6 +19,7 @@ export const HeaderWrap = styled.div`
 
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
 `;
 
 export const HeaderTop = styled.div`
@@ -31,6 +32,10 @@ export const HeaderTop = styled.div`
 
 export const WishlistAndCart = styled.div`
   display: flex;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+    display: none;
+  }
 `;
 
 export const HeaderBottom = styled.div`
@@ -39,6 +44,10 @@ export const HeaderBottom = styled.div`
 
   padding: 18px 0;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+    display: none;
+  }
 `;
 
 export const NavLinks = styled.div`

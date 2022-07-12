@@ -6,12 +6,25 @@ export const LabelContainer = styled.div`
 
 export const LabelWrap = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 0 28px 0;
+  padding: 100px 24px 28px 24px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
-export const LabelImg = styled.img``;
+export const LabelImgWrap = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+`;
+
+export const LabelImg = styled.img`
+  width: 100%;
+  height: auto;
+`;

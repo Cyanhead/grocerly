@@ -1,4 +1,3 @@
-import ChevronDown from '../../components/ChevronDown';
 import ProductTile from '../../components/ProductTile';
 
 import {
@@ -9,10 +8,14 @@ import {
   RowOne,
   RowTwo,
   ResultHeading,
-  ResultCount,
+  CategorySelect,
+  CategoryOption,
+  SortWrap,
+  SortP,
   SortButton,
+  SortOption,
+  ResultCount,
   SearchedProductsGrid,
-  //
   CategoryListWrap,
   CategoryListHeading,
   CategoryLink,
@@ -56,9 +59,29 @@ const SearchPage = () => {
         <SearchResult>
           <RowOne>
             <ResultHeading>buy fresh with grocerly</ResultHeading>
-            <SortButton>
-              Sort by: popularity <ChevronDown />
-            </SortButton>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+
+                marginTop: '8px',
+              }}
+            >
+              <CategorySelect>
+                <CategoryOption>all</CategoryOption>
+                <CategoryOption>vegetables</CategoryOption>
+                <CategoryOption>fruits</CategoryOption>
+              </CategorySelect>
+              <SortWrap>
+                <SortP> Sort by:</SortP>
+                <SortButton>
+                  <SortOption>popularity</SortOption>
+                  <SortOption>lowest price</SortOption>
+                  <SortOption>highest price</SortOption>
+                </SortButton>
+              </SortWrap>
+            </div>
           </RowOne>
           <RowTwo>
             <ResultCount>

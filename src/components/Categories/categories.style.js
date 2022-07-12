@@ -10,6 +10,10 @@ export const SlideWrap = styled.div`
   width: 100%;
 
   overflow-x: hidden;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    overflow-x: scroll;
+  }
 `;
 
 export const Slide = styled.div`
@@ -21,6 +25,24 @@ export const Slide = styled.div`
   transform: translateX(${props => props.sliderIndex * -1200}px);
 
   min-width: 1200px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+
+    min-width: 100%;
+    padding-right: 20px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const TileWrap = styled.div`
@@ -42,6 +64,11 @@ export const TileWrap = styled.div`
 
   &:last-child {
     margin-right: 0;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    width: 100%;
+    margin: 0;
   }
 `;
 

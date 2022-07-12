@@ -25,10 +25,15 @@ export const HeroContainer = styled.div`
 export const HeroWrap = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    flex-direction: column-reverse;
+  }
 `;
 
 export const HeroLeft = styled.div`
@@ -36,6 +41,8 @@ export const HeroLeft = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
+  padding: 40px 0;
 
   flex: 1;
 `;
@@ -54,11 +61,27 @@ export const HeroH1 = styled.h1`
   margin-bottom: 28px;
 
   font-size: 3rem;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    font-size: 1.75rem;
+  }
 `;
 
 export const HeroP = styled.p`
   font-size: 1.25rem;
   font-weight: ${medium};
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    font-size: 1rem;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const HeroForm = styled.form`
@@ -66,7 +89,12 @@ export const HeroForm = styled.form`
   justify-content: center;
   align-items: stretch;
 
+  width: 100%;
   border-radius: 2px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    flex-direction: column;
+  }
 `;
 
 export const InputWrap = styled.div`
@@ -77,16 +105,21 @@ export const InputWrap = styled.div`
   background-color: ${white};
   color: ${grey};
 
+  width: 100%;
   padding: 16px 12px;
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    padding: 12px 8px;
+  }
 `;
 
 export const HeroInput = styled.input`
   color: inherit;
 
   margin-left: 8px;
-  width: 280px;
+  width: 100%;
   border: none;
   outline: none;
 
@@ -111,6 +144,11 @@ export const HeroBtn = styled.button`
   &:hover {
     background-color: ${primaryHover};
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    padding: 16px 0;
+    border-radius: 2px;
+  }
 `;
 
 export const HeroRight = styled.div`
@@ -121,4 +159,7 @@ export const HeroRight = styled.div`
   flex: 1;
 `;
 
-export const HeroImg = styled.img``;
+export const HeroImg = styled.img`
+  width: 100%;
+  height: auto;
+`;

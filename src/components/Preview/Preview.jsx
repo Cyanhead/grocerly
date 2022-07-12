@@ -5,6 +5,8 @@ import {
   PreviewTop,
   PreviewHeading,
   CategoryList,
+  CategorySelect,
+  CategoryOption,
   Category,
   PreviewBottom,
   Arrow,
@@ -35,6 +37,12 @@ const Preview = props => {
             <Category>coffee &amp; teas</Category>
             <Category>meat</Category>
           </CategoryList>
+          <CategorySelect>
+            <CategoryOption green>all</CategoryOption>
+            <CategoryOption>vegetables</CategoryOption>
+            <CategoryOption>coffee &amp; teas</CategoryOption>
+            <CategoryOption>meat</CategoryOption>
+          </CategorySelect>
         </PreviewTop>
         <PreviewBottom>
           <Arrow direction="left" onClick={() => handleClick('left')}>

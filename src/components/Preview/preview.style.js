@@ -17,7 +17,7 @@ export const PreviewWrap = styled.div`
 
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 0 24px 0;
+  padding: 100px 24px 24px 24px;
 `;
 
 export const PreviewTop = styled.div`
@@ -26,17 +26,34 @@ export const PreviewTop = styled.div`
   align-items: center;
 
   margin-bottom: 36px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const PreviewHeading = styled.h2`
   font-weight: ${semibold};
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    font-size: 1.25rem;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    margin-bottom: 12px;
+  }
 `;
 
 export const CategoryList = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    display: none;
+  }
 `;
 
 export const Category = styled.p`
@@ -56,6 +73,26 @@ export const Category = styled.p`
   &:last-child {
     margin-right: 0;
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    font-size: 0.875rem;
+  }
+`;
+
+export const CategorySelect = styled.select`
+  display: none;
+
+  padding: 8px 4px;
+
+  text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    display: flex;
+  }
+`;
+
+export const CategoryOption = styled.option`
+  text-transform: capitalize;
 `;
 
 export const PreviewBottom = styled.div`
@@ -92,5 +129,9 @@ export const Arrow = styled.div`
   }
   &:active {
     background-color: ${props => props.theme.color.greyActive};
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: none;
   }
 `;

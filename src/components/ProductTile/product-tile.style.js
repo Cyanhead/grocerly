@@ -44,6 +44,10 @@ export const ProductInfo = styled.div`
 export const ProductCategory = styled.p`
   font-size: 0.75rem;
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    font-size: 0.625rem;
+  }
 `;
 
 export const ProductName = styled.p`
@@ -51,6 +55,10 @@ export const ProductName = styled.p`
 
   font-weight: ${semibold};
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const PurchaseWrap = styled.div`
@@ -58,12 +66,24 @@ export const PurchaseWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 38px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
 `;
 
 export const PriceWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    align-self: flex-start;
+
+    margin-bottom: 8px;
+  }
 `;
 
 export const CurrentPrice = styled.p`
@@ -74,6 +94,10 @@ export const CurrentPrice = styled.p`
   font-size: 1.125rem;
   font-weight: ${semibold};
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    font-size: 1rem;
+  }
 `;
 
 export const OldPrice = styled.p`
@@ -83,4 +107,8 @@ export const OldPrice = styled.p`
   font-weight: ${medium};
   text-decoration: line-through;
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    font-size: 0.75rem;
+  }
 `;

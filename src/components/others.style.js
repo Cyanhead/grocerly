@@ -24,8 +24,6 @@ export const IconWrap = styled.div`
 
   font-size: ${props => props.fontSize || '1.5rem'};
 
-  /* transition: 150ms; */
-
   cursor: ${props => props.cursor || ''};
 
   &:hover {
@@ -36,6 +34,10 @@ export const IconWrap = styled.div`
   &:active {
     background-color: ${props => props.bgActive || 'inherit'};
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    padding: ${props => props.mobilePad || ''};
+  } ;
 `;
 
 export const ColoredBtn = styled.button`
@@ -62,6 +64,14 @@ export const ColoredBtn = styled.button`
     background-color: ${props => props.bgHover || 'inherit'};
     color: ${props => props.fgHover || white};
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: flex;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    padding: ${props => props.padMid || ''};
+  }
 `;
 
 export const GreenSpan = styled.span`
@@ -77,4 +87,16 @@ export const Disabler = styled.div`
 
   opacity: ${({ disabled }) => (disabled ? '0.5' : '')};
   pointer-events: ${({ disabled }) => (disabled ? 'none' : '')};
+`;
+
+export const MobileIcon = styled.div`
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  padding: 8px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: flex;
+  }
 `;

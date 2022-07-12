@@ -22,6 +22,20 @@ export const CartButtonWrap = styled.div`
   &:active {
     background-color: ${props => props.theme.color.greyActive};
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+    justify-content: start;
+
+    padding: 0;
+    margin-right: 0;
+
+    &:hover {
+      background-color: inherit;
+    }
+    &:active {
+      background-color: inherit;
+    }
+  }
 `;
 
 export const CartButtonCounterWrap = styled.div`
@@ -57,9 +71,26 @@ export const CartButtonCount = styled.p`
   font-size: 11px;
 `;
 
-export const CartButtonText = styled.div``;
+export const CartButtonText = styled.div`
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+    display: none;
+  }
+`;
 
 export const CartButtonP = styled.p`
   font-size: 0.75rem;
   font-weight: ${medium};
+`;
+
+export const CartMobileP = styled.p`
+  display: none;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+    display: flex;
+
+    margin-left: 8px;
+
+    font-size: 0.875rem;
+    font-weight: ${medium};
+  }
 `;

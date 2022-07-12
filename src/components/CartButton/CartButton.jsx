@@ -6,6 +6,7 @@ import {
   CartButtonCount,
   CartButtonText,
   CartButtonP,
+  CartMobileP,
 } from './cart-button.style';
 
 import { useCartContext } from '../../context/CartContext';
@@ -26,6 +27,7 @@ const CartButton = () => {
           </CartButtonCounter>
         </CartButtonCounterWrap>
       </IconWrap>
+      <CartMobileP>My Cart</CartMobileP>
       <CartButtonText>
         <CartButtonP>My Cart</CartButtonP>
         <CartButtonP>
