@@ -162,4 +162,6 @@ export const HeroRight = styled.div`
 export const HeroImg = styled.img`
   width: 100%;
   height: auto;
+
+  margin-right: -48px;
 `;
