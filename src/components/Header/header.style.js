@@ -32,8 +32,12 @@ export const HeaderTop = styled.div`
 
   position: relative;
 
-  padding: 18px 0;
+  padding: 18px;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    padding: 4px;
+  }
 `;
 
 export const WishlistAndCart = styled.div`

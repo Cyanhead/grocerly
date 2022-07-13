@@ -28,7 +28,7 @@ export const SearchbarWrap = styled.div`
     top: 0;
 
     transform: ${({ toggleSearch }) =>
-      toggleSearch ? 'translateY(110px)' : 'translateY(0)'};
+      toggleSearch ? 'translateY(90px)' : 'translateY(0)'};
     transition: 300ms;
 
     z-index: 9;
@@ -158,7 +158,7 @@ export const HitContainer = styled.div`
   display: ${({ showResults }) => (showResults ? 'block' : 'none')};
 
   position: absolute;
-  top: 56px;
+  top: 50px;
 
   z-index: 7;
 
