@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const primary = props => props.theme.color.primary;
 const white = props => props.theme.color.white;
+const greyHover = props => props.theme.color.greyHover;
+const greyActive = props => props.theme.color.greyActive;
 
 export const IconWrap = styled.div`
   display: flex;
@@ -95,6 +97,18 @@ export const MobileIcon = styled.div`
   align-items: center;
 
   padding: 8px;
+
+  cursor: pointer;
+
+  border-radius: 50%;
+
+  &:hover {
+    background-color: ${greyHover};
+  }
+
+  &:active {
+    background-color: ${greyActive};
+  }
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     display: flex;

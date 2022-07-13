@@ -18,8 +18,8 @@ const Labels = () => {
       <LabelWrap>
         {images.map((img, i) => {
           return (
-            <LabelImgWrap>
-              <LabelImg key={i} src={img} alt="" />
+            <LabelImgWrap key={i}>
+              <LabelImg src={img} alt="" />
             </LabelImgWrap>
           );
         })}

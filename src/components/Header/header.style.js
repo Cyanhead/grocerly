@@ -11,6 +11,10 @@ export const HeaderContainer = styled.div`
 
   background-color: ${white};
   color: ${black};
+
+  position: sticky;
+  top: 0;
+  z-index: 11;
 `;
 
 export const HeaderWrap = styled.div`
@@ -25,6 +29,8 @@ export const HeaderWrap = styled.div`
 export const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
+
+  position: relative;
 
   padding: 18px 0;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);

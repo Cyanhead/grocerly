@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   SearchbarWrap,
   SearchbarLeft,
@@ -50,7 +50,7 @@ function Hit({ hit }) {
   );
 }
 
-const Searchbar = () => {
+const Searchbar = props => {
   const { products } = useProductsListContext();
 
   const searchClient = algoliasearch(
@@ -75,22 +75,63 @@ const Searchbar = () => {
 
   const SearchBox = () => {
     const [searchValue, setSearchValue] = useState('');
+    const [insideClick, setInsideClick] = useState(true);
+
+    /**
+     * Hook that alerts clicks outside of the passed ref
+     */
+    function useOutsideAlerter(ref) {
+      useEffect(() => {
+        /**
+         * Action to do if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            console.log('You clicked outside of me!');
+            setInsideClick(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    /**
+     * Component that alerts if you click outside of it
+     */
+    function OutsideAlerter(props) {
+      const wrapperRef = useRef(null);
+      useOutsideAlerter(wrapperRef);
+
+      return <div ref={wrapperRef}>{props.children}</div>;
+    }
+
+    const handleInput = value => {
+      setSearchValue(value);
+      setInsideClick(true);
+    };
 
     return (
       <>
         <CustomSearchBox
           placeholder="Search for items..."
-          onInput={e => setSearchValue(e.target.value)}
+          onInput={e => handleInput(e.target.value)}
         />
-        <HitContainer showResults={searchValue.length >= 1}>
-          <Hits hitComponent={Hit} />
+        <HitContainer showResults={insideClick && searchValue.length >= 1}>
+          <OutsideAlerter>
+            <Hits hitComponent={Hit} />
+          </OutsideAlerter>
         </HitContainer>
       </>
     );
   };
 
   return (
-    <SearchbarWrap>
+    <SearchbarWrap toggleSearch={props.toggleSearch} mobile={props.mobile}>
       <SearchbarLeft>
         <CategoryBtn>
           All Categories
