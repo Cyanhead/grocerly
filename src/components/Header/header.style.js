@@ -11,6 +11,10 @@ export const HeaderContainer = styled.div`
 
   background-color: ${white};
   color: ${black};
+
+  position: sticky;
+  top: 0;
+  z-index: 11;
 `;
 
 export const HeaderWrap = styled.div`
@@ -26,8 +30,14 @@ export const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
 
-  padding: 18px 0;
+  position: relative;
+
+  padding: 18px;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    padding: 4px;
+  }
 `;
 
 export const WishlistAndCart = styled.div`

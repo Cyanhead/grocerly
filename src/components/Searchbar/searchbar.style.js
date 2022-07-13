@@ -13,14 +13,27 @@ const grey = props => props.theme.color.grey;
 const semibold = props => props.theme.fontWght.semibold;
 const medium = props => props.theme.fontWght.medium;
 
+const mediumHighBP = props => props.theme.breakpoint.mediumHigh;
+
 export const SearchbarWrap = styled.div`
-  display: flex;
+  display: ${({ mobile }) => (mobile ? 'none' : 'flex')};
   justify-content: center;
 
   border-radius: 3px;
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
-    display: none;
+    display: ${({ mobile }) => (mobile ? 'flex' : 'none')};
+
+    position: fixed;
+    top: 0;
+
+    transform: ${({ toggleSearch }) =>
+      toggleSearch ? 'translateY(90px)' : 'translateY(0)'};
+    transition: 300ms;
+
+    z-index: 9;
+
+    width: 100%;
   }
 `;
 
@@ -35,6 +48,11 @@ export const SearchbarLeft = styled.div`
 
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
+
+  @media screen and (max-width: ${mediumHighBP}) {
+    width: 100%;
+    margin: 0 24px;
+  }
 `;
 
 export const CategoryBtn = styled.button`
@@ -53,6 +71,10 @@ export const CategoryBtn = styled.button`
 
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: none;
+  }
 `;
 
 export const CustomSearchBox = styled(SearchBox)`
@@ -62,6 +84,11 @@ export const CustomSearchBox = styled(SearchBox)`
   min-width: 300px;
   height: 100%;
   padding-right: 12px;
+
+  @media screen and (max-width: ${mediumHighBP}) {
+    width: 100%;
+    padding-right: 0;
+  }
 
   .ais-SearchBox-input {
     background-color: #f3f3f3;
@@ -81,10 +108,22 @@ export const CustomSearchBox = styled(SearchBox)`
     &:focus {
       border: 1px solid ${primary};
     }
+
+    @media screen and (max-width: ${mediumHighBP}) {
+      width: 100%;
+      padding: 0 40px;
+      border: none;
+
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
   }
 
   .ais-SearchBox-form::before {
     display: none;
+
+    @media screen and (max-width: ${mediumHighBP}) {
+      display: block;
+    }
   }
 `;
 
@@ -109,15 +148,19 @@ export const SearchbarRight = styled(Link)`
   &:hover {
     background-color: ${primaryHover};
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    display: none;
+  }
 `;
 
 export const HitContainer = styled.div`
   display: ${({ showResults }) => (showResults ? 'block' : 'none')};
 
   position: absolute;
-  top: 56px;
+  top: 50px;
 
-  z-index: 20;
+  z-index: 7;
 
   width: 100%;
 
@@ -125,6 +168,12 @@ export const HitContainer = styled.div`
     &:hover {
       background-color: ${primaryLite};
     }
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    height: 60vh;
+    overflow-y: scroll;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
   }
 `;
 
