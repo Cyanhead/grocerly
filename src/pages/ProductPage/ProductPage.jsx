@@ -41,6 +41,7 @@ import { query, where, getDocs, getDoc, doc } from 'firebase/firestore';
 import { colRef } from '../../components/Firebase/firebase';
 import ItemQuantityCounter from '../../components/ItemQuantityCounter';
 import { useCartContext } from '../../context/CartContext';
+import Loading from '../../components/Loading';
 
 const ProductPage = () => {
   const [previewImage, setPreviewImage] = useState(0);
@@ -205,7 +206,7 @@ const ProductPage = () => {
             textAlign: 'center',
           }}
         >
-          <h2>loading...</h2>
+          <Loading />
         </div>
       )}
     </>
