@@ -24,6 +24,8 @@ import {
 import { useProductsListContext } from '../../context/ProductsListContext';
 import { useEffect, useState } from 'react';
 
+import Loading from '../../components/Loading';
+
 const SearchPage = () => {
   const { products } = useProductsListContext();
 
@@ -156,15 +158,15 @@ const SearchPage = () => {
               {filteredProducts.length === 1 ? '' : 's'} found
             </ResultCount>
           </RowTwo>
-          <SearchedProductsGrid>
-            {filteredProducts.length !== 0 ? (
-              filteredProducts.map(product => {
+          {filteredProducts.length !== 0 ? (
+            <SearchedProductsGrid>
+              {filteredProducts.map(product => {
                 return <ProductTile key={product.id} product={product} />;
-              })
-            ) : (
-              <p>Loading...</p>
-            )}
-          </SearchedProductsGrid>
+              })}
+            </SearchedProductsGrid>
+          ) : (
+            <Loading />
+          )}
         </SearchResult>
       </SearchPageWrap>
     </SearchPageContainer>
