@@ -8,6 +8,7 @@ import {
   CustomSearchBox,
   //
   HitContainer,
+  HitContainerTop,
   HitLink,
   HitWrap,
   HitLeft,
@@ -15,6 +16,10 @@ import {
   HitImage,
   HitP,
   HitH1,
+  AlgoliaWatermark,
+  AlgoliaLink,
+  AlgoliaP,
+  AlgoliaLogo,
 } from './searchbar.style';
 import { FiSearch } from 'react-icons/fi';
 import ChevronDown from '../ChevronDown';
@@ -26,6 +31,7 @@ import {
   Highlight,
   Configure,
 } from 'react-instantsearch-hooks-web';
+import algolia_logo from '../../assets/images/Algolia-nebula.svg';
 import { useProductsListContext } from '../../context/ProductsListContext';
 
 function Hit({ hit }) {
@@ -77,6 +83,8 @@ const Searchbar = props => {
     const [searchValue, setSearchValue] = useState('');
     const [insideClick, setInsideClick] = useState(true);
 
+    const watermarkRef = useRef(null);
+
     /**
      * Hook that alerts clicks outside of the passed ref
      */
@@ -86,7 +94,14 @@ const Searchbar = props => {
          * Action to do if clicked on outside of element
          */
         function handleClickOutside(event) {
-          if (ref.current && !ref.current.contains(event.target)) {
+
+       
+          if (
+            ref.current &&
+            !ref.current.contains(event.target) &&
+            !watermarkRef.current.contains(event.target)
+          ) {
+
             setInsideClick(false);
           }
         }
@@ -121,9 +136,21 @@ const Searchbar = props => {
           onInput={e => handleInput(e.target.value)}
         />
         <HitContainer showResults={insideClick && searchValue.length >= 1}>
-          <OutsideAlerter>
-            <Hits hitComponent={Hit} />
-          </OutsideAlerter>
+          <HitContainerTop>
+            <OutsideAlerter>
+              <Hits hitComponent={Hit} />
+            </OutsideAlerter>
+          </HitContainerTop>
+          <AlgoliaWatermark ref={watermarkRef}>
+            <AlgoliaLink
+              href="https://www.algolia.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <AlgoliaP>Search by</AlgoliaP>
+              <AlgoliaLogo src={algolia_logo} alt="algolia_logo" />
+            </AlgoliaLink>
+          </AlgoliaWatermark>
         </HitContainer>
       </>
     );

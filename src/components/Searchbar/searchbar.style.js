@@ -170,10 +170,60 @@ export const HitContainer = styled.div`
     }
   }
 
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+`;
+
+export const HitContainerTop = styled.div`
+  width: 100%;
+
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
-    height: 60vh;
-    overflow-y: auto;
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+
+    max-height: 60vh;
+    overflow-y: scroll;
+  }
+`;
+
+export const AlgoliaWatermark = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 16px;
+
+  background-color: ${white};
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    padding: 8px 16px;
+  }
+`;
+
+export const AlgoliaLink = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: inherit;
+
+  text-decoration: none;
+`;
+
+export const AlgoliaP = styled.p`
+  font-size: 0.875rem;
+  font-weight: ${semibold};
+  margin-right: 8px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    font-size: 0.75rem;
+  }
+`;
+
+export const AlgoliaLogo = styled.img`
+  width: auto;
+  height: 20px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    height: 16px;
+
   }
 `;
 
