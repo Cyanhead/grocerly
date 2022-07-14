@@ -177,6 +177,7 @@ export const HitContainerTop = styled.div`
   width: 100%;
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+
     max-height: 60vh;
     overflow-y: scroll;
   }
@@ -222,6 +223,7 @@ export const AlgoliaLogo = styled.img`
 
   @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
     height: 16px;
+
   }
 `;
 

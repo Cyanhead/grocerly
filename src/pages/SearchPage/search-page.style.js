@@ -111,7 +111,6 @@ export const SortWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 
 export const SortP = styled.p`
@@ -121,7 +120,6 @@ export const SortP = styled.p`
 export const SortButton = styled.select`
   display: flex;
   align-items: center;
-
 
   padding: 4px 0;
 
@@ -153,8 +151,10 @@ export const SearchedProductsGrid = styled.div`
 export const CategoryListWrap = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: stretch;
+
+  max-height: 300px;
+  overflow-y: auto;
 `;
 
 export const CategoryListHeading = styled.h3`
@@ -162,18 +162,16 @@ export const CategoryListHeading = styled.h3`
   text-transform: uppercase;
 `;
 
-export const CategoryLink = styled.a`
+export const CategoryP = styled.p`
+  background-color: ${({ active }) => (active ? '#f5f5f5' : 'inherit')};
   color: inherit;
 
   padding: 8px 32px;
 
+  text-transform: capitalize;
   text-decoration: none;
 
   &:hover {
     background-color: #f5f5f5;
   }
-`;
-
-export const CategoryP = styled.p`
-  text-transform: capitalize;
 `;

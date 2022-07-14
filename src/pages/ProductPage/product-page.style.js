@@ -70,7 +70,7 @@ export const ProductImageSlide = styled.div`
     margin-top: 0;
     padding: 8px 0;
 
-    overflow-x: scroll;
+    overflow-x: auto;
   } ;
 `;
 

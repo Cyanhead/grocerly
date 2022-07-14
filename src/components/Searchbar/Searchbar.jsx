@@ -94,11 +94,14 @@ const Searchbar = props => {
          * Action to do if clicked on outside of element
          */
         function handleClickOutside(event) {
+
+       
           if (
             ref.current &&
             !ref.current.contains(event.target) &&
             !watermarkRef.current.contains(event.target)
           ) {
+
             setInsideClick(false);
           }
         }
