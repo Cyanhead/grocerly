@@ -172,7 +172,7 @@ export const HitContainer = styled.div`
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     height: 60vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
   }
 `;
