@@ -15,13 +15,15 @@ import ProductPage from './pages/ProductPage';
 import AddProduct from './pages/AddProduct';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import SignupPage from './pages/SignupPage/SignupPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Router>
+  const MajorRoutes = () => {
+    return (
+      <>
         <Header />
+
         <Routes>
           <Route index element={<HomePage />} />
           <Route
@@ -36,8 +38,24 @@ function App() {
             <Route path=":productId" element={<ProductPage />} />
           </Route>
           <Route path="/addproducts" element={<AddProduct />} />
+
+          <Route path="*" element={<div>nothing to see here</div>} />
         </Routes>
+
         <Footer />
+      </>
+    );
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <Routes>
+          <Route path="*" element={<MajorRoutes />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
       </Router>
     </ThemeProvider>
   );
