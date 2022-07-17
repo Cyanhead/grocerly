@@ -38,7 +38,7 @@ import { IconWrap } from '../../components/others.style';
 import SimilarProductTile from '../../components/SimilarProductTile/SimilarProductTile';
 
 import { query, where, getDocs, getDoc, doc } from 'firebase/firestore';
-import { colRef } from '../../components/Firebase/firebase';
+import { colRef } from '../../context/Firebase/firebase';
 import ItemQuantityCounter from '../../components/ItemQuantityCounter';
 import { useCartContext } from '../../context/CartContext';
 import Loading from '../../components/Loading';

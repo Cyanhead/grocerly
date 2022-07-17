@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Toaster } from 'react-hot-toast';
 
-import Firebase, { FirebaseContext } from './components/Firebase';
+import Firebase, { FirebaseContext } from './context/Firebase';
 import { CartContext } from './context/CartContext';
 import { ProductsListContext } from './context/ProductsListContext';
 
