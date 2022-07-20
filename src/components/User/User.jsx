@@ -10,19 +10,87 @@ import {
 } from './user.style';
 
 import ChevronDown from '../ChevronDown';
-import goat from '../../assets/images/evil_goat.webp';
+import profile from '../../assets/images/profile.png';
 import Wishlist from '../Wishlist';
 import CartButton from '../CartButton';
 import { IconWrap, MobileIcon } from '../others.style';
-import { FiSettings, FiUser, FiMenu } from 'react-icons/fi';
+import { FiSettings, FiUser, FiMenu, FiPower } from 'react-icons/fi';
+
+import { useAuthContext } from '../../context/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../context/Firebase';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const User = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { signedUser, setSignedUser } = useAuthContext();
+
+  const handleLogout = () => {
+    const doLogout = toast.promise(signOut(auth), {
+      loading: 'Logging out...',
+      success: 'logged out successfully',
+      error: 'Error when logging out',
+    });
+
+    doLogout
+      .then(() => {
+        console.log('the user signed out');
+        setSignedUser(null);
+      })
+      .catch(err => console.log(err.message));
+  };
+
+  const trimEmailAddress = address => {
+    let emailString;
+    let trimmed;
+
+    if (typeof address === 'string') {
+      emailString = address;
+
+      for (let i = 0; i < emailString.length; i++) {
+        if (emailString[i] === '@') {
+          trimmed = emailString.slice(0, i);
+        }
+      }
+    } else {
+      console.log(`${address} is not a string`);
+    }
+
+    return trimmed;
+  };
+  const trimUsername = username => {
+    let nameString;
+    let trimmed;
+
+    if (typeof username === 'string') {
+      nameString = username;
+
+      trimmed = nameString.slice(0, 7);
+    } else {
+      console.log(`${username} is not a string`);
+    }
+
+    return nameString.length <= 7 ? trimmed : `${trimmed}...`;
+  };
 
   return (
     <UserWrap showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
-      <UserPhoto src={goat} alt="" />
-      <UserName> Window Shopper </UserName>
+      <UserPhoto
+        src={
+          signedUser !== null && signedUser.photoURL !== null
+            ? signedUser.photoURL
+            : profile
+        }
+        alt=""
+      />
+      <UserName>
+        {signedUser !== null
+          ? signedUser.displayName !== null
+            ? trimUsername(signedUser.displayName)
+            : trimEmailAddress(signedUser.email)
+          : 'Guest user'}
+      </UserName>
       <ChevronDown mobile trigger={showMenu} />
       <MobileIcon>
         <IconWrap fontSize="2rem">
@@ -30,24 +98,49 @@ const User = () => {
         </IconWrap>
       </MobileIcon>
       <MenuWrap showMenu={showMenu}>
-        <MenuItem>
-          <IconWrap>
-            <FiUser />
-          </IconWrap>
-          <MenuItemP>Profile</MenuItemP>
-        </MenuItem>
+        {signedUser !== null ? (
+          <MenuItem onClick={() => console.log('current user', signedUser)}>
+            <IconWrap>
+              <FiUser />
+            </IconWrap>
+            <MenuItemP>Profile</MenuItemP>
+          </MenuItem>
+        ) : (
+          <Link
+            to="/login"
+            style={{ color: 'inherit', textDecoration: 'none' }}
+          >
+            <MenuItem>
+              <IconWrap>
+                <FiUser />
+              </IconWrap>
+              <MenuItemP>Log in</MenuItemP>
+            </MenuItem>
+          </Link>
+        )}
+
         <MenuItem mobile>
           <Wishlist />
         </MenuItem>
         <MenuItem mobile>
           <CartButton />
         </MenuItem>
+
         <MenuItem>
           <IconWrap>
             <FiSettings />
           </IconWrap>
           <MenuItemP>Settings</MenuItemP>
         </MenuItem>
+
+        {signedUser !== null && (
+          <MenuItem onClick={handleLogout}>
+            <IconWrap>
+              <FiPower />
+            </IconWrap>
+            <MenuItemP>Log out</MenuItemP>
+          </MenuItem>
+        )}
       </MenuWrap>
     </UserWrap>
   );

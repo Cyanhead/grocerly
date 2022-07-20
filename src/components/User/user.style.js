@@ -11,13 +11,14 @@ const semibold = props => props.theme.fontWght.semibold;
 
 export const UserWrap = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   position: relative;
 
   background-color: ${({ showMenu }) => (showMenu ? greyHover : 'inherit')};
 
+  min-width: 136px;
   padding: 8px;
 
   cursor: pointer;
@@ -29,11 +30,17 @@ export const UserWrap = styled.div`
   &:active {
     background-color: ${greyActive};
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
+    justify-content: center;
+
+    min-width: unset;
+  }
 `;
 
 export const UserPhoto = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
 
   margin-right: 4px;
@@ -54,7 +61,8 @@ export const MenuWrap = styled.ul`
   align-items: stretch;
 
   position: absolute;
-  top: 60px;
+  top: 56px;
+  left: 0;
 
   background-color: ${white};
 
@@ -63,6 +71,10 @@ export const MenuWrap = styled.ul`
   list-style: none;
 
   border: 1px solid ${grey};
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    top: 72px;
+  }
 `;
 
 export const MenuItem = styled.li`
