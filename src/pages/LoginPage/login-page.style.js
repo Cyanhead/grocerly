@@ -6,9 +6,6 @@ const accent = props => props.theme.color.accent;
 const white = props => props.theme.color.white;
 const black = props => props.theme.color.black;
 
-const semibold = props => props.theme.fontWght.semibold;
-const medium = props => props.theme.fontWght.medium;
-
 export const LoginPageContainer = styled.div`
   background-color: ${white};
   color: ${black};
@@ -132,129 +129,6 @@ export const LoginRight = styled.div`
 
   @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
     background-color: transparent;
-  }
-`;
-
-export const FormWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-
-  max-width: 500px;
-  width: 100%;
-
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
-    background-color: ${white};
-
-    padding: 20px;
-    border-radius: 10px;
-
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
-  }
-`;
-
-export const LoginText = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-
-  margin-bottom: 20px;
-`;
-
-export const LoginPageH1 = styled.h1`
-  font-family: 'Days One', sans-serif;
-
-  font-weight: ${medium};
-
-  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
-    font-size: 1.5rem;
-  }
-`;
-
-export const LoginP = styled.p`
-  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
-    font-size: 0.875rem;
-  }
-`;
-
-export const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-
-  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
-    font-size: 0.875rem;
-  }
-`;
-
-export const LoginInputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-
-  margin-bottom: 16px;
-
-  font-size: 1rem;
-`;
-
-export const LoginFormLabel = styled.label`
-  color: ${primary};
-
-  margin-bottom: 4px;
-
-  font-weight: ${medium};
-
-  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
-    font-size: 0.875rem;
-  }
-`;
-
-export const LoginFormInput = styled.input`
-  height: 48px;
-  padding: 0 16px;
-  border-radius: 5px;
-  border: 1px solid ${props => props.theme.color.grey};
-
-  transition: all 300ms;
-
-  &:hover {
-    border: 1px solid ${primary};
-  }
-  &:focus {
-    border: 1px solid ${primary};
-    outline: none;
-    border-right: 20px solid ${primary};
-  }
-
-  @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
-    font-size: 0.875rem;
-  }
-`;
-
-export const LoginButton = styled.button`
-  background-color: ${primary};
-  color: ${white};
-
-  margin: 16px 0;
-  padding: 16px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-
-  font-weight: ${semibold};
-
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.4);
-
-  cursor: pointer;
-
-  transition: ease 300ms;
-
-  &:hover {
-    background-color: ${primaryHover};
   }
 `;
 

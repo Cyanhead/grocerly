@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth } from '../../context/Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { googleAuthPopup } from '../../helpers/handleGoogleAuth';
+import { CustomForm, CustomFormInputGroup } from '../../components/Form';
 
 import {
   LoginPageContainer,
@@ -12,15 +13,6 @@ import {
   AnimBg2,
   AnimBg3,
   LoginRight,
-  FormWrap,
-  LoginText,
-  LoginPageH1,
-  LoginP,
-  LoginForm,
-  LoginInputGroup,
-  LoginFormLabel,
-  LoginFormInput,
-  LoginButton,
   GoogleSpan,
 } from './login-page.style';
 import { useNavigate } from 'react-router-dom';
@@ -32,6 +24,8 @@ const LoginPage = () => {
   const { setSignedUser } = useAuthContext();
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+
+  const [authError, setAuthError] = useState('');
 
   const goToHomepage = useNavigate();
 
@@ -59,7 +53,9 @@ const LoginPage = () => {
         goToHomepage('/');
       })
       .catch(error => {
+        console.log('err code', error.code);
         console.log(error.message);
+        setAuthError(error.code);
       });
   };
 
@@ -98,42 +94,56 @@ const LoginPage = () => {
           </AnimatedBg>
         </LoginLeft>
         <LoginRight>
-          <FormWrap>
-            <LoginText>
-              <LoginPageH1>Sign in</LoginPageH1>
-              <LoginP>
-                Sign in with
-                <GoogleSpan onClick={handleGoogleSignin}>Google</GoogleSpan>
-                instead?
-              </LoginP>
-            </LoginText>
-            <LoginForm onSubmit={handleLogin}>
-              <LoginInputGroup>
-                <LoginFormLabel htmlFor="email">email address</LoginFormLabel>
-                <LoginFormInput
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Enter your email address"
-                  value={userEmail}
-                  onChange={e => setUserEmail(e.target.value)}
-                />
-              </LoginInputGroup>
-              <LoginInputGroup>
-                <LoginFormLabel htmlFor="password">password</LoginFormLabel>
-                <LoginFormInput
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Enter your password"
-                  value={userPassword}
-                  onChange={e => setUserPassword(e.target.value)}
-                />
-              </LoginInputGroup>
-              <LoginButton>Sign in</LoginButton>
-            </LoginForm>
-            {/* TODO privacy policy */}
-          </FormWrap>
+          <CustomForm
+            onSubmit={handleLogin}
+            heading="Sign in"
+            formAltText1="Sign in with"
+            formAltLink={
+              <GoogleSpan onClick={handleGoogleSignin}>Google</GoogleSpan>
+            }
+            formAltText2="instead?"
+            // submitBtnDisableCondition
+            // submitBtnRevealType
+            // submitBtnRevealCondition
+            submitBtnText="Sign in"
+          >
+            <CustomFormInputGroup
+              // inputRevealType={false}
+              // revealCondition
+              htmlFor="email"
+              labelName="email address"
+              requiredLabel
+              inputType="email"
+              inputName="email"
+              inputId="email"
+              inputPlaceholder="Enter your email address"
+              inputValue={userEmail}
+              inputOnChange={e => setUserEmail(e.target.value)}
+              required
+              promptCondition={
+                userEmail.length && authError === 'auth/user-not-found'
+              }
+              promptMessage="Invalid email address!"
+            />
+            <CustomFormInputGroup
+              // inputRevealType={false}
+              // revealCondition
+              htmlFor="password"
+              labelName="password"
+              requiredLabel
+              inputType="password"
+              inputName="password"
+              inputId="password"
+              inputPlaceholder="Enter your password"
+              inputValue={userPassword}
+              inputOnChange={e => setUserPassword(e.target.value)}
+              required
+              promptCondition={
+                userEmail.length && authError === 'auth/wrong-password'
+              }
+              promptMessage="Invalid password!"
+            />
+          </CustomForm>
         </LoginRight>
       </LoginPageWrap>
     </LoginPageContainer>
