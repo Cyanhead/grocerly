@@ -1,6 +1,6 @@
 import { onSnapshot } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { colRef } from '../components/Firebase';
+import { colRef } from './Firebase';
 
 const Context = createContext();
 

@@ -6,9 +6,14 @@ import '@fontsource/quicksand/500.css';
 import '@fontsource/quicksand/600.css';
 import '@fontsource/quicksand/700.css';
 
+import '@fontsource/jetbrains-mono';
+import '@fontsource/days-one';
+
 import 'instantsearch.css/themes/satellite.css';
 
 export const GlobalStyle = createGlobalStyle`
+    /* CSS RESET START */
+
     /*
     1. Use a more-intuitive box-sizing model.
     */
@@ -39,7 +44,6 @@ export const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
-        font-family: "Quicksand", sans-serif;
     }
 
     /*
@@ -69,5 +73,14 @@ export const GlobalStyle = createGlobalStyle`
     */
     #root, #__next {
         isolation: isolate;
+    }
+
+    /* CSS RESET END */
+
+    body {
+        font-family: "Quicksand", sans-serif;
+    }
+    label {
+        font-family: "JetBrains Mono", monospace;
     }
 `;

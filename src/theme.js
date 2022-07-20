@@ -4,6 +4,8 @@ export const theme = {
     primaryLite: '#DEF9EC',
     primaryHover: '#3bd073',
 
+    accent: '#FFB531',
+
     black: '#253D4E',
     white: '#fff',
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { addDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { colRef, db, storage } from '../../components/Firebase';
+import { colRef, db, storage } from '../../context/Firebase';
 
 const AddProduct = () => {
   const imageTypes = ['image/png', 'image/jpg'];
