@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import Firebase, { FirebaseContext } from './context/Firebase';
 import { CartContext } from './context/CartContext';
 import { ProductsListContext } from './context/ProductsListContext';
+import { AuthContext } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,8 +14,10 @@ root.render(
     <FirebaseContext.Provider value={Firebase}>
       <ProductsListContext>
         <CartContext>
-          <Toaster />
-          <App />
+          <AuthContext>
+            <Toaster />
+            <App />
+          </AuthContext>
         </CartContext>
       </ProductsListContext>
     </FirebaseContext.Provider>

@@ -1698,6 +1698,16 @@
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.6.2.tgz#6d05fa126104c9907573364dc04147b89b530e15"
   integrity sha512-zThUKcqIU6utWzM93uEvhlh8qj8A5LMPFJPvk/ODb+8GSSif19xM2Lw1M2ijyBy8+6skSkQBbavPzOU5Oh/8tQ==
 
+"@fontsource/days-one@^4.5.5":
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/days-one/-/days-one-4.5.5.tgz#bd872c78976b2ed449b2a9c4fdec80993c18c13f"
+  integrity sha512-bVjVIRVzJP8NO0El7kz7NNVYTzUdwMb9A4I3oUSKQYDEAySROQutN1c7BzRxhi+xKHVSkBkfmzI0jlmeJiQ2LQ==
+
+"@fontsource/jetbrains-mono@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@fontsource/jetbrains-mono/-/jetbrains-mono-4.5.9.tgz#792bcd574f42a0602cc04bfef39e11058d0ca217"
+  integrity sha512-qgzRg1dYIPyAOTp1XR6RkDOlNt4o6LVAe9PXR68hQzbwd1xf0S86TWEzNFSL82do8weF/G2ubo4TGxrNKo9D1A==
+
 "@fontsource/quicksand@^4.5.9":
   version "4.5.9"
   resolved "https://registry.yarnpkg.com/@fontsource/quicksand/-/quicksand-4.5.9.tgz#48f3a2bf5a46690c67549f6023581538156264d3"

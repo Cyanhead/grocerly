@@ -15,7 +15,7 @@ import ProductPage from './pages/ProductPage';
 import AddProduct from './pages/AddProduct';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import SignupPage from './pages/SignupPage/SignupPage';
+import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 
 function App() {

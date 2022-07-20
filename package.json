@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/days-one": "^4.5.5",
+    "@fontsource/jetbrains-mono": "^4.5.9",
     "@fontsource/quicksand": "^4.5.9",
     "algoliasearch": "^4.13.1",
     "firebase": "^9.8.3",
