@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { googleAuthPopup } from '../../helpers/handleGoogleAuth';
 
 import { toast } from 'react-hot-toast';
-import { FiAlertTriangle } from 'react-icons/fi';
 
 import {
   SignupPageContainer,
@@ -15,24 +14,13 @@ import {
   AnimBg2,
   AnimBg3,
   SignupRight,
-  FormWrap,
-  SignupText,
-  SignupPageH1,
-  SignupP,
-  SignupForm,
-  SignupInputGroup,
-  HiddenSignupInputGroup,
-  PromptMessage,
-  PromptP,
-  SignupFormLabel,
-  SignupFormInput,
-  SignupButton,
   GoogleSpan,
 } from './signup-page.style';
 import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../../components/AuthHeader';
 import { useAuthContext } from '../../context/AuthContext';
-import { Disabler, IconWrap } from '../../components/others.style';
+
+import { CustomForm, CustomFormInputGroup } from '../../components/Form';
 
 const SignupPage = () => {
   const { setSignedUser } = useAuthContext();
@@ -148,7 +136,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     const handleName = () => {
-      if (userName.length !== 0 && userName.length < 3) {
+      if (userName.length !== 0 && userName.length < 2) {
         setIsNameValid(false);
       } else {
         setIsNameValid(true);
@@ -188,8 +176,6 @@ const SignupPage = () => {
     handleRePassword();
   }, [userName, userEmail, userPassword, userConfirmPassword]);
 
-  // TODO create a re-usable form component as well as input group with prompt
-
   return (
     <SignupPageContainer>
       <AuthHeader />
@@ -202,109 +188,92 @@ const SignupPage = () => {
           </AnimatedBg>
         </SignupLeft>
         <SignupRight>
-          <FormWrap>
-            <SignupText>
-              <SignupPageH1>Create your account</SignupPageH1>
-              <SignupP>
-                Sign up with
-                <GoogleSpan onClick={handleGoogleSignin}>Google</GoogleSpan>
-                instead?
-              </SignupP>
-            </SignupText>
-            <SignupForm onSubmit={handleSignup}>
-              <SignupInputGroup>
-                <SignupFormLabel htmlFor="username">your name</SignupFormLabel>
-                <SignupFormInput
-                  type="text"
-                  name="username"
-                  id="username"
-                  placeholder="Enter a name"
-                  value={userName}
-                  onChange={e => checkFormValidity(e.target.value, 'name')}
-                />
-                <PromptMessage show={isNameValid === false}>
-                  <IconWrap fontSize="1rem">
-                    <FiAlertTriangle />
-                  </IconWrap>
-                  <PromptP>Enter at least 2 characters!</PromptP>
-                </PromptMessage>
-              </SignupInputGroup>
-              <SignupInputGroup>
-                <SignupFormLabel htmlFor="email">
-                  email address<span style={{ color: 'red' }}>*</span>
-                </SignupFormLabel>
-                <SignupFormInput
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Enter your email address"
-                  value={userEmail}
-                  onChange={e => checkFormValidity(e.target.value, 'email')}
-                  required
-                />
-                <PromptMessage show={isEmailValid === false}>
-                  <IconWrap fontSize="1rem">
-                    <FiAlertTriangle />
-                  </IconWrap>
-                  <PromptP>Enter a valid email address!</PromptP>
-                </PromptMessage>
-              </SignupInputGroup>
-              <SignupInputGroup>
-                <SignupFormLabel htmlFor="password">
-                  password<span style={{ color: 'red' }}>*</span>
-                </SignupFormLabel>
-                <SignupFormInput
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Create a password"
-                  value={userPassword}
-                  onChange={e => checkFormValidity(e.target.value, 'password')}
-                  required
-                />
-                <PromptMessage show={isPasswordValid === false}>
-                  <IconWrap fontSize="1rem">
-                    <FiAlertTriangle />
-                  </IconWrap>
-                  <PromptP>Password too short!</PromptP>
-                </PromptMessage>
-              </SignupInputGroup>
-              <HiddenSignupInputGroup reveal={userPassword.length !== 0}>
-                <SignupFormLabel htmlFor="re_password">
-                  re-enter password<span style={{ color: 'red' }}>*</span>
-                </SignupFormLabel>
-                <SignupFormInput
-                  type="password"
-                  name="re_password"
-                  id="re_password"
-                  placeholder="Confirm password"
-                  value={userConfirmPassword}
-                  onChange={e =>
-                    checkFormValidity(e.target.value, 're_password')
-                  }
-                  required
-                />
-                <PromptMessage show={isRePasswordValid === false}>
-                  <IconWrap fontSize="1rem">
-                    <FiAlertTriangle />
-                  </IconWrap>
-                  <PromptP>Password does not match!</PromptP>
-                </PromptMessage>
-              </HiddenSignupInputGroup>
-              <Disabler
-                disabled={
-                  userName.length < 3 ||
-                  userPassword.length < 8 ||
-                  userPassword !== userConfirmPassword
-                }
-              >
-                <SignupButton reveal={userPassword.length !== 0}>
-                  Sign up
-                </SignupButton>
-              </Disabler>
-            </SignupForm>
-            {/* TODO privacy policy */}
-          </FormWrap>
+          <CustomForm
+            //
+            onSubmit={handleSignup}
+            heading="Create your account"
+            formAltText1="Sign up with"
+            formAltLink={
+              <GoogleSpan onClick={handleGoogleSignin}>Google</GoogleSpan>
+            }
+            formAltText2="insteady?"
+            submitBtnDisableCondition={
+              userName.length < 3 ||
+              userPassword.length < 8 ||
+              userPassword !== userConfirmPassword
+            }
+            submitBtnRevealType
+            submitBtnRevealCondition={userPassword.length !== 0}
+            submitBtnText="Sign up"
+          >
+            <CustomFormInputGroup
+              // inputRevealType={false}
+              // revealCondition
+              htmlFor="username"
+              labelName="your name"
+              // requiredLabel
+              inputType="text"
+              inputName="username"
+              inputId="username"
+              inputPlaceholder="Enter a name"
+              inputValue={userName}
+              inputOnChange={e => checkFormValidity(e.target.value, 'name')}
+              // required
+              promptCondition={isNameValid === false}
+              promptMessage="Enter at least 2 characters!"
+            />
+            <CustomFormInputGroup
+              // inputRevealType={false}
+              // revealCondition
+              htmlFor="email"
+              labelName="email address"
+              requiredLabel
+              inputType="email"
+              inputName="email"
+              inputId="email"
+              inputPlaceholder="Enter your email address"
+              inputValue={userEmail}
+              inputOnChange={e => checkFormValidity(e.target.value, 'email')}
+              required
+              promptCondition={isEmailValid === false}
+              promptMessage="Enter a valid email address!"
+            />
+            <CustomFormInputGroup
+              // inputRevealType={false}
+              // revealCondition
+              htmlFor="password"
+              labelName="password"
+              requiredLabel
+              inputType="password"
+              inputName="password"
+              inputId="password"
+              inputPlaceholder="Create a password"
+              inputValue={userPassword}
+              inputOnChange={e => checkFormValidity(e.target.value, 'password')}
+              required
+              promptCondition={isPasswordValid === false}
+              promptMessage="Password too short!"
+            />
+            <CustomFormInputGroup
+              inputRevealType
+              revealCondition={userPassword.length !== 0}
+              htmlFor="re_password"
+              labelName="re-enter password"
+              requiredLabel
+              inputType="password"
+              inputName="re_password"
+              inputId="re_password"
+              inputPlaceholder="Confirm password"
+              inputValue={userConfirmPassword}
+              inputOnChange={e =>
+                checkFormValidity(e.target.value, 're_password')
+              }
+              required
+              promptCondition={isRePasswordValid === false}
+              promptMessage="Passwords do not match!"
+            />
+          </CustomForm>
+          {/* TODO privacy policy */}
         </SignupRight>
       </SignupPageWrap>
     </SignupPageContainer>
