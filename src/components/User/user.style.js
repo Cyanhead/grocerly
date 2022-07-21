@@ -11,7 +11,7 @@ const semibold = props => props.theme.fontWght.semibold;
 
 export const UserWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   position: relative;
@@ -38,12 +38,20 @@ export const UserWrap = styled.div`
   }
 `;
 
+export const UserLeft = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  flex: 1;
+`;
+
 export const UserPhoto = styled.img`
   width: 36px;
   height: 36px;
   border-radius: 50%;
 
-  margin-right: 4px;
+  margin-right: 8px;
 `;
 
 export const UserName = styled.p`

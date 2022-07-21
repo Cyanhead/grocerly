@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import {
   UserWrap,
+  UserLeft,
   UserPhoto,
   UserName,
   MenuWrap,
@@ -10,11 +11,10 @@ import {
 } from './user.style';
 
 import ChevronDown from '../ChevronDown';
-import profile from '../../assets/images/profile.png';
 import Wishlist from '../Wishlist';
 import CartButton from '../CartButton';
 import { IconWrap, MobileIcon } from '../others.style';
-import { FiSettings, FiUser, FiMenu, FiPower } from 'react-icons/fi';
+import { FiUser, FiUserCheck, FiMenu, FiPower, FiLogIn } from 'react-icons/fi';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { signOut } from 'firebase/auth';
@@ -76,21 +76,28 @@ const User = () => {
 
   return (
     <UserWrap showMenu={showMenu} onClick={() => setShowMenu(!showMenu)}>
-      <UserPhoto
-        src={
-          signedUser !== null && signedUser.photoURL !== null
-            ? signedUser.photoURL
-            : profile
-        }
-        alt=""
-      />
-      <UserName>
-        {signedUser !== null
-          ? signedUser.displayName !== null
-            ? trimUsername(signedUser.displayName)
-            : trimEmailAddress(signedUser.email)
-          : 'Guest user'}
-      </UserName>
+      <UserLeft>
+        {signedUser !== null ? (
+          signedUser.photoURL !== null ? (
+            <UserPhoto src={signedUser.photoURL} alt="" />
+          ) : (
+            <IconWrap pad="4px 8px 4px 4px">
+              <FiUserCheck />
+            </IconWrap>
+          )
+        ) : (
+          <IconWrap pad="4px 8px 4px 4px">
+            <FiUser />
+          </IconWrap>
+        )}
+        <UserName>
+          {signedUser !== null
+            ? signedUser.displayName !== null
+              ? trimUsername(signedUser.displayName)
+              : trimEmailAddress(signedUser.email)
+            : 'Guest user'}
+        </UserName>
+      </UserLeft>
       <ChevronDown mobile trigger={showMenu} />
       <MobileIcon>
         <IconWrap fontSize="2rem">
@@ -99,12 +106,17 @@ const User = () => {
       </MobileIcon>
       <MenuWrap showMenu={showMenu}>
         {signedUser !== null ? (
-          <MenuItem onClick={() => console.log('current user', signedUser)}>
-            <IconWrap>
-              <FiUser />
-            </IconWrap>
-            <MenuItemP>Profile</MenuItemP>
-          </MenuItem>
+          <Link
+            to="/user/profile"
+            style={{ color: 'inherit', textDecoration: 'none' }}
+          >
+            <MenuItem>
+              <IconWrap>
+                <FiUser />
+              </IconWrap>
+              <MenuItemP>Profile</MenuItemP>
+            </MenuItem>
+          </Link>
         ) : (
           <Link
             to="/login"
@@ -112,7 +124,7 @@ const User = () => {
           >
             <MenuItem>
               <IconWrap>
-                <FiUser />
+                <FiLogIn />
               </IconWrap>
               <MenuItemP>Log in</MenuItemP>
             </MenuItem>
@@ -124,13 +136,6 @@ const User = () => {
         </MenuItem>
         <MenuItem mobile>
           <CartButton />
-        </MenuItem>
-
-        <MenuItem>
-          <IconWrap>
-            <FiSettings />
-          </IconWrap>
-          <MenuItemP>Settings</MenuItemP>
         </MenuItem>
 
         {signedUser !== null && (
