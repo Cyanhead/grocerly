@@ -17,6 +17,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
+import AuthCheck from './components/AuthCheck';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const MajorRoutes = () => {
@@ -37,7 +39,22 @@ function App() {
             <Route index element={<SearchPage />} />
             <Route path=":productId" element={<ProductPage />} />
           </Route>
-          <Route path="/addproducts" element={<AddProduct />} />
+          <Route
+            path="/addproducts"
+            element={
+              <AuthCheck>
+                <AddProduct />
+              </AuthCheck>
+            }
+          />
+          <Route
+            path="/user/profile"
+            element={
+              <AuthCheck>
+                <ProfilePage />
+              </AuthCheck>
+            }
+          />
 
           <Route path="*" element={<div>nothing to see here</div>} />
         </Routes>
