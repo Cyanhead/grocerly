@@ -67,7 +67,7 @@ export const RowOne = styled.div`
 
   padding: 12px 0;
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: ${props => props.theme.color.faintLine};
 
   @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
     flex-direction: column;

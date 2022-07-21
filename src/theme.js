@@ -14,6 +14,8 @@ export const theme = {
     greyBg2: '#f3f3f3',
     greyHover: '#eeeeeebb',
     greyActive: '#ddddddbb',
+
+    faintLine: '1px solid rgba(0, 0, 0, 0.1)',
   },
 
   fontWght: {
