@@ -8,7 +8,7 @@ const white = props => props.theme.color.white;
 const bold = props => props.theme.fontWght.bold;
 const medium = props => props.theme.fontWght.medium;
 
-const greyBorder = '1px solid rgba(0, 0, 0, 0.1)';
+const greyBorder = props => props.theme.color.faintLine;
 
 export const ProductPageContainer = styled.div`
   width: 100%;

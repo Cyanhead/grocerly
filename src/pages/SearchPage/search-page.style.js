@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
 const white = props => props.theme.color.white;
+const greyBg1 = props => props.theme.color.greyBg1;
+const greyBg2 = props => props.theme.color.greyBg2;
 
 const semibold = props => props.theme.fontWght.semibold;
 
 export const SearchPageContainer = styled.div`
   width: 100%;
 
-  background-color: #f5f5f5;
+  background-color: ${greyBg1};
 `;
 
 export const SearchPageWrap = styled.div`
@@ -65,7 +67,7 @@ export const RowOne = styled.div`
 
   padding: 12px 0;
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: ${props => props.theme.color.faintLine};
 
   @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
     flex-direction: column;
@@ -163,7 +165,7 @@ export const CategoryListHeading = styled.h3`
 `;
 
 export const CategoryP = styled.p`
-  background-color: ${({ active }) => (active ? '#f5f5f5' : 'inherit')};
+  background-color: ${({ active }) => (active ? greyBg2 : 'inherit')};
   color: inherit;
 
   padding: 8px 32px;
@@ -172,6 +174,6 @@ export const CategoryP = styled.p`
   text-decoration: none;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: ${greyBg2};
   }
 `;
