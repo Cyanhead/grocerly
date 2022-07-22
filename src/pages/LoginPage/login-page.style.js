@@ -115,6 +115,7 @@ export const LoginRight = styled.div`
   flex: 1;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -132,7 +133,9 @@ export const LoginRight = styled.div`
   }
 `;
 
-export const GoogleSpan = styled.span`
+export const LoginP = styled.p``;
+
+export const LinkSpan = styled.span`
   color: ${primary};
 
   margin: 0 4px;

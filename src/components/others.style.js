@@ -9,6 +9,7 @@ export const IconWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: ${props => props.alignSelf || ''};
 
   position: ${props => props.pos || ''};
 
