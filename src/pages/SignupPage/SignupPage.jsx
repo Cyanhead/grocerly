@@ -14,7 +14,7 @@ import {
   AnimBg2,
   AnimBg3,
   SignupRight,
-  GoogleSpan,
+  LinkSpan,
 } from './signup-page.style';
 import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../../components/AuthHeader';
@@ -194,7 +194,7 @@ const SignupPage = () => {
             heading="Create your account"
             formAltText1="Sign up with"
             formAltLink={
-              <GoogleSpan onClick={handleGoogleSignin}>Google</GoogleSpan>
+              <LinkSpan onClick={handleGoogleSignin}>Google</LinkSpan>
             }
             formAltText2="insteady?"
             submitBtnDisableCondition={

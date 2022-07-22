@@ -154,7 +154,7 @@ export const SignupRight = styled.div`
   }
 `;
 
-export const GoogleSpan = styled.span`
+export const LinkSpan = styled.span`
   color: ${primary};
 
   margin: 0 4px;

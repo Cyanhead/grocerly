@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { auth } from '../../context/Firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { googleAuthPopup } from '../../helpers/handleGoogleAuth';
 import { CustomForm, CustomFormInputGroup } from '../../components/Form';
 
@@ -13,12 +16,16 @@ import {
   AnimBg2,
   AnimBg3,
   LoginRight,
-  GoogleSpan,
+  LoginP,
+  LinkSpan,
 } from './login-page.style';
 import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../../components/AuthHeader';
 import { toast } from 'react-hot-toast';
 import { useAuthContext } from '../../context/AuthContext';
+import { IconWrap } from '../../components/others.style';
+import { FiChevronLeft } from 'react-icons/fi';
+import { FormWrap } from '../../components/Form/form.style';
 
 const LoginPage = () => {
   const { setSignedUser } = useAuthContext();
@@ -26,6 +33,9 @@ const LoginPage = () => {
   const [userPassword, setUserPassword] = useState('');
 
   const [authError, setAuthError] = useState('');
+
+  const [resetMail, setResetMail] = useState('');
+  const [resetPassword, setResetPassword] = useState(false);
 
   const goToHomepage = useNavigate();
 
@@ -59,7 +69,9 @@ const LoginPage = () => {
       });
   };
 
-  const handleGoogleSignin = () => {
+  const handleGoogleSignin = e => {
+    e.preventDefault();
+
     const doGoogleSignin = toast.promise(googleAuthPopup(), {
       loading: 'Signing in...',
       success: 'Signed in successfully',
@@ -80,7 +92,25 @@ const LoginPage = () => {
       });
   };
 
-  // TODO client-side form validation for password (re-enter, length and complexity)
+  const handleForgotPassword = e => {
+    e.preventDefault();
+    const email = resetMail;
+
+    const doPasswordReset = toast.promise(sendPasswordResetEmail(auth, email), {
+      loading: 'One moment...',
+      success: 'Password reset mail sent',
+      error: 'Error when sending password reset mail!',
+    });
+
+    doPasswordReset
+      .then(() => {
+        // Password reset email sent!
+      })
+      .catch(error => {
+        console.log(error);
+        setAuthError(error.code);
+      });
+  };
 
   return (
     <LoginPageContainer>
@@ -94,56 +124,99 @@ const LoginPage = () => {
           </AnimatedBg>
         </LoginLeft>
         <LoginRight>
-          <CustomForm
-            onSubmit={handleLogin}
-            heading="Sign in"
-            formAltText1="Sign in with"
-            formAltLink={
-              <GoogleSpan onClick={handleGoogleSignin}>Google</GoogleSpan>
-            }
-            formAltText2="instead?"
-            // submitBtnDisableCondition
-            // submitBtnRevealType
-            // submitBtnRevealCondition
-            submitBtnText="Sign in"
-          >
-            <CustomFormInputGroup
-              // inputRevealType={false}
-              // revealCondition
-              htmlFor="email"
-              labelName="email address"
-              requiredLabel
-              inputType="email"
-              inputName="email"
-              inputId="email"
-              inputPlaceholder="Enter your email address"
-              inputValue={userEmail}
-              inputOnChange={e => setUserEmail(e.target.value)}
-              required
-              promptCondition={
-                userEmail.length && authError === 'auth/user-not-found'
-              }
-              promptMessage="Invalid email address!"
-            />
-            <CustomFormInputGroup
-              // inputRevealType={false}
-              // revealCondition
-              htmlFor="password"
-              labelName="password"
-              requiredLabel
-              inputType="password"
-              inputName="password"
-              inputId="password"
-              inputPlaceholder="Enter your password"
-              inputValue={userPassword}
-              inputOnChange={e => setUserPassword(e.target.value)}
-              required
-              promptCondition={
-                userEmail.length && authError === 'auth/wrong-password'
-              }
-              promptMessage="Invalid password!"
-            />
-          </CustomForm>
+          {resetPassword === true ? (
+            <FormWrap>
+              <IconWrap
+                bordRad="3px"
+                fontSize="1.5rem"
+                alignSelf="start"
+                onClick={() => setResetPassword(false)}
+                bgHover={props => props.theme.color.greyHover}
+                bgActive={props => props.theme.color.greyActive}
+              >
+                <FiChevronLeft />
+              </IconWrap>
+
+              <CustomForm
+                onSubmit={handleForgotPassword}
+                heading="Reset password"
+                submitBtnText="Reset"
+              >
+                <CustomFormInputGroup
+                  htmlFor="reset_email"
+                  labelName="email address"
+                  requiredLabel
+                  inputType="email"
+                  inputName="reset_email"
+                  inputId="reset_email"
+                  inputPlaceholder="Enter your email address"
+                  inputValue={resetMail}
+                  inputOnChange={e => setResetMail(e.target.value)}
+                  required
+                  promptCondition={
+                    resetMail.length && authError === 'auth/user-not-found'
+                  }
+                  promptMessage="Invalid email address!"
+                />
+              </CustomForm>
+            </FormWrap>
+          ) : (
+            <>
+              <CustomForm
+                onSubmit={handleLogin}
+                heading="Sign in"
+                formAltText1="Sign in with"
+                formAltLink={
+                  <LinkSpan onClick={handleGoogleSignin}>Google</LinkSpan>
+                }
+                formAltText2="instead?"
+                // submitBtnDisableCondition
+                // submitBtnRevealType
+                // submitBtnRevealCondition
+                submitBtnText="Sign in"
+              >
+                <CustomFormInputGroup
+                  // inputRevealType={false}
+                  // revealCondition
+                  htmlFor="email"
+                  labelName="email address"
+                  requiredLabel
+                  inputType="email"
+                  inputName="email"
+                  inputId="email"
+                  inputPlaceholder="Enter your email address"
+                  inputValue={userEmail}
+                  inputOnChange={e => setUserEmail(e.target.value)}
+                  required
+                  promptCondition={
+                    userEmail.length && authError === 'auth/user-not-found'
+                  }
+                  promptMessage="Invalid email address!"
+                />
+                <CustomFormInputGroup
+                  // inputRevealType={false}
+                  // revealCondition
+                  htmlFor="password"
+                  labelName="password"
+                  requiredLabel
+                  inputType="password"
+                  inputName="password"
+                  inputId="password"
+                  inputPlaceholder="Enter your password"
+                  inputValue={userPassword}
+                  inputOnChange={e => setUserPassword(e.target.value)}
+                  required
+                  promptCondition={
+                    userEmail.length && authError === 'auth/wrong-password'
+                  }
+                  promptMessage="Invalid password!"
+                />
+              </CustomForm>
+              <LoginP onClick={() => setResetPassword(true)}>
+                Forgot password? <LinkSpan>Click here</LinkSpan>.
+              </LoginP>
+            </>
+          )}
         </LoginRight>
       </LoginPageWrap>
     </LoginPageContainer>
