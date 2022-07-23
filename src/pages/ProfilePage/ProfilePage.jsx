@@ -6,6 +6,8 @@ import {
   ProfilePageAside,
   ProfilePageTabGroup,
   ProfilePageTab,
+  ProfilePageSelect,
+  ProfilePageOption,
   ProfilePageMain,
   ProfilePageHeading,
   ProfilePageP,
@@ -193,6 +195,10 @@ const ProfilePage = () => {
       .catch(err => console.log(err.message));
   };
 
+  const handleSelectValue = e => {
+    setCurrentTab(e.target.value);
+  };
+
   return (
     <ProfilePageContainer>
       <ProfilePageWrap>
@@ -218,6 +224,16 @@ const ProfilePage = () => {
             Log out
           </ProfilePageTab>
         </ProfilePageAside>
+        <ProfilePageSelect onChange={handleSelectValue}>
+          {pages.map((page, i) => {
+            return (
+              <ProfilePageOption key={i} value={i}>
+                {page.name}
+              </ProfilePageOption>
+            );
+          })}
+        </ProfilePageSelect>
+
         <ProfilePageMain>
           <ProfilePageHeading>{pages[currentTab].title}</ProfilePageHeading>
           <ProfilePageContent>{pages[currentTab].content}</ProfilePageContent>

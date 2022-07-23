@@ -23,6 +23,12 @@ export const ProfilePageWrap = styled.div`
   padding: 24px;
 
   column-gap: 16px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
 `;
 
 export const ProfilePageAside = styled.aside`
@@ -40,6 +46,14 @@ export const ProfilePageAside = styled.aside`
   max-width: 250px;
 
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    max-width: 200px;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    display: none;
+  }
 `;
 
 export const ProfilePageTabGroup = styled.div``;
@@ -62,6 +76,33 @@ export const ProfilePageTab = styled.button`
     background-color: ${greyBg2};
   }
 `;
+
+export const ProfilePageSelect = styled.select`
+  display: none;
+
+  background-color: ${white};
+
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border: none;
+  outline: none;
+
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: ${props => props.theme.color.primaryLite};
+  }
+
+  &:active {
+    background-color: ${props => props.theme.color.primaryLite};
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    display: flex;
+  }
+`;
+
+export const ProfilePageOption = styled.option``;
 
 export const ProfilePageMain = styled.div`
   flex: 1;
@@ -94,6 +135,13 @@ export const ProfilePageGrid = styled.div`
   grid-template-rows: auto;
 
   gap: 16px;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+  }
 `;
 
 export const Cell = styled.div`
