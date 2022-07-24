@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   SearchbarWrap,
   SearchbarLeft,
-  CategoryBtn,
   //
   SearchbarRight,
   CustomSearchBox,
@@ -22,7 +21,6 @@ import {
   AlgoliaLogo,
 } from './searchbar.style';
 import { FiSearch } from 'react-icons/fi';
-import ChevronDown from '../ChevronDown';
 
 import algoliasearch from 'algoliasearch';
 import {
@@ -94,14 +92,11 @@ const Searchbar = props => {
          * Action to do if clicked on outside of element
          */
         function handleClickOutside(event) {
-
-       
           if (
             ref.current &&
             !ref.current.contains(event.target) &&
             !watermarkRef.current.contains(event.target)
           ) {
-
             setInsideClick(false);
           }
         }
@@ -159,12 +154,8 @@ const Searchbar = props => {
   return (
     <SearchbarWrap toggleSearch={props.toggleSearch} mobile={props.mobile}>
       <SearchbarLeft>
-        <CategoryBtn>
-          All Categories
-          <ChevronDown />
-        </CategoryBtn>
         <InstantSearch searchClient={searchClient} indexName="dev_grocerly">
-          <Configure hitsPerPage={5} />
+          <Configure hitsPerPage={4} />
           <SearchBox />
         </InstantSearch>
       </SearchbarLeft>

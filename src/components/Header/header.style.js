@@ -31,6 +31,7 @@ export const HeaderWrap = styled.div`
 export const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   position: relative;
 
