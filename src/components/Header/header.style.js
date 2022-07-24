@@ -35,8 +35,8 @@ export const HeaderTop = styled.div`
   padding: 18px;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
-    padding: 4px;
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    padding: 0;
   }
 `;
 
