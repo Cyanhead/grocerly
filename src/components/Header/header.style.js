@@ -62,6 +62,25 @@ export const HeaderBottom = styled.div`
   }
 `;
 
+export const AllCategoryBtn = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${primary};
+  color: ${white};
+
+  margin-right: ${props => props.marR || '24px'};
+  padding: 10px;
+  border-radius: 2px;
+
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${primaryHover};
+  }
+`;
+
 export const NavLinks = styled.div`
   display: flex;
   justify-content: center;
@@ -73,18 +92,16 @@ export const HeaderNavLink = styled(Link)`
   justify-content: center;
   align-items: center;
 
-  background-color: ${props => props.bg || 'inherit'};
-  color: ${props => props.fg || 'inherit'};
+  color: inherit;
 
   margin-right: ${props => props.marR || '24px'};
   padding: 10px;
-  border-radius: ${props => props.borR || 'inherit'};
+  border-radius: 2px;
 
   text-decoration: none;
 
   &:hover {
-    background-color: ${({ bg }) => (bg ? primaryHover : '')};
-    color: ${({ fg }) => (fg ? '' : primary)};
+    color: ${primary};
   }
 `;
 

@@ -12,6 +12,7 @@ import {
   HeaderTop,
   WishlistAndCart,
   HeaderBottom,
+  AllCategoryBtn,
   NavLinks,
   HeaderNavLink,
   NavP,
@@ -20,9 +21,6 @@ import {
 import { FiHome, FiPercent, FiGrid, FiSearch } from 'react-icons/fi';
 import { HiOutlineFire } from 'react-icons/hi';
 import { VscMegaphone } from 'react-icons/vsc';
-
-const primary = props => props.theme.color.primary;
-const white = props => props.theme.color.white;
 
 const Header = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
@@ -35,8 +33,12 @@ const Header = () => {
             <Disabler
               // TODO delete when all links have been added
               disabled={link.url.trim() === ''}
+              key={i}
             >
-              <HeaderNavLink to={link.url} key={i}>
+              <HeaderNavLink
+                to={link.url}
+                // key={i}
+              >
                 <IconWrap fontSize="1rem">{link.icon}</IconWrap>
                 <NavP> {link.name} </NavP>
               </HeaderNavLink>
@@ -69,12 +71,12 @@ const Header = () => {
             </div>
           </HeaderTop>
           <HeaderBottom>
-            <HeaderNavLink to="/products" bg={primary} fg={white} borR="2px">
+            <AllCategoryBtn to="/products">
               <IconWrap>
                 <FiGrid />
               </IconWrap>
               <NavP>Browse All Categories</NavP>
-            </HeaderNavLink>
+            </AllCategoryBtn>
 
             <NavLinks>
               <NavLinkGenerator
