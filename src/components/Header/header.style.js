@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
+const primary = props => props.theme.color.primary;
 const primaryHover = props => props.theme.color.primaryHover;
 const black = props => props.theme.color.black;
 const white = props => props.theme.color.white;
@@ -55,7 +57,7 @@ export const HeaderBottom = styled.div`
   padding: 18px 0;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     display: none;
   }
 `;
@@ -66,7 +68,7 @@ export const NavLinks = styled.div`
   align-items: center;
 `;
 
-export const HeaderNavLink = styled.a`
+export const HeaderNavLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,6 +84,7 @@ export const HeaderNavLink = styled.a`
 
   &:hover {
     background-color: ${({ bg }) => (bg ? primaryHover : '')};
+    color: ${({ fg }) => (fg ? '' : primary)};
   }
 `;
 
