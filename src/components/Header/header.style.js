@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
+const primary = props => props.theme.color.primary;
 const primaryHover = props => props.theme.color.primaryHover;
 const black = props => props.theme.color.black;
 const white = props => props.theme.color.white;
@@ -29,14 +31,15 @@ export const HeaderWrap = styled.div`
 export const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   position: relative;
 
   padding: 18px;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
-    padding: 4px;
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    padding: 0;
   }
 `;
 
@@ -55,8 +58,27 @@ export const HeaderBottom = styled.div`
   padding: 18px 0;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
 
-  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     display: none;
+  }
+`;
+
+export const AllCategoryBtn = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${primary};
+  color: ${white};
+
+  margin-right: ${props => props.marR || '24px'};
+  padding: 10px;
+  border-radius: 2px;
+
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${primaryHover};
   }
 `;
 
@@ -66,22 +88,21 @@ export const NavLinks = styled.div`
   align-items: center;
 `;
 
-export const HeaderNavLink = styled.a`
+export const HeaderNavLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background-color: ${props => props.bg || 'inherit'};
-  color: ${props => props.fg || 'inherit'};
+  color: inherit;
 
   margin-right: ${props => props.marR || '24px'};
   padding: 10px;
-  border-radius: ${props => props.borR || 'inherit'};
+  border-radius: 2px;
 
   text-decoration: none;
 
   &:hover {
-    background-color: ${({ bg }) => (bg ? primaryHover : '')};
+    color: ${primary};
   }
 `;
 

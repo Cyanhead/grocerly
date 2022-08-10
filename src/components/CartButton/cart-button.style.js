@@ -72,6 +72,8 @@ export const CartButtonCount = styled.p`
 `;
 
 export const CartButtonText = styled.div`
+  /* display: flex; */
+
   @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     display: none;
   }

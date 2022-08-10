@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   SearchbarWrap,
   SearchbarLeft,
-  CategoryBtn,
   //
   SearchbarRight,
   CustomSearchBox,
@@ -22,7 +21,6 @@ import {
   AlgoliaLogo,
 } from './searchbar.style';
 import { FiSearch } from 'react-icons/fi';
-import ChevronDown from '../ChevronDown';
 
 import algoliasearch from 'algoliasearch';
 import {
@@ -33,6 +31,7 @@ import {
 } from 'react-instantsearch-hooks-web';
 import algolia_logo from '../../assets/images/Algolia-nebula.svg';
 import { useProductsListContext } from '../../context/ProductsListContext';
+import { useOnClickOutside } from '../../hooks/useOnClickOutside.hook';
 
 function Hit({ hit }) {
   return (
@@ -85,44 +84,12 @@ const Searchbar = props => {
 
     const watermarkRef = useRef(null);
 
-    /**
-     * Hook that alerts clicks outside of the passed ref
-     */
-    function useOutsideAlerter(ref) {
-      useEffect(() => {
-        /**
-         * Action to do if clicked on outside of element
-         */
-        function handleClickOutside(event) {
+    const ClickWrap = ({ children }) => {
+      const ref = useRef(null);
+      useOnClickOutside(ref, () => setInsideClick(false), watermarkRef);
 
-       
-          if (
-            ref.current &&
-            !ref.current.contains(event.target) &&
-            !watermarkRef.current.contains(event.target)
-          ) {
-
-            setInsideClick(false);
-          }
-        }
-        // Bind the event listener
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-          // Unbind the event listener on clean up
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
-      }, [ref]);
-    }
-
-    /**
-     * Component that alerts if you click outside of it
-     */
-    function OutsideAlerter(props) {
-      const wrapperRef = useRef(null);
-      useOutsideAlerter(wrapperRef);
-
-      return <div ref={wrapperRef}>{props.children}</div>;
-    }
+      return <div ref={ref}>{children}</div>;
+    };
 
     const handleInput = value => {
       setSearchValue(value);
@@ -137,9 +104,9 @@ const Searchbar = props => {
         />
         <HitContainer showResults={insideClick && searchValue.length >= 1}>
           <HitContainerTop>
-            <OutsideAlerter>
+            <ClickWrap>
               <Hits hitComponent={Hit} />
-            </OutsideAlerter>
+            </ClickWrap>
           </HitContainerTop>
           <AlgoliaWatermark ref={watermarkRef}>
             <AlgoliaLink
@@ -159,12 +126,8 @@ const Searchbar = props => {
   return (
     <SearchbarWrap toggleSearch={props.toggleSearch} mobile={props.mobile}>
       <SearchbarLeft>
-        <CategoryBtn>
-          All Categories
-          <ChevronDown />
-        </CategoryBtn>
         <InstantSearch searchClient={searchClient} indexName="dev_grocerly">
-          <Configure hitsPerPage={5} />
+          <Configure hitsPerPage={4} />
           <SearchBox />
         </InstantSearch>
       </SearchbarLeft>

@@ -18,7 +18,7 @@ export const CartWrap = styled.div`
   top: 0;
   bottom: 0;
 
-  z-index: 2;
+  z-index: 13;
 
   width: 520px;
   border: 1px solid rgba(0, 0, 0, 0.2);

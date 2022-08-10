@@ -40,7 +40,11 @@ export const IconWrap = styled.div`
 
   @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {
     padding: ${props => props.mobilePad || ''};
-  } ;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
+    margin: ${props => props.largeBpMar || '0'};
+  }
 `;
 
 export const ColoredBtn = styled.button`

@@ -1,16 +1,12 @@
 import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
-
 import { SearchBox } from 'react-instantsearch-hooks-web';
 
 const primary = props => props.theme.color.primary;
 const primaryLite = props => props.theme.color.primaryLite;
-const primaryHover = props => props.theme.color.primaryHover;
 const white = props => props.theme.color.white;
-const grey = props => props.theme.color.grey;
 
-const semibold = props => props.theme.fontWght.semibold;
 const medium = props => props.theme.fontWght.medium;
 
 const mediumHighBP = props => props.theme.breakpoint.mediumHigh;
@@ -18,6 +14,7 @@ const mediumHighBP = props => props.theme.breakpoint.mediumHigh;
 export const SearchbarWrap = styled.div`
   display: ${({ mobile }) => (mobile ? 'none' : 'flex')};
   justify-content: center;
+  align-items: center;
 
   border-radius: 3px;
 
@@ -44,8 +41,6 @@ export const SearchbarLeft = styled.div`
 
   position: relative;
 
-  background-color: #f3f3f3;
-
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
 
@@ -55,35 +50,11 @@ export const SearchbarLeft = styled.div`
   }
 `;
 
-export const CategoryBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 12px;
-
-  font-weight: ${semibold};
-
-  border: none;
-  outline: none;
-
-  cursor: pointer;
-
-  border-top-left-radius: inherit;
-  border-bottom-left-radius: inherit;
-
-  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
-    display: none;
-  }
-`;
-
 export const CustomSearchBox = styled(SearchBox)`
   display: flex;
-  align-items: center;
 
-  min-width: 300px;
+  min-width: 350px;
   height: 100%;
-  padding-right: 12px;
 
   @media screen and (max-width: ${mediumHighBP}) {
     width: 100%;
@@ -91,12 +62,13 @@ export const CustomSearchBox = styled(SearchBox)`
   }
 
   .ais-SearchBox-input {
-    background-color: #f3f3f3;
+    background-color: ${props => props.theme.color.greyBg2};
+
+    height: 100%;
 
     padding: 0 12px;
     outline: none;
     border: 1px solid transparent;
-    border-left: 1px solid ${grey};
 
     font-size: 1rem;
     font-weight: ${medium};
@@ -120,10 +92,6 @@ export const CustomSearchBox = styled(SearchBox)`
 
   .ais-SearchBox-form::before {
     display: none;
-
-    @media screen and (max-width: ${mediumHighBP}) {
-      display: block;
-    }
   }
 `;
 
@@ -135,7 +103,7 @@ export const SearchbarRight = styled(Link)`
   justify-content: center;
   align-items: center;
 
-  padding: 12px 20px;
+  padding: 0 16px;
   font-size: 1.5rem;
 
   align-self: stretch;
@@ -146,7 +114,7 @@ export const SearchbarRight = styled(Link)`
   cursor: pointer;
 
   &:hover {
-    background-color: ${primaryHover};
+    background-color: ${props => props.theme.color.primaryHover};
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
@@ -177,7 +145,6 @@ export const HitContainerTop = styled.div`
   width: 100%;
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
-
     max-height: 60vh;
     overflow-y: scroll;
   }
@@ -209,7 +176,7 @@ export const AlgoliaLink = styled.a`
 
 export const AlgoliaP = styled.p`
   font-size: 0.875rem;
-  font-weight: ${semibold};
+  font-weight: ${props => props.theme.fontWght.semibold};
   margin-right: 8px;
 
   @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
@@ -223,7 +190,6 @@ export const AlgoliaLogo = styled.img`
 
   @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
     height: 16px;
-
   }
 `;
 
