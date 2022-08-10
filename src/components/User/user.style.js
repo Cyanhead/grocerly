@@ -71,6 +71,7 @@ export const MenuWrap = styled.ul`
   position: absolute;
   top: 56px;
   left: 0;
+  z-index: 12;
 
   background-color: ${white};
 
