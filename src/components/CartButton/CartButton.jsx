@@ -27,7 +27,7 @@ const CartButton = () => {
           </CartButtonCounter>
         </CartButtonCounterWrap>
       </IconWrap>
-      <CartMobileP>My Cart</CartMobileP>
+      <CartMobileP>Cart</CartMobileP>
       <CartButtonText>
         <CartButtonP>My Cart</CartButtonP>
         <CartButtonP>
