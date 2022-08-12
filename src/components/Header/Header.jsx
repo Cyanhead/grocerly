@@ -5,7 +5,9 @@ import Logo from '../Logo';
 import { Disabler, IconWrap, MobileIcon } from '../others.style';
 import Searchbar from '../Searchbar';
 import User from '../User';
+import Wishlist from '../Wishlist';
 import WishlistButton from '../WishlistButton';
+
 import {
   HeaderContainer,
   HeaderWrap,
@@ -91,6 +93,7 @@ const Header = () => {
           </HeaderBottom>
         </HeaderWrap>
         <Cart />
+        <Wishlist />
       </HeaderContainer>
     </>
   );
