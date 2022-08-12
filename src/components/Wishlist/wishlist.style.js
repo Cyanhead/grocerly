@@ -26,7 +26,7 @@ export const WishlistWrap = styled.div`
 
   transition: all 500ms ease-in-out;
   transform: ${({ showWishlist }) =>
-    showWishlist ? 'translateX(0)' : 'translateX(520px)'};
+    showWishlist ? 'translateX(0)' : 'translateX(450px)'};
   opacity: ${({ showWishlist }) => (showWishlist ? '1' : '0')};
 
   @media screen and (max-width: ${props => props.theme.breakpoint.medium}) {

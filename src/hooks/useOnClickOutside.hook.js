@@ -4,11 +4,12 @@ export const useOnClickOutside = (ref, handler, extraRef) => {
   useEffect(
     () => {
       const listener = event => {
-        // Do nothing if clicking ref's element or descendent elements
         let extraCondition =
           extraRef !== undefined
             ? extraRef.current.contains(event.target)
             : false;
+
+        // Do nothing if clicking ref's element or descendent elements
         if (
           !ref.current ||
           ref.current.contains(event.target) ||

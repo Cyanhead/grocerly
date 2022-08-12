@@ -1,5 +1,7 @@
-import { useWishlistContext } from '../../context/WIshlistContext';
+import { useRef } from 'react';
 import { useCartContext } from '../../context/CartContext';
+import { useWishlistContext } from '../../context/WIshlistContext';
+import { useOnClickOutside } from '../../hooks/useOnClickOutside.hook';
 import {
   WishlistWrap,
   WishlistTop,
@@ -39,6 +41,9 @@ const Wishlist = () => {
   } = useWishlistContext();
 
   const { onAdd } = useCartContext();
+
+  const clickOutRef = useRef(null);
+  useOnClickOutside(clickOutRef, () => setShowWishlist(false));
 
   const EmptyWishlist = () => {
     return (
@@ -129,6 +134,7 @@ const Wishlist = () => {
     <WishlistWrap
       centerCenter={wishlistItems.length === 0}
       showWishlist={showWishlist}
+      ref={clickOutRef}
     >
       <WishlistTop>
         <WishlistTopLeft>
