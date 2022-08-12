@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { useCartContext } from '../../context/CartContext';
 import {
@@ -24,6 +24,7 @@ import {
 import { FiShoppingCart, FiTrash, FiChevronLeft } from 'react-icons/fi';
 import { Disabler, GreenSpan, IconWrap } from '../others.style';
 import ItemQuantityCounter from '../ItemQuantityCounter';
+import { useOnClickOutside } from '../../hooks/useOnClickOutside.hook';
 
 const Cart = () => {
   const {
@@ -37,6 +38,9 @@ const Cart = () => {
     setShowCart,
     onRemove,
   } = useCartContext();
+
+  const clickOutRef = useRef(null);
+  useOnClickOutside(clickOutRef, () => setShowCart(false));
 
   const EmptyCart = () => {
     return (
@@ -126,7 +130,11 @@ const Cart = () => {
   };
 
   return (
-    <CartWrap centerCenter={cartItems.length === 0} showCart={showCart}>
+    <CartWrap
+      centerCenter={cartItems.length === 0}
+      showCart={showCart}
+      ref={clickOutRef}
+    >
       <CartTop>
         <CartTopLeft>
           <IconWrap
