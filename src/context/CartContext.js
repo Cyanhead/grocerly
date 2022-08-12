@@ -38,7 +38,6 @@ export const CartContext = ({ children }) => {
     }
 
     toast.success(
-      // todo: remove the 's' conditional
       `${qty} ${product.name}${qty === 1 ? '' : 's'} added to cart.`
     );
   };
@@ -52,7 +51,6 @@ export const CartContext = ({ children }) => {
     setTotalQuantity(previousQuantity => previousQuantity - product.quantity);
     setCartItems(newCartItems);
     toast.error(
-      // todo: remove the 's' conditional
       `${product.quantity} ${product.name}${
         product.quantity === 1 ? '' : 's'
       } removed from cart.`
