@@ -11,13 +11,31 @@ export const WishlistButtonWrap = styled.div`
   align-items: center;
 
   padding: 8px 8px 8px 4px;
-  margin-right: 20px;
+  margin-right: 10px;
+
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.color.greyHover};
+  }
+  &:active {
+    background-color: ${props => props.theme.color.greyActive};
+  }
 
   @media screen and (max-width: ${props => props.theme.breakpoint.large}) {
     justify-content: start;
 
     padding: 0;
     margin-right: 0;
+
+    &:hover {
+      background-color: inherit;
+    }
+    &:active {
+      background-color: inherit;
+    }
   }
 `;
 
