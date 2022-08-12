@@ -83,13 +83,8 @@ const Searchbar = props => {
     const [insideClick, setInsideClick] = useState(true);
 
     const watermarkRef = useRef(null);
-
-    const ClickWrap = ({ children }) => {
-      const ref = useRef(null);
-      useOnClickOutside(ref, () => setInsideClick(false), watermarkRef);
-
-      return <div ref={ref}>{children}</div>;
-    };
+    const clickOutRef = useRef(null);
+    useOnClickOutside(clickOutRef, () => setInsideClick(false), watermarkRef);
 
     const handleInput = value => {
       setSearchValue(value);
@@ -102,11 +97,12 @@ const Searchbar = props => {
           placeholder="Search for items..."
           onInput={e => handleInput(e.target.value)}
         />
-        <HitContainer showResults={insideClick && searchValue.length >= 1}>
+        <HitContainer
+          showResults={insideClick && searchValue.length >= 1}
+          ref={clickOutRef}
+        >
           <HitContainerTop>
-            <ClickWrap>
-              <Hits hitComponent={Hit} />
-            </ClickWrap>
+            <Hits hitComponent={Hit} />
           </HitContainerTop>
           <AlgoliaWatermark ref={watermarkRef}>
             <AlgoliaLink
