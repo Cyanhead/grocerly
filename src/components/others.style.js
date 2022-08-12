@@ -13,7 +13,7 @@ export const IconWrap = styled.div`
 
   position: ${props => props.pos || ''};
 
-  background-color: ${props => props.bg || 'inherit'};
+  background-color: ${props => props.bg || 'transparent'};
   color: ${props => props.fg || 'inherit'};
 
   margin: ${props => props.mar || '0'};
@@ -28,6 +28,8 @@ export const IconWrap = styled.div`
   font-size: ${props => props.fontSize || '1.25rem'};
 
   cursor: ${props => props.cursor || ''};
+
+  transition: 150ms ease-in;
 
   &:hover {
     background-color: ${props => props.bgHover || 'inherit'};

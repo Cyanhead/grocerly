@@ -10,8 +10,8 @@ A visiting user is able to do the following:
 - [x] arrive at the home page via [https://grocerly-store.netlify.app](https://grocerly-store.netlify.app)
 - [x] search products :mag:
 - [x] view product page for more details
-- [ ] sign up/sign in :bust_in_silhouette:
-- [ ] add products to wishlist :hearts:
+- [x] sign up/sign in :bust_in_silhouette:
+- [x] add products to wishlist :hearts:
 - [x] add products to cart :shopping_cart:
 - [ ] checkout :tada:
 
@@ -60,7 +60,7 @@ My goal was to simulate a professional work environment.
 ## How to navigate this project
 
 - [x] Somewhat complex stateful logic: [Link to example code](https://github.com/Cyanhead/grocerly/blob/main/src/context/StateContext.js#:~:text=const%20onAdd%20%3D,%7D%3B)
-- [ ] Responsive CSS using styled-components: [Link to example code]
+- [x] Responsive CSS using styled-components: [Link to example code]
 - [x] The application fetches data from Firebase: [Example for the request data and transformation ](https://github.com/Cyanhead/grocerly/blob/main/src/pages/SearchPage/SearchPage.jsx#L30:~:text=const%20fetchProducts%20%3D,%7D%3B)
 - [ ] Integration tests using React Testing Library: [Link to example code]
 

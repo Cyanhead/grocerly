@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FiShoppingCart, FiHeart } from 'react-icons/fi';
+import { FaHeart } from 'react-icons/fa';
 
 import {
   ProductPageContainer,
@@ -41,6 +42,7 @@ import { query, where, getDocs, getDoc, doc } from 'firebase/firestore';
 import { colRef } from '../../context/Firebase/firebase';
 import ItemQuantityCounter from '../../components/ItemQuantityCounter';
 import { useCartContext } from '../../context/CartContext';
+import { useWishlistContext } from '../../context/WIshlistContext';
 import Loading from '../../components/Loading';
 
 const ProductPage = () => {
@@ -49,6 +51,7 @@ const ProductPage = () => {
   const [currentProduct, setCurrentProduct] = useState([]);
 
   const { onAdd, qty, setQty } = useCartContext();
+  const { wishlistItems, onWishlistAdd } = useWishlistContext();
 
   const handleAddToCart = () => {
     onAdd(currentProduct, qty);
@@ -135,10 +138,22 @@ const ProductPage = () => {
                 <TopRow>
                   <ProductName>{currentProduct?.name || 'name'}</ProductName>
                   <AddToWishlistBtn
-                  // click function goes here
+                    onClick={() => onWishlistAdd(currentProduct)}
                   >
-                    <IconWrap>
-                      <FiHeart />
+                    <IconWrap
+                      fg={props => props.theme.color.primary}
+                      fgHover={props => props.theme.color.primaryHover}
+                      bgHover={props => props.theme.color.primaryLite}
+                      bordRad="50%"
+                      pad="16px"
+                    >
+                      {wishlistItems.find(
+                        item => item.id === currentProduct.id
+                      ) ? (
+                        <FaHeart />
+                      ) : (
+                        <FiHeart />
+                      )}
                     </IconWrap>
                   </AddToWishlistBtn>
                 </TopRow>

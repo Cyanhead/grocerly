@@ -11,7 +11,7 @@ import {
 } from './user.style';
 
 import ChevronDown from '../ChevronDown';
-import Wishlist from '../Wishlist';
+import WishlistButton from '../WishlistButton';
 import CartButton from '../CartButton';
 import { IconWrap, MobileIcon } from '../others.style';
 import { FiUser, FiUserCheck, FiMenu, FiPower, FiLogIn } from 'react-icons/fi';
@@ -141,7 +141,7 @@ const User = () => {
           )}
 
           <MenuItem mobile>
-            <Wishlist />
+            <WishlistButton />
           </MenuItem>
           <MenuItem mobile>
             <CartButton />
