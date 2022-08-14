@@ -57,7 +57,7 @@ export const CategoryList = styled.div`
 `;
 
 export const Category = styled.p`
-  color: ${({ green }) => (green ? primary : 'inherit')};
+  color: ${({ active }) => (active ? primary : 'inherit')};
 
   margin-right: 20px;
 
