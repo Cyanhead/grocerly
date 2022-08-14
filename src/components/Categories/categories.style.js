@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const semibold = props => props.theme.fontWght.semibold;
 const medium = props => props.theme.fontWght.medium;
@@ -22,9 +23,9 @@ export const Slide = styled.div`
   align-items: center;
 
   transition: 1s ease;
-  transform: translateX(${props => props.sliderIndex * -1200}px);
+  transform: translateX(${props => props.sliderIndex * -1152}px);
 
-  min-width: 1200px;
+  min-width: 1152px;
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
     display: grid;
@@ -40,8 +41,26 @@ export const Slide = styled.div`
     }
   }
 
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
+    /* grid-template-columns: 1fr 1fr; */
+    grid-gap: 16px;
+  }
   @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+`;
+
+export const TileLink = styled(Link)`
+  color: inherit;
+
+  margin: 0 16px;
+
+  text-decoration: none;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    margin: 0;
   }
 `;
 
@@ -53,9 +72,9 @@ export const TileWrap = styled.div`
 
   background-color: ${props => props.bg || 'inherit'};
 
-  width: 148px;
+  max-width: 200px;
+  width: 100%;
   height: auto;
-  margin: 0 16px;
   padding: 12px 24px;
 
   &:first-child {
@@ -87,6 +106,7 @@ export const TileText = styled.div`
 `;
 
 export const ProductName = styled.p`
+  height: 54px;
   font-size: 1.125rem;
   font-weight: ${semibold};
 
