@@ -155,6 +155,7 @@ const Footer = () => {
                 bg={props => props.theme.color.primary}
                 bgHover={props => props.theme.color.primaryHover}
                 fg={props => props.theme.color.white}
+                fgHover={props => props.theme.color.white}
                 mar="0 0 0 16px"
                 pad="10px"
                 bordRad="50%"
@@ -181,7 +182,7 @@ const Footer = () => {
         <FooterBottom>
           <Copyright>
             <FooterP>
-              &copy; {new Date().getFullYear()} Grocerly, all rights reserved.{' '}
+              &copy; {new Date().getFullYear()} Grocerly, all rights reserved.
             </FooterP>
           </Copyright>
           <PaymentImg src={payments} alt="" />
