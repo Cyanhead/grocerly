@@ -106,11 +106,14 @@ export const TileText = styled.div`
 `;
 
 export const ProductName = styled.p`
-  height: 54px;
   font-size: 1.125rem;
   font-weight: ${semibold};
 
   text-transform: capitalize;
+
+  @media screen and (max-width: ${props => props.theme.breakpoint.mediumHigh}) {
+    height: 54px;
+  }
 `;
 
 export const ProductCount = styled.p`
