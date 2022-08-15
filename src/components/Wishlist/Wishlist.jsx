@@ -28,6 +28,7 @@ import {
 } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
 import { ColoredBtn, Disabler, GreenSpan, IconWrap } from '../others.style';
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 
 const Wishlist = () => {
   const {
@@ -44,6 +45,7 @@ const Wishlist = () => {
 
   const clickOutRef = useRef(null);
   useOnClickOutside(clickOutRef, () => setShowWishlist(false));
+  useLockBodyScroll(showWishlist);
 
   const EmptyWishlist = () => {
     return (

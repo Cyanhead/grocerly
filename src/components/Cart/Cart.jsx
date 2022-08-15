@@ -25,6 +25,7 @@ import { FiShoppingCart, FiTrash, FiChevronLeft } from 'react-icons/fi';
 import { Disabler, GreenSpan, IconWrap } from '../others.style';
 import ItemQuantityCounter from '../ItemQuantityCounter';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside.hook';
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 
 const Cart = () => {
   const {
@@ -41,6 +42,7 @@ const Cart = () => {
 
   const clickOutRef = useRef(null);
   useOnClickOutside(clickOutRef, () => setShowCart(false));
+  useLockBodyScroll(showCart);
 
   const EmptyCart = () => {
     return (
