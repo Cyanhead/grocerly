@@ -39,14 +39,16 @@ function App() {
             <Route index element={<SearchPage />} />
             <Route path=":productId" element={<ProductPage />} />
           </Route>
-          <Route
-            path="/addproducts"
+          {/* // * product upload page disabled ...
+          // * ... for security reasons */}
+          {/* <Route
+            path="/admin/addproducts"
             element={
               <AuthCheck>
                 <AddProduct />
               </AuthCheck>
             }
-          />
+          /> */}
           <Route
             path="/user/profile"
             element={
