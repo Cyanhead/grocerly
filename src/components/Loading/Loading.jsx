@@ -6,10 +6,10 @@ import loader01 from '../../assets/images/loader01.svg';
 import loader02 from '../../assets/images/loader02.svg';
 import loader03 from '../../assets/images/loader03.svg';
 
-const Loading = () => {
+const Loading = props => {
   const loadingImages = [loader01, loader02, loader03];
   return (
-    <LoadingWrap>
+    <LoadingWrap minH={props.minH}>
       <LoadingImg src={loadingImages[generateRandom(0, 3)]} alt="" />
     </LoadingWrap>
   );

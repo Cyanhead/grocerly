@@ -11,7 +11,6 @@ export const batchArray = (
     requiredNum > possibleNumOfBatches ? possibleNumOfBatches : requiredNum;
   const totalBatches =
     array.length % divider === 0 ? numOfBatches : numOfBatches + 1;
-  console.log(totalBatches);
 
   const batches = [];
   let range = 0;

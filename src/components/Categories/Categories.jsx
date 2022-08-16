@@ -15,6 +15,7 @@ import { generateLightColorHsla as randomColorGenerator } from '../../helpers/ge
 
 import generateRandom from '../../helpers/generateRandom';
 import { batchArray } from '../../helpers/batchArray';
+import Loading from '../Loading';
 
 const Categories = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -59,9 +60,11 @@ const Categories = () => {
       batchCount={batchCount}
     >
       <SlideWrap>
-        {productBatches.map((batch, i) => {
-          return <CategoryTileGenerator product={batch} key={i} />;
-        })}
+        {productBatches.length === 1 && <Loading minH="100%" />}
+        {productBatches.length !== 1 &&
+          productBatches.map((batch, i) => {
+            return <CategoryTileGenerator product={batch} key={i} />;
+          })}
       </SlideWrap>
     </Preview>
   );

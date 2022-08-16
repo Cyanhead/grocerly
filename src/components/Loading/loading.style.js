@@ -8,7 +8,7 @@ export const LoadingWrap = styled.div`
   background-color: ${props => props.theme.color.white};
 
   width: 100%;
-  min-height: 80vh;
+  min-height: ${props => props.minH || '80vh'};
   max-height: 100%;
   padding: 48px;
 `;
