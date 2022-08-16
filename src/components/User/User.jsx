@@ -39,7 +39,7 @@ const User = () => {
 
     doLogout
       .then(() => {
-        console.log('the user signed out');
+        // console.log('the user signed out');
         setSignedUser(null);
       })
       .catch(err => console.log(err.message));

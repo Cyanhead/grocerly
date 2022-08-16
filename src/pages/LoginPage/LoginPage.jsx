@@ -56,15 +56,15 @@ const LoginPage = () => {
 
     doLogin
       .then(cred => {
-        console.log('user logged in:', cred.user);
+        // console.log('user logged in:', cred.user);
         setUserEmail('');
         setUserPassword('');
 
         goToHomepage('/');
       })
       .catch(error => {
-        console.log('err code', error.code);
-        console.log(error.message);
+        // console.log('err code', error.code);
+        // console.log(error.message);
         setAuthError(error.code);
       });
   };

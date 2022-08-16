@@ -12,7 +12,7 @@ import {
 import SearchPage from './pages/SearchPage/SearchPage';
 import HomePage from './pages/HomePage/HomePage';
 import ProductPage from './pages/ProductPage';
-import AddProduct from './pages/AddProduct';
+// import AddProduct from './pages/AddProduct';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SignupPage from './pages/SignupPage';
@@ -39,14 +39,16 @@ function App() {
             <Route index element={<SearchPage />} />
             <Route path=":productId" element={<ProductPage />} />
           </Route>
-          <Route
-            path="/addproducts"
+          {/* // * product upload page disabled ...
+          // * ... for security reasons */}
+          {/* <Route
+            path="/admin/addproducts"
             element={
               <AuthCheck>
                 <AddProduct />
               </AuthCheck>
             }
-          />
+          /> */}
           <Route
             path="/user/profile"
             element={

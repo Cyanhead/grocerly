@@ -7,18 +7,22 @@ const Context = createContext();
 export const ProductsListContext = ({ children }) => {
   const [products, setProducts] = useState([]);
 
-  const fetchProducts = () => {
-    onSnapshot(colRef, snapshot => {
-      let productsList = [];
-      snapshot.docs.forEach(doc => {
-        productsList.push({ ...doc.data(), id: doc.id });
-      });
-      setProducts(productsList);
-    });
-  };
-
   useEffect(() => {
+    let unsubCollection;
+
+    const fetchProducts = () => {
+      unsubCollection = onSnapshot(colRef, snapshot => {
+        let productsList = [];
+        snapshot.docs.forEach(doc => {
+          productsList.push({ ...doc.data(), id: doc.id });
+        });
+        setProducts(productsList);
+      });
+    };
+
     fetchProducts();
+
+    return unsubCollection;
   }, []);
 
   return (

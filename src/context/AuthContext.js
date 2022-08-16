@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './Firebase';
 
@@ -7,13 +7,20 @@ const Context = createContext();
 export const AuthContext = ({ children }) => {
   const [signedUser, setSignedUser] = useState(null);
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      setSignedUser(user);
-    } else {
-      // User is signed out
-    }
-  });
+  useEffect(() => {
+    let unsubAuth;
+
+    unsubAuth = onAuthStateChanged(auth, user => {
+      if (user) {
+        setSignedUser(user);
+      } else {
+        // User is signed out
+      }
+    });
+
+    return unsubAuth;
+  }, []);
+
   return (
     <Context.Provider
       value={{
