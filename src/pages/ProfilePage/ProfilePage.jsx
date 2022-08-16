@@ -77,7 +77,7 @@ const ProfilePage = () => {
           // Profile updated!
         })
         .catch(error => {
-          console.log(error);
+          // console.log(error);
         });
 
       setForm(false);
@@ -188,11 +188,13 @@ const ProfilePage = () => {
 
     doLogout
       .then(() => {
-        console.log('the user signed out');
+        // console.log('the user signed out');
         setSignedUser(null);
         navigate('/');
       })
-      .catch(err => console.log(err.message));
+      .catch(err => {
+        // console.log(err.message)
+      });
   };
 
   const handleSelectValue = e => {
