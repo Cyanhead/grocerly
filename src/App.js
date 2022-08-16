@@ -12,7 +12,7 @@ import {
 import SearchPage from './pages/SearchPage/SearchPage';
 import HomePage from './pages/HomePage/HomePage';
 import ProductPage from './pages/ProductPage';
-import AddProduct from './pages/AddProduct';
+// import AddProduct from './pages/AddProduct';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SignupPage from './pages/SignupPage';
