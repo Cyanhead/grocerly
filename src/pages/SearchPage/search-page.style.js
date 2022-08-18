@@ -173,6 +173,8 @@ export const CategoryP = styled.p`
   text-transform: capitalize;
   text-decoration: none;
 
+  cursor: pointer;
+
   &:hover {
     background-color: ${greyBg2};
   }
