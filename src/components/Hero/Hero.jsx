@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   HeroContainer,
@@ -17,8 +17,17 @@ import {
 import { IconWrap } from '../others.style';
 import heroBg from '../../assets/images/fruits_spill.webp';
 import { IoPaperPlaneOutline } from 'react-icons/io5';
+import { toast } from 'react-hot-toast';
 
 const Hero = () => {
+  const [email, setEmail] = useState('');
+
+  const handleaSubmit = e => {
+    e.preventDefault();
+    toast.success('You have been subscribed.');
+    setEmail('');
+  };
+
   return (
     <HeroContainer>
       <HeroWrap>
@@ -32,9 +41,14 @@ const Hero = () => {
               <IconWrap>
                 <IoPaperPlaneOutline />
               </IconWrap>
-              <HeroInput type="text" placeholder="Enter your email address" />
+              <HeroInput
+                type="text"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
             </InputWrap>
-            <HeroBtn>Subscribe</HeroBtn>
+            <HeroBtn onClick={handleaSubmit}>Subscribe</HeroBtn>
           </HeroForm>
         </HeroLeft>
         <HeroRight>
