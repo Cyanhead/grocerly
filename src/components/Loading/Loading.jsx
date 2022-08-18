@@ -1,6 +1,6 @@
 import React from 'react';
 import { LoadingWrap, LoadingImg } from './loading.style';
-import generateRandom from '../../helpers/generateRandom';
+import { generateRandom } from '../../helpers/generateRandom';
 
 import loader01 from '../../assets/images/loader01.svg';
 import loader02 from '../../assets/images/loader02.svg';

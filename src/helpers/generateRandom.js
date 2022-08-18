@@ -1,4 +1,4 @@
-export default function generateRandom(min = 0, max = 100) {
+export const generateRandom = (min = 0, max = 100) => {
   // find diff
   let difference = max - min;
 
@@ -12,4 +12,4 @@ export default function generateRandom(min = 0, max = 100) {
   rand = rand + min;
 
   return rand;
-}
+};
