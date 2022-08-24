@@ -30,17 +30,25 @@ A visiting user is able to do the following:
 
 ![image of homepage](/src/assets/screenshots/home-page.jpeg)
 
-#### Search page
+#### Categories page
 
-![image of homepage](/src/assets/screenshots/search-page.jpeg)
+![image of all products page](/src/assets/screenshots/categories-page.jpeg)
+
+#### Search feature
+
+![image of all products page](/src/assets/screenshots/search.jpeg)
 
 #### Product page
 
-![image of homepage](/src/assets/screenshots/product-page.jpeg)
+![image of product page](/src/assets/screenshots/product-page.jpeg)
 
 #### Cart
 
-![image of homepage](/src/assets/screenshots/cart.jpeg)
+![image of cart](/src/assets/screenshots/cart.jpeg)
+
+#### Wishlist
+
+![image of wishlist](/src/assets/screenshots/wishlist.jpeg)
 
 ## How I worked on this project
 
