@@ -19,6 +19,7 @@ import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import AuthCheck from './components/AuthCheck';
 import ProfilePage from './pages/ProfilePage';
+import NotFound from './components/NotFound';
 
 function App() {
   const MajorRoutes = () => {
@@ -44,9 +45,9 @@ function App() {
           {/* <Route
             path="/admin/addproducts"
             element={
-              <AuthCheck>
+                <AuthCheck>
                 <AddProduct />
-              </AuthCheck>
+                </AuthCheck>
             }
           /> */}
           <Route
@@ -58,7 +59,7 @@ function App() {
             }
           />
 
-          <Route path="*" element={<div>nothing to see here</div>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />
