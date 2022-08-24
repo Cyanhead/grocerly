@@ -1,4 +1,4 @@
-import generateRandom from './generateRandom';
+import { generateRandom } from './generateRandom';
 
 // generate any color from #100000 to #ffffff
 export const generateColorHex = () => {

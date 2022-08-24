@@ -13,7 +13,7 @@ import {
 } from './categories.style';
 import { generateLightColorHsla as randomColorGenerator } from '../../helpers/generateColor';
 
-import generateRandom from '../../helpers/generateRandom';
+import { generateRandom } from '../../helpers/generateRandom';
 import { batchArray } from '../../helpers/batchArray';
 import Loading from '../Loading';
 
