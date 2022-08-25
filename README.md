@@ -36,7 +36,7 @@ A visiting user is able to do the following:
 
 #### Search feature
 
-![image of all products page](/src/assets/screenshots/search.jpeg)
+![image of all search feature](/src/assets/screenshots/search.jpeg)
 
 #### Product page
 
@@ -54,23 +54,23 @@ A visiting user is able to do the following:
 
 My goal was to simulate a professional work environment.
 
-- I built this app based on Figma designs:
+- I built this app based on [Figma designs](https://www.figma.com/file/zhDamBNT8lrqvUlnpDRVhW/Grocerly?node-id=0%3A1):
   ![figma design](/src/assets/screenshots/figma-home-page.jpeg)
   <!-- ![figma design](/src/assets/screenshots/figma-header.jpeg)
   ![figma design](/src/assets/screenshots/figma-footer.jpeg) -->
 
-- I worked with tasks on a Kanban board:
+- I worked with tasks on a [Kanban board](https://github.com/users/Cyanhead/projects/2/views/2):
   ![kanban board view of tasks](/src/assets/screenshots/github-tasks.jpeg)
   ![header task details](/src/assets/screenshots/github-tasks-header.jpeg)
 
-- I used feature branches and Pull Requests: Here is a [PR example](https://github.com/Cyanhead/grocerly/pull/2)
+- I used feature branches and Pull Requests: Here is a [PR example](https://github.com/Cyanhead/grocerly/pull/15)
 
 ## How to navigate this project
 
-- [x] Somewhat complex stateful logic: [Link to example code](https://github.com/Cyanhead/grocerly/blob/main/src/context/StateContext.js#:~:text=const%20onAdd%20%3D,%7D%3B)
-- [x] Responsive CSS using styled-components: [Link to example code]
-- [x] The application fetches data from Firebase: [Example for the request data and transformation ](https://github.com/Cyanhead/grocerly/blob/main/src/pages/SearchPage/SearchPage.jsx#L30:~:text=const%20fetchProducts%20%3D,%7D%3B)
-- [ ] Integration tests using React Testing Library: [Link to example code]
+- Somewhat complex stateful logic: [Link to example code](https://github.com/Cyanhead/grocerly/blob/main/src/context/CartContext.js#:~:text=const%20onAdd%20%3D,%7D%3B)
+- Responsive CSS using styled-components: [Link to example code](https://github.com/Cyanhead/grocerly/blob/main/src/components/Categories/categories.style.js)
+- The application fetches data from Firebase: [Example for the request data and transformation ](https://github.com/Cyanhead/grocerly/blob/main/src/context/ProductsListContext.js#:~:text=const%20fetchProducts%20%3D,%7D%3B)
+<!-- - Integration tests using React Testing Library: [Link to example code] -->
 
 ## Why I built the project this way
 
@@ -79,7 +79,7 @@ My goal was to simulate a professional work environment.
 - styled-components is a great library for styling. It includes an auto-prefixer, uses scoped
   classes, and allows a seamless integration with JS.
 - My plan is to become a full-stack developer eventually. But for the beginning I focus on the
-  frontend. That's why I decided to use an existing database procider like Firebase rather to create a custom server.
+  frontend. That's why I decided to use an existing database provider like Firebase rather to create a custom database.
     <!-- I have
     basic backend knowledge as well. -->
   <!-- - Testing is an essential part of production applications. Testing Library is the go-to library in the
@@ -88,7 +88,7 @@ My goal was to simulate a professional work environment.
 ## If I had more time I would change this
 
 - Set up continuous integration to run the tests and ESLint on every Pull Request
-- Refactor some of the code. Especially [this part](https://github.com/Cyanhead/grocerly/blob/main/src/pages/AddProduct/AddProduct.jsx#:~:text=%7D%3B-,const%20uploadProductsV2%20%3D%20productsArray%20%3D%3E%20%7B,%7D%3B,-const%20areAllPhotosSelected%20%3D)
+- Refactor some of the code. Especially [this part](https://github.com/Cyanhead/grocerly/blob/main/src/context/AuthContext.js#:~:text=unsubAuth%20%3D%20onAuthStateChanged,%7D)
 - Add end-to-end tests with Cypress.
 
 ## Available Scripts
