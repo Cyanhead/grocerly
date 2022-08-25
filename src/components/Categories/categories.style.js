@@ -42,7 +42,6 @@ export const Slide = styled.div`
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoint.mediumLow}) {
-    /* grid-template-columns: 1fr 1fr; */
     grid-gap: 16px;
   }
   @media screen and (max-width: ${props => props.theme.breakpoint.small}) {
