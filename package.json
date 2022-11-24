@@ -18,7 +18,8 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "yarn-audit-fix": "^9.3.7"
   },
   "resolutions": {
     "nth-check": "^2.0.1"
