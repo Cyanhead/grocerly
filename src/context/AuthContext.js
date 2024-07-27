@@ -6,15 +6,15 @@ const Context = createContext();
 
 export const AuthContext = ({ children }) => {
   const [signedUser, setSignedUser] = useState(null);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserAdmin, setIsUserAdmin] = useState(false);
 
   useEffect(() => {
-    let unsubAuth;
-
-    unsubAuth = onAuthStateChanged(auth, user => {
+    let unsubAuth = onAuthStateChanged(auth, user => {
       if (user) {
+        setIsUserLoggedIn(true);
         setSignedUser(user);
-      } else {
-        // User is signed out
+        return;
       }
     });
 
@@ -26,6 +26,10 @@ export const AuthContext = ({ children }) => {
       value={{
         signedUser,
         setSignedUser,
+        isUserLoggedIn,
+        setIsUserLoggedIn,
+        isUserAdmin,
+        setIsUserAdmin
       }}
     >
       {children}

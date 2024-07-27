@@ -6,18 +6,18 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Outlet,
+  Outlet
 } from 'react-router-dom';
 
 import SearchPage from './pages/SearchPage/SearchPage';
 import HomePage from './pages/HomePage/HomePage';
 import ProductPage from './pages/ProductPage';
-// import AddProduct from './pages/AddProduct';
+import AddProduct from './pages/AddProduct';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
-import AuthCheck from './components/AuthCheck';
+import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
 import NotFound from './components/NotFound';
 
@@ -42,20 +42,28 @@ function App() {
           </Route>
           {/* // * product upload page disabled ...
           // * ... for security reasons */}
-          {/* <Route
-            path="/admin/addproducts"
+          <Route
+            path="/admin/add-products"
             element={
-                <AuthCheck>
-                <AddProduct />
-                </AuthCheck>
+              <>
+                <ProtectedRoute
+                // user={signedUser}
+                >
+                  <AddProduct />
+                </ProtectedRoute>
+              </>
             }
-          /> */}
+          />
           <Route
             path="/user/profile"
             element={
-              <AuthCheck>
-                <ProfilePage />
-              </AuthCheck>
+              <>
+                <ProtectedRoute
+                // user={signedUser}
+                >
+                  <ProfilePage />
+                </ProtectedRoute>
+              </>
             }
           />
 
