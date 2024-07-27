@@ -14,7 +14,7 @@
     "@fontsource/quicksand": "^4.5.9",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "algoliasearch": "^4.13.1",
-    "firebase": "^9.8.3",
+    "firebase": "^10.12.4",
     "instantsearch.css": "^7.4.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
