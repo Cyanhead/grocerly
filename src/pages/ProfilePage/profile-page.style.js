@@ -117,6 +117,8 @@ export const ProfilePageMain = styled.div`
 
 export const ProfilePageHeading = styled.h2`
   border-bottom: ${faintLine};
+
+  text-transform: capitalize;
 `;
 
 export const ProfilePageContent = styled.div`

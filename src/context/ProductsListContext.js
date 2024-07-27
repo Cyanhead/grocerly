@@ -1,6 +1,6 @@
 import { onSnapshot } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { colRef } from './Firebase';
+import { productsColRef } from './Firebase';
 
 const Context = createContext();
 
@@ -11,7 +11,7 @@ export const ProductsListContext = ({ children }) => {
     let unsubCollection;
 
     const fetchProducts = () => {
-      unsubCollection = onSnapshot(colRef, snapshot => {
+      unsubCollection = onSnapshot(productsColRef, snapshot => {
         let productsList = [];
         snapshot.docs.forEach(doc => {
           productsList.push({ ...doc.data(), id: doc.id });
@@ -28,7 +28,7 @@ export const ProductsListContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        products,
+        products
       }}
     >
       {children}

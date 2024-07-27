@@ -19,13 +19,13 @@ import {
   CartItemRight,
   CartRow,
   CartBottom,
-  CheckoutButton,
+  CheckoutButton
 } from './cart.style';
 import { FiShoppingCart, FiTrash, FiChevronLeft } from 'react-icons/fi';
 import { Disabler, GreenSpan, IconWrap } from '../others.style';
 import ItemQuantityCounter from '../ItemQuantityCounter';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside.hook';
-import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll.hook';
 
 const Cart = () => {
   const {
@@ -37,7 +37,7 @@ const Cart = () => {
     setTotalPrice,
     showCart,
     setShowCart,
-    onRemove,
+    onRemove
   } = useCartContext();
 
   const clickOutRef = useRef(null);
@@ -72,7 +72,7 @@ const Cart = () => {
   const CartInterface = () => {
     return (
       <CartItemsList>
-        {cartItems.map(item => {
+        {cartItems?.map(item => {
           return (
             <CartItemWrap key={item?.id}>
               <CartItemLeft>

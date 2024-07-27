@@ -18,7 +18,7 @@ import {
   SearchedProductsGrid,
   CategoryListWrap,
   CategoryListHeading,
-  CategoryP,
+  CategoryP
 } from './search-page.style';
 
 import { useProductsListContext } from '../../context/ProductsListContext';
@@ -67,7 +67,7 @@ const SearchPage = () => {
         {props.mobile ? (
           <CategorySelect onChange={handleSelectValue}>
             <CategoryOption>all</CategoryOption>
-            {productCategories.map((type, i) => {
+            {productCategories?.map((type, i) => {
               return (
                 <CategoryOption key={i} value={type}>
                   {type}
@@ -82,7 +82,7 @@ const SearchPage = () => {
               <CategoryP active={active} onClick={handleCategory}>
                 all
               </CategoryP>
-              {productCategories.map((type, i) => {
+              {productCategories?.map((type, i) => {
                 return (
                   <CategoryP
                     key={i}
@@ -138,7 +138,7 @@ const SearchPage = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
 
-                marginTop: '8px',
+                marginTop: '8px'
               }}
             >
               <CategoryGenerator mobile />
@@ -160,7 +160,7 @@ const SearchPage = () => {
           </RowTwo>
           {filteredProducts.length !== 0 ? (
             <SearchedProductsGrid>
-              {filteredProducts.map(product => {
+              {filteredProducts?.map(product => {
                 return <ProductTile key={product.id} product={product} />;
               })}
             </SearchedProductsGrid>

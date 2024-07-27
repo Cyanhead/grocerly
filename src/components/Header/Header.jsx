@@ -17,7 +17,7 @@ import {
   AllCategoryBtn,
   NavLinks,
   HeaderNavLink,
-  NavP,
+  NavP
 } from './header.style';
 
 import { FiHome, FiPercent, FiGrid, FiSearch } from 'react-icons/fi';
@@ -30,7 +30,7 @@ const Header = () => {
   const NavLinkGenerator = props => {
     return (
       <>
-        {props.links.map((link, i) => {
+        {props.links?.map((link, i) => {
           return (
             <Disabler
               // TODO delete when all links have been added
@@ -86,7 +86,7 @@ const Header = () => {
                   { name: 'home', icon: <FiHome />, url: '/' },
                   { name: 'hot deals', icon: <HiOutlineFire />, url: '' },
                   { name: 'promotions', icon: <FiPercent />, url: '' },
-                  { name: 'new products', icon: <VscMegaphone />, url: '' },
+                  { name: 'new products', icon: <VscMegaphone />, url: '' }
                 ]}
               />
             </NavLinks>

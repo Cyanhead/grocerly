@@ -18,7 +18,7 @@ import {
   AlgoliaWatermark,
   AlgoliaLink,
   AlgoliaP,
-  AlgoliaLogo,
+  AlgoliaLogo
 } from './searchbar.style';
 import { FiSearch } from 'react-icons/fi';
 
@@ -27,7 +27,7 @@ import {
   InstantSearch,
   Hits,
   Highlight,
-  Configure,
+  Configure
 } from 'react-instantsearch-hooks-web';
 import algolia_logo from '../../assets/images/Algolia-nebula.svg';
 import { useProductsListContext } from '../../context/ProductsListContext';
@@ -65,7 +65,9 @@ const Searchbar = props => {
 
   useEffect(() => {
     let searchableProducts = [];
-    products.map(item => {
+
+    // remove unwanted properties from products
+    products?.map(item => {
       const { oldPrice, timestamp, details, id, ...rest } = item;
       return searchableProducts.push({ ...rest, objectID: id, id });
     });
@@ -73,8 +75,10 @@ const Searchbar = props => {
     const sendDataToAlgolia = () => {
       const index = searchClient.initIndex('dev_grocerly');
 
-      index.saveObjects(searchableProducts);
+      // update the 'dev_grocerly' index with the current list of products
+      index.replaceAllObjects(searchableProducts);
     };
+
     sendDataToAlgolia();
   }, [searchClient, products]);
 

@@ -17,18 +17,18 @@ import {
   WishlistItemLeft,
   ItemImg,
   ItemDetails,
-  WishlistItemRight,
+  WishlistItemRight
 } from './wishlist.style';
 
 import {
   FiHeart,
   FiTrash,
   FiChevronLeft,
-  FiShoppingCart,
+  FiShoppingCart
 } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
 import { ColoredBtn, Disabler, GreenSpan, IconWrap } from '../others.style';
-import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll.hook';
 
 const Wishlist = () => {
   const {
@@ -38,7 +38,7 @@ const Wishlist = () => {
     setShowWishlist,
     totalQuantity,
     setTotalQuantity,
-    onWishlistAdd,
+    onWishlistAdd
   } = useWishlistContext();
 
   const { onAdd } = useCartContext();
@@ -75,7 +75,7 @@ const Wishlist = () => {
   const WishlistInterface = () => {
     return (
       <WishlistItemsList>
-        {wishlistItems.map(item => {
+        {wishlistItems?.map(item => {
           return (
             <WishlistItemWrap key={item?.id}>
               <WishlistItemLeft>

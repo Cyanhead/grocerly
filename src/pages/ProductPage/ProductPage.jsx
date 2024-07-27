@@ -32,14 +32,14 @@ import {
   ProductDetails,
   SimilarProducts,
   SimilarProductsHeading,
-  SimilarProductsMarquee,
+  SimilarProductsMarquee
 } from './product-page.style';
 
 import { IconWrap } from '../../components/others.style';
 import SimilarProductTile from '../../components/SimilarProductTile/SimilarProductTile';
 
 import { query, where, getDocs, getDoc, doc } from 'firebase/firestore';
-import { colRef } from '../../context/Firebase/firebase';
+import { productsColRef } from '../../context/Firebase/firebase';
 import ItemQuantityCounter from '../../components/ItemQuantityCounter';
 import { useCartContext } from '../../context/CartContext';
 import { useWishlistContext } from '../../context/WIshlistContext';
@@ -62,7 +62,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     const fetchSimilarProducts = async category => {
-      const q = query(colRef, where('category', '==', category));
+      const q = query(productsColRef, where('category', '==', category));
 
       const querySnapshot = await getDocs(q);
 
@@ -79,7 +79,7 @@ const ProductPage = () => {
     };
 
     const fetchProductMatchedById = async () => {
-      const docRef = doc(colRef, productId);
+      const docRef = doc(productsColRef, productId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -106,7 +106,7 @@ const ProductPage = () => {
                 <ProductImageSlide mobile>
                   {
                     // TODO consider the max amount of product photos uploadable
-                    currentProduct?.images.map((image, i) => {
+                    currentProduct?.images?.map((image, i) => {
                       return <ProductImage key={i} src={image} alt="" />;
                     })
                   }
@@ -120,7 +120,7 @@ const ProductPage = () => {
                 <ProductImageSlide>
                   {
                     // TODO consider the max amount of product photos uploadable
-                    currentProduct?.images.map((image, i) => {
+                    currentProduct?.images?.map((image, i) => {
                       return (
                         <ProductImageWrap
                           key={i}
@@ -204,7 +204,7 @@ const ProductPage = () => {
             <SimilarProducts>
               <SimilarProductsHeading>similar products</SimilarProductsHeading>
               <SimilarProductsMarquee>
-                {similarProductList.slice(0, 10).map(product => {
+                {similarProductList.slice(0, 10)?.map(product => {
                   return (
                     <SimilarProductTile key={product.id} product={product} />
                   );
@@ -218,7 +218,7 @@ const ProductPage = () => {
           style={{
             maxWidth: '1200px',
             margin: '0 auto',
-            textAlign: 'center',
+            textAlign: 'center'
           }}
         >
           <Loading />
