@@ -8,7 +8,7 @@ import { ProductsListContext } from './context/ProductsListContext';
 import { CartContext } from './context/CartContext';
 import { WishlistContext } from './context/WIshlistContext';
 import { AuthContext } from './context/AuthContext';
-// import { UsersListContext } from './context/UsersListContext';
+import { UsersListContext } from './context/UsersListContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
