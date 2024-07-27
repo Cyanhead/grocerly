@@ -18,7 +18,7 @@ import {
   AlgoliaWatermark,
   AlgoliaLink,
   AlgoliaP,
-  AlgoliaLogo
+  AlgoliaLogo,
 } from './searchbar.style';
 import { FiSearch } from 'react-icons/fi';
 
@@ -27,7 +27,7 @@ import {
   InstantSearch,
   Hits,
   Highlight,
-  Configure
+  Configure,
 } from 'react-instantsearch-hooks-web';
 import algolia_logo from '../../assets/images/Algolia-nebula.svg';
 import { useProductsListContext } from '../../context/ProductsListContext';
@@ -59,8 +59,8 @@ const Searchbar = props => {
   const { products } = useProductsListContext();
 
   const searchClient = algoliasearch(
-    process.env.REACT_APP_ALGOLIA_APP_ID,
-    process.env.REACT_APP_ALGOLIA_ADMIN_API_KEY
+    import.meta.env.VITE_ALGOLIA_APP_ID,
+    import.meta.env.VITE_ALGOLIA_ADMIN_API_KEY
   );
 
   useEffect(() => {
