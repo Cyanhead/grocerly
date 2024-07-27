@@ -18,10 +18,10 @@ root.render(
         <CartContext>
           <WishlistContext>
             <AuthContext>
-              {/* <UsersListContext> */}
-              <Toaster />
-              <App />
-              {/* </UsersListContext> */}
+              <UsersListContext>
+                <Toaster />
+                <App />
+              </UsersListContext>
             </AuthContext>
           </WishlistContext>
         </CartContext>
