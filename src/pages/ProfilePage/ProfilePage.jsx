@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   ProfilePageContainer,
@@ -17,7 +17,7 @@ import {
   CellTop,
   CellBottom,
   CellButton,
-  BackBtnWrap,
+  BackBtnWrap
 } from './profile-page.style';
 import { signOut, updateProfile } from 'firebase/auth';
 import {
@@ -27,26 +27,45 @@ import {
   FiPower,
   FiEdit,
   FiChevronLeft,
+  FiClipboard,
+  FiShoppingBag
 } from 'react-icons/fi';
-import { IconWrap } from '../../components/others.style';
+import { GreenSpan, IconWrap } from '../../components/others.style';
 import { auth } from '../../context/Firebase';
 import { toast } from 'react-hot-toast';
 import { useAuthContext } from '../../context/AuthContext';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CustomForm, CustomFormInputGroup } from '../../components/Form';
+import Loading from '../../components/Loading/Loading';
 
 const ProfilePage = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [form, setForm] = useState(false);
 
+  // const { displayName, email, emailVerified } = user;
+
+  // TODO: modify this to use isUserLoggedIn boolean
+  // const {
+  //   // signedUser: { displayName, email, emailVerified },
+  //   setSignedUser
+  // } = useAuthContext();
+
   const {
-    signedUser: { displayName, email, emailVerified },
+    signedUser,
     setSignedUser,
+    isUserLoggedIn,
+    setIsUserLoggedIn,
+    isUserAdmin,
+    setIsUserAdmin
   } = useAuthContext();
+
+  // TODO: create a custom hook for this
   const navigate = useNavigate();
 
-  const [userName, setUserName] = useState(displayName);
+  const [userName, setUserName] = useState('User');
+  const [userEmail, setUserEmail] = useState('example@email.com');
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   const Account = () => {
     const GridItem = props => {
@@ -71,7 +90,7 @@ const ProfilePage = () => {
 
     const handleSubmit = () => {
       updateProfile(auth.currentUser, {
-        displayName: userName,
+        displayName: userName
       })
         .then(() => {
           // Profile updated!
@@ -102,7 +121,7 @@ const ProfilePage = () => {
             <CustomForm
               onSubmit={handleSubmit}
               submitBtnDisableCondition={
-                userName.trim() === '' || userName === displayName
+                userName.trim() === '' || userName === signedUser.displayName
               }
               submitBtnText="Submit"
             >
@@ -127,10 +146,23 @@ const ProfilePage = () => {
               editable
               editOnClick={() => setForm(true)}
             >
-              <ProfilePageP>{displayName} </ProfilePageP>
-              <ProfilePageP>{email} </ProfilePageP>
               <ProfilePageP>
-                Email status: {emailVerified ? 'Verified' : 'Unverified'}
+                Name:{' '}
+                <GreenSpan fg="black" fontWght="600" textTrans="capitalize">
+                  {userName}
+                </GreenSpan>
+              </ProfilePageP>
+              <ProfilePageP>
+                Email address:{' '}
+                <GreenSpan fg="black" fontWght="600" textTrans="capitalize">
+                  {userEmail}
+                </GreenSpan>
+              </ProfilePageP>
+              <ProfilePageP>
+                Email status:{' '}
+                <GreenSpan fg="black" fontWght="600" textTrans="capitalize">
+                  {isEmailVerified ? 'Verified' : 'Unverified'}
+                </GreenSpan>
               </ProfilePageP>
             </GridItem>
             <GridItem itemTitle="Address book">
@@ -140,7 +172,7 @@ const ProfilePage = () => {
               >
                 Your default shipping address:
               </ProfilePageP>
-              <ProfilePageP>{displayName} </ProfilePageP>
+              <ProfilePageP>{userName} </ProfilePageP>
               <ProfilePageP>16 Murpy Street</ProfilePageP>
               <ProfilePageP>+1 024 4355</ProfilePageP>
             </GridItem>
@@ -162,34 +194,41 @@ const ProfilePage = () => {
     {
       name: 'Account',
       icon: <FiUser />,
-      title: `Hi, ${displayName}`,
-      content: <Account />,
+      title: `Hi, ${userName}`,
+      content: <Account />
     },
     {
       name: 'Orders',
       icon: <FiPackage />,
       title: 'Orders',
-      content: <Orders />,
+      content: <Orders />
     },
     {
       name: 'Inbox',
       icon: <FiMail />,
       title: 'Inbox messages',
-      content: <Inbox />,
-    },
+      content: <Inbox />
+    }
+    // ,{
+    //   name: 'Manage Store',
+    //   icon: <FiClipboard />,
+    //   title: 'Manage Store',
+    //   content: <Inbox />
+    // },
   ];
 
   const handleLogout = () => {
     const doLogout = toast.promise(signOut(auth), {
       loading: 'Logging out...',
       success: 'logged out successfully',
-      error: 'Error when logging out',
+      error: 'Error when logging out'
     });
 
     doLogout
       .then(() => {
         // console.log('the user signed out');
         setSignedUser(null);
+        setIsUserLoggedIn(false);
         navigate('/');
       })
       .catch(err => {
@@ -201,47 +240,87 @@ const ProfilePage = () => {
     setCurrentTab(e.target.value);
   };
 
-  return (
-    <ProfilePageContainer>
-      <ProfilePageWrap>
-        <ProfilePageAside>
-          <ProfilePageTabGroup>
-            {pages.map((tab, i) => {
-              return (
-                <ProfilePageTab
-                  key={i}
-                  onClick={() => setCurrentTab(i)}
-                  active={currentTab === i}
-                >
-                  <IconWrap pad="4px 8px 4px 4px">{tab.icon}</IconWrap>
-                  {tab.name}
-                </ProfilePageTab>
-              );
-            })}
-          </ProfilePageTabGroup>
-          <ProfilePageTab onClick={handleLogout}>
-            <IconWrap>
-              <FiPower />
-            </IconWrap>
-            Log out
-          </ProfilePageTab>
-        </ProfilePageAside>
-        <ProfilePageSelect onChange={handleSelectValue}>
-          {pages.map((page, i) => {
-            return (
-              <ProfilePageOption key={i} value={i}>
-                {page.name}
-              </ProfilePageOption>
-            );
-          })}
-        </ProfilePageSelect>
+  useEffect(() => {
+    if (signedUser === null || signedUser === undefined) {
+      return;
+    }
 
-        <ProfilePageMain>
-          <ProfilePageHeading>{pages[currentTab].title}</ProfilePageHeading>
-          <ProfilePageContent>{pages[currentTab].content}</ProfilePageContent>
-        </ProfilePageMain>
-      </ProfilePageWrap>
-    </ProfilePageContainer>
+    setUserName(signedUser.displayName);
+    setUserEmail(signedUser.email);
+    setIsEmailVerified(signedUser.emailVerified);
+  }, [signedUser]);
+
+  return (
+    <>
+      {isUserLoggedIn ? (
+        <ProfilePageContainer>
+          <ProfilePageWrap>
+            <ProfilePageAside>
+              <ProfilePageTabGroup>
+                {pages?.map((tab, i) => {
+                  return (
+                    <ProfilePageTab
+                      key={i}
+                      onClick={() => setCurrentTab(i)}
+                      active={currentTab === i}
+                    >
+                      <IconWrap pad="4px 8px 4px 4px">{tab.icon}</IconWrap>
+                      {tab.name}
+                    </ProfilePageTab>
+                  );
+                })}
+                {/* TODO an admin check before showing this btn */}
+                <Link
+                  to="/admin/add-products"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <ProfilePageTab>
+                    <IconWrap>
+                      <FiShoppingBag />
+                    </IconWrap>
+                    Manage Store
+                  </ProfilePageTab>
+                </Link>
+              </ProfilePageTabGroup>
+              <ProfilePageTab onClick={handleLogout}>
+                <IconWrap>
+                  <FiPower />
+                </IconWrap>
+                Log out
+              </ProfilePageTab>
+            </ProfilePageAside>
+            {/* // * for mobile */}
+            <ProfilePageSelect onChange={handleSelectValue}>
+              {pages?.map((page, i) => {
+                return (
+                  <ProfilePageOption key={i} value={i}>
+                    {page.name}
+                  </ProfilePageOption>
+                );
+              })}
+            </ProfilePageSelect>
+
+            <ProfilePageMain>
+              <ProfilePageHeading>{pages[currentTab].title}</ProfilePageHeading>
+              <ProfilePageContent>
+                {pages[currentTab].content}
+              </ProfilePageContent>
+            </ProfilePageMain>
+          </ProfilePageWrap>
+        </ProfilePageContainer>
+      ) : (
+        <div
+          style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            textAlign: 'center'
+          }}
+        >
+          {/* // TODO: update Looading component to match above styles */}
+          <Loading />
+        </div>
+      )}
+    </>
   );
 };
 

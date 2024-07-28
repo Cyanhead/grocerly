@@ -9,7 +9,7 @@ import {
   TileImg,
   TileText,
   ProductName,
-  ProductCount,
+  ProductCount
 } from './categories.style';
 import { generateLightColorHsla as randomColorGenerator } from '../../helpers/generateColor';
 
@@ -24,16 +24,17 @@ const Categories = () => {
     const sliderIndex = useContext(SliderContext);
     return (
       <Slide sliderIndex={sliderIndex}>
-        {props.product.map((item, i) => {
-          const randomNum = generateRandom(1, 30);
+        {props.productBatch?.map(item => {
+          const randomNum = generateRandom(2, 30);
+          // console.log('productBatch', props.productBatch);
           return (
-            <TileLink to={`/products/${item.id}`} key={i + item.name}>
+            <TileLink to={`/products/${item.id}`} key={item.id}>
               <TileWrap bg={randomColorGenerator}>
                 <TileImg src={item.images[0]} alt="" />
                 <TileText>
                   <ProductName> {item.name} </ProductName>
                   <ProductCount>
-                    {randomNum} item{randomNum === 1 ? '' : 's'}
+                    {randomNum} item{randomNum}
                   </ProductCount>
                 </TileText>
               </TileWrap>
@@ -60,11 +61,13 @@ const Categories = () => {
       batchCount={batchCount}
     >
       <SlideWrap>
-        {productBatches.length === 1 && <Loading minH="100%" />}
-        {productBatches.length !== 1 &&
-          productBatches.map((batch, i) => {
-            return <CategoryTileGenerator product={batch} key={i} />;
-          })}
+        {productBatches.length ? (
+          productBatches?.map((batch, i) => {
+            return <CategoryTileGenerator productBatch={batch} key={i} />;
+          })
+        ) : (
+          <Loading minH="100%" />
+        )}
       </SlideWrap>
     </Preview>
   );

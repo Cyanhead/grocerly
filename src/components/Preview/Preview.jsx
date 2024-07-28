@@ -9,7 +9,7 @@ import {
   CategoryOption,
   Category,
   PreviewBottom,
-  Arrow,
+  Arrow
 } from './preview.style';
 
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
@@ -34,7 +34,7 @@ const Preview = props => {
       setFilteredProducts(products);
       setFilterCategory('all');
     } else {
-      setFilterCategory(e.target.innerHTML);
+      setFilterCategory(e.target.innerHTML.toLowerCase());
     }
   };
 
@@ -71,14 +71,14 @@ const Preview = props => {
         <PreviewTop>
           <PreviewHeading>{props.heading}</PreviewHeading>
           <CategoryList>
-            {categories.map((catgy, i) => {
+            {categories?.map((catgry, i) => {
               return (
                 <Category
-                  key={i + catgy}
+                  key={i + catgry}
                   onClick={handleCategory}
-                  active={filterCategory.toLowerCase() === catgy.toLowerCase()}
+                  active={filterCategory.toLowerCase() === catgry.toLowerCase()}
                 >
-                  {catgy}
+                  {catgry}
                 </Category>
               );
             })}
@@ -90,10 +90,10 @@ const Preview = props => {
             </Link>
           </CategoryList>
           <CategorySelect onChange={handleSelectValue}>
-            {categories.map((catgy, i) => {
+            {categories?.map((catgry, i) => {
               return (
-                <CategoryOption key={i + catgy} value={catgy}>
-                  {catgy}
+                <CategoryOption key={i + catgry} value={catgry}>
+                  {catgry}
                 </CategoryOption>
               );
             })}

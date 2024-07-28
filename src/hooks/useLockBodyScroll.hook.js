@@ -1,4 +1,4 @@
-const { useLayoutEffect } = require('react');
+import { useLayoutEffect } from 'react';
 
 export const useLockBodyScroll = bool => {
   useLayoutEffect(() => {

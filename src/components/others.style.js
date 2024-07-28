@@ -83,10 +83,12 @@ export const ColoredBtn = styled.button`
   }
 `;
 
+// TODO: rename to ColorSpan
 export const GreenSpan = styled.span`
-  color: ${primary};
+  color: ${props => props.fg || primary};
 
   font-weight: ${props => props.fontWght || ''};
+  text-transform: ${props => props.textTrans || ''};
 `;
 
 export const Disabler = styled.div`

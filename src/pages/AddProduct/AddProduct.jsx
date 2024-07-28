@@ -1,16 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   addDoc,
   arrayUnion,
   doc,
   serverTimestamp,
-  updateDoc,
+  updateDoc
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { colRef, db, storage } from '../../context/Firebase';
+import { productsColRef, db, storage } from '../../context/Firebase';
 
 import { generateRandom } from '../../helpers/generateRandom';
+import { useUserListContext } from '../../context/UsersListContext';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
 
 const AddProduct = () => {
   const imageTypes = ['image/png', 'image/jpg', 'image/webp'];
@@ -110,11 +113,144 @@ const AddProduct = () => {
   // };
 
   const AddProductsByArray = () => {
+    const generatePrice = () => {
+      return generateRandom(5, 64);
+    };
+
+    const generateDiscount = () => {
+      return generateRandom(65, 100);
+    };
+
+    const itemsToBeUploaded = [
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'green pepper',
+        otherNames: [],
+        category: 'Vegetable',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'green pepper is popularly used in salads',
+        details: `green pepper is popularly used in salads, stir-fries, and other dishes. It is also a great source of vitamin C and vitamin A, as well as other nutrients like vitamin E, vitamin B6, folate, and vitamin K. Additionally, it is low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'lemongrass',
+        otherNames: [],
+        category: 'Vegetable',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'lemongrass is used in teas, soups, and curries',
+        details: `lemongrass is used in teas, soups, and curries. It is also suitable for poultry, fish, beef, and seafood. It is also a great source of vitamin A, vitamin C, folate, magnesium, zinc, copper, iron, potassium, phosphorus, calcium, and manganese. Additionally, it is low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'lime',
+        otherNames: [],
+        category: 'Fruit',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'lime is a great source of vitamin C',
+        details: `limes are a popular ingredient in drinks, desserts, and marinades. They are also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, they are low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'lemon',
+        otherNames: [],
+        category: 'Fruit',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'a lemon has a sour taste, yet a pleasant aroma',
+        details: `Lemons are a popular ingredient in drinks, desserts, and marinades. They are also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, they are low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'onion',
+        otherNames: [],
+        category: 'Vegetable',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'onions are a popular ingredient in many dishes',
+        details: `An onion has many layers and a strong taste. It is a popular ingredient in many dishes. It is also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, it is low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'orange',
+        otherNames: [],
+        category: 'Fruit',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'Oranges are a great source of vitamin C',
+        details: `Oranges are a popular ingredient in drinks, desserts, and marinades. They are also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, they are low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'parsley',
+        otherNames: [],
+        category: 'Vegetable',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'parsley is a popular ingredient in many dishes',
+        details: `The parsley plant has a mild taste and a pleasant aroma. It is a popular ingredient for soups, salads, and other dishes.`,
+        timestamp: serverTimestamp()
+      },
+      // {
+      //   localId: Math.random().toString(36).substring(7),
+      //   name: 'xxx',
+      //   otherNames: [],
+      //   category: 'xxx',
+      //   price: Number(generatePrice()),
+      //   oldPrice: Number(generateDiscount()),
+      //   brief: 'xxx',
+      //   details: `xxx`,
+      //   timestamp: serverTimestamp()
+      // },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'pear',
+        otherNames: [],
+        category: 'Fruit',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'pears are soft and have a mild taste',
+        details: `Pears are used in desserts, salads, and other dishes. They are also a great source of vitamin C, vitamin K, potassium, copper, and folate. Additionally, they are low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      },
+      {
+        localId: Math.random().toString(36).substring(7),
+        name: 'peas',
+        otherNames: [],
+        category: 'Vegetable',
+        price: Number(generatePrice()),
+        oldPrice: Number(generateDiscount()),
+        brief: 'peas are a popular ingredient in many dishes',
+        details: `Peas are used in soups, salads, and other dishes. They are also a great source of vitamin C, vitamin K, potassium, copper, and folate. Additionally, they are low in calories and packed with antioxidants.`,
+        timestamp: serverTimestamp()
+      }
+      // ,{        localId: Math.random().toString(36).substring(7),
+      //   name: 'xxx',
+      //   otherNames: [],
+      //   category: 'xxx',
+      //   price: Number(generatePrice()),
+      //   oldPrice: Number(generateDiscount()),
+      //   brief: 'xxx',
+      //   details: `xxx`,
+      //   timestamp: serverTimestamp()
+      // }
+    ];
+
     const [successMsg, setSuccessMsg] = useState('Products not yet uploaded');
+    const [productList, setProductList] = useState(itemsToBeUploaded);
 
     const SingleProduct = ({ product }) => {
       const [multipleImages, setMultipleImages] = useState([]);
-      const [imageTypeError, setImageTypeError] = useState('null');
+      const [imageTypeError, setImageTypeError] = useState(null);
+      // const [productData, setProductData] = useState();
 
       const handleMultipleImages = e => {
         let selectedFiles = e.target.files;
@@ -128,10 +264,6 @@ const AddProduct = () => {
 
             setMultipleImages(() => [...validImages]);
             setImageTypeError('');
-
-            // set the value to the products object
-            product.imageFiles = [...validImages];
-            console.log('img props', product.imageFiles);
           } else {
             setMultipleImages(null);
             setImageTypeError('select a valid image type, png or jpg');
@@ -139,37 +271,84 @@ const AddProduct = () => {
         });
       };
 
+      const addImagesToProduct = item => {
+        // clone the current productList
+        // const copyOfProductList = [...productList];
+        const copyOfProductList = structuredClone(productList);
+
+        // find the index of the item to be updated
+        const itemIndex = copyOfProductList.findIndex(
+          product => product.localId === item.localId
+        );
+
+        // add the imageFiles property to the item
+        item.imageFiles = multipleImages;
+
+        // update the item in the copyOfProductList
+        copyOfProductList[itemIndex] = item;
+
+        // set the productList to the updated copyOfProductList
+        setProductList(copyOfProductList);
+
+        return;
+      };
+
       return (
-        <div style={{ border: '1px solid black' }}>
-          {imageTypeError && <h3> {imageTypeError} </h3>}
+        <li style={{ border: '1px solid black', padding: '32px 8px' }}>
+          {imageTypeError && <h3> Image error: {imageTypeError} </h3>}
+          {multipleImages?.length
+            ? multipleImages?.map((photo, i) => {
+                return <p key={i}>You have selected ${photo.name}</p>;
+              })
+            : !product.imageFiles?.length && (
+                <input
+                  type="file"
+                  onInputCapture={handleMultipleImages}
+                  multiple
+                />
+              )}
 
-          {multipleImages.length !== 0 ? (
-            multipleImages.map((photo, i) => {
-              return <p key={i}>image: ` you have selected ${photo.name}`</p>;
-            })
+          {product.imageFiles?.length ? (
+            <>
+              <p>
+                You have added {product.imageFiles?.length} image
+                {product.imageFiles?.length === 1 ? '' : 's'}
+              </p>
+              <ol>
+                {product.imageFiles?.map((photo, i) => {
+                  return <li key={i}>${photo.name}</li>;
+                })}
+              </ol>
+            </>
           ) : (
-            <input type="file" onInputCapture={handleMultipleImages} multiple />
+            <button type="button" onClick={() => addImagesToProduct(product)}>
+              add images
+            </button>
           )}
-
+          <br />
           <p> name: {product.name} </p>
           <p> category: {product.category} </p>
           <p> price: {product.price} </p>
           <p> old price: {product.oldPrice} </p>
-          <p style={{ maxWidth: '80%' }}> details: {product.details} </p>
-        </div>
+          <p> brief: {product.brief} </p>
+        </li>
       );
     };
 
     const handleProductUpload = productsArray => {
-      if (areAllPhotosSelected(productsArray)) {
+      // console.log({ productsArray });
+
+      if (checkIfAllProductsHaveImages(productsArray)) {
+        // console.log('all products have images');
+
         productsArray.forEach(product => {
           let allImages = product.imageFiles;
 
           // create collection reference
           const createNewDocAndReturnId = async obj => {
-            // removes the imageFile property from the product data to be uploaded
-            const { imageFiles, ...rest } = obj;
-            const docRef = await addDoc(colRef, rest);
+            // removes the imageFile and localId properties from the product data to be uploaded
+            const { imageFiles, localId, ...rest } = obj;
+            const docRef = await addDoc(productsColRef, rest);
             let docId = `${docRef.id}`;
             console.log('1. Document written with ID: ', docId);
             return docId;
@@ -203,7 +382,7 @@ const AddProduct = () => {
                         console.log('3. resUrl & url', url);
                         const productsDocRef = doc(db, 'products', returnedId);
                         updateDoc(productsDocRef, {
-                          images: arrayUnion(url),
+                          images: arrayUnion(url)
                         });
                         console.log('4. Created image field');
                         setSuccessMsg('Products successfully uploaded');
@@ -219,51 +398,29 @@ const AddProduct = () => {
               console.log(error.message);
             });
         });
-      } else {
-        console.log('some products have no photos');
+        return;
       }
+
+      return 'something went wrong';
     };
 
-    const areAllPhotosSelected = array => {
+    const checkIfAllProductsHaveImages = array => {
       let counter = 0;
-      let totalLength = 0;
+
       array.forEach(arrItem => {
-        for (let i = 0; i < arrItem.imageFiles.length; i++) {
-          if (
-            arrItem.imageFiles[i] !== null &&
-            arrItem.imageFile[i] !== undefined
-          ) {
-            counter += 1;
-            totalLength += arrItem.imageFiles.length;
-          } else {
-            console.log(`${arrItem.name} has no image`);
-            return false;
-          }
+        if (arrItem.imageFiles?.length) {
+          counter += 1;
         }
       });
-      if (counter === totalLength) {
-        console.log('all items have images');
-        return true;
-      } else {
-        return false;
-      }
-    };
 
-    const productsList = [
-      {
-        name: 'xxx',
-        otherNames: [],
-        category: 'xxx',
-        price: Number(generateRandom(4, 8)),
-        oldPrice: Number(9),
-        brief: 'xxx.',
-        details: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate,
-        assumenda. Incidunt, hic illo. Alias adipisci exercitationem quod ab
-        eum provident veniam tenetur eos magni iure libero, quo debitis at
-        sequi!`,
-        timestamp: serverTimestamp(),
-      },
-    ];
+      if (counter === array.length) {
+        console.log('all products have photos');
+        return true;
+      }
+
+      console.log('some products have no photos');
+      return false;
+    };
 
     return (
       <div style={{ width: '100%' }}>
@@ -271,17 +428,37 @@ const AddProduct = () => {
           <h1>Add Products By Array</h1>
           <h2> {successMsg} </h2>
           <br />
-          <button onClick={() => handleProductUpload(productsList)}>
+          <button onClick={() => handleProductUpload(productList)}>
             upload products
           </button>
           <br /> <br />
-          {productsList?.map((product, index) => {
-            return <SingleProduct key={index} product={product} />;
-          })}
+          <ol>
+            {productList?.map(product => {
+              return <SingleProduct product={product} key={product.localId} />;
+            })}
+          </ol>
         </div>
       </div>
     );
   };
+
+  // const { isUserAdmin } = useAuthContext();
+  // console.log('isUserAdmin', isUserAdmin);
+
+  // const gotoRoute = useNavigate();
+
+  // useEffect(() => {
+  //   if (!isUserAdmin) {
+  //     gotoRoute(-1);
+  //     return;
+  //   }
+  //   console.log('isUserAdmin', isUserAdmin);
+
+  //   // first
+  //   // return () => {
+  //   //   second
+  //   // }
+  // }, [gotoRoute, isUserAdmin]);
 
   return (
     <>

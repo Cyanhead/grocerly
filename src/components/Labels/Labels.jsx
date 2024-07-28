@@ -3,7 +3,7 @@ import {
   LabelImg,
   LabelContainer,
   LabelImgWrap,
-  LabelWrap,
+  LabelWrap
 } from './labels.style';
 
 import label1 from '../../assets/images/label1.svg';
@@ -16,7 +16,7 @@ const Labels = () => {
   return (
     <LabelContainer>
       <LabelWrap>
-        {images.map((img, i) => {
+        {images?.map((img, i) => {
           return (
             <LabelImgWrap key={i}>
               <LabelImg src={img} alt="" />

@@ -14,7 +14,7 @@ import {
   Copyright,
   PaymentImg,
   SocialWrap,
-  SocialLink,
+  SocialLink
 } from './footer.style';
 
 import Logo from '../Logo';
@@ -24,7 +24,7 @@ import {
   RiFacebookFill,
   RiLinkedinFill,
   RiInstagramFill,
-  RiTwitterFill,
+  RiTwitterFill
 } from 'react-icons/ri';
 import payments from '../../assets/images/payments.webp';
 
@@ -34,32 +34,32 @@ const Footer = () => {
       {
         icon: <FiMapPin />,
         title: 'address',
-        content: '1762 School House Road',
+        content: '1762 School House Road'
       },
       { icon: <FiPhone />, title: 'call us', content: '1233-777' },
       {
         icon: <FiMail />,
         title: 'email',
         content: 'grocerly@contact.com',
-        anotherCase: true,
+        anotherCase: true
       },
       {
         icon: <FiClock />,
         title: 'work hours',
-        content: '8:00 - 20:00, Sunday -  Thursday',
-      },
+        content: '8:00 - 20:00, Sunday -  Thursday'
+      }
     ];
 
     return (
       <ColBody mar="36px 0 0 0">
-        {contactInfo.map((info, i) => {
+        {contactInfo?.map((info, i) => {
           return (
             <ContactRow key={i}>
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'start',
-                  alignItems: 'center',
+                  alignItems: 'center'
                 }}
               >
                 <IconWrap fg={props => props.theme.color.primary}>
@@ -90,8 +90,8 @@ const Footer = () => {
           { name: 'wishlist', url: '' },
           { name: 'cart', url: '' },
           { name: 'track order', url: '' },
-          { name: 'shipping details', url: '' },
-        ],
+          { name: 'shipping details', url: '' }
+        ]
       },
       {
         colHead: 'useful links',
@@ -100,8 +100,8 @@ const Footer = () => {
           { name: 'contact', url: '' },
           { name: 'hot deals', url: '' },
           { name: 'promotions', url: '' },
-          { name: 'new products', url: '' },
-        ],
+          { name: 'new products', url: '' }
+        ]
       },
       {
         colHead: 'help center',
@@ -111,19 +111,19 @@ const Footer = () => {
           { name: 'checkout', url: '' },
           { name: 'shipping', url: '' },
           { name: 'q & a', url: '' },
-          { name: 'privacy policy', url: '' },
-        ],
-      },
+          { name: 'privacy policy', url: '' }
+        ]
+      }
     ];
 
     return (
       <>
-        {colLinksData.map((col, i) => {
+        {colLinksData?.map((col, i) => {
           return (
             <Column key={i}>
               <ColHead> {col.colHead} </ColHead>
               <ColBody>
-                {col.links.map((link, i) => {
+                {col.links?.map((link, i) => {
                   return (
                     <ColLink href={link.url} key={i} mar="0 0 16px 0">
                       <FooterP> {link.name} </FooterP>
@@ -143,12 +143,12 @@ const Footer = () => {
       { icon: <RiFacebookFill />, url: '' },
       { icon: <RiLinkedinFill />, url: '' },
       { icon: <RiInstagramFill />, url: '' },
-      { icon: <RiTwitterFill />, url: '' },
+      { icon: <RiTwitterFill />, url: '' }
     ];
 
     return (
       <SocialWrap>
-        {socials.map((medium, i) => {
+        {socials?.map((medium, i) => {
           return (
             <SocialLink key={i} href={medium.url}>
               <IconWrap

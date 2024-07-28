@@ -7,7 +7,7 @@ import {
   UserName,
   MenuWrap,
   MenuItem,
-  MenuItemP,
+  MenuItemP
 } from './user.style';
 
 import ChevronDown from '../ChevronDown';
@@ -25,22 +25,32 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside.hook';
 
 const User = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const { signedUser, setSignedUser } = useAuthContext();
+
+  const {
+    signedUser,
+    setSignedUser,
+    isUserLoggedIn,
+    setIsUserLoggedIn,
+    isUserAdmin,
+    setIsUserAdmin
+  } = useAuthContext();
 
   const clickOutRef = useRef(null);
   useOnClickOutside(clickOutRef, () => setShowMenu(false));
 
+  // TODO: create a custom hook for this
   const handleLogout = () => {
     const doLogout = toast.promise(signOut(auth), {
       loading: 'Logging out...',
       success: 'logged out successfully',
-      error: 'Error when logging out',
+      error: 'Error when logging out'
     });
 
     doLogout
       .then(() => {
         // console.log('the user signed out');
         setSignedUser(null);
+        setIsUserLoggedIn(false);
       })
       .catch(err => console.log(err.message));
   };

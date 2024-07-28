@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '../../context/Firebase';
 import {
   sendPasswordResetEmail,
-  signInWithEmailAndPassword,
+  signInWithEmailAndPassword
 } from 'firebase/auth';
 import { googleAuthPopup } from '../../helpers/handleGoogleAuth';
 import { CustomForm, CustomFormInputGroup } from '../../components/Form';
@@ -17,7 +17,7 @@ import {
   AnimBg3,
   LoginRight,
   LoginP,
-  LinkSpan,
+  LinkSpan
 } from './login-page.style';
 import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../../components/AuthHeader';
@@ -28,16 +28,18 @@ import { FiChevronLeft } from 'react-icons/fi';
 import { FormWrap } from '../../components/Form/form.style';
 
 const LoginPage = () => {
-  const { setSignedUser } = useAuthContext();
+  // TODO: modify this to use isUserLoggedIn boolean
+  const { signedUser, setSignedUser, isUserLoggedIn } = useAuthContext();
   const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
+
+  const [userPassword, setUserPassword] = useState('12345678'); // TODO: remove hardcoded password
 
   const [authError, setAuthError] = useState('');
 
   const [resetMail, setResetMail] = useState('');
   const [resetPassword, setResetPassword] = useState(false);
 
-  const goToHomepage = useNavigate();
+  const gotoRoute = useNavigate();
 
   const handleLogin = e => {
     e.preventDefault();
@@ -50,7 +52,7 @@ const LoginPage = () => {
       {
         loading: 'Signing in...',
         success: 'Signed in successfully',
-        error: 'Error when signing in user!',
+        error: 'Error when signing in user!'
       }
     );
 
@@ -60,7 +62,8 @@ const LoginPage = () => {
         setUserEmail('');
         setUserPassword('');
 
-        goToHomepage('/');
+        // TODO: not working as expected. Goes back 2 routes instead of 1
+        gotoRoute(-1, { replace: true });
       })
       .catch(error => {
         // console.log('err code', error.code);
@@ -75,7 +78,7 @@ const LoginPage = () => {
     const doGoogleSignin = toast.promise(googleAuthPopup(), {
       loading: 'Signing in...',
       success: 'Signed in successfully',
-      error: 'Error when signing in user!',
+      error: 'Error when signing in user!'
     });
 
     doGoogleSignin
@@ -84,7 +87,7 @@ const LoginPage = () => {
         // The signed-in user info.
         const user = result.user;
         setSignedUser(user);
-        goToHomepage('/');
+        gotoRoute('/');
       })
       .catch(error => {
         // Handle Errors here.
@@ -99,7 +102,7 @@ const LoginPage = () => {
     const doPasswordReset = toast.promise(sendPasswordResetEmail(auth, email), {
       loading: 'One moment...',
       success: 'Password reset mail sent',
-      error: 'Error when sending password reset mail!',
+      error: 'Error when sending password reset mail!'
     });
 
     doPasswordReset
@@ -111,6 +114,24 @@ const LoginPage = () => {
         setAuthError(error.code);
       });
   };
+
+  useEffect(() => {
+    // if (signedUser !== null) {
+    //   gotoRoute(-1);
+
+    //   return;
+    // }
+    if (isUserLoggedIn) {
+      gotoRoute(-1, { replace: true });
+
+      // return;
+    }
+
+    // return () => {
+    //   second
+    // }
+    // }, [gotoRoute, signedUser]);
+  }, [gotoRoute, isUserLoggedIn]);
 
   return (
     <LoginPageContainer>

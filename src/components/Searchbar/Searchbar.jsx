@@ -59,13 +59,15 @@ const Searchbar = props => {
   const { products } = useProductsListContext();
 
   const searchClient = algoliasearch(
-    process.env.REACT_APP_ALGOLIA_APP_ID,
-    process.env.REACT_APP_ALGOLIA_ADMIN_API_KEY
+    import.meta.env.VITE_ALGOLIA_APP_ID,
+    import.meta.env.VITE_ALGOLIA_ADMIN_API_KEY
   );
 
   useEffect(() => {
     let searchableProducts = [];
-    products.map(item => {
+
+    // remove unwanted properties from products
+    products?.map(item => {
       const { oldPrice, timestamp, details, id, ...rest } = item;
       return searchableProducts.push({ ...rest, objectID: id, id });
     });
@@ -73,8 +75,10 @@ const Searchbar = props => {
     const sendDataToAlgolia = () => {
       const index = searchClient.initIndex('dev_grocerly');
 
-      index.saveObjects(searchableProducts);
+      // update the 'dev_grocerly' index with the current list of products
+      index.replaceAllObjects(searchableProducts);
     };
+
     sendDataToAlgolia();
   }, [searchClient, products]);
 
