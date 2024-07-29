@@ -1,5 +1,3 @@
-import { createGlobalStyle } from 'styled-components';
-
 import '@fontsource/quicksand/300.css';
 import '@fontsource/quicksand/400.css';
 import '@fontsource/quicksand/500.css';
@@ -9,11 +7,11 @@ import '@fontsource/quicksand/700.css';
 import '@fontsource/jetbrains-mono';
 import '@fontsource/days-one';
 
-import 'instantsearch.css/themes/satellite.css';
+import { createGlobalStyle } from 'styled-components';
+import { getColor } from './themeUtils';
 
 export const GlobalStyle = createGlobalStyle`
     /* CSS RESET START */
-
     /*
     1. Use a more-intuitive box-sizing model.
     */
@@ -74,13 +72,11 @@ export const GlobalStyle = createGlobalStyle`
     #root, #__next {
         isolation: isolate;
     }
-
     /* CSS RESET END */
 
     body {
         font-family: "Quicksand", sans-serif;
-    }
-    label {
-        font-family: "JetBrains Mono", monospace;
+        background-color: ${getColor('white')};
+        color: ${getColor('black')};
     }
 `;

@@ -18,7 +18,7 @@ export const theme = {
     faintLine: '1px solid rgba(0, 0, 0, 0.1)',
   },
 
-  fontWght: {
+  fontWeight: {
     light: 300,
     regular: 400,
     medium: 500,
@@ -27,10 +27,12 @@ export const theme = {
   },
 
   breakpoint: {
-    large: '1100px',
-    mediumHigh: '900px',
-    medium: '768px',
-    mediumLow: '600px',
-    small: '480px',
+    xl: '1200px',
+    lg: '992px',
+    md: '768px',
+    sm: '576px',
+    xs: '480px',
   },
-};
+} as const;
+
+export type ThemeType = typeof theme;
