@@ -1,8 +1,16 @@
 export const theme = {
   color: {
     primary: '#3BB77E',
-    primaryLite: '#DEF9EC',
-    primaryHover: '#3bd073',
+    primary50: '#e1fcf0',
+    primary100: '#bfedd8',
+    primary200: '#9ce1c1',
+    primary300: '#76d3a9',
+    primary400: '#51c791',
+    primary500: '#38ae77',
+    primary600: '#2a875d',
+    primary700: '#1a6041',
+    primary800: '#0b3b26',
+    primary900: '#001509',
 
     accent: '#FFB531',
 
