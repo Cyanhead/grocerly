@@ -5,7 +5,7 @@ import {
   arrayUnion,
   doc,
   serverTimestamp,
-  updateDoc
+  updateDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { productsColRef, db, storage } from '../../context/Firebase';
@@ -13,7 +13,7 @@ import { productsColRef, db, storage } from '../../context/Firebase';
 import { generateRandom } from '../../helpers/generateRandom';
 import { useUserListContext } from '../../context/UsersListContext';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/auth/AuthContext';
 
 const AddProduct = () => {
   const imageTypes = ['image/png', 'image/jpg', 'image/webp'];
@@ -131,7 +131,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'green pepper is popularly used in salads',
         details: `green pepper is popularly used in salads, stir-fries, and other dishes. It is also a great source of vitamin C and vitamin A, as well as other nutrients like vitamin E, vitamin B6, folate, and vitamin K. Additionally, it is low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       {
         localId: Math.random().toString(36).substring(7),
@@ -142,7 +142,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'lemongrass is used in teas, soups, and curries',
         details: `lemongrass is used in teas, soups, and curries. It is also suitable for poultry, fish, beef, and seafood. It is also a great source of vitamin A, vitamin C, folate, magnesium, zinc, copper, iron, potassium, phosphorus, calcium, and manganese. Additionally, it is low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       {
         localId: Math.random().toString(36).substring(7),
@@ -153,7 +153,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'lime is a great source of vitamin C',
         details: `limes are a popular ingredient in drinks, desserts, and marinades. They are also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, they are low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       {
         localId: Math.random().toString(36).substring(7),
@@ -164,7 +164,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'a lemon has a sour taste, yet a pleasant aroma',
         details: `Lemons are a popular ingredient in drinks, desserts, and marinades. They are also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, they are low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       {
         localId: Math.random().toString(36).substring(7),
@@ -175,7 +175,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'onions are a popular ingredient in many dishes',
         details: `An onion has many layers and a strong taste. It is a popular ingredient in many dishes. It is also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, it is low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       {
         localId: Math.random().toString(36).substring(7),
@@ -186,7 +186,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'Oranges are a great source of vitamin C',
         details: `Oranges are a popular ingredient in drinks, desserts, and marinades. They are also a great source of vitamin C, vitamin B6, potassium, folate, magnesium, and thiamine. Additionally, they are low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       {
         localId: Math.random().toString(36).substring(7),
@@ -197,7 +197,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'parsley is a popular ingredient in many dishes',
         details: `The parsley plant has a mild taste and a pleasant aroma. It is a popular ingredient for soups, salads, and other dishes.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       // {
       //   localId: Math.random().toString(36).substring(7),
@@ -219,7 +219,7 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'pears are soft and have a mild taste',
         details: `Pears are used in desserts, salads, and other dishes. They are also a great source of vitamin C, vitamin K, potassium, copper, and folate. Additionally, they are low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
       },
       {
         localId: Math.random().toString(36).substring(7),
@@ -230,8 +230,8 @@ const AddProduct = () => {
         oldPrice: Number(generateDiscount()),
         brief: 'peas are a popular ingredient in many dishes',
         details: `Peas are used in soups, salads, and other dishes. They are also a great source of vitamin C, vitamin K, potassium, copper, and folate. Additionally, they are low in calories and packed with antioxidants.`,
-        timestamp: serverTimestamp()
-      }
+        timestamp: serverTimestamp(),
+      },
       // ,{        localId: Math.random().toString(36).substring(7),
       //   name: 'xxx',
       //   otherNames: [],
@@ -382,7 +382,7 @@ const AddProduct = () => {
                         console.log('3. resUrl & url', url);
                         const productsDocRef = doc(db, 'products', returnedId);
                         updateDoc(productsDocRef, {
-                          images: arrayUnion(url)
+                          images: arrayUnion(url),
                         });
                         console.log('4. Created image field');
                         setSuccessMsg('Products successfully uploaded');

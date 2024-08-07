@@ -14,11 +14,11 @@ import {
   AnimBg2,
   AnimBg3,
   SignupRight,
-  LinkSpan
+  LinkSpan,
 } from './signup-page.style';
 import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../../components/AuthHeader';
-import { useAuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/auth/AuthContext';
 
 import { CustomForm, CustomFormInputGroup } from '../../components/Form';
 
@@ -50,7 +50,7 @@ const SignupPage = () => {
       {
         loading: 'Creating account...',
         success: 'Account created successfully',
-        error: 'Error when creating user account'
+        error: 'Error when creating user account',
       }
     );
 
@@ -63,7 +63,7 @@ const SignupPage = () => {
         goToSiginPage('/login');
 
         updateProfile(auth.currentUser, {
-          displayName: userName
+          displayName: userName,
         })
           .then(() => {
             // Profile updated!
@@ -82,7 +82,7 @@ const SignupPage = () => {
     const doGoogleSignin = toast.promise(googleAuthPopup(), {
       loading: 'Signing up...',
       success: 'Signed up successfully',
-      error: 'Error when signing up user!'
+      error: 'Error when signing up user!',
     });
 
     doGoogleSignin

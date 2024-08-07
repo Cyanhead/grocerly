@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { auth } from '../../context/Firebase';
 import {
   sendPasswordResetEmail,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { googleAuthPopup } from '../../helpers/handleGoogleAuth';
 import { CustomForm, CustomFormInputGroup } from '../../components/Form';
@@ -17,12 +17,12 @@ import {
   AnimBg3,
   LoginRight,
   LoginP,
-  LinkSpan
+  LinkSpan,
 } from './login-page.style';
 import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../../components/AuthHeader';
 import { toast } from 'react-hot-toast';
-import { useAuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/auth/AuthContext';
 import { IconWrap } from '../../components/others.style';
 import { FiChevronLeft } from 'react-icons/fi';
 import { FormWrap } from '../../components/Form/form.style';
@@ -52,7 +52,7 @@ const LoginPage = () => {
       {
         loading: 'Signing in...',
         success: 'Signed in successfully',
-        error: 'Error when signing in user!'
+        error: 'Error when signing in user!',
       }
     );
 
@@ -78,7 +78,7 @@ const LoginPage = () => {
     const doGoogleSignin = toast.promise(googleAuthPopup(), {
       loading: 'Signing in...',
       success: 'Signed in successfully',
-      error: 'Error when signing in user!'
+      error: 'Error when signing in user!',
     });
 
     doGoogleSignin
@@ -102,7 +102,7 @@ const LoginPage = () => {
     const doPasswordReset = toast.promise(sendPasswordResetEmail(auth, email), {
       loading: 'One moment...',
       success: 'Password reset mail sent',
-      error: 'Error when sending password reset mail!'
+      error: 'Error when sending password reset mail!',
     });
 
     doPasswordReset

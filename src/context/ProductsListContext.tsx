@@ -28,7 +28,7 @@ export const ProductsListContext = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        products
+        products,
       }}
     >
       {children}

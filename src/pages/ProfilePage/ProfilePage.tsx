@@ -17,7 +17,7 @@ import {
   CellTop,
   CellBottom,
   CellButton,
-  BackBtnWrap
+  BackBtnWrap,
 } from './profile-page.style';
 import { signOut, updateProfile } from 'firebase/auth';
 import {
@@ -28,12 +28,12 @@ import {
   FiEdit,
   FiChevronLeft,
   FiClipboard,
-  FiShoppingBag
+  FiShoppingBag,
 } from 'react-icons/fi';
 import { GreenSpan, IconWrap } from '../../components/others.style';
 import { auth } from '../../context/Firebase';
 import { toast } from 'react-hot-toast';
-import { useAuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/auth/AuthContext';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { CustomForm, CustomFormInputGroup } from '../../components/Form';
@@ -57,7 +57,7 @@ const ProfilePage = () => {
     isUserLoggedIn,
     setIsUserLoggedIn,
     isUserAdmin,
-    setIsUserAdmin
+    setIsUserAdmin,
   } = useAuthContext();
 
   // TODO: create a custom hook for this
@@ -90,7 +90,7 @@ const ProfilePage = () => {
 
     const handleSubmit = () => {
       updateProfile(auth.currentUser, {
-        displayName: userName
+        displayName: userName,
       })
         .then(() => {
           // Profile updated!
@@ -195,20 +195,20 @@ const ProfilePage = () => {
       name: 'Account',
       icon: <FiUser />,
       title: `Hi, ${userName}`,
-      content: <Account />
+      content: <Account />,
     },
     {
       name: 'Orders',
       icon: <FiPackage />,
       title: 'Orders',
-      content: <Orders />
+      content: <Orders />,
     },
     {
       name: 'Inbox',
       icon: <FiMail />,
       title: 'Inbox messages',
-      content: <Inbox />
-    }
+      content: <Inbox />,
+    },
     // ,{
     //   name: 'Manage Store',
     //   icon: <FiClipboard />,
@@ -221,7 +221,7 @@ const ProfilePage = () => {
     const doLogout = toast.promise(signOut(auth), {
       loading: 'Logging out...',
       success: 'logged out successfully',
-      error: 'Error when logging out'
+      error: 'Error when logging out',
     });
 
     doLogout
@@ -313,7 +313,7 @@ const ProfilePage = () => {
           style={{
             maxWidth: '1200px',
             margin: '0 auto',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           {/* // TODO: update Looading component to match above styles */}
