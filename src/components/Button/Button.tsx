@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Button = ({ as = 'button', children, ...delegated }: ButtonPropsType) => {
   return (
-    <StyledButton as={as} {...delegated}>
+    <StyledButton as={as} type="button" {...delegated}>
       {children}
     </StyledButton>
   );

@@ -68,7 +68,7 @@ const BaseStyles = css<ButtonPropsType>`
           color: ${$theme || getColor('black')};
 
           &:hover {
-            background-color: ${getColor('greyHover')};
+            color: ${$theme || getColor('primary600')};
           }
         `;
       default:

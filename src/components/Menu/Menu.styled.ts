@@ -3,6 +3,7 @@ import { StyledButton } from '../Button/Button.styled';
 import { getBreakpoint } from '../../theme';
 
 export const Button = styled(StyledButton).attrs<{ $gap?: number }>(props => ({
+  type: 'button',
   $gap: props.$gap || 4,
 }))`
   padding: 10px 12px;
