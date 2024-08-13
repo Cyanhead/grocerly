@@ -1,44 +1,60 @@
 import { describe, expect, it } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Menu from './Menu';
+import { TestTube } from 'lucide-react';
+import { renderWithProviders } from '../../tests/testUtils';
+import userEvent from '@testing-library/user-event';
+import { MenuPropsType } from './Menu.type';
+
+const optionList: MenuPropsType['options'] = [
+  {
+    type: 'button',
+    label: 'test option 1',
+    icon: TestTube,
+    onClick: vi.fn(),
+  },
+];
 
 describe('Menu', () => {
-  const TestElement = () => (
-    <Menu
-      options={[
-        {
-          // type: 'text',
-          label: 'test option 1',
-          icon: null,
-          onClick: () => {},
-        },
-      ]}
-    >
-      Click me
-    </Menu>
-  );
+  function renderComponent() {
+    renderWithProviders(<Menu options={optionList}>Test Menu</Menu>, {
+      providers: ['ThemeProvider'],
+    });
 
-  it('should render', () => {
-    // Arrange
-    render(<TestElement />);
+    return {
+      menuButton: screen.getByRole('button', { name: /test menu/i }),
+    };
+  }
 
-    // Act
-    const menuElem = screen.getByRole('button', { name: /click me/i });
+  it('should render a button', async () => {
+    const { menuButton } = await renderComponent();
 
-    // Assert
-    expect(menuElem).toBeInTheDocument();
+    expect(menuButton).toBeInTheDocument();
   });
 
-  it('should render options when clicked', () => {
-    // Arrange
-    render(<TestElement />);
+  it('should show a list of menu options when clicked', async () => {
+    const { menuButton } = await renderComponent();
 
-    // Act
-    const menuElem = screen.getByRole('button', { name: /click me/i });
-    fireEvent.click(menuElem);
-    const optionElem = screen.getByRole('button', { name: /test option 1/i });
+    const user = userEvent.setup();
+    await user.click(menuButton);
 
-    // Assert
-    expect(optionElem).toBeInTheDocument();
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getByRole('listitem')).toBeInTheDocument();
+  });
+
+  it('should call function passed to menu option upon option click ', async () => {
+    const { menuButton } = renderComponent();
+
+    const user = userEvent.setup();
+    await user.click(menuButton);
+
+    const menuOption = await screen.findByRole('button', {
+      name: /test option/i,
+    });
+    expect(menuOption).toBeInTheDocument();
+
+    await user.click(menuOption);
+
+    expect(optionList[0].onClick).toHaveBeenCalled();
   });
 });

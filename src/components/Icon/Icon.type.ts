@@ -5,7 +5,7 @@ type LucideIconType = React.ForwardRefExoticComponent<
 >;
 
 export type IconPropsType = {
-  withoutText?: boolean;
+  isIconStandalone?: boolean;
   icon: LucideIconType;
   visuallyHidden?: string;
 };

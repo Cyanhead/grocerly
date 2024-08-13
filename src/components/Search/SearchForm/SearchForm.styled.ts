@@ -4,7 +4,7 @@ import Input from '../../Input';
 
 export const Wrapper = styled.form`
   position: relative;
-  display: none;
+  /* display: none; */
   max-width: 350px;
   width: 100%;
   height: 44px;

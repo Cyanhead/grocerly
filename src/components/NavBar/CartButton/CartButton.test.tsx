@@ -1,16 +1,22 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { describe, expect, it } from 'vitest';
+import { screen } from '@testing-library/react';
 import CartButton from './CartButton';
+import { renderWithProviders } from '../../../tests/testUtils';
 
 describe('<CartButton />', () => {
-  test('it should mount', () => {
-    // Arrange: render the component
-    render(<CartButton />);
+  function renderComponent() {
+    renderWithProviders(<CartButton />, {
+      providers: ['ThemeProvider'],
+    });
 
-    // Act: get the component
-    const cartButton = screen.getByTestId('CartButton');
+    return {
+      cartButton: screen.getByRole('button', { name: /cart/i }),
+    };
+  }
 
-    // Assert: run checks
+  it('should render the cart button', () => {
+    const { cartButton } = renderComponent();
+
     expect(cartButton).toBeInTheDocument();
   });
 });

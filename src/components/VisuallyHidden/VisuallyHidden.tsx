@@ -32,6 +32,10 @@ function VisuallyHidden({ children, ...delegated }: VisuallyHiddenPropsType) {
     return children;
   }
 
-  return <Span {...delegated}>{children}</Span>;
+  return (
+    <Span data-testid="VisuallyHidden" {...delegated}>
+      {children}
+    </Span>
+  );
 }
 export default VisuallyHidden;

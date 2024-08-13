@@ -2,8 +2,12 @@ import styled, { css } from 'styled-components';
 import { getBreakpoint, getColor } from '../../../theme';
 import { Link } from 'react-router-dom';
 
-export const Container = styled.div.attrs<{ $noResults?: boolean }>(props => ({
+export const Container = styled.div.attrs<{
+  $noResults?: boolean;
+  as?: string;
+}>(props => ({
   $noResults: props.$noResults || false,
+  as: props.as,
 }))`
   border: 1px solid ${getColor('primary')};
   border-radius: 2px;
@@ -34,6 +38,10 @@ export const Container = styled.div.attrs<{ $noResults?: boolean }>(props => ({
   @media screen and (min-width: ${getBreakpoint('md')}) {
     margin: 0;
   }
+`;
+
+export const ListItem = styled.li`
+list-style: none;
 `;
 
 export const SearchRow = styled(Link)`

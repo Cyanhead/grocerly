@@ -17,6 +17,8 @@ import Icon from '../Icon';
 
 function User() {
   const { state } = useAuthContext();
+  // console.log({ state });
+
   const { isLoggedIn, user } = state;
   const userName = user?.name ?? 'Guest';
 
@@ -58,6 +60,7 @@ function User() {
 
   return (
     <Menu options={isLoggedIn ? loggedInUserMenuOptions : userMenuOptions}>
+      {/* TODO: show google account photo if auth */}
       <Icon icon={UserIcon} />
       <P>{userName}</P>
       <Icon icon={ChevronDown} />

@@ -1,16 +1,55 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { screen } from '@testing-library/react';
 import SearchResults from './SearchResults';
+import { renderWithProviders } from '../../../tests/testUtils';
+import { act } from 'react';
+
+const SAMPLE_DATA = [
+  {
+    id: '1',
+    name: 'product1',
+    image: '',
+    category: 'test',
+    price: '99',
+  },
+  {
+    id: '2',
+    name: 'product2',
+    image: '',
+    category: 'test',
+    price: '99',
+  },
+];
 
 describe('<SearchResults />', () => {
-  test('it should mount', () => {
-    // Arrange: render the component
-    render(<SearchResults />);
+  async function renderComponent() {
+    await act(async () => {
+      renderWithProviders(<SearchResults searchResultList={SAMPLE_DATA} />, {
+        providers: ['MemoryRouter', 'ThemeProvider'],
+        route: '/',
+      });
+    });
 
-    // Act: get the component
-    const searchResults = screen.getByTestId('SearchResults');
+    return {
+      searchResults: screen.getByRole('list'),
+      resultItem: screen.getAllByRole('listitem'),
+    };
+  }
 
-    // Assert: run checks
+  it('should render a list of items', async () => {
+    const { searchResults, resultItem } = await renderComponent();
+
     expect(searchResults).toBeInTheDocument();
+    expect(resultItem.length).toEqual(2);
+  });
+
+  it('should not show a list when passed an empty array', async () => {
+    await act(async () =>
+      renderWithProviders(<SearchResults searchResultList={[]} />, {
+        providers: ['MemoryRouter', 'AuthProvider', 'ThemeProvider'],
+        route: '/',
+      })
+    );
+
+    expect(screen.getByText(/no/i)).toBeInTheDocument();
   });
 });

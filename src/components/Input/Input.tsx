@@ -8,7 +8,6 @@ function Input({ id, ...delegated }: InputPropsType) {
 
   return (
     <Component
-      //
       data-testid="Input"
       id={appliedId}
       type="text"

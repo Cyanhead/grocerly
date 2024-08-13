@@ -30,6 +30,7 @@ function SearchBar() {
       {showSearchBar && (
         <Wrapper ref={searchBarRef}>
           <SearchInput
+            type="search"
             data-testid="Mobile Search Input"
             placeholder="Search for products..."
             value={searchTerm}

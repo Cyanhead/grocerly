@@ -1,16 +1,30 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { describe, expect, it } from 'vitest';
+import { screen } from '@testing-library/react';
 import NavBar from './NavBar';
+import { renderWithProviders } from '../../tests/testUtils';
+import { act } from 'react';
 
 describe('<NavBar />', () => {
-  test('it should mount', () => {
-    // Arrange: render the component
-    render(<NavBar />);
+  async function renderComponent() {
+    await act(async () => {
+      renderWithProviders(<NavBar />, {
+        providers: ['MemoryRouter', 'AuthProvider', 'ThemeProvider'],
+        route: '/',
+      });
+    });
 
-    // Act: get the component
-    const navBar = screen.getByTestId('NavBar');
+    return {
+      logo: screen.getByRole('img', { name: /logo/i }),
+      searchBar: screen.getByRole('searchbox'),
+      menuButton: screen.getByRole('button', { name: /menu/i }),
+    };
+  }
 
-    // Assert: run checks
-    expect(navBar).toBeInTheDocument();
+  it('should render a logo, search bar and menu button', async () => {
+    const { logo, searchBar, menuButton } = await renderComponent();
+
+    expect(logo).toBeInTheDocument();
+    expect(searchBar).toBeInTheDocument();
+    expect(menuButton).toBeInTheDocument();
   });
 });

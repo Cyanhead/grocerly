@@ -3,11 +3,11 @@ import { Wrapper } from './Icon.styled';
 import VisuallyHidden from '../VisuallyHidden';
 
 function Icon({
-  withoutText = false,
+  isIconStandalone = false,
   icon: IconElement,
   visuallyHidden,
 }: IconPropsType) {
-  if (withoutText) {
+  if (isIconStandalone) {
     return (
       <Wrapper data-testid="Icon">
         <IconElement size={24} />
@@ -16,7 +16,7 @@ function Icon({
     );
   }
 
-  return <IconElement size={24} />;
+  return <IconElement size={24} data-testid="Icon" />;
 }
 
 export default Icon;

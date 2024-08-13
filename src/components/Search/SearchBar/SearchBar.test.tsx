@@ -1,16 +1,30 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { describe, expect, it } from 'vitest';
+import { screen } from '@testing-library/react';
 import SearchBar from './SearchBar';
+import { renderWithProviders } from '../../../tests/testUtils';
+import userEvent from '@testing-library/user-event';
 
 describe('<SearchBar />', () => {
-  test('it should mount', () => {
-    // Arrange: render the component
-    render(<SearchBar />);
+  function renderComponent() {
+    renderWithProviders(<SearchBar />, { providers: ['ThemeProvider'] });
 
-    // Act: get the component
-    const searchBar = screen.getByTestId('SearchBar');
+    return { searchButton: screen.getByRole('button', { name: /search/i }) };
+  }
 
-    // Assert: run checks
-    expect(searchBar).toBeInTheDocument();
+  it('should render a search icon', () => {
+    const { searchButton } = renderComponent();
+
+    expect(searchButton).toBeInTheDocument();
+  });
+
+  it('should render a search input when the search icon button is clicked', async () => {
+    const { searchButton } = renderComponent();
+
+    const user = userEvent.setup();
+    await user.click(searchButton);
+
+    const searchInput = await screen.findByRole('searchbox');
+
+    expect(searchInput).toBeInTheDocument();
   });
 });

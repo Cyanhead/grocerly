@@ -1,16 +1,22 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { describe, expect, it } from 'vitest';
+import { screen } from '@testing-library/react';
 import Logo from './Logo';
+import { renderWithProviders } from '../../tests/testUtils';
 
 describe('<Logo />', () => {
-  test('it should mount', () => {
-    // Arrange: render the component
-    render(<Logo />);
+  function renderComponent() {
+    renderWithProviders(<Logo />, { providers: ['MemoryRouter'], route: '/' });
 
-    // Act: get the component
-    const logo = screen.getByTestId('Logo');
+    return {
+      image: screen.getByRole('img', { name: /logo/i }),
+      link: screen.getByRole('link', { name: /logo/i }),
+    };
+  }
 
-    // Assert: run checks
-    expect(logo).toBeInTheDocument();
+  it('should render a logo image', () => {
+    const { image, link } = renderComponent();
+
+    expect(image).toBeInTheDocument();
+    expect(link).toBeInTheDocument();
   });
 });

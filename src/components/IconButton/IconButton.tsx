@@ -1,12 +1,12 @@
 import { IconButtonPropsType } from './IconButton.type';
 import { StyledIconButton } from './IconButton.styled';
 import VisuallyHidden from '../VisuallyHidden';
-import { forwardRef } from 'react';
+import { forwardRef, Ref } from 'react';
 import Icon from '../Icon/Icon';
 
 function IconButton(
   { icon, visuallyHidden, ...delegated }: IconButtonPropsType,
-  ref: any
+  ref: Ref<HTMLButtonElement>
 ) {
   return (
     <StyledIconButton
@@ -16,10 +16,11 @@ function IconButton(
       $pad={10}
       {...delegated}
     >
-      <Icon icon={icon} withoutText />
+      <Icon icon={icon} isIconStandalone />
       {visuallyHidden && <VisuallyHidden>{visuallyHidden}</VisuallyHidden>}
     </StyledIconButton>
   );
 }
 
-export default forwardRef(IconButton);
+const ForwardedWithRef = forwardRef(IconButton);
+export default ForwardedWithRef;

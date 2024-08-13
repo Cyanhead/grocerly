@@ -1,6 +1,7 @@
 import { CSSProperties } from 'styled-components';
 
 export type LayoutPropsType = {
+  children: React.ReactNode;
   $pad?: number;
   $gap?: number;
   $justify?: CSSProperties['justifyContent'];

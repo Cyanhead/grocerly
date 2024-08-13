@@ -8,6 +8,9 @@ export type ButtonCSSPropsType = {
 };
 
 export type ButtonPropsType = React.ComponentPropsWithoutRef<'button'> &
-  ButtonCSSPropsType & { as?: keyof JSX.IntrinsicElements };
+  ButtonCSSPropsType & {
+    children: React.ReactNode;
+    as?: keyof JSX.IntrinsicElements;
+  };
 
 export type LinkButtonPropsType = ButtonCSSPropsType & LinkProps;
