@@ -23,6 +23,17 @@ export const theme = {
     greyHover: '#eeeeeebb',
     greyActive: '#ddddddbb',
 
+    danger50: '#ffe2e2',
+    danger100: '#ffb1b2',
+    danger200: '#ff7f7f',
+    danger300: '#ff4d4d',
+    danger400: '#fe1d1b',
+    danger500: '#e50501',
+    danger600: '#b30000',
+    danger700: '#810000',
+    danger800: '#4f0000',
+    danger900: '#200000',
+
     faintLine: '1px solid rgba(0, 0, 0, 0.1)',
   },
 

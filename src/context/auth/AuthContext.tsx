@@ -20,17 +20,11 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       auth,
       user => {
         if (user) {
-          const { uid, displayName } = user;
-          const userName = displayName || 'User';
-
           dispatch({
             type: 'LOGIN',
             payload: {
               isLoggedIn: true,
-              user: {
-                id: uid,
-                name: userName,
-              },
+              user: user,
             },
           });
         } else {
@@ -62,5 +56,6 @@ const useAuthContext = () => {
   return context;
 };
 
+// REFACTOR
 // eslint-disable-next-line react-refresh/only-export-components
 export { AuthProvider, useAuthContext };

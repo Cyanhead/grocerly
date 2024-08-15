@@ -46,7 +46,7 @@ function NavBar() {
 
             <CartButton />
           </WishlistAndCart>
-          <Layout.FlexRow $justify="space-between">
+          <Layout.FlexRow $justify="space-between" $align="center">
             <SearchBar />
             <User />
           </Layout.FlexRow>

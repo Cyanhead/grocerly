@@ -31,7 +31,7 @@ export const FlexCol = styled.div.attrs<LayoutPropsType>(props => ({
 }))`
   display: flex;
   flex-direction: column;
-  gap: ${props => props.$gap};
+  gap: ${props => `${props.$gap}px`};
   padding: ${props => `${props.$pad}px`};
   justify-content: ${props => props.$justify};
   align-items: ${props => props.$align};

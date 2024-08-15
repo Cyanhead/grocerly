@@ -8,7 +8,7 @@ import '@fontsource/jetbrains-mono';
 import '@fontsource/days-one';
 
 import { createGlobalStyle } from 'styled-components';
-import { getColor } from './themeUtils';
+import { getColor, getFontWeight } from './themeUtils';
 
 export const GlobalStyle = createGlobalStyle`
     /* CSS RESET START */
@@ -78,5 +78,10 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Quicksand", sans-serif;
         background-color: ${getColor('white')};
         color: ${getColor('black')};
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: "Days One", sans-serif;
+        font-weight: ${getFontWeight('medium')};
     }
 `;

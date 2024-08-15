@@ -2,13 +2,6 @@ import styled, { css } from 'styled-components';
 import { getColor, getFontWeight } from '../../theme';
 import { ButtonPropsType } from './Button.type';
 
-const danger = {
-  base: '#b40000',
-  light: '#ffe1e1',
-  mid: '#ffd4d4',
-  dark: '#500000',
-};
-
 const BaseStyles = css<ButtonPropsType>`
   display: flex;
   gap: 6px;
@@ -39,26 +32,32 @@ const BaseStyles = css<ButtonPropsType>`
       case 'secondary':
         return css`
           background-color: ${getColor('white')};
-          color: ${$theme === 'danger' ? danger.base : getColor('primary600')};
+          color: ${$theme === 'danger'
+            ? getColor('danger600')
+            : getColor('primary600')};
           border: 2px solid
-            ${$theme === 'danger' ? danger.base : getColor('primary600')};
+            ${$theme === 'danger'
+              ? getColor('danger600')
+              : getColor('primary600')};
 
           &:hover {
             background-color: ${$theme === 'danger'
-              ? danger.light
+              ? getColor('danger50')
               : getColor('primary50')};
           }
         `;
       case 'ghost':
         return css`
           background-color: ${$theme === 'danger'
-            ? danger.light
+            ? getColor('danger50')
             : getColor('primary50')};
-          color: ${$theme === 'danger' ? danger.dark : getColor('primary700')};
+          color: ${$theme === 'danger'
+            ? getColor('danger700')
+            : getColor('primary700')};
 
           &:hover {
             background-color: ${$theme === 'danger'
-              ? danger.mid
+              ? getColor('danger100')
               : getColor('primary100')};
           }
         `;
