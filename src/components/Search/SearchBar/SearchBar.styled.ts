@@ -15,8 +15,6 @@ export const Wrapper = styled.div`
     display: none;
   }
 `;
-
-// export const SearchIconButton = styled(IconButton).attrs({})`
 export const SearchIconButton = styled(IconButton)`
   @media screen and (min-width: ${getBreakpoint('md')}) {
     display: none;
@@ -28,5 +26,5 @@ export const SearchInput = styled(Input).attrs<{ $bg?: string }>(props => ({
 }))`
   background-color: ${props => props.$bg};
   width: 100%;
-  height: 100%;
+  height: 60px;
 `;

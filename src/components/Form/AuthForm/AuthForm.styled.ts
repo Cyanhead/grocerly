@@ -1,6 +1,8 @@
 import { getFontWeight } from './../../../theme/themeUtils';
 import styled from 'styled-components';
 import { getColor } from '../../../theme';
+import Input from '../../Input';
+import Button from '../../Button';
 
 export const Container = styled.div`
   padding: 0 8px;
@@ -20,11 +22,6 @@ export const Wrapper = styled.form`
   padding: 20px;
   padding-bottom: 32px;
   border-radius: 2px;
-
-  button#submit-btn {
-    font-weight: ${getFontWeight('semibold')};
-    justify-content: center;
-  }
 `;
 
 export const Title = styled.h1``;
@@ -32,21 +29,21 @@ export const Title = styled.h1``;
 export const Set = styled.fieldset`
   border: none;
   width: 100%;
+`;
 
-  input {
-    border: 1px solid ${getColor('grey')};
-    border-radius: 2px;
-    margin-top: 6px;
+export const FormInput = styled(Input).attrs<{ $hasError?: boolean }>({})`
+  border: 1px solid ${getColor('grey')};
+  border-radius: 2px;
+  margin-top: 6px;
 
-    transition: all 200ms;
+  transition: all 200ms;
 
-    &:hover {
-      border: 1px solid ${getColor('primary')};
-    }
-    &:focus {
-      border: 1px solid ${getColor('primary')};
-      border-right: 20px solid ${getColor('primary')};
-    }
+  &:hover {
+    border: 1px solid ${getColor('primary')};
+  }
+  &:focus {
+    border: 1px solid ${getColor('primary')};
+    border-right: 20px solid ${getColor('primary')};
   }
 `;
 
@@ -58,6 +55,10 @@ export const Label = styled.label`
   font-weight: ${getFontWeight('medium')};
 `;
 
+export const OptionalTag = styled.span`
+  color: ${getColor('grey')};
+`;
+
 export const Prompt = styled.p`
   display: flex;
   align-items: center;
@@ -66,4 +67,9 @@ export const Prompt = styled.p`
   color: ${getColor('danger600')};
   margin-top: 8px;
   font-weight: ${getFontWeight('medium')};
+`;
+
+export const SubmitButton = styled(Button)`
+  font-weight: ${getFontWeight('semibold')};
+  justify-content: center;
 `;

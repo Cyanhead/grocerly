@@ -2,7 +2,6 @@ import toast from 'react-hot-toast';
 import AuthForm from '../../../components/Form/AuthForm';
 import { useAuthContext } from '../../../context';
 import { ForgotPass } from '../Login.styled';
-import { googleAuthPopup } from '../../../helpers/handleGoogleAuth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -10,6 +9,7 @@ import { auth } from '../../../context/Firebase';
 import { FirebaseError } from 'firebase/app';
 import { Link } from '../../../components/NavBar/AuthNavBar/AuthNavBar.styled';
 import { LinkButton, P } from '../../AuthPages.styled';
+import { useSignInWithGoogle } from '../../../hooks';
 
 function LoginForm() {
   const { dispatch } = useAuthContext();
@@ -19,33 +19,14 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<FirebaseError | unknown>(null);
 
-  const handleGoogleSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const [isLoading, setIsLoading] = useState(false);
 
-    try {
-      const result = await toast.promise(googleAuthPopup(), {
-        loading: 'Signing in...',
-        success: 'Signed in successfully',
-        error: 'Error when signing in user!',
-      });
-
-      const user = result.user;
-
-      dispatch({
-        type: 'LOGIN',
-        payload: {
-          isLoggedIn: true,
-          user: user,
-        },
-      });
-      navigate('/', { replace: true });
-    } catch (error) {
-      console.error('Google sign in error', error);
-    }
-  };
+  const { handleGoogleSignIn, loading: googleLoading } = useSignInWithGoogle();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     try {
       const credentials = await toast.promise(
@@ -73,6 +54,8 @@ function LoginForm() {
       } else {
         setError(new Error('An unknown error occurred.'));
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -122,7 +105,8 @@ function LoginForm() {
             },
           ],
           button: {
-            text: 'Log in',
+            text: isLoading ? 'Logging in...' : 'Log in',
+            isDisabled: isLoading || googleLoading,
           },
         }}
       />

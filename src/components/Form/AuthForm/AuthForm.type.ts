@@ -17,8 +17,10 @@ export type AuthFormPropsType = {
         prompt: string;
       };
     }[];
+    customInput?: React.ReactNode;
     button: {
       text: string;
+      isDisabled?: boolean;
     };
   };
   children?: React.ReactNode;

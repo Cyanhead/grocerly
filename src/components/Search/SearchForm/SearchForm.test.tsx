@@ -13,15 +13,18 @@ describe('<SearchForm />', () => {
     );
 
     return {
-      form: screen.getByRole('form', { name: /search/i }),
-      searchInput: screen.getByRole('searchbox'),
-      searchButton: screen.getByRole('button', { name: /search/i }),
+      form: screen.getAllByRole('form', { hidden: true })[0],
+      searchInput: screen.getAllByRole('searchbox', { hidden: true })[0],
+      searchButton: screen.getAllByRole('button', {
+        hidden: true,
+        name: /search/i,
+      })[0],
     };
   }
 
   const handleSubmit = vi.fn();
 
-  it('should render a text input and button', async () => {
+  it('should render a form, text input and button', async () => {
     const { form, searchInput, searchButton } = await renderComponent();
 
     expect(form).toBeInTheDocument();

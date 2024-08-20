@@ -15,7 +15,7 @@ describe('<NavBar />', () => {
 
     return {
       logo: screen.getByRole('img', { name: /logo/i }),
-      searchBar: screen.getByRole('searchbox'),
+      searchBar: screen.getAllByRole('searchbox', { hidden: true })[0],
       menuButton: screen.getByRole('button', { name: /menu/i }),
     };
   }

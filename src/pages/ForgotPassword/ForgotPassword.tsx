@@ -1,14 +1,11 @@
 import AuthNavBar from '../../components/NavBar/AuthNavBar';
+import { Container, Left, Right, Wrapper } from '../AuthPages.styled';
 import {
   AnimationWrapper,
   AnimLineBg1,
   AnimLineBg2,
   AnimLineBg3,
-  Container,
-  Left,
-  Right,
-  Wrapper,
-} from '../AuthPages.styled';
+} from '../Login/Login.styled';
 import PasswordResetForm from './PasswordResetForm';
 
 function ForgotPassword() {

@@ -17,7 +17,7 @@ function SearchForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log('Should go to search page');
+    console.log('Should go to search page'); // TODO
 
     // const url = `/products?name=${searchTerm}`;
     // navigate(url);

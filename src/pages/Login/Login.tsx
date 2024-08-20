@@ -4,11 +4,8 @@ import {
   AnimLineBg1,
   AnimLineBg2,
   AnimLineBg3,
-  Container,
-  Left,
-  Right,
-  Wrapper,
-} from '../AuthPages.styled';
+} from './Login.styled';
+import { Container, Left, Right, Wrapper } from '../AuthPages.styled';
 import LoginForm from './LoginForm/LoginForm';
 
 function Login() {

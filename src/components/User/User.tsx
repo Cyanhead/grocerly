@@ -6,7 +6,7 @@ import {
   LogIn,
   LogOut,
 } from 'lucide-react';
-import { P } from './User.styled';
+import { P, Photo } from './User.styled';
 import Menu from '../Menu';
 import VisuallyHidden from '../VisuallyHidden';
 import { useAuthContext } from '../../context';
@@ -14,23 +14,18 @@ import { MenuPropsType } from '../Menu/Menu.type';
 import { useLogout } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../Icon';
+import { truncateString } from '../../helpers';
 
 function User() {
   const { state } = useAuthContext();
-  // console.log({ state });
 
   const { isLoggedIn, user } = state;
-  const userName = user?.name ?? 'Guest';
+  const userName = user?.displayName ?? user?.email ?? 'Guest';
+  const displayName = truncateString(userName, 10);
 
   const navigate = useNavigate();
 
   const userMenuOptions: MenuPropsType['options'] = [
-    {
-      type: 'button',
-      label: 'Login',
-      icon: LogIn,
-      onClick: () => navigate('/login'),
-    },
     {
       type: 'button',
       label: 'Wishlist',
@@ -43,26 +38,35 @@ function User() {
       icon: ShoppingCart,
       onClick: () => console.log('Added to cart'),
     },
+    {
+      type: 'button',
+      label: 'Login',
+      icon: LogIn,
+      onClick: () => navigate('/login'),
+    },
   ];
 
   const loggedInUserMenuOptions = [...userMenuOptions];
-  loggedInUserMenuOptions.shift();
+  loggedInUserMenuOptions.pop();
   loggedInUserMenuOptions.unshift({
+    type: 'text',
+    label: displayName,
+  });
+  loggedInUserMenuOptions.push({
     type: 'button',
     label: 'Log out',
     icon: LogOut,
     onClick: useLogout,
   });
-  loggedInUserMenuOptions.unshift({
-    type: 'text',
-    label: userName,
-  });
 
   return (
     <Menu options={isLoggedIn ? loggedInUserMenuOptions : userMenuOptions}>
-      {/* TODO: show google account photo if auth */}
-      <Icon icon={UserIcon} />
-      <P>{userName}</P>
+      {user?.photoURL ? (
+        <Photo src={user?.photoURL} alt="" />
+      ) : (
+        <Icon icon={UserIcon} />
+      )}
+      <P>{displayName}</P>
       <Icon icon={ChevronDown} />
       <VisuallyHidden>Check Menu</VisuallyHidden>
     </Menu>
