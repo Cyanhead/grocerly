@@ -1,18 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import { ForgotPassword, Login, SignUp } from '../pages';
+import { Error as ErrorPage, ForgotPassword, Login, SignUp } from '../pages';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    errorElement: 'Custom Router Error', // TODO: create error component
+    errorElement: <ErrorPage />,
     element: <App />,
     children: [
       {
         errorElement: <div>Error page</div>,
         children: [
           {
-            // default path
             index: true,
             element: <h3>Home Page</h3>,
           },
@@ -30,17 +29,17 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    errorElement: 'Custom Router Error', // TODO: create error component
+    errorElement: <ErrorPage />,
     element: <Login />,
   },
   {
     path: '/forgot-password',
-    errorElement: 'Custom Router Error', // TODO: create error component
+    errorElement: <ErrorPage />,
     element: <ForgotPassword />,
   },
   {
     path: '/sign-up',
-    errorElement: 'Custom Router Error', // TODO: create error component
+    errorElement: <ErrorPage />,
     element: <SignUp />,
   },
 ]);
