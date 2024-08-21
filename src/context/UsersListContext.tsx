@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { usersColRef } from './Firebase';
 import { onSnapshot } from 'firebase/firestore';
-import { useAuthContext } from './AuthContext';
+import { useAuthContext } from './auth/AuthContext';
 
 const Context = createContext();
 
@@ -47,7 +47,7 @@ export const UsersListContext = ({ children }) => {
       value={{
         // users,
         // setUsers,
-        isUserAdmin
+        isUserAdmin,
       }}
     >
       {children}

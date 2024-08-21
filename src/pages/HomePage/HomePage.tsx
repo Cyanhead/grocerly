@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Hero from '../../components/Hero';
 import Categories from '../../components/Categories';
 import Labels from '../../components/Labels';
-import { useAuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/auth/AuthContext';
 import { db, usersColRef } from '../../context/Firebase';
 import { doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 
@@ -40,7 +40,7 @@ const HomePage = () => {
           id: uid,
           displayName,
           email,
-          admin: false
+          admin: false,
         });
         return;
       };

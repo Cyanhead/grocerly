@@ -32,7 +32,7 @@ import {
   ProductDetails,
   SimilarProducts,
   SimilarProductsHeading,
-  SimilarProductsMarquee
+  SimilarProductsMarquee,
 } from './product-page.style';
 
 import { IconWrap } from '../../components/others.style';
@@ -218,7 +218,7 @@ const ProductPage = () => {
           style={{
             maxWidth: '1200px',
             margin: '0 auto',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           <Loading />
