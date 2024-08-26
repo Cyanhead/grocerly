@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
 `;
 
@@ -27,8 +27,8 @@ export const TopRow = styled.section`
 
   position: relative;
 
-  padding: 8px 16px;
   border-bottom: 1px solid rgba(173, 173, 173, 0.2);
+  padding: 8px 16px;
 
   @media screen and (min-width: ${getBreakpoint('md')}) {
     padding: 12px 24px;

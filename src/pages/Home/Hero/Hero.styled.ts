@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import heroContainerBg from '../../../assets/images/fruits_illx.webp';
 import { getBreakpoint } from '../../../theme';
+import { BaseContainer, BaseWrapper } from '../../../components';
 
-export const Container = styled.section`
-  width: 100%;
-
+export const Container = styled(BaseContainer)`
   background-color: rgba(197, 234, 217, 0.78);
   background-image: url(${heroContainerBg});
   background-position: center;
@@ -19,11 +18,10 @@ export const Container = styled.section`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(BaseWrapper)`
   display: flex;
   flex-direction: column-reverse;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0;
 
   @media screen and (min-width: ${getBreakpoint('lg')}) {
     flex-direction: row;
@@ -54,9 +52,27 @@ export const Section = styled.div`
   }
 `;
 
-export const Heading = styled.h1``;
+export const Heading = styled.h1`
+  font-size: calc(24 / 16 * 1rem);
 
-export const P = styled.p``;
+  @media screen and (min-width: ${getBreakpoint('md')}) {
+    font-size: calc(32 / 16 * 1rem);
+  }
+
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    font-size: calc(48 / 16 * 1rem);
+  }
+
+  @media screen and (min-width: ${getBreakpoint('xl')}) {
+    font-size: calc(56 / 16 * 1rem);
+  }
+`;
+
+export const P = styled.p`
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    font-size: calc(20 / 16 * 1rem);
+  }
+`;
 
 export const ImageWrapper = styled.div`
   @media screen and (min-width: ${getBreakpoint('sm')}) {
