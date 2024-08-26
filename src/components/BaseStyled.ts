@@ -18,14 +18,14 @@ export const BaseWrapper = styled.div`
   max-width: 1280px;
   margin: 0 auto;
 
-  padding: 8px 16px;
+  padding: 40px 16px;
 
   @media screen and (min-width: ${getBreakpoint('md')}) {
-    padding: 12px 24px;
+    padding: 48px 24px;
   }
 
   @media screen and (min-width: ${getBreakpoint('lg')}) {
-    padding: 16px 40px;
+    padding: 56px 40px;
   }
 `;
 

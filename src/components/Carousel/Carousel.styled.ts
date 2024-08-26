@@ -62,7 +62,7 @@ export const Wrapper = styled.div.attrs<{ $index: number; $width: number }>(
 
 const BaseArrowStyles = css`
   position: absolute;
-  bottom: 25%;
+  bottom: 29%;
   transform: translateY(-50%);
   z-index: 1;
   display: none;
