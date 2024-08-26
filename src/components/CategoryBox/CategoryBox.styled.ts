@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { getBreakpoint, getColor, getFontWeight } from '../../theme';
-import { BaseContainer, BaseWrapper } from '../BaseStyled';
+import { getBreakpoint, getColor } from '../../theme';
+import { BaseContainer, BaseWrapper, SectionHeading } from '../BaseStyled';
 import { StyledButton } from '../Button/Button.styled';
 
 export const Container = styled(BaseContainer)``;
@@ -19,23 +19,7 @@ export const TopRow = styled.div`
   align-items: center;
 `;
 
-export const SectionHeading = styled.h2`
-  font-family: 'Quicksand', sans-serif;
-  font-weight: ${getFontWeight('semibold')};
-  font-size: calc(20 / 16 * 1rem);
-
-  @media screen and (min-width: ${getBreakpoint('md')}) {
-    font-size: calc(24 / 16 * 1rem);
-  }
-
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
-    font-size: calc(28 / 16 * 1rem);
-  }
-
-  @media screen and (min-width: ${getBreakpoint('xl')}) {
-    font-size: calc(32 / 16 * 1rem);
-  }
-`;
+export const Heading = styled(SectionHeading)``;
 
 export const Categories = styled.div`
   display: none;

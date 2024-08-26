@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getBreakpoint } from '../theme';
+import { getBreakpoint, getFontWeight } from '../theme';
 
 export const BaseContainer = styled.section`
   width: 100%;
@@ -26,5 +26,23 @@ export const BaseWrapper = styled.div`
 
   @media screen and (min-width: ${getBreakpoint('lg')}) {
     padding: 16px 40px;
+  }
+`;
+
+export const SectionHeading = styled.h2`
+  font-family: 'Quicksand', sans-serif;
+  font-weight: ${getFontWeight('semibold')};
+  font-size: calc(20 / 16 * 1rem);
+
+  @media screen and (min-width: ${getBreakpoint('md')}) {
+    font-size: calc(24 / 16 * 1rem);
+  }
+
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    font-size: calc(28 / 16 * 1rem);
+  }
+
+  @media screen and (min-width: ${getBreakpoint('xl')}) {
+    font-size: calc(32 / 16 * 1rem);
   }
 `;

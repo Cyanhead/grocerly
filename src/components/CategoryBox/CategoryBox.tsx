@@ -2,7 +2,7 @@ import { CategoryBoxPropsType } from './CategoryBox.type';
 import {
   Container,
   Wrapper,
-  SectionHeading,
+  Heading,
   TopRow,
   Categories,
   CategoryButton,
@@ -32,7 +32,7 @@ function CategoryBox<T>({
     <Container data-testid="CategoryBox">
       <Wrapper>
         <TopRow>
-          <SectionHeading>{heading}</SectionHeading>
+          <Heading>{heading}</Heading>
           {/* // TODO: implement filter on button click */}
           <Categories>
             {categoryList.map(category => (

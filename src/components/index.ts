@@ -1,3 +1,4 @@
+export { default as Banners } from './Banners';
 export { default as Button } from './Button';
 export { default as CategoryBox } from './CategoryBox';
 export { default as Input } from './Input';
