@@ -75,12 +75,13 @@ export const P = styled.p`
 `;
 
 export const ImageWrapper = styled.div`
+  align-self: flex-end;
   @media screen and (min-width: ${getBreakpoint('sm')}) {
     max-width: 576px;
-    align-self: flex-end;
   }
 
   @media screen and (min-width: ${getBreakpoint('lg')}) {
+    align-self: flex-start;
     max-width: 400px;
   }
 
