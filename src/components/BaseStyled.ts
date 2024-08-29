@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { getBreakpoint, getFontWeight } from '../theme';
+import { getBreakpoint, getColor, getFontWeight } from '../theme';
+import { Link } from 'react-router-dom';
 
 export const BaseContainer = styled.section`
   width: 100%;
@@ -44,5 +45,33 @@ export const SectionHeading = styled.h2`
 
   @media screen and (min-width: ${getBreakpoint('xl')}) {
     font-size: calc(32 / 16 * 1rem);
+  }
+`;
+
+export const SectionHeading2 = styled.h2`
+  font-family: 'Quicksand', sans-serif;
+  font-weight: ${getFontWeight('semibold')};
+  font-size: calc(18 / 16 * 1rem);
+
+  @media screen and (min-width: ${getBreakpoint('md')}) {
+    font-size: calc(20 / 16 * 1rem);
+  }
+
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    font-size: calc(22 / 16 * 1rem);
+  }
+
+  @media screen and (min-width: ${getBreakpoint('xl')}) {
+    font-size: calc(24 / 16 * 1rem);
+  }
+`;
+
+export const TextLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: ${getColor('primary600')};
   }
 `;

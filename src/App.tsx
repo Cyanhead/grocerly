@@ -1,4 +1,4 @@
-import { NavBar, ScrollToAnchor } from './components';
+import { Footer, NavBar, ScrollToAnchor } from './components';
 import { Outlet } from 'react-router-dom';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
       <main>
         <Outlet />
       </main>
-      <footer>footer</footer>
+      <Footer />
       <ScrollToAnchor />
     </>
   );

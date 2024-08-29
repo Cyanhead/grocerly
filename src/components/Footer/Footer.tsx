@@ -1,196 +1,126 @@
-import React from 'react';
-
 import {
-  FooterContainer,
-  FooterWrap,
-  FooterTop,
+  Clock,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Twitter,
+} from 'lucide-react';
+import {
+  Footnote,
   Column,
-  ColHead,
-  ColBody,
-  ColLink,
-  FooterP,
-  ContactRow,
-  FooterBottom,
-  Copyright,
-  PaymentImg,
-  SocialWrap,
-  SocialLink
-} from './footer.style';
-
-import Logo from '../Logo';
-import { IconWrap } from '../others.style';
-import { FiMapPin, FiPhone, FiMail, FiClock } from 'react-icons/fi';
-import {
-  RiFacebookFill,
-  RiLinkedinFill,
-  RiInstagramFill,
-  RiTwitterFill
-} from 'react-icons/ri';
+  ContactGroup,
+  Container,
+  Heading,
+  Link,
+  LinksGroup,
+  ListItem,
+  P,
+  Section,
+  Span,
+  Wrapper,
+  Payments,
+  Social,
+  SocialIcon,
+} from './Footer.styled';
 import payments from '../../assets/images/payments.webp';
+import Icon from '../Icon';
 
-const Footer = () => {
-  const ContactInfoGenerator = () => {
-    const contactInfo = [
-      {
-        icon: <FiMapPin />,
-        title: 'address',
-        content: '1762 School House Road'
-      },
-      { icon: <FiPhone />, title: 'call us', content: '1233-777' },
-      {
-        icon: <FiMail />,
-        title: 'email',
-        content: 'grocerly@contact.com',
-        anotherCase: true
-      },
-      {
-        icon: <FiClock />,
-        title: 'work hours',
-        content: '8:00 - 20:00, Sunday -  Thursday'
-      }
-    ];
+const contact_details = [
+  {
+    icon: MapPin,
+    title: 'Address',
+    content: '1762 School House Road',
+  },
+  { icon: Phone, title: 'Call us', content: '1233-777' },
+  {
+    icon: Mail,
+    title: 'Email',
+    content: 'grocerly@contact.com',
+  },
+  {
+    icon: Clock,
+    title: 'Work hours',
+    content: '8:00 - 20:00, Sunday -  Thursday',
+  },
+];
 
-    return (
-      <ColBody mar="36px 0 0 0">
-        {contactInfo?.map((info, i) => {
-          return (
-            <ContactRow key={i}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'start',
-                  alignItems: 'center'
-                }}
-              >
-                <IconWrap fg={props => props.theme.color.primary}>
-                  {info.icon}
-                </IconWrap>
-                <FooterP
-                  fontWght={props => props.theme.fontWght.semibold}
-                  mar="0 8px 0 0"
-                >
-                  {info.title}:
-                </FooterP>
-              </div>
-              <FooterP textTrans={info.anotherCase ? 'lowercase' : ''}>
-                {info.content}
-              </FooterP>
-            </ContactRow>
-          );
-        })}
-      </ColBody>
-    );
-  };
+const navigation_links = [
+  {
+    column: 'account',
+    links: [
+      { name: 'wishlist', url: '#' },
+      { name: 'cart', url: '#' },
+      { name: 'track order', url: '#' },
+      { name: 'shipping details', url: '#' },
+    ],
+  },
+  {
+    column: 'useful links',
+    links: [
+      { name: 'about us', url: '#' },
+      { name: 'contact', url: '#' },
+      { name: 'hot deals', url: '#' },
+      { name: 'promotions', url: '#' },
+      { name: 'new products', url: '#' },
+    ],
+  },
+  {
+    column: 'help center',
+    links: [
+      { name: 'payments', url: '#' },
+      { name: 'refund', url: '#' },
+      { name: 'checkout', url: '#' },
+      { name: 'shipping', url: '#' },
+      { name: 'q & a', url: '#' },
+      { name: 'privacy policy', url: '#' },
+    ],
+  },
+];
 
-  const ColumnGenerator = () => {
-    const colLinksData = [
-      {
-        colHead: 'account',
-        links: [
-          { name: 'wishlist', url: '' },
-          { name: 'cart', url: '' },
-          { name: 'track order', url: '' },
-          { name: 'shipping details', url: '' }
-        ]
-      },
-      {
-        colHead: 'useful links',
-        links: [
-          { name: 'about us', url: '' },
-          { name: 'contact', url: '' },
-          { name: 'hot deals', url: '' },
-          { name: 'promotions', url: '' },
-          { name: 'new products', url: '' }
-        ]
-      },
-      {
-        colHead: 'help center',
-        links: [
-          { name: 'payments', url: '' },
-          { name: 'refund', url: '' },
-          { name: 'checkout', url: '' },
-          { name: 'shipping', url: '' },
-          { name: 'q & a', url: '' },
-          { name: 'privacy policy', url: '' }
-        ]
-      }
-    ];
-
-    return (
-      <>
-        {colLinksData?.map((col, i) => {
-          return (
-            <Column key={i}>
-              <ColHead> {col.colHead} </ColHead>
-              <ColBody>
-                {col.links?.map((link, i) => {
-                  return (
-                    <ColLink href={link.url} key={i} mar="0 0 16px 0">
-                      <FooterP> {link.name} </FooterP>
-                    </ColLink>
-                  );
-                })}
-              </ColBody>
-            </Column>
-          );
-        })}
-      </>
-    );
-  };
-
-  const FooterSocialIconGenerator = () => {
-    const socials = [
-      { icon: <RiFacebookFill />, url: '' },
-      { icon: <RiLinkedinFill />, url: '' },
-      { icon: <RiInstagramFill />, url: '' },
-      { icon: <RiTwitterFill />, url: '' }
-    ];
-
-    return (
-      <SocialWrap>
-        {socials?.map((medium, i) => {
-          return (
-            <SocialLink key={i} href={medium.url}>
-              <IconWrap
-                bg={props => props.theme.color.primary}
-                bgHover={props => props.theme.color.primaryHover}
-                fg={props => props.theme.color.white}
-                fgHover={props => props.theme.color.white}
-                mar="0 0 0 16px"
-                pad="10px"
-                bordRad="50%"
-              >
-                {medium.icon}
-              </IconWrap>
-            </SocialLink>
-          );
-        })}
-      </SocialWrap>
-    );
-  };
-
+function Footer() {
   return (
-    <FooterContainer>
-      <FooterWrap>
-        <FooterTop>
-          <Column>
-            <Logo />
-            <ContactInfoGenerator />
-          </Column>
-          <ColumnGenerator />
-        </FooterTop>
-        <FooterBottom>
-          <Copyright>
-            <FooterP>
-              &copy; {new Date().getFullYear()} Grocerly, all rights reserved.
-            </FooterP>
-          </Copyright>
-          <PaymentImg src={payments} alt="" />
-          <FooterSocialIconGenerator />
-        </FooterBottom>
-      </FooterWrap>
-    </FooterContainer>
+    <Container data-testid="Footer">
+      <Wrapper>
+        <Section>
+          <ContactGroup>
+            {contact_details.map(({ icon: Icon, title, content }, index) => (
+              <ListItem key={index}>
+                <Icon color="#3BB77E" /> <Span>{title}:</Span> {content}
+              </ListItem>
+            ))}
+          </ContactGroup>
+          {navigation_links.map(({ column, links }, index) => (
+            <Column key={index}>
+              <Heading>{column}</Heading>
+              <LinksGroup>
+                {links.map(({ name, url }, index) => (
+                  <ListItem key={index}>
+                    <Link to={url}>{name}</Link>
+                  </ListItem>
+                ))}
+              </LinksGroup>
+            </Column>
+          ))}
+        </Section>
+        <Footnote>
+          <P>
+            &copy; {new Date().getFullYear()} Grocerly, all rights reserved.
+          </P>
+          <Payments src={payments} alt="" />
+          <Social>
+            {[Facebook, Linkedin, Instagram, Twitter].map((icon, index) => (
+              <SocialIcon to="#">
+                <Icon key={index} icon={icon} />
+              </SocialIcon>
+            ))}
+          </Social>
+        </Footnote>
+      </Wrapper>
+    </Container>
   );
-};
+}
 
 export default Footer;

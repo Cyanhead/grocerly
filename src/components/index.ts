@@ -1,7 +1,9 @@
 export { default as Banners } from './Banners';
 export { default as Button } from './Button';
 export { default as CategoryBox } from './CategoryBox';
+export { default as Footer } from './Footer';
 export { default as Input } from './Input';
+export { default as Labels } from './Labels';
 export { default as Layout } from './Layout';
 export { default as Logo } from './Logo';
 export { default as MobileAppBanner } from './MobileAppBanner';
