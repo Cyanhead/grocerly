@@ -5,6 +5,7 @@ export { default as Footer } from './Footer';
 export { default as Input } from './Input';
 export { default as Labels } from './Labels';
 export { default as Layout } from './Layout';
+export { default as Loader } from './Loader';
 export { default as Logo } from './Logo';
 export { default as MobileAppBanner } from './MobileAppBanner';
 export { default as NavBar } from './NavBar';
