@@ -16,12 +16,30 @@ import { useNavigate } from 'react-router-dom';
 import Icon from '../Icon';
 import { truncateString } from '../../helpers';
 
+const TRUNCATION_LENGTH = 10;
+
 function User() {
   const { state } = useAuthContext();
 
   const { isLoggedIn, user } = state;
+
   const userName = user?.displayName ?? user?.email ?? 'Guest';
-  const displayName = truncateString(userName, 10);
+
+  function formatUserName(userEnteredName: string) {
+    const names = userEnteredName.split(' ');
+
+    if (names.length === 1) {
+      return truncateString(userName, TRUNCATION_LENGTH);
+    }
+
+    const firstName = names[0];
+    const lastNameInitial = names[1][0];
+    const newName = `${firstName} ${lastNameInitial}.`;
+
+    return truncateString(newName, TRUNCATION_LENGTH);
+  }
+
+  const displayName = formatUserName(userName);
 
   const navigate = useNavigate();
 

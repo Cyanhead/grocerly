@@ -1,3 +1,4 @@
+export { default as Admin } from './Admin';
 export { default as Error } from './Error';
 export { default as ForgotPassword } from './ForgotPassword';
 export { default as Home } from './Home';

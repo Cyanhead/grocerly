@@ -9,6 +9,7 @@ export { default as Loader } from './Loader';
 export { default as Logo } from './Logo';
 export { default as MobileAppBanner } from './MobileAppBanner';
 export { default as NavBar } from './NavBar';
+export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SearchBar } from './Search/SearchBar';
 export { default as User } from './User';
 export { default as VisuallyHidden } from './VisuallyHidden';
