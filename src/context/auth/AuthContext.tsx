@@ -7,48 +7,28 @@ import {
   useState,
 } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from '../Firebase';
+import { auth } from '../Firebase';
 import { reducer, initialState } from './reducer';
 import { AuthContextType } from './types';
-import { doc, getDoc } from 'firebase/firestore';
+import { getUserRoles } from '../../helpers';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [loading, setLoading] = useState(true); // Initialize loading state
-
-  async function getUserRoles() {
-    if (auth.currentUser) {
-      const docRef = doc(db, 'users', auth.currentUser?.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        console.log('Document data:', docSnap.data());
-        return docSnap.data().roles;
-      } else {
-        console.log('No such document!');
-      }
-    } else {
-      console.error(
-        'auth.currentUser is null. Could not get the user document.'
-      );
-    }
-    return {};
-  }
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unSubAuth = onAuthStateChanged(
       auth,
       async user => {
         if (user) {
-          const roles = await getUserRoles();
           dispatch({
             type: 'LOGIN',
             payload: {
               isLoggedIn: true,
               user: user,
-              roles: roles,
+              roles: await getUserRoles(),
             },
           });
         } else {

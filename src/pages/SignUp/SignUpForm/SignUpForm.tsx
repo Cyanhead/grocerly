@@ -3,11 +3,12 @@ import AuthForm from '../../../components/Form/AuthForm';
 import { LinkButton, P } from '../../AuthPages.styled';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../../context/Firebase';
+import { auth, db } from '../../../context/Firebase';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from '../../../hooks';
 import PasswordInput from '../../../components/Form/PasswordInput';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -33,6 +34,17 @@ function SignUpForm() {
 
     setIsLoading(true);
 
+    const userData = {
+      username,
+      email,
+      roles: {
+        admin: false,
+        user: true,
+      },
+
+      createdAt: serverTimestamp(),
+    };
+
     try {
       await toast.promise(
         createUserWithEmailAndPassword(auth, email, password),
@@ -43,11 +55,17 @@ function SignUpForm() {
         }
       );
 
-      if (auth.currentUser) {
-        updateProfile(auth.currentUser, {
-          displayName: username,
-        });
+      if (auth.currentUser === null) {
+        console.error(
+          'auth.currentUser is null. Could not create user document.'
+        );
+        return;
       }
+
+      await setDoc(doc(db, 'users', auth.currentUser.uid), userData);
+      await updateProfile(auth.currentUser, {
+        displayName: username,
+      });
 
       navigate('/', { replace: true });
     } catch (error) {

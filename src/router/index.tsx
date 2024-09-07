@@ -25,6 +25,14 @@ const router = createBrowserRouter([
         element: <div>Products page</div>,
       },
       {
+        path: '/profile',
+        element: (
+          <ProtectedRoute>
+            <h1>Profile page</h1>
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '*',
         element: <div>Page Not Found!</div>,
       },
@@ -33,14 +41,13 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: (
-      <ProtectedRoute role="admin">
+      <ProtectedRoute forAdminOnly>
         <Admin />
       </ProtectedRoute>
     ),
     children: [
       {
         index: true,
-        // path: '/home',
         element: <Dashboard />,
       },
       {

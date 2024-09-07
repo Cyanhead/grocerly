@@ -1,7 +1,7 @@
 import { User } from 'firebase/auth';
 import { Dispatch } from 'react';
 
-type Roles = {
+export type Roles = {
   user: boolean;
   admin: boolean;
 };

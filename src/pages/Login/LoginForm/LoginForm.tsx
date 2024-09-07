@@ -10,6 +10,7 @@ import { FirebaseError } from 'firebase/app';
 import { Link } from '../../../components/NavBar/AuthNavBar/AuthNavBar.styled';
 import { LinkButton, P } from '../../AuthPages.styled';
 import { useSignInWithGoogle } from '../../../hooks';
+import { getUserRoles } from '../../../helpers';
 
 function LoginForm() {
   const { dispatch } = useAuthContext();
@@ -44,6 +45,7 @@ function LoginForm() {
         payload: {
           isLoggedIn: true,
           user: user,
+          roles: await getUserRoles(),
         },
       });
       navigate('/', { replace: true });
