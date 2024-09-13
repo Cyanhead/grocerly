@@ -119,3 +119,28 @@ export const LoadingBtn = styled.div`
   border-radius: 3px;
   animation: ${shineLoadingContainerItems} 2s infinite ease-out;
 `;
+
+// SINGLE LINE CONTENT
+export const SingleTextLine = styled.div.attrs<{
+  $width?: string;
+  $height?: string;
+}>(props => ({
+  $width: props.$width || '200px',
+  $height: props.$height || '26px',
+}))`
+  width: ${props => props.$width};
+  height: ${props => props.$height};
+  background: #ececec;
+  background-image: linear-gradient(
+    90deg,
+    #ececec 0px,
+    #ddd 40px,
+    #ececec 80px
+  );
+  background-size: 250px;
+
+  display: inline-block;
+
+  border-radius: 2px;
+  animation: ${shineLoadingContainerItems} 2s infinite ease-out;
+`;

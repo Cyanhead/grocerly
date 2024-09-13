@@ -7,7 +7,7 @@ import {
   Login,
   SignUp,
 } from '../pages';
-import Admin, { Dashboard } from '../pages/Admin';
+import Admin, { Dashboard, ProductItem, Products } from '../pages/Admin';
 import { ProtectedRoute } from '../components';
 
 const router = createBrowserRouter([
@@ -22,7 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/products',
-        element: <div>Products page</div>,
+        element: (
+          <div>
+            <h1>Products</h1>
+          </div>
+        ),
       },
       {
         path: '/profile',
@@ -40,6 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
+    errorElement: <ErrorPage />,
     element: (
       <ProtectedRoute forAdminOnly>
         <Admin />
@@ -52,7 +57,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin/products',
-        element: <h1>Admin Products page</h1>,
+        // element: ,
+        children: [
+          {
+            index: true,
+            element: <Products />,
+          },
+          {
+            path: '/admin/products/:id',
+            element: <ProductItem />,
+          },
+        ],
       },
       {
         path: '/admin/settings',

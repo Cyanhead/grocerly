@@ -66,12 +66,17 @@ export const SectionHeading2 = styled.h2`
   }
 `;
 
-export const TextLink = styled(Link)`
-  color: inherit;
+export const TextLink = styled(Link).attrs<{$isActive?: boolean}>(
+  props=> ({
+   $isActive: props.$isActive
+  })
+)`
+  color: ${props => props.$isActive ? getColor('primary600') :'inherit'};
   text-decoration: none;
+
 
   &:hover {
     text-decoration: underline;
-    color: ${getColor('primary600')};
+    color: ${props => !props.$isActive ? getColor('primary600') :'inherit'};
   }
 `;

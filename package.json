@@ -26,6 +26,7 @@
     "react-router-dom": "^6.3.0",
     "styled-components": "^6.1.12",
     "stylis": "^4.0.0",
+    "swr": "^2.2.5",
     "vite": "^5.3.5",
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.3.2"

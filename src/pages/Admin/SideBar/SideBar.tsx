@@ -63,7 +63,7 @@ function SideBar() {
       <div style={{ paddingLeft: '16px', alignSelf: 'start' }}>
         <Logo />
       </div>
-      <SideBarButton to="/admin" icon={Home}>
+      <SideBarButton to="/admin" icon={Home} end>
         Dashboard
       </SideBarButton>
       {sections.map(({ title, options }, index) => (

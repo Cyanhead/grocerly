@@ -7,6 +7,7 @@ import {
   LoadingMainText,
   LoadingSubText,
   LoadingBtn,
+  SingleTextLine,
 } from './Skeleton.styled';
 
 function ImageAndText() {
@@ -48,10 +49,20 @@ function Metric() {
     </LoadingContent>
   );
 }
+function SingleLineText({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
+  return <SingleTextLine $width={width} $height={height} />;
+}
 
 const Skeleton = {
   ImageAndText,
   Text,
+  SingleLineText,
   Metric,
 };
 

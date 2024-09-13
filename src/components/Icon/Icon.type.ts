@@ -8,4 +8,5 @@ export type IconPropsType = {
   isIconStandalone?: boolean;
   icon: LucideIconType;
   visuallyHidden?: string;
+  size?: number;
 };

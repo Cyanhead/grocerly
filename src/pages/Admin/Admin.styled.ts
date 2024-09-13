@@ -11,8 +11,11 @@ export const Page = styled.main`
 `;
 
 export const Title = styled(SectionHeading2)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
   text-transform: capitalize;
-  margin-left: 40px;
 `;
 
 export const Grid = styled(BaseWrapper)`
@@ -23,7 +26,10 @@ export const Grid = styled(BaseWrapper)`
   padding-top: 20px;
 `;
 
-export const Cell = styled.div.attrs<{ $span?: number }>(props => ({
+export const Cell = styled.div.attrs<{
+  $span?: number;
+  children: React.ReactNode;
+}>(props => ({
   $span: props.$span || 1,
 }))`
   grid-column-start: auto;
@@ -36,14 +42,8 @@ export const Cell = styled.div.attrs<{ $span?: number }>(props => ({
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
 `;
 
-export const MetricCard = styled.div`
-  display: flex;
-  flex-direction: column;
+export const TitleCell = styled(Cell)`
+  border: none;
+  box-shadow: none;
+  padding: 0;
 `;
-
-export const MetricTitle = styled.p`
-  font-size: calc(14 / 16 * 1rem);
-  color: ${getColor('grey')};
-`;
-
-export const MetricValue = styled(SectionHeading2)``;
