@@ -5,7 +5,7 @@ import { forwardRef, Ref } from 'react';
 import Icon from '../Icon/Icon';
 
 function IconButton(
-  { icon, visuallyHidden, ...delegated }: IconButtonPropsType,
+  { icon, visuallyHidden, size, ...delegated }: IconButtonPropsType,
   ref: Ref<HTMLButtonElement>
 ) {
   return (
@@ -16,7 +16,7 @@ function IconButton(
       $pad={10}
       {...delegated}
     >
-      <Icon icon={icon} isIconStandalone />
+      <Icon icon={icon} size={size} isIconStandalone />
       {visuallyHidden && <VisuallyHidden>{visuallyHidden}</VisuallyHidden>}
     </StyledIconButton>
   );

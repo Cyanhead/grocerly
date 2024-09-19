@@ -2,6 +2,7 @@ import { DetailsPropsType } from './Details.type';
 import Icon from '../../../components/Icon';
 import {
   Divider,
+  MenuWrapper,
   Image,
   ImageWrapper,
   P,
@@ -9,11 +10,16 @@ import {
   StatsWrapper,
   Wrapper,
 } from './Details.styled';
-import { useState } from 'react';
-import { Modal } from '../../../components';
+import { Edit3, MoreVertical } from 'lucide-react';
+import { Menu } from '../../../components';
 
-function Details({ image, name, additionalInfo, stats }: DetailsPropsType) {
-  const [showEditModal, setShowEditModal] = useState(false);
+function Details({
+  image,
+  name,
+  additionalInfo,
+  stats,
+  setShowEditModal,
+}: DetailsPropsType) {
   return (
     <Wrapper data-testid="Details">
       <ImageWrapper>
@@ -32,12 +38,31 @@ function Details({ image, name, additionalInfo, stats }: DetailsPropsType) {
           </Stats>
         ))}
       </StatsWrapper>
-      <button onClick={() => setShowEditModal(true)}>Edit</button>
-      {showEditModal && (
-        <Modal closeModal={() => setShowEditModal(false)}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </Modal>
-      )}
+      <MenuWrapper>
+        <Menu
+          options={[
+            {
+              label: 'Edit',
+              onClick: () => setShowEditModal(true),
+              icon: Edit3,
+              type: 'button',
+            },
+            // {
+            //   label: 'Delete',
+            //   onClick: () => {},
+            //   icon: Trash2,
+            //   type: 'button',
+            // },
+          ]}
+        >
+          <Icon
+            icon={MoreVertical}
+            size={20}
+            visuallyHidden="Edit Product"
+            isIconStandalone
+          />
+        </Menu>
+      </MenuWrapper>
     </Wrapper>
   );
 }

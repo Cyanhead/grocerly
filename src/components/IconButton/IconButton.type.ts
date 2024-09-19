@@ -6,4 +6,5 @@ export type IconButtonPropsType = Omit<ButtonPropsType, 'children'> & {
     Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>
   >;
   visuallyHidden?: string;
+  size?: number;
 };

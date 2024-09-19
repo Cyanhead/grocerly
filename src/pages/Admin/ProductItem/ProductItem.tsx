@@ -3,7 +3,7 @@ import { Cell } from '../Admin.styled';
 
 import revenue_chart from '../bar_chart.svg';
 import { useGetOrders, useGetSingleProduct } from '../../../hooks';
-import { Loader } from '../../../components';
+import { EditProductForm, Loader, Modal } from '../../../components';
 import { useParams } from 'react-router-dom';
 import { MetricPropsType } from '../Metric/Metric.type';
 import defaultImage from '../../../assets/images/default_product.svg';
@@ -17,9 +17,12 @@ import {
 import { parseTimestamp } from '../../../helpers';
 import Details from '../Details';
 import { DetailsPropsType } from '../Details/Details.type';
+import { useState } from 'react';
+import { GalleryProvider } from '../../../components/Gallery/context';
 
 function ProductItem() {
   const { id: productId = '' } = useParams();
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const {
     isLoading: ordersIsLoading,
@@ -136,6 +139,7 @@ function ProductItem() {
         name={product.name}
         additionalInfo={product.category}
         stats={productInfo}
+        setShowEditModal={setShowEditModal}
       />
 
       <Cell $span={3}>
@@ -145,6 +149,17 @@ function ProductItem() {
       </Cell>
 
       <Cell $span={4}>Latest orders</Cell>
+
+      {showEditModal && (
+        <Modal closeModal={() => setShowEditModal(false)}>
+          <GalleryProvider>
+            <EditProductForm
+              closeFormModal={() => setShowEditModal(false)}
+              product={product}
+            />
+          </GalleryProvider>
+        </Modal>
+      )}
     </>
   );
 }

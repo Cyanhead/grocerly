@@ -9,4 +9,5 @@ export type DetailsPropsType = {
     value: number | string;
     icon: IconPropsType['icon'];
   }[];
+  setShowEditModal: (value: boolean) => void;
 };

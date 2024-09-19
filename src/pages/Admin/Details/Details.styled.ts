@@ -3,6 +3,8 @@ import { getFontWeight, getColor } from '../../../theme';
 import { Cell } from '../Admin.styled';
 
 export const Wrapper = styled(Cell)`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -51,4 +53,10 @@ export const P = styled.p.attrs<{ $bold?: boolean }>(props => ({
   font-weight: ${props =>
     props.$bold ? getFontWeight('semibold') : getFontWeight('light')};
   text-transform: capitalize;
+`;
+
+export const MenuWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
