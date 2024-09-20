@@ -5,6 +5,7 @@ import {
   ForgotPassword,
   Home,
   Login,
+  NotFound,
   SignUp,
 } from '../pages';
 import Admin, { Dashboard, ProductItem, Products } from '../pages/Admin';
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: <div>Page Not Found!</div>,
+        element: <NotFound />,
       },
     ],
   },
