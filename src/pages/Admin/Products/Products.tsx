@@ -4,58 +4,72 @@ import revenue_chart from '../bar_chart.svg';
 import { Link } from 'react-router-dom';
 import { useGetOrders, useGetProducts } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
+import { AddProductForm, Button, Modal, Skeleton } from '../../../components';
+import Icon from '../../../components/Icon';
+import { Plus } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { GalleryProvider } from '../../../components/Gallery/context';
 
 function Products() {
   const {
     isLoading: isLoadingProducts,
-    data: products,
+    data: products = [],
     error: productsError,
   } = useGetProducts();
+
   const {
     isLoading: isLoadingOrders,
-    data: orders,
-    error: orderError,
+    data: orders = [],
+    error: ordersError,
   } = useGetOrders();
 
-  if (!products || !orders) {
-    return <div>Loading...</div>;
-  }
+  const [showAddProductModal, setShowAddProductModal] = useState(false);
 
-  if (productsError) {
-    return <div>{productsError.message}</div>;
-  }
-
-  if (orderError) {
-    return <div>{orderError.message}</div>;
-  }
-
-  const totalRevenue = products.reduce(
-    (acc, product) => acc + product.price,
-    0
-  );
-  const totalStock = products.reduce((acc, product) => acc + product.stock, 0);
-  const totalOutOfStock = products.reduce((acc, product) => {
-    if (product.stock === 0) {
-      return acc + 1;
-    }
-    return acc;
-  }, 0);
-
-  const totalOrders = orders.reduce((acc, order) => {
-    const productCountPerOrder = order.products.reduce(
-      (incr, product) => incr + product.count,
+  // Memoize metrics calculation to avoid unnecessary recalculations
+  const metrics: MetricPropsType[] = useMemo(() => {
+    const totalRevenue = products.reduce(
+      (acc, product) => acc + product.price * product.stock,
       0
     );
+    const totalStock = products.reduce(
+      (acc, product) => acc + product.stock,
+      0
+    );
+    const totalOutOfStock = products.filter(
+      product => product.stock === 0
+    ).length;
 
-    return acc + productCountPerOrder;
-  }, 0);
+    const totalOrders = orders.reduce((acc, order) => {
+      const productCountPerOrder = order.products.reduce(
+        (incr, product) => incr + product.count,
+        0
+      );
+      return acc + productCountPerOrder;
+    }, 0);
 
-  const metrics: MetricPropsType[] = [
-    { name: 'Unclaimed Revenue', value: totalRevenue, prefix: '$' },
-    { name: 'Sold', value: totalOrders },
-    { name: 'Stock', value: totalStock },
-    { name: 'Out of Stock', value: totalOutOfStock },
-  ];
+    return [
+      { name: 'Unclaimed Revenue', value: totalRevenue, prefix: '$' },
+      { name: 'Sold', value: totalOrders },
+      { name: 'Stock', value: totalStock },
+      { name: 'Out of Stock', value: totalOutOfStock },
+    ];
+  }, [products, orders]);
+
+  // Display a loading spinner while fetching products or orders
+  if (isLoadingProducts || isLoadingOrders) {
+    return <Skeleton.Dashboard />;
+  }
+
+  // Handle errors separately for products and orders
+  if (productsError) {
+    console.error(productsError);
+    return <div>Error loading products: {productsError.message}</div>;
+  }
+
+  if (ordersError) {
+    console.error(ordersError);
+    return <div>Error loading orders: {ordersError.message}</div>;
+  }
 
   return (
     <>
@@ -72,8 +86,27 @@ function Products() {
         <img src={revenue_chart} alt="" />
       </Cell>
 
+      <Cell $span={2}>
+        <h2>Recently Ordered</h2>
+      </Cell>
+
+      <Cell $span={2}>
+        <h2>Bestsellers</h2>
+      </Cell>
+
       <Cell $span={4}>
-        Latest orders
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <h2>All Products</h2>
+          <Button $variant="ghost" onClick={() => setShowAddProductModal(true)}>
+            <Icon icon={Plus} />
+            Add Product
+          </Button>
+        </div>
         <div
           style={{
             display: 'flex',
@@ -91,6 +124,16 @@ function Products() {
           ))}
         </div>
       </Cell>
+
+      {showAddProductModal && (
+        <Modal closeModal={() => setShowAddProductModal(false)}>
+          <GalleryProvider>
+            <AddProductForm
+              closeFormModal={() => setShowAddProductModal(false)}
+            />
+          </GalleryProvider>
+        </Modal>
+      )}
     </>
   );
 }

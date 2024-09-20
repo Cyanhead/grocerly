@@ -1,3 +1,4 @@
+export { default as AddProductForm } from './Form/AddProductForm';
 export { default as Banners } from './Banners';
 export { default as Button } from './Button';
 export { default as CategoryBox } from './CategoryBox';
@@ -15,6 +16,7 @@ export { default as NavBar } from './NavBar';
 export { default as EditProductForm } from './Form/EditProductForm';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SearchBar } from './Search/SearchBar';
+export { default as Skeleton } from './Loader/Skeleton';
 export { default as User } from './User';
 export { default as VisuallyHidden } from './VisuallyHidden';
 export * from './BaseStyled';

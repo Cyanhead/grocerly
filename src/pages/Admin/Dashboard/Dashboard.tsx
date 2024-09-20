@@ -4,31 +4,35 @@ import cart_chart from '../cart_chart.svg';
 import Metric from '../Metric';
 import { MetricPropsType } from '../Metric/Metric.type';
 import { useGetOrders } from '../../../hooks';
-import { Loader } from '../../../components';
+import { Skeleton } from '../../../components';
+import { useMemo } from 'react';
 
 function Dashboard() {
-  const { data, error } = useGetOrders();
+  const { isLoading, data: orders = [], error } = useGetOrders();
 
-  if (!data) {
-    return <Loader fullscreen />;
+  const metrics: MetricPropsType[] = useMemo(() => {
+    const totalRevenue = orders.reduce((acc, order) => acc + order.revenue, 0);
+
+    return [
+      { name: 'Revenue', value: totalRevenue, prefix: '$' },
+      { name: 'Orders', value: orders.length },
+      { name: 'Visitors', value: 45 },
+      {
+        name: 'Conversion',
+        value: 12,
+        suffix: '%',
+      },
+    ];
+  }, [orders]);
+
+  if (isLoading) {
+    return <Skeleton.Dashboard />;
   }
 
   if (error) {
     console.error(error);
+    return <div>Error getting orders: {error.message}</div>;
   }
-
-  const totalRevenue = data?.reduce((acc, order) => acc + order.revenue, 0);
-
-  const metrics: MetricPropsType[] = [
-    { name: 'Revenue', value: totalRevenue, prefix: '$' },
-    { name: 'Orders', value: data.length },
-    { name: 'Visitors', value: 45 },
-    {
-      name: 'Conversion',
-      value: 12,
-      suffix: '%',
-    },
-  ];
 
   return (
     <>

@@ -32,7 +32,10 @@ export type Products = {
  * @returns An object with the above properties.
  */
 export function useGetProducts() {
-  const { isLoading, data, error } = useSWR<Products>('items', getCollection); // TODO: revert to 'products'
+  const { isLoading, data, error } = useSWR<Products>(
+    'products',
+    getCollection
+  );
 
   return { isLoading, data, error };
 }

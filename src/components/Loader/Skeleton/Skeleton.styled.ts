@@ -18,6 +18,15 @@ export const Wrapper = styled.div`
   overflow: hidden;
 `;
 
+const longerShineLoadingImage = keyframes`
+  0% {
+    background-position: -25%;
+  }
+   100% {
+    background-position: 125%;
+  }
+`;
+
 const shineLoadingImage = keyframes`
   0% {
     background-position: -32px;
@@ -37,6 +46,32 @@ export const LoadingImage = styled.div`
   );
   background-size: 250px;
   animation: ${shineLoadingImage} 2s infinite ease-out;
+`;
+
+export const ChartWrapper = styled.div.attrs<{
+  $span?: number;
+  children: React.ReactNode;
+}>(props => ({
+  $span: props.$span || 4,
+}))`
+  grid-column-start: auto;
+  grid-column-end: span ${props => props.$span};
+`;
+
+export const ChartImage = styled.div`
+  background-image: linear-gradient(
+    90deg,
+    #f7f7f7 0px,
+    #ececec 40px,
+    #f7f7f7 80px
+  );
+
+  background-size: 150px;
+  background-repeat: no-repeat;
+  background-color: #f7f7f7;
+
+  height: 250px;
+  animation: ${longerShineLoadingImage} 2s infinite ease-out;
 `;
 
 export const LoadingContent = styled.div.attrs<{

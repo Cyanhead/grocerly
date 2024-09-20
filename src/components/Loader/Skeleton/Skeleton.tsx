@@ -1,3 +1,4 @@
+import { range } from '../../../helpers';
 import {
   Container,
   Wrapper,
@@ -8,6 +9,8 @@ import {
   LoadingSubText,
   LoadingBtn,
   SingleTextLine,
+  ChartWrapper,
+  ChartImage,
 } from './Skeleton.styled';
 
 function ImageAndText() {
@@ -49,6 +52,26 @@ function Metric() {
     </LoadingContent>
   );
 }
+
+function Chart() {
+  return (
+    <ChartWrapper>
+      <ChartImage />
+    </ChartWrapper>
+  );
+}
+
+function Dashboard() {
+  return (
+    <>
+      {range(0, 4).map(num => (
+        <Metric key={num} />
+      ))}
+      <Chart />
+    </>
+  );
+}
+
 function SingleLineText({
   width,
   height,
@@ -63,6 +86,7 @@ const Skeleton = {
   ImageAndText,
   Text,
   SingleLineText,
+  Dashboard,
   Metric,
 };
 

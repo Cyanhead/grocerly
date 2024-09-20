@@ -1,43 +1,51 @@
-import {
-  ExistingProductType,
-  EditProductFormPropsType,
-} from './EditProductForm.type';
+import { NewProductType, AddProductFormPropsType } from './AddProductForm.type';
+import ProductForm from '../ProductForm';
 import { useState } from 'react';
+import ProductFormInput from '../ProductForm/ProductFormInput';
 import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
-import { db, storage } from '../../../context/Firebase';
-import {
-  arrayRemove,
+  addDoc,
   arrayUnion,
+  collection,
   doc,
   serverTimestamp,
   updateDoc,
 } from 'firebase/firestore';
+import { db, storage } from '../../../context/Firebase';
 import { useGalleryContext } from '../../Gallery/context';
-import ProductForm from '../ProductForm';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
-function EditProductForm({
-  product,
-  closeFormModal,
-}: EditProductFormPropsType) {
-  const [formData, setFormData] = useState<ExistingProductType>({ ...product });
-
-  const { newImagesToUpload, imagesToDeleteOnBackend } = useGalleryContext();
+function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
+  const [formData, setFormData] = useState<NewProductType>({
+    name: '',
+    price: 0,
+    about: '',
+    otherNames: [],
+    images: [],
+    category: '',
+    stock: 0,
+  });
 
   const [status, setStatus] = useState<
     'idle' | 'loading' | 'success' | 'error'
   >('idle');
 
-  async function handleUploadImagesAndReturnUrls() {
+  const { newImagesToUpload } = useGalleryContext();
+
+  async function createNewDocAndReturnId(obj: NewProductType) {
+    const itemsDocRef = collection(db, 'products');
+
+    const docRef = await addDoc(itemsDocRef, obj);
+    const docId = `${docRef.id}`;
+    console.log('1. Document written with ID: ', docId);
+    return docId;
+  }
+
+  async function handleUploadImagesAndReturnUrls(productId: string) {
     const urls = await Promise.all(
       newImagesToUpload.map(imgFile => {
         return new Promise<string>((resolve, reject) => {
           const uploadTask = uploadBytesResumable(
-            ref(storage, `products/${product.id}/${imgFile.name}`),
+            ref(storage, `products/${productId}/${imgFile.name}`),
             imgFile
           );
 
@@ -58,7 +66,7 @@ function EditProductForm({
           async function complete() {
             try {
               const url = await getDownloadURL(
-                ref(storage, `products/${product.id}/${imgFile.name}`)
+                ref(storage, `products/${productId}/${imgFile.name}`)
               );
               resolve(url);
             } catch (err) {
@@ -79,71 +87,33 @@ function EditProductForm({
     return urls;
   }
 
-  async function handleDeleteImagesOnBackend() {
-    const productsDocRef = doc(db, 'product', product.id);
-    const urls = imagesToDeleteOnBackend;
-
-    try {
-      await updateDoc(productsDocRef, {
-        images: arrayRemove(...urls),
-      });
-      console.log('Document successfully updated!');
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      } else {
-        console.error('Unknown error:', error);
-      }
-    }
-  }
-
-  async function deleteMediaFromStorage(mediaUrl: string) {
-    try {
-      // Extract file path from the URL
-      const decodedUrl = decodeURIComponent(
-        mediaUrl.split('/o/')[1].split('?')[0]
-      );
-
-      // Create a reference to the file to delete
-      const fileRef = ref(storage, decodedUrl);
-
-      // Delete the file
-      await deleteObject(fileRef);
-
-      console.log('File deleted successfully');
-    } catch (error) {
-      console.error('Error deleting file:', error);
-    }
-  }
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setStatus('loading');
 
-    if (imagesToDeleteOnBackend.length !== 0) {
-      await handleDeleteImagesOnBackend();
-      await Promise.all(
-        imagesToDeleteOnBackend.map(url => deleteMediaFromStorage(url))
-      );
-    }
+    const productId = await createNewDocAndReturnId(formData);
+    const urls = await handleUploadImagesAndReturnUrls(productId);
 
-    const urls = await handleUploadImagesAndReturnUrls();
+    const productsDocRef = doc(db, 'products', productId);
 
-    const productsDocRef = doc(db, 'products', product.id);
-
-    const updatedProductData = {
+    const productData = {
+      id: productId,
       images: arrayUnion(...urls),
       name: formData.name,
       otherNames: formData.otherNames,
       category: formData.category,
       about: formData.about,
       price: formData.price,
+      stock: formData.stock,
+      rating: 1,
+      createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
+      lastOrder: serverTimestamp(),
     };
 
     try {
-      await updateDoc(productsDocRef, updatedProductData);
+      await updateDoc(productsDocRef, productData);
       console.log('3. Product successfully updated!');
     } catch (error) {
       setStatus('error');
@@ -162,15 +132,29 @@ function EditProductForm({
   return (
     <ProductForm
       onSubmit={handleSubmit}
-      status={status}
       state={formData}
       stateSetter={setFormData}
+      status={status}
       button={{
         text: 'Save Changes',
         loadingText: 'Saving...',
       }}
-    />
+    >
+      <ProductFormInput
+        type="number"
+        label="Stock"
+        name="stock"
+        placeholder="Enter available stock..."
+        value={formData.stock}
+        onInputChange={e =>
+          setFormData(prevState => ({
+            ...prevState,
+            stock: parseInt(e.target.value),
+          }))
+        }
+      />
+    </ProductForm>
   );
 }
 
-export default EditProductForm;
+export default AddProductForm;

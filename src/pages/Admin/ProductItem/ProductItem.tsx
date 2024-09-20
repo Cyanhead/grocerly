@@ -1,9 +1,8 @@
 import Metric from '../Metric';
 import { Cell } from '../Admin.styled';
-
 import revenue_chart from '../bar_chart.svg';
 import { useGetOrders, useGetSingleProduct } from '../../../hooks';
-import { EditProductForm, Loader, Modal } from '../../../components';
+import { EditProductForm, Modal, Skeleton } from '../../../components';
 import { useParams } from 'react-router-dom';
 import { MetricPropsType } from '../Metric/Metric.type';
 import defaultImage from '../../../assets/images/default_product.svg';
@@ -17,8 +16,9 @@ import {
 import { parseTimestamp } from '../../../helpers';
 import Details from '../Details';
 import { DetailsPropsType } from '../Details/Details.type';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { GalleryProvider } from '../../../components/Gallery/context';
+import { Timestamp } from 'firebase/firestore';
 
 function ProductItem() {
   const { id: productId = '' } = useParams();
@@ -26,7 +26,7 @@ function ProductItem() {
 
   const {
     isLoading: ordersIsLoading,
-    data: orders,
+    data: orders = [],
     error: ordersError,
   } = useGetOrders();
 
@@ -36,94 +36,94 @@ function ProductItem() {
     error: productError,
   } = useGetSingleProduct(productId);
 
-  if (productIsLoading || ordersIsLoading || !orders || !product) {
-    return <Loader fullscreen />;
+  const metrics: MetricPropsType[] = useMemo(() => {
+    const completedOrders = orders.filter(
+      order => order.status === 'completed'
+    );
+    const completedOrdersThatIncludeProductId = completedOrders.filter(order =>
+      order.products.some(item => item.id === productId)
+    );
+
+    const productRevenue = completedOrdersThatIncludeProductId.reduce(
+      (acc, order) => {
+        const productItem = order.products.find(item => item.id === productId);
+        if (!productItem) return acc;
+        return acc + productItem.price * productItem.count;
+      },
+      0
+    );
+
+    const ordersThatIncludeProductId = orders.filter(order =>
+      order.products.some(item => item.id === productId)
+    );
+
+    const numOfProductsSold = ordersThatIncludeProductId.reduce(
+      (acc, order) => {
+        const productItem = order.products.find(item => item.id === productId);
+        return productItem ? acc + productItem.count : acc;
+      },
+      0
+    );
+
+    const refundedOrders = orders.filter(order => order.status === 'refunded');
+
+    const refundedOrdersThatIncludeProductId = refundedOrders.filter(order =>
+      order.products.some(item => item.id === productId)
+    );
+
+    const numOfProductsRefunded = refundedOrdersThatIncludeProductId.reduce(
+      (acc, order) => {
+        const productItem = order.products.find(item => item.id === productId);
+        return productItem ? acc + productItem.count : acc;
+      },
+      0
+    );
+
+    return [
+      { name: 'Revenue', value: productRevenue, prefix: '$' },
+      { name: 'Orders', value: numOfProductsSold },
+      { name: 'Refunds', value: numOfProductsRefunded },
+      { name: 'Net profit', value: productRevenue * 0.18, prefix: '$' },
+    ];
+  }, [orders, productId]);
+
+  if (productIsLoading || ordersIsLoading) {
+    return <Skeleton.Dashboard />;
   }
 
-  if (ordersError || productError) {
-    console.error(ordersError);
+  if (productError || !product) {
     console.error(productError);
-    return <Loader fullscreen />;
+    return (
+      <div>
+        Error loading product: {productError?.message || 'Product not found'}
+      </div>
+    );
   }
 
-  // REVENUE -------------------------------------------------
-  const completedOrders = orders.filter(order => order.status === 'completed');
+  if (ordersError) {
+    console.error(ordersError);
+    return <div>Error loading orders: {ordersError.message}</div>;
+  }
 
-  const completedOrdersThatIncludeProductId = completedOrders.filter(order =>
-    order.products.some(item => item.id === productId)
-  );
+  function determineFirstSale(lastOrder: Timestamp, createdAt: Timestamp) {
+    if (!lastOrder || !createdAt) return 'Never';
 
-  const productRevenue = completedOrdersThatIncludeProductId.reduce(
-    (acc, order) => {
-      const product = order.products.find(item => item.id === productId);
-
-      if (!product) return acc;
-
-      const productRevenue = product.price * product.count;
-      return acc + productRevenue;
-    },
-    0
-  );
-
-  // ORDER COUNT --------------------------------------------
-  const ordersThatIncludeProductId = orders.filter(order =>
-    order.products.some(item => item.id === productId)
-  );
-
-  const numOfProductsSold = ordersThatIncludeProductId.reduce((acc, order) => {
-    const product = order.products.find(item => item.id === productId);
-
-    if (!product) return acc;
-
-    return acc + product.count;
-  }, 0);
-
-  // REFUNDS -------------------------------------------------
-  const refundedOrders = orders.filter(order => order.status === 'refunded');
-
-  const refundedOrdersThatIncludeProductId = refundedOrders.filter(order =>
-    order.products.some(item => item.id === productId)
-  );
-
-  const numOfProductsRefunded = refundedOrdersThatIncludeProductId.reduce(
-    (acc, order) => {
-      const product = order.products.find(item => item.id === productId);
-
-      if (!product) return acc;
-
-      return acc + product.count;
-    },
-    0
-  );
-
-  const metrics: MetricPropsType[] = [
-    {
-      name: 'Revenue',
-      value: productRevenue,
-      prefix: '$',
-    },
-    { name: 'Orders', value: numOfProductsSold },
-    { name: 'Refunds', value: numOfProductsRefunded },
-    {
-      name: 'Net profit',
-      value: productRevenue * 0.18,
-
-      prefix: '$',
-    },
-  ];
+    const diff = lastOrder.toDate().getTime() - createdAt.toDate().getTime();
+    return diff > 1000 * 60 ? parseTimestamp(lastOrder) : 'Never';
+  }
 
   const productInfo: DetailsPropsType['stats'] = [
     { stat: 'Price', value: product.price, icon: DollarSign },
     { stat: 'In Stock', value: product.stock, icon: Package },
-    { stat: 'Rating', value: product.rating, icon: Star },
+    { stat: 'Rating', value: product.rating ?? 'N/A', icon: Star },
     {
       stat: 'Start Date',
-      value: parseTimestamp(product.createdAt),
+      value: parseTimestamp(product.createdAt) ?? 'N/A',
       icon: CalendarPlus,
     },
     {
       stat: 'First sale',
-      value: parseTimestamp(product.lastOrder),
+      value: determineFirstSale(product.lastOrder, product.createdAt),
       icon: ShoppingBag,
     },
   ];
@@ -135,16 +135,15 @@ function ProductItem() {
       ))}
 
       <Details
-        image={product.images[0] ?? defaultImage}
-        name={product.name}
-        additionalInfo={product.category}
+        image={product.images?.[0] ?? defaultImage}
+        name={product.name || 'Unnamed Product'}
+        additionalInfo={product.category || 'Unknown Category'}
         stats={productInfo}
         setShowEditModal={setShowEditModal}
       />
 
       <Cell $span={3}>
         revenue chart
-        {/* TODO: replace with chart */}
         <img src={revenue_chart} alt="" />
       </Cell>
 
