@@ -4,6 +4,7 @@ export { default as Button } from './Button';
 export { default as CategoryBox } from './CategoryBox';
 export { default as Footer } from './Footer';
 export { default as Gallery } from './Gallery';
+export { default as Icon } from './Icon';
 export { default as Input } from './Input';
 export { default as Labels } from './Labels';
 export { default as Layout } from './Layout';

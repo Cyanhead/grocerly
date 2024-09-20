@@ -2,7 +2,7 @@ import { IconButtonPropsType } from './IconButton.type';
 import { StyledIconButton } from './IconButton.styled';
 import VisuallyHidden from '../VisuallyHidden';
 import { forwardRef, Ref } from 'react';
-import Icon from '../Icon/Icon';
+import Icon from '../Icon';
 
 function IconButton(
   { icon, visuallyHidden, size, ...delegated }: IconButtonPropsType,

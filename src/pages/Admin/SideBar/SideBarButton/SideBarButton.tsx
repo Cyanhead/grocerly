@@ -1,6 +1,6 @@
 import { SideBarButtonPropsType } from './SideBarButton.type';
 import { Button } from './SideBarButton.styled';
-import Icon from '../../../../components/Icon';
+import { Icon } from '../../../../components';
 
 function SideBarButton({ to, icon, children, end }: SideBarButtonPropsType) {
   function toKebabCase(word: string) {

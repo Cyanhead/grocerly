@@ -6,9 +6,8 @@ import {
   Section,
   Wrapper,
 } from './Error.styled';
-import { Button } from '../../components';
-import Icon from '../../components/Icon';
-import { ArrowLeft, Headset, Home, RefreshCcw } from 'lucide-react';
+import { Button, Icon } from '../../components';
+import { ArrowLeft, Home, RefreshCcw } from 'lucide-react';
 import { LinkButton } from '../../components/Button';
 
 const Error = () => {

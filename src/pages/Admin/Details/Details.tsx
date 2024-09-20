@@ -1,5 +1,4 @@
 import { DetailsPropsType } from './Details.type';
-import Icon from '../../../components/Icon';
 import {
   Divider,
   MenuWrapper,
@@ -11,7 +10,7 @@ import {
   Wrapper,
 } from './Details.styled';
 import { Edit3, MoreVertical } from 'lucide-react';
-import { Menu } from '../../../components';
+import { Icon, Menu } from '../../../components';
 
 function Details({
   image,

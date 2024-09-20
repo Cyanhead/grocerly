@@ -4,8 +4,13 @@ import revenue_chart from '../bar_chart.svg';
 import { Link } from 'react-router-dom';
 import { useGetOrders, useGetProducts } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
-import { AddProductForm, Button, Modal, Skeleton } from '../../../components';
-import Icon from '../../../components/Icon';
+import {
+  AddProductForm,
+  Button,
+  Icon,
+  Modal,
+  Skeleton,
+} from '../../../components';
 import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { GalleryProvider } from '../../../components/Gallery/context';
