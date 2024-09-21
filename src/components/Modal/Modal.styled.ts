@@ -14,6 +14,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
 `;
 
 export const Wrapper = styled.div`

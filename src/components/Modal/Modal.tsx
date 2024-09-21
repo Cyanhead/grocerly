@@ -105,11 +105,7 @@ const Modal = ({ children = 'empty modal', closeModal }: ModalPropsType) => {
       role="dialog"
       aria-modal="true"
     >
-      <Wrapper
-        className="flex items-center justify-center rounded-lg border-4 bg-bgGray p-10 shadow-xl"
-        ref={modalRef}
-        tabIndex={-1}
-      >
+      <Wrapper ref={modalRef} tabIndex={-1}>
         <CloseButtonWrapper onClick={closeModal}>
           <Icon
             icon={X}

@@ -7,4 +7,5 @@ export type IconButtonPropsType = Omit<ButtonPropsType, 'children'> & {
   >;
   visuallyHidden?: string;
   size?: number;
+  variant?: ButtonPropsType['$variant'];
 };

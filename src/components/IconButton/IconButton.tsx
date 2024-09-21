@@ -5,14 +5,20 @@ import { forwardRef, Ref } from 'react';
 import Icon from '../Icon';
 
 function IconButton(
-  { icon, visuallyHidden, size, ...delegated }: IconButtonPropsType,
+  {
+    icon,
+    visuallyHidden,
+    size,
+    variant = 'normal',
+    ...delegated
+  }: IconButtonPropsType,
   ref: Ref<HTMLButtonElement>
 ) {
   return (
     <StyledIconButton
       ref={ref}
       data-testid="IconButton"
-      $variant="normal"
+      $variant={variant}
       $pad={10}
       {...delegated}
     >

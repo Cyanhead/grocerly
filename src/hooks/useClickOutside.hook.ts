@@ -1,5 +1,12 @@
 import { useEffect, RefObject } from 'react';
 
+/**
+ * @description
+ * Hook that handles outside clicks on a set of ref elements.
+ * @param {RefObject<HTMLElement>[]} refs
+ * @param {() => void} handler
+ * @returns
+ */
 export const useClickOutside = (
   refs: RefObject<HTMLElement>[],
   handler: () => void

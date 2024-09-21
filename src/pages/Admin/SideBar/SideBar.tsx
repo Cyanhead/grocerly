@@ -10,10 +10,14 @@ import {
   Scroll,
   Settings2,
   Users,
+  X,
 } from 'lucide-react';
 import { Layout, Logo } from '../../../components';
-import { SectionTitle, Wrapper } from './SideBar.styled';
+import { CloseButton, GreyBg, SectionTitle, Wrapper } from './SideBar.styled';
 import SideBarButton from './SideBarButton';
+import { SideBarPropsType } from './SideBar.type';
+import { useClickOutside } from '../../../hooks';
+import { useEffect, useRef } from 'react';
 
 const sections = [
   {
@@ -57,19 +61,51 @@ const sections = [
   },
 ];
 
-function SideBar() {
+function SideBar({ showSideBar, setShowSideBar }: SideBarPropsType) {
+  const sideBarRef = useRef(null);
+
+  useClickOutside([sideBarRef], () => {
+    setShowSideBar(false);
+  });
+
+  const tabIndex = window.innerWidth >= 992 ? 0 : showSideBar ? 0 : -1;
+
+  useEffect(() => {
+    if (showSideBar) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [showSideBar]);
+
   return (
-    <Wrapper data-testid="SideBar">
-      <div style={{ paddingLeft: '16px', alignSelf: 'start' }}>
-        <Logo />
-      </div>
-      <SideBarButton to="/admin" icon={Home} end>
-        Dashboard
-      </SideBarButton>
-      {sections.map(({ title, options }, index) => (
-        <SideBarSection key={index} title={title} options={options} />
-      ))}
-    </Wrapper>
+    <>
+      <GreyBg $show={showSideBar} />
+      <Wrapper ref={sideBarRef} data-testid="SideBar" $isOpen={showSideBar}>
+        <div style={{ paddingLeft: '16px', alignSelf: 'start' }}>
+          <Logo tabIndex={tabIndex} />
+        </div>
+        <SideBarButton to="/admin" icon={Home} tabIndex={tabIndex} end>
+          Dashboard
+        </SideBarButton>
+        {sections.map(({ title, options }, index) => (
+          <SideBarSection
+            key={index}
+            title={title}
+            options={options}
+            tabIndex={tabIndex}
+          />
+        ))}
+      </Wrapper>
+      <CloseButton
+        $show={showSideBar}
+        variant="ghost"
+        visuallyHidden="close sidebar"
+        icon={X}
+        onClick={() => setShowSideBar(false)}
+        tabIndex={tabIndex}
+      />
+    </>
   );
 }
 
@@ -78,14 +114,19 @@ export default SideBar;
 type SideBarSectionPropsType = {
   title: string;
   options: (typeof sections)[0]['options'];
+  tabIndex?: number;
 };
-const SideBarSection = ({ title, options }: SideBarSectionPropsType) => (
+const SideBarSection = ({
+  title,
+  options,
+  tabIndex,
+}: SideBarSectionPropsType) => (
   <Layout.FlexCol as="nav" $align="stretch">
     <SectionTitle>{title}</SectionTitle>
     <ul style={{ listStyle: 'none' }}>
       {options.map(({ name, icon }, index) => (
         <li key={index}>
-          <SideBarButton to={`/admin/${name}`} icon={icon}>
+          <SideBarButton to={`/admin/${name}`} icon={icon} tabIndex={tabIndex}>
             {name}
           </SideBarButton>
         </li>

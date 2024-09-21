@@ -3,9 +3,11 @@ import SideBar from './SideBar';
 import { Container, Grid, Page, Title, TitleCell } from './Admin.styled';
 import NavBar from './NavBar';
 import { TextLink } from '../../components';
+import { useState } from 'react';
 
 function Admin() {
   const { pathname, state } = useLocation();
+  const [showSideBar, setShowSideBar] = useState(false);
 
   function getPageTitle(path: string, routerState: { title: string }) {
     if (path === '/admin') {
@@ -32,9 +34,9 @@ function Admin() {
 
   return (
     <Container data-testid="Admin">
-      <SideBar />
+      <SideBar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
       <Page>
-        <NavBar />
+        <NavBar setShowSideBar={setShowSideBar} />
         <Grid as="section">
           <TitleCell $span={4}>
             <PageTitle title={title} />
