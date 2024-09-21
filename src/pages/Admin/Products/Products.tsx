@@ -86,20 +86,20 @@ function Products() {
         />
       ))}
 
-      <Cell $span={4}>
+      <Cell $span={[2, 4]}>
         {/* TODO: replace with chart */}
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      <Cell $span={2}>
+      <Cell $span={[1, 2]}>
         <h2>Recently Ordered</h2>
       </Cell>
 
-      <Cell $span={2}>
+      <Cell $span={[1, 2]}>
         <h2>Bestsellers</h2>
       </Cell>
 
-      <Cell $span={4}>
+      <Cell $span={[2, 4]}>
         <div
           style={{
             display: 'flex',

@@ -142,12 +142,14 @@ function ProductItem() {
         setShowEditModal={setShowEditModal}
       />
 
-      <Cell $span={3}>
+      <Cell $span={[2, 3]}>
         revenue chart
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      <Cell $span={4}>Latest orders</Cell>
+      <Cell $span={[2, 4]}>
+        <h2>Latest orders</h2>
+      </Cell>
 
       {showEditModal && (
         <Modal closeModal={() => setShowEditModal(false)}>

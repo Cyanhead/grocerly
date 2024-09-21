@@ -40,20 +40,23 @@ function Dashboard() {
         <Metric key={metric.name} {...metric} />
       ))}
 
-      <Cell $span={3}>
+      <Cell $span={[2, 3]}>
         {/* TODO: replace with chart */}
         <img src={revenue_chart} alt="" />
       </Cell>
-      <Cell $span={1}>
+      <Cell>
         {/* NOTE: might delete */}
         {/* TODO: replace with chart */}
         <img src={cart_chart} alt="" />
       </Cell>
 
-      <Cell $span={2}>Best sellers</Cell>
-      <Cell $span={2}>Traffic</Cell>
+      <Cell $span={[1, 2]}>
+        <h2>Traffic</h2>
+      </Cell>
 
-      <Cell $span={4}>Latest orders</Cell>
+      <Cell $span={[1, 2]}>
+        <h2>Latest orders</h2>
+      </Cell>
     </>
   );
 }

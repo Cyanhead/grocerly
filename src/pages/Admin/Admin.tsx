@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import SideBar from './SideBar';
-import { Container, Grid, Page, Title, TitleCell } from './Admin.styled';
+import { Container, Grid, Page, Title, TitleWrapper } from './Admin.styled';
 import NavBar from './NavBar';
 import { TextLink } from '../../components';
 import { useState } from 'react';
@@ -37,10 +37,10 @@ function Admin() {
       <SideBar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
       <Page>
         <NavBar setShowSideBar={setShowSideBar} />
+        <TitleWrapper>
+          <PageTitle title={title} />
+        </TitleWrapper>
         <Grid as="section">
-          <TitleCell $span={4}>
-            <PageTitle title={title} />
-          </TitleCell>
           <Outlet />
         </Grid>
       </Page>

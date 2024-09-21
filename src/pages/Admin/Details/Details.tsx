@@ -20,7 +20,7 @@ function Details({
   setShowEditModal,
 }: DetailsPropsType) {
   return (
-    <Wrapper data-testid="Details">
+    <Wrapper data-testid="Details" $span={[2, 1]}>
       <ImageWrapper>
         <Image src={image} alt="product image" />
         <P $bold>{name}</P>
@@ -57,7 +57,7 @@ function Details({
           <Icon
             icon={MoreVertical}
             size={20}
-            visuallyHidden="Edit Product"
+            visuallyHidden="Product Menu"
             isIconStandalone
           />
         </Menu>

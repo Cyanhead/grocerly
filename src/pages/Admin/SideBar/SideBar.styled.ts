@@ -46,7 +46,7 @@ export const Wrapper = styled.div.attrs<{ $isOpen: boolean }>(props => ({
 
   transition: 300ms ease-in-out;
 
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
+  @media screen and (min-width: ${getBreakpoint('xl')}) {
     position: sticky;
     left: 0;
   }
@@ -70,7 +70,7 @@ export const CloseButton = styled(IconButton).attrs<{ $show: boolean }>({})`
 
   transition: 300ms ease-in-out;
 
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
+  @media screen and (min-width: ${getBreakpoint('xl')}) {
     display: none;
   }
 `;
