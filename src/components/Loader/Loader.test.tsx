@@ -9,17 +9,19 @@ describe('<Loader />', () => {
     });
 
     return {
-      loader: screen.getByRole('Loader'),
+      loader: screen.getByRole('img', { name: /load/i }),
     };
   }
 
-  it('should render Loader_CHANGE_THIS_TO_EXPECTED_DEFAULT_BEHAVIOR', () => {
+  it('should render', () => {
     const { loader } = renderComponent();
 
     expect(loader).toBeInTheDocument();
+  });
 
-    // render(<Loader />);
+  it('should be animated', () => {
+    const { loader } = renderComponent();
 
-    // expect(screen.getByRole('Loader')).toBeInTheDocument();
+    expect(loader).toHaveStyle({ animation: 'pulse 1.5s infinite linear' });
   });
 });

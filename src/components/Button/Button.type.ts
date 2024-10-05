@@ -11,6 +11,8 @@ export type ButtonPropsType = React.ComponentPropsWithoutRef<'button'> &
   ButtonCSSPropsType & {
     children: React.ReactNode;
     as?: keyof JSX.IntrinsicElements;
+    variant?: ButtonPropsType['$variant'];
   };
 
-export type LinkButtonPropsType = ButtonCSSPropsType & LinkProps;
+export type LinkButtonPropsType = ButtonCSSPropsType &
+  LinkProps & { variant?: ButtonPropsType['$variant'] };

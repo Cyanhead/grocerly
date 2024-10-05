@@ -16,6 +16,7 @@ export const Wrapper = styled(BaseWrapper)`
 export const FullScreenWrapper = styled(Wrapper)`
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
 `;
 
 export const Image = styled.img`

@@ -22,8 +22,8 @@ const longerShineLoadingImage = keyframes`
   0% {
     background-position: -25%;
   }
-   100% {
-    background-position: 125%;
+   40%,100% {
+    background-position: calc(125% + 100px);
   }
 `;
 
@@ -48,14 +48,17 @@ export const LoadingImage = styled.div`
   animation: ${shineLoadingImage} 2s infinite ease-out;
 `;
 
-export const ChartWrapper = styled.div.attrs<{
-  $span?: number;
-  children: React.ReactNode;
-}>(props => ({
-  $span: props.$span || 4,
-}))`
+export const ChartWrapper = styled.div`
   grid-column-start: auto;
-  grid-column-end: span ${props => props.$span};
+  grid-column-end: span 1;
+
+  @media screen and (min-width: ${getBreakpoint('xs')}) {
+    grid-column-end: span 2;
+  }
+
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    grid-column-end: span 4;
+  }
 `;
 
 export const ChartImage = styled.div`
@@ -99,7 +102,8 @@ const shineLoadingContainerItems = keyframes`
     background-position: -100px;
   }
   40%, 100% {
-    background-position: 140px;
+    background-position: 200px;
+
   }
 `;
 

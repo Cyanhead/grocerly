@@ -68,6 +68,7 @@ function Dashboard() {
         <Metric key={num} />
       ))}
       <Chart />
+      <Chart />
     </>
   );
 }
