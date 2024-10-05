@@ -4,16 +4,11 @@ import revenue_chart from '../bar_chart.svg';
 import { Link } from 'react-router-dom';
 import { useGetOrders, useGetProducts } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
-import {
-  AddProductForm,
-  Button,
-  Icon,
-  Modal,
-  Skeleton,
-} from '../../../components';
+import { AddProductForm, Icon, Modal, Skeleton } from '../../../components';
 import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { GalleryProvider } from '../../../components/Gallery/context';
+import { AddProductButton, MobileAddProductButton } from './Products.styled';
 
 function Products() {
   const {
@@ -107,10 +102,18 @@ function Products() {
           }}
         >
           <h2>All Products</h2>
-          <Button $variant="ghost" onClick={() => setShowAddProductModal(true)}>
+          <AddProductButton
+            variant="ghost"
+            onClick={() => setShowAddProductModal(true)}
+          >
             <Icon icon={Plus} />
             Add Product
-          </Button>
+          </AddProductButton>
+          <MobileAddProductButton
+            icon={Plus}
+            variant="ghost"
+            onClick={() => setShowAddProductModal(true)}
+          />
         </div>
         <div
           style={{

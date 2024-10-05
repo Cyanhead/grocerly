@@ -21,7 +21,7 @@ export const GreyBg = styled.div.attrs<{ $show: boolean }>(props => ({
   backdrop-filter: blur(10px);
 `;
 
-export const Wrapper = styled.div.attrs<{ $isOpen: boolean }>(props => ({
+export const Wrapper = styled.aside.attrs<{ $isOpen: boolean }>(props => ({
   $isOpen: props.$isOpen || false,
 }))`
   position: fixed;

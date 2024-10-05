@@ -9,7 +9,10 @@ function Admin() {
   const { pathname, state } = useLocation();
   const [showSideBar, setShowSideBar] = useState(false);
 
-  function getPageTitle(path: string, routerState: { title: string }) {
+  function getPageTitle(
+    path: string,
+    routerState: { title?: string } | null | undefined
+  ) {
     if (path === '/admin') {
       return 'Dashboard';
     }
@@ -27,10 +30,14 @@ function Admin() {
       return cleaned;
     }
 
-    return `${cleaned} / ${routerState.title}`;
+    return `${cleaned} / ${routerState?.title ?? ''}`;
   }
 
   const title = getPageTitle(pathname, state);
+
+  if (typeof title !== 'string') {
+    throw new Error('title is not a string');
+  }
 
   return (
     <Container data-testid="Admin">
@@ -40,7 +47,7 @@ function Admin() {
         <TitleWrapper>
           <PageTitle title={title} />
         </TitleWrapper>
-        <Grid as="section">
+        <Grid as="section" aria-label="dashboard-page-grid">
           <Outlet />
         </Grid>
       </Page>

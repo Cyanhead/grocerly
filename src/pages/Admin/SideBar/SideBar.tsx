@@ -68,6 +68,7 @@ function SideBar({ showSideBar, setShowSideBar }: SideBarPropsType) {
     setShowSideBar(false);
   });
 
+  // ensures that the buttons are keyboard-focusable on large screens
   const tabIndex = window.innerWidth >= 992 ? 0 : showSideBar ? 0 : -1;
 
   useEffect(() => {

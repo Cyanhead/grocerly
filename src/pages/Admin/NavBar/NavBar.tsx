@@ -1,6 +1,6 @@
 import { LayoutGrid } from 'lucide-react';
 import { User } from '../../../components';
-import { Container, MenuButton, Wrapper } from './NavBar.styled';
+import { Container, Logo, MenuButton, Wrapper } from './NavBar.styled';
 import { NavBarPropsType } from './NavBar.type';
 
 function NavBar({ setShowSideBar }: NavBarPropsType) {
@@ -12,6 +12,7 @@ function NavBar({ setShowSideBar }: NavBarPropsType) {
           visuallyHidden="navigation menu"
           onClick={() => setShowSideBar((prev: boolean) => !prev)}
         />
+        <Logo />
         <User />
       </Wrapper>
     </Container>
