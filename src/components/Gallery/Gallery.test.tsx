@@ -1,25 +1,26 @@
 import { screen } from '@testing-library/react';
 import Gallery from './Gallery';
 import { renderWithProviders } from '../../tests/testUtils';
+import { GalleryProvider } from './context';
 
 describe('<Gallery />', () => {
   function renderComponent() {
-    renderWithProviders(<Gallery />, {
-      providers: ['ThemeProvider'],
-    });
+    renderWithProviders(
+      <GalleryProvider>
+        <Gallery images={[]} />
+      </GalleryProvider>,
+      {
+        providers: ['ThemeProvider'],
+      }
+    );
 
     return {
-      gallery: screen.getByRole('Gallery'),
+      previewImage: screen.getByRole('img', { name: /product/i }),
     };
   }
 
-  it('should render Gallery_CHANGE_THIS_TO_EXPECTED_DEFAULT_BEHAVIOR', () => {
-    const { gallery } = renderComponent();
-
-    expect(gallery).toBeInTheDocument();
-
-    // render(<Gallery />);
-
-    // expect(screen.getByRole('Gallery')).toBeInTheDocument();
+  it('should render', () => {
+    const { previewImage } = renderComponent();
+    expect(previewImage).toBeInTheDocument();
   });
 });

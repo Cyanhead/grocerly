@@ -1,15 +1,15 @@
 import { screen } from '@testing-library/react';
 import Metric from './Metric';
-import { renderWithProviders } from '../../tests/testUtils';
+import { renderWithProviders } from '../../../tests/testUtils';
 
 describe('<Metric />', () => {
   function renderComponent() {
-    renderWithProviders(<Metric />, {
+    renderWithProviders(<Metric name="Sample" value={101} />, {
       providers: ['ThemeProvider'],
     });
 
     return {
-      metric: screen.getByRole('Metric'),
+      metric: screen.getByRole('heading', { name: '101' }),
     };
   }
 
@@ -17,9 +17,5 @@ describe('<Metric />', () => {
     const { metric } = renderComponent();
 
     expect(metric).toBeInTheDocument();
-
-    // render(<Metric />);
-
-    // expect(screen.getByRole('Metric')).toBeInTheDocument();
   });
 });

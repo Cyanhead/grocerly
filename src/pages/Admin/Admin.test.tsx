@@ -1,25 +1,36 @@
 import { screen } from '@testing-library/react';
 import Admin from './Admin';
 import { renderWithProviders } from '../../tests/testUtils';
+import { act } from 'react';
 
 describe('<Admin />', () => {
-  function renderComponent() {
-    renderWithProviders(<Admin />, {
-      providers: ['ThemeProvider'],
-    });
+  async function renderComponent() {
+    await act(async () =>
+      renderWithProviders(<Admin />, {
+        providers: ['ThemeProvider', 'MemoryRouter', 'AuthProvider'],
+        route: '/admin/products',
+      })
+    );
 
     return {
-      admin: screen.getByRole('Admin'),
+      heading: screen.getByRole('heading'),
+      adminPageGrid: screen.getByRole('region'),
+      sideBar: screen.getByRole('complementary'),
+      navBar: screen.getByRole('banner'),
     };
   }
 
-  it('should render Admin_CHANGE_THIS_TO_EXPECTED_DEFAULT_BEHAVIOR', () => {
-    const { admin } = renderComponent();
+  it('should render a sidebar and a navbar', async () => {
+    const { sideBar, navBar } = await renderComponent();
 
-    expect(admin).toBeInTheDocument();
+    expect(sideBar).toBeInTheDocument();
+    expect(navBar).toBeInTheDocument();
+  });
 
-    // render(<Admin />);
+  it('should render a heading and a grid', async () => {
+    const { heading, adminPageGrid } = await renderComponent();
 
-    // expect(screen.getByRole('Admin')).toBeInTheDocument();
+    expect(heading).toBeInTheDocument();
+    expect(adminPageGrid).toHaveStyle('display: grid');
   });
 });

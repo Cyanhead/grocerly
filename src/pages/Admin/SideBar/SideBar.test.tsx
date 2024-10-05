@@ -3,23 +3,25 @@ import SideBar from './SideBar';
 import { renderWithProviders } from '../../../tests/testUtils';
 
 describe('<SideBar />', () => {
+  const handleShowSideBar = vi.fn();
+
   function renderComponent() {
-    renderWithProviders(<SideBar />, {
-      providers: ['ThemeProvider'],
-    });
+    const { rerender } = renderWithProviders(
+      <SideBar showSideBar={false} setShowSideBar={handleShowSideBar} />,
+      {
+        providers: ['ThemeProvider', 'MemoryRouter'],
+      }
+    );
 
     return {
-      sideBar: screen.getByRole('SideBar'),
+      rerender,
+      sideBar: screen.getByRole('complementary'),
     };
   }
 
-  it('should render SideBar_CHANGE_THIS_TO_EXPECTED_DEFAULT_BEHAVIOR', () => {
+  it('should render the sidebar out of view', () => {
     const { sideBar } = renderComponent();
 
-    expect(sideBar).toBeInTheDocument();
-
-    // render(<SideBar />);
-
-    // expect(screen.getByRole('SideBar')).toBeInTheDocument();
+    expect(sideBar).toHaveStyle('left: -100%');
   });
 });

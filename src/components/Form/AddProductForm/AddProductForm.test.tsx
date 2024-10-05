@@ -1,15 +1,25 @@
 import { screen } from '@testing-library/react';
 import AddProductForm from './AddProductForm';
-import { renderWithProviders } from '../../tests/testUtils';
+import { renderWithProviders } from '../../../tests/testUtils';
+import { GalleryProvider } from '../../Gallery/context';
 
 describe('<AddProductForm />', () => {
   function renderComponent() {
-    renderWithProviders(<AddProductForm />, {
-      providers: ['ThemeProvider'],
-    });
+    renderWithProviders(
+      <GalleryProvider>
+        <AddProductForm
+          closeFormModal={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+        />
+      </GalleryProvider>,
+      {
+        providers: ['ThemeProvider'],
+      }
+    );
 
     return {
-      addProductForm: screen.getByRole('AddProductForm'),
+      addProductForm: screen.getByRole('form', { name: /product/i }),
     };
   }
 
@@ -17,9 +27,5 @@ describe('<AddProductForm />', () => {
     const { addProductForm } = renderComponent();
 
     expect(addProductForm).toBeInTheDocument();
-
-    // render(<AddProductForm />);
-
-    // expect(screen.getByRole('AddProductForm')).toBeInTheDocument();
   });
 });

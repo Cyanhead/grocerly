@@ -1,25 +1,25 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import NavBar from './NavBar';
 import { renderWithProviders } from '../../../tests/testUtils';
 
 describe('<NavBar />', () => {
-  function renderComponent() {
-    renderWithProviders(<NavBar />, {
-      providers: ['ThemeProvider'],
-    });
+  async function renderComponent() {
+    await act(async () =>
+      renderWithProviders(<NavBar setShowSideBar={() => {}} />, {
+        providers: ['ThemeProvider', 'MemoryRouter', 'AuthProvider'],
+      })
+    );
 
     return {
-      navBar: screen.getByRole('NavBar'),
+      sidebarButton: screen.getByRole('button', { name: /navigation/i }),
+      logoLink: screen.getByRole('link', { name: /logo/i }),
     };
   }
 
-  it('should render NavBar_CHANGE_THIS_TO_EXPECTED_DEFAULT_BEHAVIOR', () => {
-    const { navBar } = renderComponent();
+  it('should render', async () => {
+    const { sidebarButton, logoLink } = await renderComponent();
 
-    expect(navBar).toBeInTheDocument();
-
-    // render(<NavBar />);
-
-    // expect(screen.getByRole('NavBar')).toBeInTheDocument();
+    expect(sidebarButton).toBeInTheDocument();
+    expect(logoLink).toBeInTheDocument();
   });
 });

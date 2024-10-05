@@ -1,25 +1,24 @@
 import { screen } from '@testing-library/react';
 import ProductFormInput from './ProductFormInput';
-import { renderWithProviders } from '../../tests/testUtils';
+import { renderWithProviders } from '../../../../tests/testUtils';
 
 describe('<ProductFormInput />', () => {
   function renderComponent() {
-    renderWithProviders(<ProductFormInput />, {
-      providers: ['ThemeProvider'],
-    });
+    renderWithProviders(
+      <ProductFormInput label="sample" name="sample" value="sample" />,
+      {
+        providers: ['ThemeProvider'],
+      }
+    );
 
     return {
-      productFormInput: screen.getByRole('ProductFormInput'),
+      productFormInput: screen.getByRole('textbox', { name: 'sample' }),
     };
   }
 
-  it('should render ProductFormInput_CHANGE_THIS_TO_EXPECTED_DEFAULT_BEHAVIOR', () => {
+  it('should render', () => {
     const { productFormInput } = renderComponent();
 
     expect(productFormInput).toBeInTheDocument();
-
-    // render(<ProductFormInput />);
-
-    // expect(screen.getByRole('ProductFormInput')).toBeInTheDocument();
   });
 });

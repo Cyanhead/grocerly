@@ -17,10 +17,22 @@ interface RenderWithOptions {
   route?: string;
 }
 
-export const renderWithProviders = (
+/**
+ * Renders given `ui` wrapped in given React Context providers. If `MemoryRouter`
+ * is included, sets the initial route to the given `route`.
+ *
+ * @param ui - The React element to render
+ * @param options - Options to customize the rendering
+ * @param options.providers - The providers to wrap the `ui`
+ * @param [options.route='/'] - The initial route if `MemoryRouter` is
+ *   included
+ * @returns The return value of `render` plus a `rerender` function
+ */
+
+export function renderWithProviders(
   ui: React.ReactElement,
   { providers, route = '/' }: RenderWithOptions
-) => {
+) {
   // Set initial route if MemoryRouter is included
   if (providers.includes('MemoryRouter')) {
     window.history.pushState({}, 'Test page', route);
@@ -43,5 +55,13 @@ export const renderWithProviders = (
     }, children);
   };
 
-  return render(ui, { wrapper: Wrapper });
-};
+  // Render with the wrapper and return everything `render` provides, including `rerender`
+  return {
+    ...render(ui, { wrapper: Wrapper }),
+    rerender: (newUi: React.ReactElement, newOptions?: RenderWithOptions) =>
+      renderWithProviders(newUi, {
+        providers,
+        route: newOptions?.route || route,
+      }),
+  };
+}
