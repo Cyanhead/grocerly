@@ -1,4 +1,5 @@
-import { Products, useGetProducts } from './useGetProducts.hook';
+import { Products } from '../types';
+import { useGetProducts } from './useGetProducts.hook';
 
 /**
  * Retrieves a single product from the database by its id and returns an object

@@ -1,4 +1,4 @@
-import { Products } from '../../../hooks';
+import { Products } from '../../../types';
 
 export type NewProductType = Omit<
   Products[0],
