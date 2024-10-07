@@ -1,14 +1,28 @@
 import { Cell } from '../Admin.styled';
 import Metric from '../Metric';
 import revenue_chart from '../bar_chart.svg';
-import { Link } from 'react-router-dom';
 import { useGetOrders, useGetProducts } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
-import { AddProductForm, Icon, Modal, Skeleton } from '../../../components';
+import {
+  AddProductForm,
+  Icon,
+  Modal,
+  SectionHeading2,
+  Skeleton,
+} from '../../../components';
+import {
+  AllProducts,
+  Bestsellers,
+  LatestOrderedProducts,
+} from '../../../components/Tables';
 import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { GalleryProvider } from '../../../components/Gallery/context';
-import { AddProductButton, MobileAddProductButton } from './Products.styled';
+import {
+  AddProductButton,
+  MobileAddProductButton,
+  TableHeader,
+} from './Products.styled';
 
 function Products() {
   const {
@@ -55,6 +69,17 @@ function Products() {
     ];
   }, [products, orders]);
 
+  const latestSoldProducts = useMemo(() => {
+    return [...products]
+      .sort((a, b) => b.lastOrder.toMillis() - a.lastOrder.toMillis())
+      .slice(0, 5);
+  }, [products]);
+
+  const bestsellers = useMemo(() => {
+    const soldProducts = orders.map(order => order.products).flat();
+    return soldProducts.sort((a, b) => b.count - a.count).slice(0, 5);
+  }, [orders]);
+
   // Display a loading spinner while fetching products or orders
   if (isLoadingProducts || isLoadingOrders) {
     return <Skeleton.Dashboard />;
@@ -86,22 +111,23 @@ function Products() {
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      <Cell $span={[1, 2]}>
-        <h2>Recently Ordered</h2>
+      <Cell $span={[2, 2]}>
+        <SectionHeading2>Recently Ordered</SectionHeading2>
+        <LatestOrderedProducts products={latestSoldProducts} />
       </Cell>
 
-      <Cell $span={[1, 2]}>
-        <h2>Bestsellers</h2>
+      <Cell $span={[2, 2]}>
+        <SectionHeading2>Bestsellers</SectionHeading2>
+        <Bestsellers products={bestsellers} />
       </Cell>
 
-      <Cell $span={[2, 4]}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <h2>All Products</h2>
+      <Cell
+        $span={[2, 4]}
+        // NOTE: hacky solution because I couldn't figure out why the table overflowed the cell width
+        style={{ overflow: 'auto' }}
+      >
+        <TableHeader>
+          <SectionHeading2>All Products</SectionHeading2>
           <AddProductButton
             variant="ghost"
             onClick={() => setShowAddProductModal(true)}
@@ -114,23 +140,9 @@ function Products() {
             variant="ghost"
             onClick={() => setShowAddProductModal(true)}
           />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          {products.map(product => (
-            <Link
-              key={product.id}
-              to={`${product.id}`}
-              state={{ title: product.name }}
-            >
-              {product.name}
-            </Link>
-          ))}
-        </div>
+        </TableHeader>
+
+        <AllProducts products={products} />
       </Cell>
 
       {showAddProductModal && (

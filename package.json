@@ -12,9 +12,11 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
     "@fontsource/days-one": "^5.0.19",
     "@fontsource/jetbrains-mono": "^5.0.20",
     "@fontsource/quicksand": "^5.0.18",
+    "@table-library/react-table-library": "^4.1.7",
     "algoliasearch": "^4.13.1",
     "firebase": "^10.12.4",
     "instantsearch.css": "^8.3.0",
