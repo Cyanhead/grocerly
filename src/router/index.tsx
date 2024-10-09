@@ -8,7 +8,13 @@ import {
   NotFound,
   SignUp,
 } from '../pages';
-import Admin, { Dashboard, ProductItem, Products } from '../pages/Admin';
+import Admin, {
+  Dashboard,
+  OrderItem,
+  Orders,
+  ProductItem,
+  Products,
+} from '../pages/Admin';
 import { ProtectedRoute } from '../components';
 
 const router = createBrowserRouter([
@@ -58,7 +64,6 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin/products',
-        // element: ,
         children: [
           {
             index: true,
@@ -67,6 +72,19 @@ const router = createBrowserRouter([
           {
             path: '/admin/products/:id',
             element: <ProductItem />,
+          },
+        ],
+      },
+      {
+        path: '/admin/orders',
+        children: [
+          {
+            index: true,
+            element: <Orders />,
+          },
+          {
+            path: '/admin/orders/:id',
+            element: <OrderItem />,
           },
         ],
       },

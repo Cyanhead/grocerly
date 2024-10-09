@@ -1,16 +1,20 @@
 import { Timestamp } from 'firebase/firestore';
 
 export type Orders = {
+  id: string;
   status: 'processing' | 'cancelled' | 'failed' | 'refunded' | 'completed';
-  netProfit: number;
+  createdAt: Timestamp;
+  customer: {
+    id: string;
+    name: string;
+  };
   products: {
     id: string;
+    image: string;
     name: string;
     count: number;
     price: number;
   }[];
-  createdAt: Timestamp;
-  customerId: string;
-  id: string;
   revenue: number;
+  netProfit: number;
 }[];

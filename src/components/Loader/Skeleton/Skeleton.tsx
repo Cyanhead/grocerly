@@ -1,7 +1,7 @@
 import { range } from '../../../helpers';
 import {
-  Container,
-  Wrapper,
+  ImageAndTextContainer,
+  ImageAndTextWrapper,
   LoadingImage,
   LoadingContent,
   LoadingTextContainer,
@@ -15,8 +15,8 @@ import {
 
 function ImageAndText() {
   return (
-    <Container>
-      <Wrapper>
+    <ImageAndTextContainer>
+      <ImageAndTextWrapper>
         <LoadingImage />
         <LoadingContent>
           <LoadingTextContainer>
@@ -25,8 +25,8 @@ function ImageAndText() {
           </LoadingTextContainer>
           <LoadingBtn />
         </LoadingContent>
-      </Wrapper>
-    </Container>
+      </ImageAndTextWrapper>
+    </ImageAndTextContainer>
   );
 }
 
@@ -42,6 +42,16 @@ function Text({ width }: { width?: string }) {
   );
 }
 
+function SingleLineText({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
+  return <SingleTextLine $width={width} $height={height} />;
+}
+
 function Metric() {
   return (
     <LoadingContent $height="87.33px">
@@ -53,10 +63,10 @@ function Metric() {
   );
 }
 
-function Chart() {
+function Chart({ height }: { height?: string }) {
   return (
     <ChartWrapper>
-      <ChartImage />
+      <ChartImage $height={height} />
     </ChartWrapper>
   );
 }
@@ -73,14 +83,14 @@ function Dashboard() {
   );
 }
 
-function SingleLineText({
-  width,
-  height,
-}: {
-  width?: string;
-  height?: string;
+function Wrapper({
+  children,
+}: // style,
+{
+  children: React.ReactNode;
+  // style?: React.CSSProperties;
 }) {
-  return <SingleTextLine $width={width} $height={height} />;
+  return <>{children}</>;
 }
 
 const Skeleton = {
@@ -89,6 +99,8 @@ const Skeleton = {
   SingleLineText,
   Dashboard,
   Metric,
+  Chart,
+  Wrapper,
 };
 
 export default Skeleton;

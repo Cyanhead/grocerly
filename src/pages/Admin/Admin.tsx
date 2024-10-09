@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import SideBar from './SideBar';
 import { Container, Grid, Page, Title, TitleWrapper } from './Admin.styled';
 import NavBar from './NavBar';
-import { TextLink } from '../../components';
+import { ScrollToTop, TextLink } from '../../components';
 import { useState } from 'react';
 
 function Admin() {
@@ -51,6 +51,7 @@ function Admin() {
           <Outlet />
         </Grid>
       </Page>
+      <ScrollToTop />
     </Container>
   );
 }
@@ -59,10 +60,11 @@ export default Admin;
 
 function PageTitle({ title }: { title: string }) {
   const path = title.split('/');
+
   if (path.length === 2) {
     return (
       <Title>
-        <TextLink to="/admin/products" $isActive>
+        <TextLink to={`/admin/${path[0].trim()}`} $isActive>
           {path[0]}
         </TextLink>
         /{path[1]}

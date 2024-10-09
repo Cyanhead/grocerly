@@ -14,8 +14,10 @@ export const Title = styled(SectionHeading2)`
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 
   text-transform: capitalize;
+  word-wrap: break-word;
 `;
 
 export const Grid = styled(BaseWrapper)`
@@ -61,4 +63,8 @@ export const Cell = styled.div.attrs<{
 
 export const TitleWrapper = styled(BaseWrapper)`
   padding-bottom: 0;
+
+  @media screen and (min-width: ${getBreakpoint('xl')}) {
+    padding-top: 0;
+  }
 `;

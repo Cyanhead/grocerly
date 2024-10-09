@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import { getBreakpoint } from '../../../theme';
 
-export const Container = styled.div`
+export const ImageAndTextContainer = styled.div`
   width: 100%;
 
   @media (min-width: ${getBreakpoint('md')}) {
@@ -13,7 +13,7 @@ export const Container = styled.div`
   margin-bottom: 15px;
 `;
 
-export const Wrapper = styled.div`
+export const ImageAndTextWrapper = styled.div`
   border-radius: 4px;
   overflow: hidden;
 `;
@@ -61,7 +61,9 @@ export const ChartWrapper = styled.div`
   }
 `;
 
-export const ChartImage = styled.div`
+export const ChartImage = styled.div.attrs<{ $height?: string }>(props => ({
+  $height: props.$height || '250px',
+}))`
   background-image: linear-gradient(
     90deg,
     #f7f7f7 0px,
@@ -73,7 +75,8 @@ export const ChartImage = styled.div`
   background-repeat: no-repeat;
   background-color: #f7f7f7;
 
-  height: 250px;
+  height: ${props => props.$height};
+
   animation: ${longerShineLoadingImage} 2s infinite ease-out;
 `;
 

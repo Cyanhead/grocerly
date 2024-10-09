@@ -58,13 +58,14 @@ function Products() {
         (incr, product) => incr + product.count,
         0
       );
+
       return acc + productCountPerOrder;
     }, 0);
 
     return [
       { name: 'Unclaimed Revenue', value: totalRevenue, prefix: '$' },
       { name: 'Sold', value: totalOrders },
-      { name: 'Stock', value: totalStock },
+      { name: 'In Stock', value: totalStock },
       { name: 'Out of Stock', value: totalOutOfStock },
     ];
   }, [products, orders]);

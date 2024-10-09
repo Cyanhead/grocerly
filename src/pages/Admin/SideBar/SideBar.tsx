@@ -26,7 +26,7 @@ const sections = [
     options: [
       { name: 'users', icon: Users },
       { name: 'products', icon: Package },
-      { name: 'purchases', icon: DollarSign },
+      { name: 'orders', icon: DollarSign },
 
       // { name: 'guarantors', icon:  },
       // { name: 'loans', icon: null },

@@ -2,7 +2,12 @@ import Metric from '../Metric';
 import { Cell } from '../Admin.styled';
 import revenue_chart from '../bar_chart.svg';
 import { useGetOrders, useGetSingleProduct } from '../../../hooks';
-import { EditProductForm, Modal, Skeleton } from '../../../components';
+import {
+  EditProductForm,
+  Modal,
+  SectionHeading2,
+  Skeleton,
+} from '../../../components';
 import { useParams } from 'react-router-dom';
 import { MetricPropsType } from '../Metric/Metric.type';
 import defaultImage from '../../../assets/images/default_product.svg';
@@ -19,6 +24,7 @@ import { DetailsPropsType } from '../Details/Details.type';
 import { useMemo, useState } from 'react';
 import { GalleryProvider } from '../../../components/Gallery/context';
 import { Timestamp } from 'firebase/firestore';
+import { Orders } from '../../../components/Tables';
 
 function ProductItem() {
   const { id: productId = '' } = useParams();
@@ -35,6 +41,10 @@ function ProductItem() {
     product,
     error: productError,
   } = useGetSingleProduct(productId);
+
+  const productOrders = orders.filter(order =>
+    order.products.some(item => item.id === productId)
+  );
 
   const metrics: MetricPropsType[] = useMemo(() => {
     const completedOrders = orders.filter(
@@ -147,9 +157,12 @@ function ProductItem() {
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      <Cell $span={[2, 4]}>
-        <h2>Latest orders</h2>
-      </Cell>
+      {productOrders.length > 0 && (
+        <Cell $span={[2, 4]}>
+          <SectionHeading2>Orders</SectionHeading2>
+          <Orders orders={productOrders} />
+        </Cell>
+      )}
 
       {showEditModal && (
         <Modal closeModal={() => setShowEditModal(false)}>

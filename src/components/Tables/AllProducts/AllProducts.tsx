@@ -45,17 +45,9 @@ function AllProducts({ products }: AllProductsPropsType) {
 
   const theme = useTheme({
     Table: `
-      // --data-table-library_grid-template-columns: repeat(5, minmax(150px, 1fr)) 60px;
-      // --data-table-library_grid-template-columns: 2fr 1fr 100px 100px 2fr 60px;
-      // --data-table-library_grid-template-columns: 200px repeat(5, 1fr);
-      
       --data-table-library_grid-template-columns: minmax(150px, 2fr) minmax(150px, 1fr) 100px 100px minmax(150px, 2fr) 60px;
       width: 100%;
-     
-      @media screen and (min-width: 768px) {
-        --data-table-library_grid-template-columns: minmax(150px, 2fr) minmax(150px, 1fr) 100px 100px minmax(150px, 2fr) 60px;
-      }
-    
+         
       tr {
       &:is(:last-of-type) {
         td {
@@ -74,13 +66,7 @@ function AllProducts({ products }: AllProductsPropsType) {
       padding-top: 20px;
     `,
     Cell: `
-      padding: 12px 0;
-      // &:is(:first-of-type) {
-      //   padding-left: 12px;
-      // }
-      @media (max-width: 768px) {
-        font-size: 14px;
-      }
+      padding: 12px 0;      
     `,
   });
 

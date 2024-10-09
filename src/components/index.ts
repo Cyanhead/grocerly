@@ -15,12 +15,14 @@ export { default as MobileAppBanner } from './MobileAppBanner';
 export { default as Menu } from './Menu';
 export { default as Modal } from './Modal';
 export { default as NavBar } from './NavBar';
-export { default as EditProductForm } from './Form/EditProductForm';
+export { default as PhotoGroup } from './PhotoGroup';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SearchBar } from './Search/SearchBar';
 export { default as Skeleton } from './Loader/Skeleton';
 export { default as User } from './User';
 export { default as VisuallyHidden } from './VisuallyHidden';
 export * from './BaseStyled';
+
 //
 export { default as ScrollToAnchor } from './ScrollToAnchor';
+export { default as ScrollToTop } from './ScrollToTop';
