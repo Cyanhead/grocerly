@@ -1,4 +1,3 @@
-export { default as AddProductForm } from './Form/AddProductForm';
 export { default as Banners } from './Banners';
 export { default as Button } from './Button';
 export { default as CategoryBox } from './CategoryBox';

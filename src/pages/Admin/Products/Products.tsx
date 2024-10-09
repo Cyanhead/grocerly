@@ -3,13 +3,8 @@ import Metric from '../Metric';
 import revenue_chart from '../bar_chart.svg';
 import { useGetOrders, useGetProducts } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
-import {
-  AddProductForm,
-  Icon,
-  Modal,
-  SectionHeading2,
-  Skeleton,
-} from '../../../components';
+import { Icon, Modal, SectionHeading2, Skeleton } from '../../../components';
+import { AddProductForm } from '../../../components/Form';
 import {
   AllProducts,
   Bestsellers,

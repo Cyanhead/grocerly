@@ -2,12 +2,8 @@ import Metric from '../Metric';
 import { Cell } from '../Admin.styled';
 import revenue_chart from '../bar_chart.svg';
 import { useGetOrders, useGetSingleProduct } from '../../../hooks';
-import {
-  EditProductForm,
-  Modal,
-  SectionHeading2,
-  Skeleton,
-} from '../../../components';
+import { Modal, SectionHeading2, Skeleton } from '../../../components';
+import { EditProductForm } from '../../../components/Form';
 import { useParams } from 'react-router-dom';
 import { MetricPropsType } from '../Metric/Metric.type';
 import defaultImage from '../../../assets/images/default_product.svg';
