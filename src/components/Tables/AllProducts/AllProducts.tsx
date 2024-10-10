@@ -12,8 +12,9 @@ import { useTheme } from '@table-library/react-table-library/theme';
 // import { usePagination } from '@table-library/react-table-library/pagination';
 import { parseTimestamp } from '../../../helpers';
 import { MoreVertical } from 'lucide-react';
-import { TextLink } from '../../BaseStyled';
+import { SectionHeading2, TextLink } from '../../BaseStyled';
 import { Timestamp } from 'firebase/firestore';
+import { EmptyTableMessage } from '../Tables.styled';
 // import { useState } from 'react';
 // import {
 //   Action,
@@ -21,7 +22,11 @@ import { Timestamp } from 'firebase/firestore';
 //   State,
 // } from '@table-library/react-table-library/types/common';
 
-function AllProducts({ products }: AllProductsPropsType) {
+function AllProducts({
+  heading,
+  products,
+  emptyTableMessage = 'No products found.',
+}: AllProductsPropsType) {
   // const [page, setPage] = useState(0); // NOTE: shouldn't this be page 1?
   // const [pageLimit, setPageLimit] = useState(10);
 
@@ -69,6 +74,14 @@ function AllProducts({ products }: AllProductsPropsType) {
       padding: 12px 0;      
     `,
   });
+
+  if (products.length === 0)
+    return (
+      <>
+        <SectionHeading2>{heading}</SectionHeading2>
+        <EmptyTableMessage>{emptyTableMessage}</EmptyTableMessage>;
+      </>
+    );
 
   // const pagination = usePagination(
   //   { nodes },
@@ -180,6 +193,7 @@ function AllProducts({ products }: AllProductsPropsType) {
 
   return (
     <>
+      {heading && <SectionHeading2>{heading}</SectionHeading2>}
       <Table
         data={data}
         theme={theme}

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useGetUsers } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
 import Metric from '../Metric';
-import { SectionHeading2, Skeleton } from '../../../components';
+import { Skeleton } from '../../../components';
 import { Users as UsersTable } from '../../../components/Tables';
 import revenue_chart from '../bar_chart.svg';
 import { Cell } from '../Admin.styled';
@@ -46,9 +46,8 @@ function Users() {
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      <Cell $span={[2, 4]}>
-        <SectionHeading2>All Users</SectionHeading2>
-        <UsersTable users={users} />
+      <Cell $span={[2, 4]} style={{ overflow: 'auto' }}>
+        <UsersTable users={users} heading="All Users" />
       </Cell>
     </>
   );

@@ -10,11 +10,16 @@ import {
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { parseTimestamp } from '../../../helpers';
-import { TextLink } from '../../BaseStyled';
+import { SectionHeading2, TextLink } from '../../BaseStyled';
 import PhotoGroup from '../../PhotoGroup';
 import fallbackUserImage from '../../../assets/images/default_user_fade.svg';
+import { EmptyTableMessage } from '../Tables.styled';
 
-function Users({ users }: UsersPropsType) {
+function Users({
+  heading = 'Users',
+  users,
+  emptyTableMessage = 'No users found.',
+}: UsersPropsType) {
   const nodes = users.map(({ id, image, name, lastOrder }) => {
     return {
       id,
@@ -63,51 +68,62 @@ function Users({ users }: UsersPropsType) {
     `,
   });
 
-  return (
-    <Table
-      data={data}
-      theme={theme}
-      layout={{ custom: true, horizontalScroll: true }}
-    >
-      {(tableList: typeof nodes) => (
-        <>
-          <Header>
-            <HeaderRow>
-              <HeaderCell>ID</HeaderCell>
-              <HeaderCell></HeaderCell>
-              <HeaderCell>Name</HeaderCell>
-              <HeaderCell>Last Order</HeaderCell>
-            </HeaderRow>
-          </Header>
+  if (users.length === 0)
+    return (
+      <>
+        <SectionHeading2>{heading}</SectionHeading2>
+        <EmptyTableMessage>{emptyTableMessage}</EmptyTableMessage>;
+      </>
+    );
 
-          <Body>
-            {tableList.map(user => {
-              return (
-                <Row key={user.id} item={user}>
-                  <Cell>{user.id}</Cell>
-                  <Cell>
-                    <PhotoGroup
-                      // TODO: show fallback image when there is no image
-                      photos={[user.image ?? fallbackUserImage]}
-                    />
-                  </Cell>
-                  <Cell style={{ textTransform: 'capitalize' }}>
-                    <TextLink
-                      $isActive
-                      to={`/admin/users/${user.id}`}
-                      state={{ title: user.id }}
-                    >
-                      {user.name}
-                    </TextLink>
-                  </Cell>
-                  <Cell>{parseTimestamp(user.lastOrder)}</Cell>
-                </Row>
-              );
-            })}
-          </Body>
-        </>
-      )}
-    </Table>
+  return (
+    <>
+      <SectionHeading2>{heading}</SectionHeading2>
+      <Table
+        data={data}
+        theme={theme}
+        layout={{ custom: true, horizontalScroll: true }}
+      >
+        {(tableList: typeof nodes) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>ID</HeaderCell>
+                <HeaderCell></HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Last Order</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(user => {
+                return (
+                  <Row key={user.id} item={user}>
+                    <Cell>{user.id}</Cell>
+                    <Cell>
+                      <PhotoGroup
+                        // TODO: show fallback image when there is no image
+                        photos={[user.image ?? fallbackUserImage]}
+                      />
+                    </Cell>
+                    <Cell style={{ textTransform: 'capitalize' }}>
+                      <TextLink
+                        $isActive
+                        to={`/admin/users/${user.id}`}
+                        state={{ title: user.id }}
+                      >
+                        {user.name}
+                      </TextLink>
+                    </Cell>
+                    <Cell>{parseTimestamp(user.lastOrder)}</Cell>
+                  </Row>
+                );
+              })}
+            </Body>
+          </>
+        )}
+      </Table>
+    </>
   );
 }
 

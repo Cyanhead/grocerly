@@ -2,7 +2,7 @@ import Metric from '../Metric';
 import { Cell } from '../Admin.styled';
 import revenue_chart from '../bar_chart.svg';
 import { useGetOrders, useGetSingleProduct } from '../../../hooks';
-import { Modal, SectionHeading2, Skeleton } from '../../../components';
+import { Modal, Skeleton } from '../../../components';
 import { EditProductForm } from '../../../components/Form';
 import { useParams } from 'react-router-dom';
 import { MetricPropsType } from '../Metric/Metric.type';
@@ -115,7 +115,9 @@ function ProductItem() {
     if (!lastOrder || !createdAt) return 'Never';
 
     const diff = lastOrder.toDate().getTime() - createdAt.toDate().getTime();
-    return diff > 1000 * 60 ? parseTimestamp(lastOrder) : 'Never';
+    return diff > 1000 * 60
+      ? parseTimestamp(lastOrder, { hour: 'numeric', minute: 'numeric' })
+      : 'Never';
   }
 
   const productInfo: DetailsPropsType['stats'] = [
@@ -124,7 +126,11 @@ function ProductItem() {
     { stat: 'Rating', value: product.rating ?? 'N/A', icon: Star },
     {
       stat: 'Start Date',
-      value: parseTimestamp(product.createdAt) ?? 'N/A',
+      value:
+        parseTimestamp(product.createdAt, {
+          hour: 'numeric',
+          minute: 'numeric',
+        }) ?? 'N/A',
       icon: CalendarPlus,
     },
     {
@@ -141,6 +147,7 @@ function ProductItem() {
       ))}
 
       <Details
+        type="product"
         image={product.images?.[0] ?? defaultImage}
         name={product.name || 'Unnamed Product'}
         additionalInfo={product.category || 'Unknown Category'}
@@ -153,12 +160,12 @@ function ProductItem() {
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      {productOrders.length > 0 && (
-        <Cell $span={[2, 4]}>
-          <SectionHeading2>Orders</SectionHeading2>
-          <Orders orders={productOrders} />
-        </Cell>
-      )}
+      <Cell $span={[2, 4]} style={{ overflow: 'auto' }}>
+        <Orders
+          orders={productOrders}
+          emptyTableMessage={`No orders for ${product.name}`}
+        />
+      </Cell>
 
       {showEditModal && (
         <Modal closeModal={() => setShowEditModal(false)}>

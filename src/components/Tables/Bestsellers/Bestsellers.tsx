@@ -9,9 +9,14 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { TextLink } from '../../BaseStyled';
+import { SectionHeading2, TextLink } from '../../BaseStyled';
+import { EmptyTableMessage } from '../Tables.styled';
 
-function Bestsellers({ products }: BestsellersPropsType) {
+function Bestsellers({
+  heading = 'Bestsellers',
+  products,
+  emptyTableMessage = 'No products found!',
+}: BestsellersPropsType) {
   const nodes = products.map(({ id, name, count, price }) => {
     return {
       id,
@@ -48,44 +53,55 @@ function Bestsellers({ products }: BestsellersPropsType) {
     `,
   });
 
-  return (
-    <Table
-      data={data}
-      theme={theme}
-      // layout={{ custom: true, horizontalScroll: true }}
-    >
-      {(tableList: typeof nodes) => (
-        <>
-          <Header>
-            <HeaderRow>
-              <HeaderCell>Name</HeaderCell>
-              <HeaderCell>Sales</HeaderCell>
-              <HeaderCell>Price</HeaderCell>
-            </HeaderRow>
-          </Header>
+  if (products.length === 0)
+    return (
+      <>
+        <SectionHeading2>{heading}</SectionHeading2>
+        <EmptyTableMessage>{emptyTableMessage}</EmptyTableMessage>
+      </>
+    );
 
-          <Body>
-            {tableList.map(product => {
-              return (
-                <Row key={product.id} item={product}>
-                  <Cell style={{ textTransform: 'capitalize' }}>
-                    <TextLink
-                      $isActive
-                      to={product.id}
-                      state={{ title: product.name }}
-                    >
-                      {product.name}
-                    </TextLink>
-                  </Cell>
-                  <Cell>{product.count}</Cell>
-                  <Cell>${product.price}</Cell>
-                </Row>
-              );
-            })}
-          </Body>
-        </>
-      )}
-    </Table>
+  return (
+    <>
+      <SectionHeading2>{heading} </SectionHeading2>
+      <Table
+        data={data}
+        theme={theme}
+        // layout={{ custom: true, horizontalScroll: true }}
+      >
+        {(tableList: typeof nodes) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Sales</HeaderCell>
+                <HeaderCell>Price</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(product => {
+                return (
+                  <Row key={product.id} item={product}>
+                    <Cell style={{ textTransform: 'capitalize' }}>
+                      <TextLink
+                        $isActive
+                        to={product.id}
+                        state={{ title: product.name }}
+                      >
+                        {product.name}
+                      </TextLink>
+                    </Cell>
+                    <Cell>{product.count}</Cell>
+                    <Cell>${product.price}</Cell>
+                  </Row>
+                );
+              })}
+            </Body>
+          </>
+        )}
+      </Table>
+    </>
   );
 }
 

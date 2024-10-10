@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { SectionHeading2, Skeleton } from '../../../components';
+import { Skeleton } from '../../../components';
 import { Orders as OrdersTable } from '../../../components/Tables';
 import { useGetOrders } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
@@ -95,8 +95,7 @@ function Orders() {
       </Cell>
 
       <Cell $span={[2, 4]} style={{ overflow: 'auto' }}>
-        <SectionHeading2>Latest Orders</SectionHeading2>
-        <OrdersTable orders={mostRecentOrders} />
+        <OrdersTable orders={mostRecentOrders} heading="Latest Orders" />
       </Cell>
     </>
   );

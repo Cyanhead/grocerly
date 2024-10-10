@@ -108,12 +108,13 @@ function Products() {
       </Cell>
 
       <Cell $span={[2, 2]}>
-        <SectionHeading2>Recently Ordered</SectionHeading2>
-        <LatestOrderedProducts products={latestSoldProducts} />
+        <LatestOrderedProducts
+          products={latestSoldProducts}
+          heading="Recently Ordered"
+        />
       </Cell>
 
       <Cell $span={[2, 2]}>
-        <SectionHeading2>Bestsellers</SectionHeading2>
         <Bestsellers products={bestsellers} />
       </Cell>
 

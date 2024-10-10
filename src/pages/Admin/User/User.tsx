@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useGetSingleUser, useGetOrders } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
 import Metric from '../Metric';
-import { SectionHeading2, Skeleton } from '../../../components';
+import { Skeleton } from '../../../components';
 import { Orders } from '../../../components/Tables';
 import revenue_chart from '../bar_chart.svg';
 import { Cell } from '../Admin.styled';
@@ -115,8 +115,7 @@ function User() {
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      <Cell $span={[2, 4]}>
-        <SectionHeading2>Orders</SectionHeading2>
+      <Cell $span={[2, 4]} style={{ overflow: 'auto' }}>
         <Orders
           orders={ordersByUser}
           emptyTableMessage={`${user.name} has not placed any orders.`}

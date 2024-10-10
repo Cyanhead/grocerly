@@ -74,7 +74,7 @@ function OrderItem() {
   const userOrders = ordersList.filter(
     order => order.customer.id === customer.id
   );
-  const otherOrdersByUser = userOrders.filter(order => order.id !== orderId);
+  const moreOrdersByUser = userOrders.filter(order => order.id !== orderId);
 
   return (
     <>
@@ -119,18 +119,18 @@ function OrderItem() {
         </Row>
         <OrderItemProducts products={products} />
       </Cell>
-      {otherOrdersByUser.length > 0 && (
-        <Cell
-          $span={[2, 4]}
-          style={{
-            overflow: 'auto',
-          }}
-        >
-          <SectionHeading2>More orders by {customer.name}</SectionHeading2>
-
-          <Orders orders={otherOrdersByUser} />
-        </Cell>
-      )}
+      <Cell
+        $span={[2, 4]}
+        style={{
+          overflow: 'auto',
+        }}
+      >
+        <Orders
+          orders={moreOrdersByUser}
+          heading={`More orders by ${customer.name}`}
+          emptyTableMessage={`${customer.name} hasn't placed any other orders!`}
+        />
+      </Cell>
     </>
   );
 }

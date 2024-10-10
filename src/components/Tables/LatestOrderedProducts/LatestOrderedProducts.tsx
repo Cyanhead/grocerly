@@ -10,10 +10,15 @@ import {
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { parseTimestamp } from '../../../helpers';
-import { TextLink } from '../../BaseStyled';
+import { SectionHeading2, TextLink } from '../../BaseStyled';
 import { Timestamp } from 'firebase/firestore';
+import { EmptyTableMessage } from '../Tables.styled';
 
-function LatestOrderedProducts({ products }: LatestOrderedProductsPropsType) {
+function LatestOrderedProducts({
+  heading = 'Ordered Products',
+  products,
+  emptyTableMessage = 'No products found!',
+}: LatestOrderedProductsPropsType) {
   const nodes = products.map(({ id, name, lastOrder, createdAt }) => {
     return {
       id,
@@ -50,63 +55,76 @@ function LatestOrderedProducts({ products }: LatestOrderedProductsPropsType) {
     `,
   });
 
+  if (products.length === 0)
+    return (
+      <>
+        <SectionHeading2>{heading}</SectionHeading2>
+        <EmptyTableMessage>{emptyTableMessage}</EmptyTableMessage>
+      </>
+    );
+
   return (
-    <Table
-      data={data}
-      theme={theme}
-      layout={{ custom: true, horizontalScroll: true }}
-    >
-      {(tableList: typeof nodes) => (
-        <>
-          <Header>
-            <HeaderRow>
-              <HeaderCell>Name</HeaderCell>
-              <HeaderCell>Last Order</HeaderCell>
-            </HeaderRow>
-          </Header>
+    <>
+      <SectionHeading2>{heading}</SectionHeading2>
+      <Table
+        data={data}
+        theme={theme}
+        layout={{ custom: true, horizontalScroll: true }}
+      >
+        {(tableList: typeof nodes) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Last Order</HeaderCell>
+              </HeaderRow>
+            </Header>
 
-          <Body>
-            {tableList.map(product => {
-              function determineFirstSale(
-                lastOrder: Timestamp,
-                createdAt: Timestamp
-              ) {
-                if (!lastOrder || !createdAt) return 'Never';
+            <Body>
+              {tableList.map(product => {
+                function determineFirstSale(
+                  lastOrder: Timestamp,
+                  createdAt: Timestamp
+                ) {
+                  if (!lastOrder || !createdAt) return 'Never';
 
-                const diff =
-                  lastOrder.toDate().getTime() - createdAt.toDate().getTime();
-                return diff > 1000 * 60
-                  ? parseTimestamp(product.lastOrder, {
-                      hour: 'numeric',
-                      minute: 'numeric',
-                    })
-                  : 'Never';
-              }
+                  const diff =
+                    lastOrder.toDate().getTime() - createdAt.toDate().getTime();
+                  return diff > 1000 * 60
+                    ? parseTimestamp(product.lastOrder, {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                      })
+                    : 'Never';
+                }
 
-              const lastOrderedDateTime = determineFirstSale(
-                product.lastOrder,
-                product.createdAt
-              );
+                const lastOrderedDateTime = determineFirstSale(
+                  product.lastOrder,
+                  product.createdAt
+                );
 
-              return (
-                <Row key={product.id} item={product}>
-                  <Cell style={{ textTransform: 'capitalize' }}>
-                    <TextLink
-                      $isActive
-                      to={product.id}
-                      state={{ title: product.name }}
-                    >
-                      {product.name}
-                    </TextLink>
-                  </Cell>
-                  <Cell title={lastOrderedDateTime}>{lastOrderedDateTime}</Cell>
-                </Row>
-              );
-            })}
-          </Body>
-        </>
-      )}
-    </Table>
+                return (
+                  <Row key={product.id} item={product}>
+                    <Cell style={{ textTransform: 'capitalize' }}>
+                      <TextLink
+                        $isActive
+                        to={product.id}
+                        state={{ title: product.name }}
+                      >
+                        {product.name}
+                      </TextLink>
+                    </Cell>
+                    <Cell title={lastOrderedDateTime}>
+                      {lastOrderedDateTime}
+                    </Cell>
+                  </Row>
+                );
+              })}
+            </Body>
+          </>
+        )}
+      </Table>
+    </>
   );
 }
 
