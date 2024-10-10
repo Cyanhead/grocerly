@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getFontWeight, getColor } from '../../../theme';
+import { getFontWeight, getColor, getBreakpoint } from '../../../theme';
 import { Cell } from '../Admin.styled';
 
 export const Wrapper = styled(Cell)`
@@ -39,7 +39,24 @@ export const StatsWrapper = styled.div`
   width: 100%;
 `;
 
-export const Stats = styled.div``;
+export const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  @media screen and (min-width: ${getBreakpoint('xs')}) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+`;
 
 export const P = styled.p.attrs<{ $bold?: boolean }>(props => ({
   $bold: props.$bold || false,

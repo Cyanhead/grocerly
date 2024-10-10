@@ -14,6 +14,8 @@ import Admin, {
   Orders,
   ProductItem,
   Products,
+  User,
+  Users,
 } from '../pages/Admin';
 import { ProtectedRoute } from '../components';
 
@@ -85,6 +87,19 @@ const router = createBrowserRouter([
           {
             path: '/admin/orders/:id',
             element: <OrderItem />,
+          },
+        ],
+      },
+      {
+        path: '/admin/users',
+        children: [
+          {
+            index: true,
+            element: <Users />,
+          },
+          {
+            path: '/admin/users/:id',
+            element: <User />,
           },
         ],
       },

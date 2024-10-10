@@ -5,63 +5,72 @@ import {
   Image,
   ImageWrapper,
   P,
-  Stats,
   StatsWrapper,
   Wrapper,
+  Row,
 } from './Details.styled';
 import { Edit3, MoreVertical } from 'lucide-react';
 import { Icon, Menu } from '../../../components';
 
 function Details({
+  type,
   image,
   name,
   additionalInfo,
   stats,
-  setShowEditModal,
+  setShowEditModal = () => {},
 }: DetailsPropsType) {
   return (
     <Wrapper data-testid="Details" $span={[2, 1]}>
       <ImageWrapper>
-        <Image src={image} alt="product image" />
+        <Image
+          src={image}
+          alt={`${type === 'product' ? 'product' : 'user'} image`}
+        />
         <P $bold>{name}</P>
-        <P>{additionalInfo}</P>
+        <P style={type === 'user' ? { textTransform: 'lowercase' } : {}}>
+          {additionalInfo}
+        </P>
       </ImageWrapper>
       <Divider />
       <StatsWrapper>
         {stats.map((stat, index) => (
-          <Stats key={index}>
+          <Row key={index}>
             <P key={stat.stat} $bold>
               <Icon icon={stat.icon} size={16} /> {stat.stat}
             </P>
             <P>{stat.value}</P>
-          </Stats>
+          </Row>
         ))}
       </StatsWrapper>
-      <MenuWrapper>
-        <Menu
-          options={[
-            {
-              label: 'Edit',
-              onClick: () => setShowEditModal(true),
-              icon: Edit3,
-              type: 'button',
-            },
-            // {
-            //   label: 'Delete',
-            //   onClick: () => {},
-            //   icon: Trash2,
-            //   type: 'button',
-            // },
-          ]}
-        >
-          <Icon
-            icon={MoreVertical}
-            size={20}
-            visuallyHidden="Product Menu"
-            isIconStandalone
-          />
-        </Menu>
-      </MenuWrapper>
+      {type === 'product' && (
+        <MenuWrapper>
+          <Menu
+            options={[
+              {
+                label: 'Edit',
+                onClick: () => setShowEditModal(true),
+                icon: Edit3,
+                type: 'button',
+              },
+              // TODO: enable delete when it's ready
+              // {
+              //   label: 'Delete',
+              //   onClick: () => {},
+              //   icon: Trash2,
+              //   type: 'button',
+              // },
+            ]}
+          >
+            <Icon
+              icon={MoreVertical}
+              size={20}
+              visuallyHidden="Product Menu"
+              isIconStandalone
+            />
+          </Menu>
+        </MenuWrapper>
+      )}
     </Wrapper>
   );
 }
