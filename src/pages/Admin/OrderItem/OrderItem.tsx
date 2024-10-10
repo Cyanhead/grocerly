@@ -107,24 +107,14 @@ function OrderItem() {
           );
         })}
       </Cell>
-      <Cell
-        $span={[2, 2]}
-        style={{
-          overflow: 'auto',
-        }}
-      >
+      <Cell $span={[2, 2]} $scroll>
         <Row>
           <SectionHeading2>Products</SectionHeading2>
           <P>4 items</P>
         </Row>
         <OrderItemProducts products={products} />
       </Cell>
-      <Cell
-        $span={[2, 4]}
-        style={{
-          overflow: 'auto',
-        }}
-      >
+      <Cell $span={[2, 4]} $scroll>
         <Orders
           orders={moreOrdersByUser}
           heading={`More orders by ${customer.name}`}

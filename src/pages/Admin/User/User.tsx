@@ -115,7 +115,7 @@ function User() {
         <img src={revenue_chart} alt="" />
       </Cell>
 
-      <Cell $span={[2, 4]} style={{ overflow: 'auto' }}>
+      <Cell $span={[2, 4]} $scroll>
         <Orders
           orders={ordersByUser}
           emptyTableMessage={`${user.name} has not placed any orders.`}

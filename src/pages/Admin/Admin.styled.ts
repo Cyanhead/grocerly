@@ -40,6 +40,7 @@ export const Grid = styled(BaseWrapper)`
 export const Cell = styled.div.attrs<{
   $span?: [number, number];
   children: React.ReactNode;
+  $scroll?: boolean;
 }>(({ $span = [1, 1] }) => ({
   $span,
 }))`
@@ -51,6 +52,9 @@ export const Cell = styled.div.attrs<{
   border-radius: 2px;
   border: ${getColor('faintLine')};
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+
+  // NOTE: hacky solution because I couldn't figure out why the table overflowed the cell width
+  overflow-x: ${props => (props.$scroll ? 'auto' : 'visible')};
 
   @media screen and (min-width: ${getBreakpoint('xs')}) {
     grid-column-end: span ${props => props.$span?.[0] ?? 1};

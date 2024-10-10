@@ -118,11 +118,7 @@ function Products() {
         <Bestsellers products={bestsellers} />
       </Cell>
 
-      <Cell
-        $span={[2, 4]}
-        // NOTE: hacky solution because I couldn't figure out why the table overflowed the cell width
-        style={{ overflow: 'auto' }}
-      >
+      <Cell $span={[2, 4]} $scroll>
         <TableHeader>
           <SectionHeading2>All Products</SectionHeading2>
           <AddProductButton
