@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from '../../../hooks';
 import PasswordInput from '../../../components/Form/PasswordInput';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { Users } from '../../../types';
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -34,15 +35,21 @@ function SignUpForm() {
 
     setIsLoading(true);
 
-    const userData = {
-      username,
+    const userData: Users[0] = {
+      name: username,
       email,
       roles: {
         admin: false,
         user: true,
       },
 
+      id: '',
+      image: '',
+      address: [],
+      firstOrder: null,
+      lastOrder: null,
       createdAt: serverTimestamp(),
+      updatedAt: null,
     };
 
     try {
@@ -61,6 +68,9 @@ function SignUpForm() {
         );
         return;
       }
+
+      userData.id = auth.currentUser.uid;
+      userData.image = auth.currentUser.photoURL ?? '';
 
       await setDoc(doc(db, 'users', auth.currentUser.uid), userData);
       await updateProfile(auth.currentUser, {

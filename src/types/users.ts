@@ -1,4 +1,4 @@
-import { Timestamp } from 'firebase/firestore';
+import { FieldValue, Timestamp } from 'firebase/firestore';
 import { Roles } from '../context/auth/types';
 
 export type Users = {
@@ -8,8 +8,8 @@ export type Users = {
   image: string;
   roles: Roles;
   address: string[];
-  firstOrder: Timestamp;
-  lastOrder: Timestamp;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  firstOrder: Timestamp | null;
+  lastOrder: Timestamp | null;
+  createdAt: FieldValue | Timestamp | null;
+  updatedAt: FieldValue | Timestamp | null;
 }[];
