@@ -1,3 +1,4 @@
+import React from 'react';
 import { FullScreenWrapper, Image, Wrapper } from './Loader.styled';
 import loader01 from '../../assets/images/loader01.svg';
 import loader02 from '../../assets/images/loader02.svg';
@@ -24,4 +25,5 @@ function Loader({ fullscreen = false }: LoaderPropsType) {
   );
 }
 
-export default Loader;
+const MemoizedLoader = React.memo(Loader);
+export default MemoizedLoader;
