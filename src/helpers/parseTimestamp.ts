@@ -28,6 +28,9 @@ export const parseTimestamp = (
   config?: FormatOptions
 ): string => {
   if (!isValidTimestamp(timestamp)) {
+    console.warn(
+      `parseTimestamp was called with an invalid timestamp: ${timestamp}`
+    );
     return '{invalid date}';
   }
 

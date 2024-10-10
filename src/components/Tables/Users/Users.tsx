@@ -115,7 +115,11 @@ function Users({
                         {user.name}
                       </TextLink>
                     </Cell>
-                    <Cell>{parseTimestamp(user.lastOrder)}</Cell>
+                    <Cell>
+                      {user.lastOrder
+                        ? parseTimestamp(user.lastOrder)
+                        : 'Never'}
+                    </Cell>
                   </Row>
                 );
               })}

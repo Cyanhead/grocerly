@@ -12,6 +12,7 @@ function Users() {
 
   const metrics: MetricPropsType[] = useMemo(() => {
     const activeUsers = users.filter(user => {
+      if (!user.lastOrder) return false;
       const diff = new Date().getTime() - user.lastOrder.toDate().getTime();
 
       // users that have placed an order in the past week

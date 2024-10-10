@@ -8,8 +8,8 @@ import { OrderItemProducts, Orders } from '../../../components/Tables';
 import {
   BadgeDollarSign,
   CalendarClockIcon,
-  CheckCircle,
   DollarSign,
+  RefreshCw,
   User,
 } from 'lucide-react';
 
@@ -46,7 +46,7 @@ function OrderItem() {
   const orderDetails = [
     {
       title: 'Status',
-      icon: CheckCircle,
+      icon: RefreshCw,
       value: status,
     },
     {
