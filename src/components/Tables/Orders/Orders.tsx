@@ -103,6 +103,8 @@ function Orders({
 
             <Body>
               {tableList.map(order => {
+                const photos = order.products.map(product => product.image);
+
                 return (
                   <Row key={order.id} item={order}>
                     <Cell style={{ textTransform: 'capitalize' }}>
@@ -115,9 +117,7 @@ function Orders({
                       </TextLink>
                     </Cell>
                     <Cell>
-                      <PhotoGroup
-                        photos={new Array(order.products.length).fill('dummy')}
-                      />
+                      <PhotoGroup photos={photos} />
                       {order.products.length}{' '}
                       {order.products.length === 1 ? 'item' : 'items'}
                     </Cell>

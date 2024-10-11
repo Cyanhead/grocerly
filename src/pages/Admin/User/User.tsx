@@ -10,7 +10,7 @@ import Details, { DetailsPropsType } from '../Details';
 import { useParams } from 'react-router-dom';
 import { parseTimestamp } from '../../../helpers';
 import { CalendarPlus, MapPin, ShoppingBag, UserSquare2 } from 'lucide-react';
-import fallbackImage from '../../../assets/images/default_user_fade.svg';
+import fallbackPhoto from '../../../assets/images/default_user_fade.svg';
 
 function User() {
   const { id: userId = '' } = useParams();
@@ -106,7 +106,7 @@ function User() {
 
       <Details
         type="user"
-        image={user.image ?? fallbackImage}
+        image={user.photoUrl || fallbackPhoto}
         name={user.name}
         additionalInfo={user.email ?? 'N/A'}
         stats={userInfo}

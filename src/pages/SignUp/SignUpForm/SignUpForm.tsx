@@ -44,7 +44,7 @@ function SignUpForm() {
       },
 
       id: '',
-      image: '',
+      photoUrl: '',
       address: [],
       firstOrder: null,
       lastOrder: null,
@@ -70,7 +70,7 @@ function SignUpForm() {
       }
 
       userData.id = auth.currentUser.uid;
-      userData.image = auth.currentUser.photoURL ?? '';
+      userData.photoUrl = auth.currentUser.photoURL ?? '';
 
       await setDoc(doc(db, 'users', auth.currentUser.uid), userData);
       await updateProfile(auth.currentUser, {

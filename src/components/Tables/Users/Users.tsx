@@ -12,7 +12,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { parseTimestamp } from '../../../helpers';
 import { SectionHeading2, TextLink } from '../../BaseStyled';
 import PhotoGroup from '../../PhotoGroup';
-import fallbackUserImage from '../../../assets/images/default_user_fade.svg';
+import fallbackUserPhoto from '../../../assets/images/default_user_fade.svg';
 import { EmptyTableMessage } from '../Tables.styled';
 
 function Users({
@@ -20,7 +20,7 @@ function Users({
   users,
   emptyTableMessage = 'No users found.',
 }: UsersPropsType) {
-  const nodes = users.map(({ id, image, name, lastOrder }) => {
+  const nodes = users.map(({ id, photoUrl: image, name, lastOrder }) => {
     return {
       id,
       image,
@@ -90,7 +90,7 @@ function Users({
               <HeaderRow>
                 <HeaderCell>ID</HeaderCell>
                 <HeaderCell></HeaderCell>
-                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>User</HeaderCell>
                 <HeaderCell>Last Order</HeaderCell>
               </HeaderRow>
             </Header>
@@ -101,10 +101,7 @@ function Users({
                   <Row key={user.id} item={user}>
                     <Cell>{user.id}</Cell>
                     <Cell>
-                      <PhotoGroup
-                        // TODO: show fallback image when there is no image
-                        photos={[user.image ?? fallbackUserImage]}
-                      />
+                      <PhotoGroup photos={[user.image || fallbackUserPhoto]} />
                     </Cell>
                     <Cell style={{ textTransform: 'capitalize' }}>
                       <TextLink

@@ -5,7 +5,7 @@ export type Users = {
   id: string;
   name: string;
   email: string;
-  image: string;
+  photoUrl: string;
   roles: Roles;
   address: string[];
   firstOrder: Timestamp | null;

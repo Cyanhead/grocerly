@@ -1,76 +1,58 @@
+import { Circle, Group, Image, Row } from './PhotoGroup.styled';
 import { PhotoGroupPropsType } from './PhotoGroup.type';
+import defaultPhoto from '../../assets/images/default_product.svg';
 
 function PhotoGroup({ photos }: PhotoGroupPropsType) {
-  function Circle({ children }: { children?: React.ReactNode }) {
-    return (
-      <div
-        style={{
-          width: '40px',
-          height: '40px',
-          backgroundColor: '#b0b0b088',
-          borderRadius: '50%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontWeight: '500',
-        }}
-      >
-        {children}
-      </div>
-    );
-  }
-
-  // REFACTOR
   switch (photos.length) {
     case 0:
       return null;
     case 1:
-      return <Circle />;
+      return <Image src={photos[0] || defaultPhoto} />;
     case 2:
       return (
-        <div style={{ display: 'flex', gap: '6px' }}>
-          <Circle />
-          <Circle />
-        </div>
+        <Row>
+          <Image src={photos[0] || defaultPhoto} />
+          <Image src={photos[1] || defaultPhoto} />
+        </Row>
       );
     case 3:
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-          <div style={{ display: 'flex' }}>
-            <Circle />
-          </div>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <Circle />
-            <Circle />
-          </div>
-        </div>
+        <Group $gap="0px">
+          <Row>
+            <Image src={photos[0] || defaultPhoto} />
+          </Row>
+          <Row>
+            <Image src={photos[1] || defaultPhoto} />
+            <Image src={photos[2] || defaultPhoto} />
+          </Row>
+        </Group>
       );
     case 4:
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <Circle />
-            <Circle />
-          </div>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <Circle />
-            <Circle />
-          </div>
-        </div>
+        <Group>
+          <Row>
+            <Image src={photos[0] || defaultPhoto} />
+            <Image src={photos[1] || defaultPhoto} />
+          </Row>
+          <Row>
+            <Image src={photos[2] || defaultPhoto} />
+            <Image src={photos[3] || defaultPhoto} />
+          </Row>
+        </Group>
       );
 
     default:
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <Circle />
-            <Circle />
-          </div>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <Circle />
+        <Group>
+          <Row>
+            <Image src={photos[0] || defaultPhoto} />
+            <Image src={photos[1] || defaultPhoto} />
+          </Row>
+          <Row>
+            <Image src={photos[3] || defaultPhoto} />
             <Circle>+{photos.length - 4}</Circle>
-          </div>
-        </div>
+          </Row>
+        </Group>
       );
   }
 }

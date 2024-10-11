@@ -7,6 +7,7 @@ import { googleAuthPopup } from '../helpers/handleGoogleAuth';
 import { getUserRoles } from '../helpers';
 import { auth, db } from '../context/Firebase';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { Users } from '../types';
 
 /**
  * Provides a function to handle Google sign in and a loading state indicator.
@@ -15,9 +16,11 @@ import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
  * @example
  * const { handleGoogleSignIn, loading } = useSignInWithGoogle();
  *
+ * ```tsx
  * <Button onClick={handleGoogleSignIn} disabled={loading}>
  *   {loading ? 'Signing in...' : 'Sign in with Google'}
  * </Button>
+ * ```
  */
 const useSignInWithGoogle = () => {
   const [loading, setLoading] = useState(false);
@@ -43,16 +46,25 @@ const useSignInWithGoogle = () => {
         return;
       }
 
-      const userData = {
-        username: user.displayName,
-        email: user.email,
+      const userData: Users[0] = {
+        name: user.displayName ?? '',
+        email: user.email ?? '',
         roles: {
           admin: false,
           user: true,
         },
 
+        id: '',
+        photoUrl: '',
+        address: [],
+        firstOrder: null,
+        lastOrder: null,
         createdAt: serverTimestamp(),
+        updatedAt: null,
       };
+
+      userData.id = user.uid;
+      userData.photoUrl = user.photoURL ?? '';
 
       await setDoc(doc(db, 'users', user.uid), userData);
 
