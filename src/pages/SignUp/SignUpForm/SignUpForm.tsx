@@ -3,13 +3,14 @@ import AuthForm from '../../../components/Form/AuthForm';
 import { LinkButton, P } from '../../AuthPages.styled';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth, db } from '../../../context/Firebase';
+import { analytics, auth, db } from '../../../context/Firebase';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from '../../../hooks';
 import PasswordInput from '../../../components/Form/PasswordInput';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { Users } from '../../../types';
+import { logEvent } from 'firebase/analytics';
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -76,6 +77,8 @@ function SignUpForm() {
       await updateProfile(auth.currentUser, {
         displayName: username,
       });
+
+      logEvent(analytics, 'sign_up');
 
       navigate('/', { replace: true });
     } catch (error) {

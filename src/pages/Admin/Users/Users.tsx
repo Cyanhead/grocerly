@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useGetUsers } from '../../../hooks';
+import { useGetUsers, useGetVisits } from '../../../hooks';
 import { MetricPropsType } from '../Metric/Metric.type';
 import Metric from '../Metric';
 import { Skeleton } from '../../../components';
@@ -10,6 +10,8 @@ import { Cell } from '../Admin.styled';
 function Users() {
   const { isLoading, data: users = [], error } = useGetUsers();
 
+  const { data: visits = [] } = useGetVisits();
+
   const metrics: MetricPropsType[] = useMemo(() => {
     const activeUsers = users.filter(user => {
       if (!user.lastOrder) return false;
@@ -19,13 +21,15 @@ function Users() {
       return diff < 1000 * 60 * 60 * 24 * 7;
     });
 
+    const conversion = (users.length / visits.length) * 100;
+
     return [
       { name: 'All', value: users.length },
       { name: 'Active ', value: activeUsers.length },
-      { name: 'Visitors', value: 999 },
-      { name: 'Conversion', value: 13, suffix: '%' },
+      { name: 'Visitors', value: visits.length ?? 0 },
+      { name: 'Conversion', value: conversion, suffix: '%' },
     ];
-  }, [users]);
+  }, [users, visits.length]);
 
   if (isLoading) {
     return <Skeleton.Dashboard />;

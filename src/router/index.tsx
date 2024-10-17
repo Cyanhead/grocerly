@@ -18,6 +18,9 @@ import Admin, {
   Users,
 } from '../pages/Admin';
 import { ProtectedRoute } from '../components';
+import { logVisitEvent } from '../helpers';
+
+logVisitEvent();
 
 const router = createBrowserRouter([
   {

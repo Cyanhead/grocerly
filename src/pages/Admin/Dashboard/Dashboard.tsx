@@ -3,27 +3,29 @@ import revenue_chart from '../bar_chart.svg';
 import cart_chart from '../cart_chart.svg';
 import Metric from '../Metric';
 import { MetricPropsType } from '../Metric/Metric.type';
-import { useGetOrders } from '../../../hooks';
+import { useGetOrders, useGetVisits } from '../../../hooks';
 import { Skeleton } from '../../../components';
 import { useMemo } from 'react';
 
 function Dashboard() {
   const { isLoading, data: orders = [], error } = useGetOrders();
+  const { data: visits = [] } = useGetVisits();
 
   const metrics: MetricPropsType[] = useMemo(() => {
     const totalRevenue = orders.reduce((acc, order) => acc + order.revenue, 0);
 
+    const pendingOrders = orders.filter(order => order.status === 'processing');
+
     return [
       { name: 'Revenue', value: totalRevenue, prefix: '$' },
       { name: 'Orders', value: orders.length },
-      { name: 'Visitors', value: 45 },
       {
-        name: 'Conversion',
-        value: 12,
-        suffix: '%',
+        name: 'Pending Orders',
+        value: pendingOrders.length,
       },
+      { name: 'Visitors', value: visits.length ?? 0 },
     ];
-  }, [orders]);
+  }, [orders, visits.length]);
 
   if (isLoading) {
     return <Skeleton.Dashboard />;
