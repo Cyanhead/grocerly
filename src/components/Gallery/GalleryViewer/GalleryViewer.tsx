@@ -8,7 +8,7 @@ function GalleryViewer({ numOfCols = 4, images }: GalleryPropsType) {
   return (
     <Wrapper data-testid="Gallery" $numOfCols={numOfCols}>
       <Preview
-        src={images[activeImageIndex]}
+        src={images[activeImageIndex].largeURL}
         alt="product image"
         $numOfCols={numOfCols}
       />
@@ -16,7 +16,7 @@ function GalleryViewer({ numOfCols = 4, images }: GalleryPropsType) {
       {images.map((image, index) => (
         <ImageButton key={index} onFocus={() => setActiveImageIndex(index)}>
           <Image
-            src={image}
+            src={image.smallURL}
             alt="product images"
             onMouseEnter={() => setActiveImageIndex(index)}
             $active={activeImageIndex === index}

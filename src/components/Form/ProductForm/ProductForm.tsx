@@ -8,11 +8,11 @@ import {
 } from '../Form.styled';
 import ProductFormInput from './ProductFormInput';
 import Layout from '../../Layout';
-import { NewProductType } from '../AddProductForm/AddProductForm.type';
-import { ExistingProductType } from '../EditProductForm/EditProductForm.type';
+import { NewProductStateType } from '../AddProductForm/AddProductForm.type';
+import { ExistingProductStateType } from '../EditProductForm/EditProductForm.type';
 import Gallery from '../../Gallery';
 
-function ProductForm<T extends NewProductType | ExistingProductType>({
+function ProductForm<T extends NewProductStateType | ExistingProductStateType>({
   onSubmit,
   children,
   state: product,

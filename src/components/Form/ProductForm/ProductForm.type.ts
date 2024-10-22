@@ -1,14 +1,14 @@
-import { NewProductType } from '../AddProductForm/AddProductForm.type';
-import { ExistingProductType } from '../EditProductForm/EditProductForm.type';
+import { NewProductStateType } from '../AddProductForm/AddProductForm.type';
+import { ExistingProductStateType } from '../EditProductForm/EditProductForm.type';
 
 export type ProductFormPropsType<
-  T extends NewProductType | ExistingProductType
+  T extends NewProductStateType | ExistingProductStateType
 > = {
   status: 'idle' | 'loading' | 'success' | 'error';
 
   children?: React.ReactNode;
 
-  state: ExistingProductType | NewProductType;
+  state: ExistingProductStateType | NewProductStateType;
   stateSetter: React.Dispatch<React.SetStateAction<T>>;
 
   button: {

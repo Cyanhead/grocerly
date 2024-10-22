@@ -1,7 +1,10 @@
 import { screen } from '@testing-library/react';
 import { ProductFormPropsType } from './ProductForm.type';
-import { NewProductType } from '../AddProductForm/AddProductForm.type';
-import { ExistingProductType } from '../EditProductForm/EditProductForm.type';
+import {
+  NewProductStateType,
+  NewProductType,
+} from '../AddProductForm/AddProductForm.type';
+import { ExistingProductStateType } from '../EditProductForm/EditProductForm.type';
 import { renderWithProviders } from '../../../tests/testUtils';
 import { GalleryProvider } from '../../Gallery/context';
 import ProductForm from './ProductForm';
@@ -26,7 +29,7 @@ describe('<ProductForm />', () => {
     },
   };
 
-  const defaultExistingProductsProps: ProductFormPropsType<ExistingProductType> =
+  const defaultExistingProductsProps: ProductFormPropsType<ExistingProductStateType> =
     {
       onSubmit: vi.fn(),
       state: {
@@ -60,14 +63,21 @@ describe('<ProductForm />', () => {
   });
 
   it('renders with existing product', () => {
-    const existingProduct: ExistingProductType = {
+    const existingProduct: ExistingProductStateType = {
       id: '1',
       name: 'Existing Product',
       otherNames: ['Existing Product 1', 'Existing Product 2'],
       category: 'Existing Category',
       about: 'Existing product description',
       price: 10,
-      images: ['image1.jpg', 'image2.jpg'],
+      images: [
+        {
+          id: 'id',
+          largeURL: 'large_image',
+          smallURL: 'small_image',
+          thumbnailURL: 'thumbnail_image',
+        },
+      ],
     };
 
     renderWithProviders(
@@ -88,7 +98,7 @@ describe('<ProductForm />', () => {
   });
 
   it('renders with new product', () => {
-    const newProduct: NewProductType = {
+    const newProduct: NewProductStateType = {
       name: 'New Product',
       otherNames: [],
       category: '',

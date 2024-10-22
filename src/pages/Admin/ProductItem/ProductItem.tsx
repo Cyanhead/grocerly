@@ -148,7 +148,7 @@ function ProductItem() {
 
       <Details
         type="product"
-        image={product.images?.[0] ?? defaultImage}
+        image={product.images[0]?.thumbnailURL ?? defaultImage}
         name={product.name || 'Unnamed Product'}
         additionalInfo={product.category || 'Unknown Category'}
         stats={productInfo}

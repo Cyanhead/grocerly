@@ -1,6 +1,7 @@
 export * from './arrays';
 export * from './generateId';
 export * from './getCollection';
+export * from './getImageIdFromUrl';
 export * from './getSubCollection';
 export * from './getUserRoles';
 export * from './handleGoogleAuth';
@@ -8,5 +9,6 @@ export * from './logLoginEvent';
 export * from './logVisitEvent';
 export * from './parseTimestamp';
 export * from './range';
+export * from './resizeImage';
 export * from './separateNumberByComma';
 export * from './truncateString';

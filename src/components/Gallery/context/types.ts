@@ -1,3 +1,7 @@
+import { Products } from '../../../types';
+
+type Images = Products[0]['images'];
+
 export type GalleryContextType = {
   activeImageIndex: number;
   setActiveImageIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -10,6 +14,6 @@ export type GalleryContextType = {
 
   newImagesToUpload: File[];
   setNewImagesToUpload: React.Dispatch<React.SetStateAction<File[]>>;
-  setImagesToDeleteOnBackend: React.Dispatch<React.SetStateAction<string[]>>;
-  imagesToDeleteOnBackend: string[];
+  imagesToDeleteOnBackend: Images;
+  setImagesToDeleteOnBackend: React.Dispatch<React.SetStateAction<Images>>;
 };

@@ -16,6 +16,7 @@ import {
 import Icon from '../../Icon';
 import { Plus, Trash2 } from 'lucide-react';
 import { useGalleryContext } from '../context';
+import { getImageIdFromUrl } from '../../../helpers';
 
 function GalleryEditor({ numOfCols = 4, images }: GalleryEditorPropsType) {
   const {
@@ -50,7 +51,7 @@ function GalleryEditor({ numOfCols = 4, images }: GalleryEditorPropsType) {
     return isValid;
   }
 
-  function handleFileSelect(e: ChangeEvent<HTMLInputElement>) {
+  async function handleFileSelect(e: ChangeEvent<HTMLInputElement>) {
     const selectedImages = e.target.files;
 
     if (!selectedImages) {
@@ -82,25 +83,39 @@ function GalleryEditor({ numOfCols = 4, images }: GalleryEditorPropsType) {
     setNewImagesToUpload([...newImagesToUpload, ...selectedImages]);
     setFileErrors([]);
   }
-
   function handleImageDelete(imageToRemove: string) {
-    const isUrl = imageToRemove.split('/')[0] === 'https:';
+    const isUrl = imageToRemove.startsWith('https:');
+    const currentImagesSet = new Set(currentImages);
 
     if (isUrl) {
-      setImagesToDeleteOnBackend(prev => [...prev, imageToRemove]);
-    } else {
-      setViewableSelectedImage(
-        viewableSelectedImage.filter(image => image !== imageToRemove)
+      const imageToRemoveId = getImageIdFromUrl(imageToRemove);
+      const imageToRemoveObject = images.find(
+        image => image.id === imageToRemoveId
       );
+
+      if (!imageToRemoveObject) {
+        console.error('Could not find image to delete');
+        return;
+      }
+
+      setImagesToDeleteOnBackend(prev => [...prev, imageToRemoveObject]);
     }
-    setCurrentImages(currentImages.filter(image => image !== imageToRemove));
+
+    const nextCurrentImages = [...currentImagesSet].filter(
+      image => image !== imageToRemove
+    );
+    setCurrentImages(nextCurrentImages);
+    setViewableSelectedImage(
+      viewableSelectedImage.filter(image => image !== imageToRemove)
+    );
   }
 
   const combinedFiles = [...currentImages, ...viewableSelectedImage];
 
   useEffect(() => {
-    setCurrentImages(images);
-  }, [images, setCurrentImages]);
+    setCurrentImages(images.map(image => image.smallURL));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

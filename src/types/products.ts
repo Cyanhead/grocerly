@@ -6,7 +6,12 @@ export type Products = {
   otherNames: string[];
   category: string;
   about: string;
-  images: string[];
+  images: {
+    id: string;
+    largeURL: string;
+    smallURL: string;
+    thumbnailURL: string;
+  }[];
   price: number;
   stock: number;
   rating: 1 | 2 | 3 | 4 | 5;

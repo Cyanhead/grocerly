@@ -1,4 +1,8 @@
-import { NewProductType, AddProductFormPropsType } from './AddProductForm.type';
+import {
+  NewProductType,
+  AddProductFormPropsType,
+  NewProductStateType,
+} from './AddProductForm.type';
 import ProductForm from '../ProductForm';
 import { useState } from 'react';
 import ProductFormInput from '../ProductForm/ProductFormInput';
@@ -7,15 +11,22 @@ import {
   arrayUnion,
   collection,
   doc,
+  FieldValue,
   serverTimestamp,
   updateDoc,
 } from 'firebase/firestore';
 import { db, storage } from '../../../context/Firebase';
 import { useGalleryContext } from '../../Gallery/context';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import {
+  generateUniqueId,
+  getImageIdFromUrl,
+  resizeFile,
+} from '../../../helpers';
+import { Products } from '../../../types';
 
 function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
-  const [formData, setFormData] = useState<NewProductType>({
+  const [formData, setFormData] = useState<NewProductStateType>({
     name: '',
     price: 0,
     about: '',
@@ -31,7 +42,7 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
 
   const { newImagesToUpload } = useGalleryContext();
 
-  async function createNewDocAndReturnId(obj: NewProductType) {
+  async function createNewDocAndReturnId(obj: NewProductStateType) {
     const itemsDocRef = collection(db, 'products');
 
     const docRef = await addDoc(itemsDocRef, obj);
@@ -42,45 +53,65 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
 
   async function handleUploadImagesAndReturnUrls(productId: string) {
     const urls = await Promise.all(
-      newImagesToUpload.map(imgFile => {
-        return new Promise<string>((resolve, reject) => {
-          const uploadTask = uploadBytesResumable(
-            ref(storage, `products/${productId}/${imgFile.name}`),
-            imgFile
-          );
+      newImagesToUpload.flatMap(async imgFile => {
+        const id = generateUniqueId();
+        const fileVariants = [
+          { file: await resizeFile(imgFile, 'large'), suffix: 'large' },
+          { file: await resizeFile(imgFile, 'small'), suffix: 'small' },
+          { file: await resizeFile(imgFile, 'thumbnail'), suffix: 'thumbnail' },
+        ];
 
-          function next(snapshot: {
-            bytesTransferred: number;
-            totalBytes: number;
-          }) {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('1. Upload is ' + progress + '% done');
-          }
+        const [imageName] = imgFile.name.split('.');
 
-          function error(error: { message: unknown }) {
-            console.log('Error upload task error', error.message);
-            reject(error);
-          }
+        return Promise.all(
+          fileVariants.map(
+            ({ file, suffix }) =>
+              new Promise<string>((resolve, reject) => {
+                const uploadTask = uploadBytesResumable(
+                  ref(
+                    storage,
+                    `products/${productId}/${imageName}_${suffix}_${id}`
+                  ),
+                  file as File
+                );
 
-          async function complete() {
-            try {
-              const url = await getDownloadURL(
-                ref(storage, `products/${productId}/${imgFile.name}`)
-              );
-              resolve(url);
-            } catch (err) {
-              if (err instanceof Error) {
-                console.log('Error 2. url error', err.message);
-                reject(err);
-              } else {
-                reject('Unknown error occurred');
-              }
-            }
-          }
+                function next(snapshot: {
+                  bytesTransferred: number;
+                  totalBytes: number;
+                }) {
+                  const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  console.log(`${suffix} Upload is ` + progress + `% done`);
+                }
 
-          uploadTask.on('state_changed', next, error, complete);
-        });
+                function error(error: { message: unknown }) {
+                  console.log(`${suffix} upload task error`, error.message);
+                  reject(error);
+                }
+
+                async function complete() {
+                  try {
+                    const url = await getDownloadURL(
+                      ref(
+                        storage,
+                        `products/${productId}/${imageName}_${suffix}_${id}`
+                      )
+                    );
+                    resolve(url);
+                  } catch (err) {
+                    if (err instanceof Error) {
+                      console.log(`Error 2. ${suffix} url error`, err.message);
+                      reject(err);
+                    } else {
+                      reject('Unknown error occurred');
+                    }
+                  }
+                }
+
+                uploadTask.on('state_changed', next, error, complete);
+              })
+          )
+        );
       })
     );
 
@@ -94,12 +125,31 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
 
     const productId = await createNewDocAndReturnId(formData);
     const urls = await handleUploadImagesAndReturnUrls(productId);
+    const imageGroups: Products[0]['images'] = urls.map(sizes => {
+      return {
+        id: getImageIdFromUrl(sizes[0]),
+        largeURL: sizes[0],
+        smallURL: sizes[1],
+        thumbnailURL: sizes[2],
+      };
+    });
 
     const productsDocRef = doc(db, 'products', productId);
 
-    const productData = {
+    type ProductData = Omit<
+      NewProductType,
+      'images' | 'createdAt' | 'updatedAt' | 'lastOrder'
+    > & {
+      id: string;
+      images: Products[0]['images'] | FieldValue;
+      createdAt: FieldValue;
+      updatedAt: FieldValue;
+      lastOrder: FieldValue;
+    };
+
+    const productData: ProductData = {
       id: productId,
-      images: arrayUnion(...urls),
+      images: arrayUnion(...imageGroups),
       name: formData.name,
       otherNames: formData.otherNames,
       category: formData.category,
