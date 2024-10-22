@@ -88,7 +88,7 @@ function OrderItemProducts({ products }: OrderItemProductsPropsType) {
               return (
                 <Row key={product.id} item={product}>
                   <Cell>
-                    <PhotoGroup photos={['one']} />
+                    <PhotoGroup photos={[product.image]} />
                   </Cell>
                   <Cell style={{ textTransform: 'capitalize' }}>
                     <TextLink

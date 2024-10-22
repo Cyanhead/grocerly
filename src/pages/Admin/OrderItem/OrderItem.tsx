@@ -110,7 +110,9 @@ function OrderItem() {
       <Cell $span={[2, 2]} $scroll>
         <Row>
           <SectionHeading2>Products</SectionHeading2>
-          <P>4 items</P>
+          <P>
+            {products.length} {products.length === 1 ? 'item' : 'items'}
+          </P>
         </Row>
         <OrderItemProducts products={products} />
       </Cell>
