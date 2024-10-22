@@ -112,8 +112,8 @@ function Footer() {
           <Payments src={payments} alt="" />
           <Social>
             {[Facebook, Linkedin, Instagram, Twitter].map((icon, index) => (
-              <SocialIcon to="#">
-                <Icon key={index} icon={icon} />
+              <SocialIcon to="#" key={index}>
+                <Icon icon={icon} />
               </SocialIcon>
             ))}
           </Social>

@@ -1,4 +1,11 @@
 export * from './useClickOutside.hook';
+export * from './useGetOrders.hook';
+export * from './useGetProducts.hook';
+export * from './useGetSingleProduct.hook';
+export * from './useGetSingleOrder.hook';
+export * from './useGetSingleUser.hook';
+export * from './useGetUsers.hook';
+export * from './useGetVisits.hook';
 export * from './useLogout.hook';
 export { default as useToggle } from './useToggle.hook';
 export { default as useSearchItemList } from './useSearchItemList.hook';

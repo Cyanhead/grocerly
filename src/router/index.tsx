@@ -5,8 +5,22 @@ import {
   ForgotPassword,
   Home,
   Login,
+  NotFound,
   SignUp,
 } from '../pages';
+import Admin, {
+  Dashboard,
+  OrderItem,
+  Orders,
+  ProductItem,
+  Products,
+  User,
+  Users,
+} from '../pages/Admin';
+import { ProtectedRoute } from '../components';
+import { logVisitEvent } from '../helpers';
+
+logVisitEvent();
 
 const router = createBrowserRouter([
   {
@@ -20,11 +34,85 @@ const router = createBrowserRouter([
       },
       {
         path: '/products',
-        element: <div>Products page</div>,
+        element: (
+          <div>
+            <h1>Products</h1>
+          </div>
+        ),
+      },
+      {
+        path: '/profile',
+        element: (
+          <ProtectedRoute>
+            <h1>Profile page</h1>
+          </ProtectedRoute>
+        ),
       },
       {
         path: '*',
         element: <div>Page Not Found!</div>,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    errorElement: <ErrorPage />,
+    element: (
+      <ProtectedRoute forAdminOnly>
+        <Admin />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: '/admin/products',
+        children: [
+          {
+            index: true,
+            element: <Products />,
+          },
+          {
+            path: '/admin/products/:id',
+            element: <ProductItem />,
+          },
+        ],
+      },
+      {
+        path: '/admin/orders',
+        children: [
+          {
+            index: true,
+            element: <Orders />,
+          },
+          {
+            path: '/admin/orders/:id',
+            element: <OrderItem />,
+          },
+        ],
+      },
+      {
+        path: '/admin/users',
+        children: [
+          {
+            index: true,
+            element: <Users />,
+          },
+          {
+            path: '/admin/users/:id',
+            element: <User />,
+          },
+        ],
+      },
+      {
+        path: '/admin/settings',
+        element: <h1>Admin Settings page</h1>,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },

@@ -10,6 +10,7 @@ import { FirebaseError } from 'firebase/app';
 import { Link } from '../../../components/NavBar/AuthNavBar/AuthNavBar.styled';
 import { LinkButton, P } from '../../AuthPages.styled';
 import { useSignInWithGoogle } from '../../../hooks';
+import { getUserRoles, logLoginEvent } from '../../../helpers';
 
 function LoginForm() {
   const { dispatch } = useAuthContext();
@@ -44,8 +45,12 @@ function LoginForm() {
         payload: {
           isLoggedIn: true,
           user: user,
+          roles: await getUserRoles(),
         },
       });
+
+      logLoginEvent(user.uid);
+
       navigate('/', { replace: true });
     } catch (error) {
       console.error('Firebase sign in error', error);
