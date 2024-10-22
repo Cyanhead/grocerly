@@ -1,3 +1,4 @@
+// REFACTOR
 import { useLayoutEffect } from 'react';
 
 export const useLockBodyScroll = bool => {
