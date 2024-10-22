@@ -1,5 +1,5 @@
 export * from './arrays';
-export * from './generateSessionId';
+export * from './generateId';
 export * from './getCollection';
 export * from './getSubCollection';
 export * from './getUserRoles';

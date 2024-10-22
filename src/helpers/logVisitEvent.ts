@@ -2,7 +2,7 @@ import { logEvent } from 'firebase/analytics';
 import { analytics, db } from '../context/Firebase';
 import { VisitEvent } from '../types/events';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { generateSessionId } from './generateSessionId';
+import { generateUniqueId } from './generateId';
 
 const VISIT_LOG_KEY = 'last-visit-log-timestamp';
 const VISIT_LOG_INTERVAL = 60 * 60 * 24 * 1000; // 1 day in milliseconds
@@ -19,7 +19,7 @@ export async function logVisitEvent() {
   logEvent(analytics, 'site_visit');
 
   const eventData: VisitEvent = {
-    sessionId: generateSessionId(),
+    sessionId: generateUniqueId(),
     timestamp: serverTimestamp(),
     pageUrl: window.location.href,
     userAgent: navigator.userAgent,

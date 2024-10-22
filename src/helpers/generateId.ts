@@ -1,4 +1,4 @@
-export function generateSessionId(): string {
+export function generateUniqueId(): string {
   // Get current time in milliseconds
   const timestamp = Date.now().toString(36);
 
