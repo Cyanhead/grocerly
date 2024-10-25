@@ -1,6 +1,7 @@
 export { default as Banners } from './Banners';
 export { default as Button } from './Button';
 export { default as CategoryBox } from './CategoryBox';
+export { default as Error } from './Error';
 export { default as Footer } from './Footer';
 export { default as Gallery } from './Gallery';
 export { default as Icon } from './Icon';
@@ -15,6 +16,7 @@ export { default as Menu } from './Menu';
 export { default as Modal } from './Modal';
 export { default as NavBar } from './NavBar';
 export { default as PhotoGroup } from './PhotoGroup';
+export { default as ProductCard } from './ProductCard';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SearchBar } from './Search/SearchBar';
 export { default as Skeleton } from './Loader/Skeleton';

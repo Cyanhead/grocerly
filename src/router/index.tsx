@@ -6,6 +6,7 @@ import {
   Home,
   Login,
   NotFound,
+  Products,
   SignUp,
 } from '../pages';
 import Admin, {
@@ -13,7 +14,7 @@ import Admin, {
   OrderItem,
   Orders,
   ProductItem,
-  Products,
+  Products as AdminProducts,
   User,
   Users,
 } from '../pages/Admin';
@@ -34,12 +35,18 @@ const router = createBrowserRouter([
       },
       {
         path: '/products',
-        element: (
-          <div>
-            <h1>Products</h1>
-          </div>
-        ),
+        children: [
+          {
+            index: true,
+            element: <Products />,
+          },
+          {
+            path: '/products/:id',
+            element: <h1>Product page</h1>,
+          },
+        ],
       },
+
       {
         path: '/profile',
         element: (
@@ -72,7 +79,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Products />,
+            element: <AdminProducts />,
           },
           {
             path: '/admin/products/:id',

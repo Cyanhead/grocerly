@@ -66,17 +66,24 @@ export const SectionHeading2 = styled.h2`
   }
 `;
 
-export const TextLink = styled(Link).attrs<{$isActive?: boolean}>(
-  props=> ({
-   $isActive: props.$isActive
-  })
-)`
-  color: ${props => props.$isActive ? getColor('primary600') :'inherit'};
+export const TextLink = styled(Link).attrs<{ $isActive?: boolean }>(props => ({
+  $isActive: props.$isActive,
+}))`
+  color: ${props => (props.$isActive ? getColor('primary600') : 'inherit')};
   text-decoration: none;
-
 
   &:hover {
     text-decoration: underline;
-    color: ${props => !props.$isActive ? getColor('primary600') :'inherit'};
+    color: ${props => (!props.$isActive ? getColor('primary600') : 'inherit')};
   }
 `;
+
+export const Select = styled.select`
+  padding: 8px 4px;
+  background-color: ${getColor('white')};
+  border: 1px solid ${getColor('primary700')};
+  border-radius: 2px;
+  padding-left: 8px;
+`;
+
+export const Option = styled.option``;

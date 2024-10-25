@@ -1,4 +1,5 @@
 export * from './useClickOutside.hook';
+export * from './useGetCategories.hook';
 export * from './useGetOrders.hook';
 export * from './useGetProducts.hook';
 export * from './useGetSingleProduct.hook';
