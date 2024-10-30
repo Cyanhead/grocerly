@@ -6,6 +6,7 @@ import {
   Home,
   Login,
   NotFound,
+  Product,
   Products,
   SignUp,
 } from '../pages';
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/products/:id',
-            element: <h1>Product page</h1>,
+            element: <Product />,
           },
         ],
       },
