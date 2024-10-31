@@ -1,6 +1,7 @@
 export * from './arrays';
 export * from './generateId';
 export * from './getCollection';
+export * from './getDocument';
 export * from './getImageIdFromUrl';
 export * from './getSubCollection';
 export * from './getUserRoles';

@@ -8,7 +8,7 @@ function GalleryViewer({ numOfCols = 4, images }: GalleryPropsType) {
   return (
     <Wrapper data-testid="Gallery" $numOfCols={numOfCols}>
       <Preview
-        src={images[activeImageIndex].largeURL}
+        src={images[activeImageIndex].smallURL}
         alt="product image"
         $numOfCols={numOfCols}
       />

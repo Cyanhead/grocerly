@@ -12,9 +12,10 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { Layout, Logo } from '../../../components';
-import { CloseButton, GreyBg, SectionTitle, Wrapper } from './SideBar.styled';
+import { Logo } from '../../../components';
+import { CloseButton, GreyBg, Wrapper } from './SideBar.styled';
 import SideBarButton from './SideBarButton';
+import SidebarSection from './SidebarSection';
 import { SideBarPropsType } from './SideBar.type';
 import { useClickOutside } from '../../../hooks';
 import { useEffect, useRef } from 'react';
@@ -90,7 +91,7 @@ function SideBar({ showSideBar, setShowSideBar }: SideBarPropsType) {
           Dashboard
         </SideBarButton>
         {sections.map(({ title, options }, index) => (
-          <SideBarSection
+          <SidebarSection
             key={index}
             title={title}
             options={options}
@@ -111,27 +112,3 @@ function SideBar({ showSideBar, setShowSideBar }: SideBarPropsType) {
 }
 
 export default SideBar;
-
-type SideBarSectionPropsType = {
-  title: string;
-  options: (typeof sections)[0]['options'];
-  tabIndex?: number;
-};
-const SideBarSection = ({
-  title,
-  options,
-  tabIndex,
-}: SideBarSectionPropsType) => (
-  <Layout.FlexCol as="nav" $align="stretch">
-    <SectionTitle>{title}</SectionTitle>
-    <ul style={{ listStyle: 'none' }}>
-      {options.map(({ name, icon }, index) => (
-        <li key={index}>
-          <SideBarButton to={`/admin/${name}`} icon={icon} tabIndex={tabIndex}>
-            {name}
-          </SideBarButton>
-        </li>
-      ))}
-    </ul>
-  </Layout.FlexCol>
-);

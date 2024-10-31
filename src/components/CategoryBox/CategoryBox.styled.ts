@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { getBreakpoint, getColor } from '../../theme';
-import { BaseContainer, BaseWrapper, SectionHeading } from '../BaseStyled';
+import {
+  BaseContainer,
+  BaseWrapper,
+  Option,
+  SectionHeading,
+  Select,
+} from '../BaseStyled';
 import { StyledButton } from '../Button/Button.styled';
 
 export const Container = styled(BaseContainer)``;
@@ -41,16 +47,10 @@ export const CategoryButton = styled(StyledButton).attrs<{ $active?: boolean }>(
   color: ${props => (props.$active ? getColor('primary') : 'inherit')};
 `;
 
-export const CategorySelect = styled.select`
-  padding: 8px 4px;
-  background-color: ${getColor('white')};
-  border: 1px solid ${getColor('primary700')};
-  border-radius: 2px;
-  padding-left: 8px;
-
+export const CategorySelect = styled(Select)`
   @media screen and (min-width: ${getBreakpoint('md')}) {
     display: none;
   }
 `;
 
-export const CategoryOption = styled.option``;
+export const CategoryOption = styled(Option)``;
