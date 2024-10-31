@@ -1,4 +1,4 @@
-import { Error, Loader, SectionHeading2 } from '../../components';
+import { Error, Loader } from '../../components';
 import { useGetProducts } from '../../hooks';
 import ProductList from './ProductList';
 
@@ -12,21 +12,11 @@ function Products() {
   if (error) {
     console.error(error);
 
-    return (
-      <Error>
-        <SectionHeading2>
-          Error getting products: {error?.message}
-        </SectionHeading2>
-      </Error>
-    );
+    return <Error>Error getting products: {error?.message}.</Error>;
   }
 
   if (!products.length) {
-    return (
-      <Error>
-        <SectionHeading2>No products found!</SectionHeading2>
-      </Error>
-    );
+    return <Error>No products found!</Error>;
   }
 
   return <ProductList allProducts={products} />;

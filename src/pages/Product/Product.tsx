@@ -24,6 +24,7 @@ import {
 import { useGetSingleProduct } from '../../hooks';
 import {
   Counter,
+  Error,
   Gallery,
   Icon,
   Loader,
@@ -52,9 +53,9 @@ function Product() {
   if (productError || !product) {
     console.error(productError);
     return (
-      <div>
-        Error loading product: {productError?.message || 'Product not found'}
-      </div>
+      <Error>
+        Error loading product: {productError?.message || 'Product not found'}.
+      </Error>
     );
   }
 
