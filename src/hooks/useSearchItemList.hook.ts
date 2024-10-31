@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 // TODO: modify to take real data
 import { SearchResultsType } from '../components/Search/SAMPLE_DATA';
 
-function useSearchItemList(searchTerm: string, data: SearchResultsType) {
+export function useSearchItemList(searchTerm: string, data: SearchResultsType) {
   const [results, setResults] = useState<SearchResultsType>([]);
 
   useEffect(() => {
@@ -18,5 +18,3 @@ function useSearchItemList(searchTerm: string, data: SearchResultsType) {
   }, [data, searchTerm]);
   return results;
 }
-
-export default useSearchItemList;

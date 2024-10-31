@@ -12,7 +12,7 @@ import { Users } from '../types';
 /**
  * Provides a function to handle Google sign in and a loading state indicator.
  *
- * @returns {{ handleGoogleSignIn: () => Promise<void>, loading: boolean }}
+ * @returns An object with a `handleGoogleSignIn` function and a `loading` state.
  * @example
  * const { handleGoogleSignIn, loading } = useSignInWithGoogle();
  *
@@ -22,7 +22,7 @@ import { Users } from '../types';
  * </Button>
  * ```
  */
-const useSignInWithGoogle = () => {
+export function useSignInWithGoogle() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -89,6 +89,4 @@ const useSignInWithGoogle = () => {
     handleGoogleSignIn,
     loading,
   };
-};
-
-export default useSignInWithGoogle;
+}

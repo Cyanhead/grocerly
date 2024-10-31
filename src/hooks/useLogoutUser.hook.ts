@@ -11,7 +11,7 @@ import { auth } from '../context/Firebase';
  *
  * <Button onClick={handleLogout}>Log out</Button>
  */
-export const useLogout = async () => {
+export async function useLogoutUser() {
   try {
     await toast.promise(signOut(auth), {
       loading: 'Logging out...',
@@ -21,4 +21,4 @@ export const useLogout = async () => {
   } catch (error) {
     console.error(error);
   }
-};
+}

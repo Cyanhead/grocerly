@@ -11,7 +11,10 @@ interface PasswordConfig {
   requireSpecialChar?: boolean;
 }
 
-function useValidatePassword(password: string, config: PasswordConfig = {}) {
+export function useValidatePassword(
+  password: string,
+  config: PasswordConfig = {}
+) {
   const {
     minLength = 8,
     requireUppercase = true,
@@ -76,5 +79,3 @@ function useValidatePassword(password: string, config: PasswordConfig = {}) {
 
   return { ...checks };
 }
-
-export default useValidatePassword;

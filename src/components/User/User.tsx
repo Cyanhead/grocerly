@@ -11,7 +11,7 @@ import Menu from '../Menu';
 import VisuallyHidden from '../VisuallyHidden';
 import { useAuthContext } from '../../context';
 import { MenuPropsType } from '../Menu/Menu.type';
-import { useLogout } from '../../hooks';
+import { useLogoutUser } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../Icon';
 import { truncateString } from '../../helpers';
@@ -74,7 +74,7 @@ function User() {
     type: 'button',
     label: 'Log out',
     icon: LogOut,
-    onClick: useLogout,
+    onClick: useLogoutUser,
   });
 
   return (

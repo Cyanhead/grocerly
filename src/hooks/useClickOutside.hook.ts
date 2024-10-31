@@ -7,10 +7,10 @@ import { useEffect, RefObject } from 'react';
  * @param {() => void} handler
  * @returns
  */
-export const useClickOutside = (
+export function useClickOutside(
   refs: RefObject<HTMLElement>[],
   handler: () => void
-) => {
+) {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -27,4 +27,4 @@ export const useClickOutside = (
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [refs, handler]);
-};
+}

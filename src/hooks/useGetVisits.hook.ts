@@ -15,7 +15,7 @@ import { getSubCollection } from '../helpers';
  *
  * @returns An object with the above properties.
  */
-export const useGetVisits = () => {
+export function useGetVisits() {
   const path = 'event-logs/user/visits';
   const { isLoading, data, error } = useSWR<VisitEvent[]>(
     path,
@@ -23,4 +23,4 @@ export const useGetVisits = () => {
   );
 
   return { isLoading, data, error };
-};
+}
