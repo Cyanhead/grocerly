@@ -30,6 +30,23 @@ export const BaseWrapper = styled.div`
   }
 `;
 
+export const ModalBackground = styled.div.attrs<{ $show: boolean }>(props => ({
+  $show: props.$show || false,
+}))`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  overflow: hidden;
+
+  display: ${props => (props.$show ? 'block' : 'none')};
+
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+`;
+
 export const SectionHeading = styled.h2`
   font-family: 'Quicksand', sans-serif;
   font-weight: ${getFontWeight('semibold')};

@@ -45,10 +45,6 @@ export const Name = styled.h2`
   text-transform: capitalize;
 `;
 
-export const WishlistButton = styled(StyledButton)`
-  border-radius: 50%;
-`;
-
 export const Category = styled.p`
   text-transform: capitalize;
   font-weight: ${getFontWeight('medium')};

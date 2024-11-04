@@ -1,12 +1,5 @@
-import {
-  Flame,
-  Heart,
-  Home,
-  LayoutGrid,
-  Megaphone,
-  Percent,
-} from 'lucide-react';
-import Button, { LinkButton } from '../Button';
+import { Flame, Home, LayoutGrid, Megaphone, Percent } from 'lucide-react';
+import { LinkButton } from '../Button';
 import Icon from '../Icon';
 import Layout from '../Layout';
 import Logo from '../Logo';
@@ -22,6 +15,9 @@ import {
   WishlistAndCart,
   Wrapper,
 } from './NavBar.styled';
+import { useState } from 'react';
+import Wishlist from '../Wishlist';
+import WishlistButton from './WishlistButton';
 
 const bottomNavLinks = [
   { text: 'Home', icon: Home },
@@ -31,49 +27,50 @@ const bottomNavLinks = [
 ];
 
 function NavBar() {
+  const [showWishlist, setShowWishlist] = useState(false);
+
   return (
-    <Container data-testid="NavBar">
-      <Wrapper>
-        <TopRow>
-          <Logo />
-          <SearchForm />
+    <>
+      <Container data-testid="NavBar">
+        <Wrapper>
+          <TopRow>
+            <Logo />
+            <SearchForm />
 
-          <WishlistAndCart>
-            <Button $variant="normal">
-              <Icon icon={Heart} />
-              Wishlist
-            </Button>
+            <WishlistAndCart>
+              <WishlistButton onClick={() => setShowWishlist(true)} />
+              <CartButton />
+            </WishlistAndCart>
+            <Layout.FlexRow $justify="space-between" $align="center">
+              <SearchBar />
+              <User />
+            </Layout.FlexRow>
+          </TopRow>
+          <BottomRow>
+            <LinkButton to="/products">
+              <Icon icon={LayoutGrid} />
+              Browse All Categories
+            </LinkButton>
+            <NavLinks>
+              {bottomNavLinks.map(({ text, icon }) => {
+                const formatted = '#' + text.split(' ').join('-').toLowerCase();
+                const url = text.toLowerCase() === 'home' ? '/' : formatted;
 
-            <CartButton />
-          </WishlistAndCart>
-          <Layout.FlexRow $justify="space-between" $align="center">
-            <SearchBar />
-            <User />
-          </Layout.FlexRow>
-        </TopRow>
-        <BottomRow>
-          <LinkButton to="/products">
-            <Icon icon={LayoutGrid} />
-            Browse All Categories
-          </LinkButton>
-          <NavLinks>
-            {bottomNavLinks.map(({ text, icon }) => {
-              const formatted = '#' + text.split(' ').join('-').toLowerCase();
-              const url = text.toLowerCase() === 'home' ? '/' : formatted;
-
-              return (
-                <li key={text}>
-                  <LinkButton to={url} $variant="normal">
-                    <Icon icon={icon} />
-                    {text}
-                  </LinkButton>
-                </li>
-              );
-            })}
-          </NavLinks>
-        </BottomRow>
-      </Wrapper>
-    </Container>
+                return (
+                  <li key={text}>
+                    <LinkButton to={url} $variant="normal">
+                      <Icon icon={icon} />
+                      {text}
+                    </LinkButton>
+                  </li>
+                );
+              })}
+            </NavLinks>
+          </BottomRow>
+        </Wrapper>
+      </Container>
+      <Wishlist isVisible={showWishlist} setIsVisible={setShowWishlist} />
+    </>
   );
 }
 

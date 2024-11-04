@@ -34,10 +34,10 @@ const BaseStyles = css<ButtonPropsType>`
           background-color: ${getColor('white')};
           color: ${$theme === 'danger'
             ? getColor('danger600')
-            : getColor('primary600')};
+            : getColor('primary700')};
           border: 2px solid
             ${$theme === 'danger'
-              ? getColor('danger600')
+              ? getColor('danger700')
               : getColor('primary600')};
 
           &:hover {
@@ -67,7 +67,9 @@ const BaseStyles = css<ButtonPropsType>`
           color: ${$theme || getColor('black')};
 
           &:hover {
-            color: ${$theme || getColor('primary600')};
+            color: ${$theme === 'danger'
+              ? getColor('danger600')
+              : getColor('primary600')};
           }
         `;
       default:

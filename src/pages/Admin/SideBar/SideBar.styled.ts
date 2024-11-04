@@ -4,23 +4,6 @@ import { IconButton } from '../../../components';
 
 const SIDEBAR_WIDTH = '283px';
 
-export const GreyBg = styled.div.attrs<{ $show: boolean }>(props => ({
-  $show: props.$show || false,
-}))`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 2;
-  overflow: hidden;
-
-  display: ${props => (props.$show ? 'block' : 'none')};
-
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-`;
-
 export const Wrapper = styled.aside.attrs<{ $isOpen: boolean }>(props => ({
   $isOpen: props.$isOpen || false,
 }))`

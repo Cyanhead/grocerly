@@ -14,7 +14,6 @@ import {
   OldPrice,
   Percentage,
   Images,
-  WishlistButton,
   BuyButton,
   OtherName,
   Offer,
@@ -23,6 +22,7 @@ import {
 } from './Product.styled';
 import { useGetSingleProduct } from '../../hooks';
 import {
+  AddToWishlistButton,
   Counter,
   Error,
   Gallery,
@@ -33,12 +33,10 @@ import {
 } from '../../components';
 import { GalleryProvider } from '../../components/Gallery/context';
 import { separateNumberByComma } from '../../helpers';
-import { Heart, ShoppingCart } from 'lucide-react';
-import { useState } from 'react';
+import { ShoppingCart } from 'lucide-react';
 
 function Product() {
   const { id: productId = '' } = useParams();
-  const [addedToWishlist, setAddedToWishlist] = useState(false);
 
   const {
     isLoading: productIsLoading,
@@ -85,15 +83,9 @@ function Product() {
           <Details>
             <Header>
               <Name>{name}</Name>
-              <WishlistButton
-                onClick={() => {
-                  setAddedToWishlist(!addedToWishlist);
-                  console.log('Added to wishlist');
-                }}
-                $variant={addedToWishlist ? 'primary' : 'ghost'}
-              >
-                <Icon icon={Heart} visuallyHidden="Wishlist" />
-              </WishlistButton>
+              <AddToWishlistButton
+                product={{ ...product, image: product.images[0].smallURL }}
+              />
             </Header>
             <div>
               <Category>{category}</Category>Also called

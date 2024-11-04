@@ -6,12 +6,30 @@ import { useEffect, RefObject } from 'react';
  * @param {RefObject<HTMLElement>[]} refs
  * @param {() => void} handler
  * @returns
+ *
+ * @example
+ * const MyComponent = () => {
+ *   const wrapperRef = useRef(null);
+ *   useClickOutside([wrapperRef], () => console.log('Clicked outside'));
+ *
+ *   return (
+ *     <div ref={wrapperRef}>
+ *       <p>Hello World</p>
+ *     </div>
+ *   );
+ * };
  */
 export function useClickOutside(
   refs: RefObject<HTMLElement>[],
   handler: () => void
 ) {
   useEffect(() => {
+    /**
+     * @description
+     * Handles the event of a click outside the provided refs.
+     * If the click is outside all of the refs, the handler is called.
+     * @param {MouseEvent} e
+     */
     const handleClickOutside = (e: MouseEvent) => {
       if (
         refs.every(

@@ -29,6 +29,6 @@ export const reducer = (state: State, action: Action): State => {
         },
       };
     default:
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${(action as Action).type}`);
   }
 };

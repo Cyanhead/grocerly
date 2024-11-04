@@ -1,13 +1,16 @@
 import { Footer, NavBar, ScrollToAnchor } from './components';
 import { Outlet } from 'react-router-dom';
+import { WishlistProvider } from './context';
 
 function App() {
   return (
     <>
-      <NavBar />
-      <main>
-        <Outlet />
-      </main>
+      <WishlistProvider>
+        <NavBar />
+        <main>
+          <Outlet />
+        </main>
+      </WishlistProvider>
       <Footer />
       <ScrollToAnchor />
     </>

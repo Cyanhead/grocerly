@@ -1,3 +1,5 @@
+export * from './BaseStyled';
+export { default as AddToWishlistButton } from './AddToWishlistButton';
 export { default as Banners } from './Banners';
 export { default as Button } from './Button';
 export { default as CategoryBox } from './CategoryBox';
@@ -24,7 +26,6 @@ export { default as SimilarProducts } from './SimilarProducts';
 export { default as Skeleton } from './Loader/Skeleton';
 export { default as User } from './User';
 export { default as VisuallyHidden } from './VisuallyHidden';
-export * from './BaseStyled';
 
 //
 export { default as ScrollToAnchor } from './ScrollToAnchor';

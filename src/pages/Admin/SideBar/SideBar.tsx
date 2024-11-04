@@ -12,13 +12,13 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { Logo } from '../../../components';
-import { CloseButton, GreyBg, Wrapper } from './SideBar.styled';
+import { ModalBackground, Logo } from '../../../components';
+import { CloseButton, Wrapper } from './SideBar.styled';
 import SideBarButton from './SideBarButton';
 import SidebarSection from './SidebarSection';
 import { SideBarPropsType } from './SideBar.type';
-import { useClickOutside } from '../../../hooks';
-import { useEffect, useRef } from 'react';
+import { useClickOutside, useLockScroll } from '../../../hooks';
+import { useRef } from 'react';
 
 const sections = [
   {
@@ -68,21 +68,14 @@ function SideBar({ showSideBar, setShowSideBar }: SideBarPropsType) {
   useClickOutside([sideBarRef], () => {
     setShowSideBar(false);
   });
+  useLockScroll(showSideBar);
 
   // ensures that the buttons are keyboard-focusable on large screens
   const tabIndex = window.innerWidth >= 992 ? 0 : showSideBar ? 0 : -1;
 
-  useEffect(() => {
-    if (showSideBar) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [showSideBar]);
-
   return (
     <>
-      <GreyBg $show={showSideBar} />
+      <ModalBackground $show={showSideBar} />
       <Wrapper ref={sideBarRef} data-testid="SideBar" $isOpen={showSideBar}>
         <div style={{ paddingLeft: '16px', alignSelf: 'start' }}>
           <Logo tabIndex={tabIndex} />
