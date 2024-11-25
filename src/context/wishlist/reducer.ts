@@ -1,8 +1,8 @@
-import { Action, WishlistState } from './types';
+import { WishlistAction, WishlistState } from './types';
 
 export const initialState: WishlistState = [];
 
-export function reducer(state: WishlistState, action: Action) {
+export function reducer(state: WishlistState, action: WishlistAction) {
   switch (action.type) {
     case 'ADD_TO_WISHLIST':
       return state.some(product => product.id === action.payload.id)
@@ -16,6 +16,8 @@ export function reducer(state: WishlistState, action: Action) {
       return [];
 
     default:
-      throw new Error(`Unhandled action type: ${(action as Action).type}`);
+      throw new Error(
+        `Unhandled action type: ${(action as WishlistAction).type}`
+      );
   }
 }

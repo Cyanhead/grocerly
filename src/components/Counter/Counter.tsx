@@ -1,11 +1,9 @@
 import { Minus, Plus } from 'lucide-react';
 import { IconButton } from '..';
 import { Count, Wrapper } from './Counter.styled';
-import { useState } from 'react';
+import { CounterPropsType } from './Counter.type';
 
-function Counter() {
-  const [count, setCount] = useState(1);
-
+function Counter({ count, setCount }: CounterPropsType) {
   return (
     <Wrapper>
       <IconButton

@@ -34,9 +34,13 @@ import {
 import { GalleryProvider } from '../../components/Gallery/context';
 import { separateNumberByComma } from '../../helpers';
 import { ShoppingCart } from 'lucide-react';
+import { useCartContext } from '../../context';
+import { useState } from 'react';
 
 function Product() {
   const { id: productId = '' } = useParams();
+  const { dispatch } = useCartContext();
+  const [count, setCount] = useState(1);
 
   const {
     isLoading: productIsLoading,
@@ -71,6 +75,19 @@ function Product() {
 
   const percentage = calcPercentage(price, parseFloat(oldPrice));
 
+  function handleAddToCart(productId: string) {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: {
+        id: productId,
+        name,
+        price,
+        image: images[0].smallURL,
+        quantity: count,
+      },
+    });
+  }
+
   return (
     <Container>
       <Wrapper>
@@ -104,7 +121,7 @@ function Product() {
                 );
               })}
             </div>
-            rating {/* TODO: implement <Rating /> component */}
+            {/*rating*/} {/* TODO: implement <Rating /> component */}
             <Brief>{about.split('.')[0]}.</Brief>
             <Price>
               &#36;
@@ -115,9 +132,9 @@ function Product() {
                 <OldPrice>&#36; {oldPrice}</OldPrice>
                 <Percentage> {percentage} &#37;</Percentage>
               </Discount>
-              <Counter />
+              <Counter count={count} setCount={setCount} />
             </Group>
-            <BuyButton onClick={() => console.log('Added to cart')}>
+            <BuyButton onClick={() => handleAddToCart(productId)}>
               <Icon icon={ShoppingCart} visuallyHidden="Cart" /> Add to cart
             </BuyButton>
             <Contact>

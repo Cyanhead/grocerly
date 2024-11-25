@@ -7,7 +7,7 @@ type WishlistProduct = Pick<Products[0], 'id' | 'name' | 'price' | 'stock'> & {
 
 export type WishlistState = WishlistProduct[];
 
-export type Action =
+export type WishlistAction =
   | {
       type: 'ADD_TO_WISHLIST';
       payload: WishlistProduct;
@@ -17,5 +17,5 @@ export type Action =
 
 export type WishlistContextType = {
   state: WishlistState;
-  dispatch: Dispatch<Action>;
+  dispatch: Dispatch<WishlistAction>;
 };

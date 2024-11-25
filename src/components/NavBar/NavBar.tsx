@@ -18,6 +18,7 @@ import {
 import { useState } from 'react';
 import Wishlist from '../Wishlist';
 import WishlistButton from './WishlistButton';
+import Cart from '../Cart';
 
 const bottomNavLinks = [
   { text: 'Home', icon: Home },
@@ -28,6 +29,7 @@ const bottomNavLinks = [
 
 function NavBar() {
   const [showWishlist, setShowWishlist] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   return (
     <>
@@ -39,7 +41,7 @@ function NavBar() {
 
             <WishlistAndCart>
               <WishlistButton onClick={() => setShowWishlist(true)} />
-              <CartButton />
+              <CartButton onClick={() => setShowCart(true)} />
             </WishlistAndCart>
             <Layout.FlexRow $justify="space-between" $align="center">
               <SearchBar />
@@ -70,6 +72,7 @@ function NavBar() {
         </Wrapper>
       </Container>
       <Wishlist isVisible={showWishlist} setIsVisible={setShowWishlist} />
+      <Cart isVisible={showCart} setIsVisible={setShowCart} />
     </>
   );
 }
