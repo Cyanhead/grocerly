@@ -101,6 +101,7 @@ function Wishlist({ isVisible, setIsVisible }: WishlistPropsType) {
               </Layout.FlexRow>
             </Card>
           ))}
+          {/* <button>Add all to cart</button> */}
         </Column>
       </Wrapper>
     </>

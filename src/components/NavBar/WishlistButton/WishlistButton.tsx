@@ -1,13 +1,15 @@
 import { WishlistButtonPropsType } from './WishlistButton.type';
-import Button from '../../Button';
-import Icon from '../../Icon';
 import { Heart } from 'lucide-react';
+import { Button } from './WishlistButton.styled';
+import IconAndBadge from '../../IconAndBadge';
+import { useWishlistContext } from '../../../context';
 
 function WishlistButton({ onClick }: WishlistButtonPropsType) {
-  // TODO: implement badge count
+  const { state: wishlist } = useWishlistContext();
+
   return (
     <Button $variant="normal" onClick={onClick}>
-      <Icon icon={Heart} />
+      <IconAndBadge count={wishlist.length} icon={Heart} />
       Wishlist
     </Button>
   );
