@@ -1,3 +1,3 @@
-import { Container, FlexRow, FlexCol } from './Layout.styled';
+import { Container, FlexRow, FlexCol, Grid } from './Layout.styled';
 
-export default { Container, FlexRow, FlexCol };
+export default { Container, FlexRow, FlexCol, Grid };
