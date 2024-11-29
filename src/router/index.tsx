@@ -8,6 +8,7 @@ import {
   NotFound,
   Product,
   Products,
+  Profile,
   SignUp,
 } from '../pages';
 import Admin, {
@@ -47,12 +48,11 @@ const router = createBrowserRouter([
           },
         ],
       },
-
       {
         path: '/profile',
         element: (
           <ProtectedRoute>
-            <h1>Profile page</h1>
+            <Profile />
           </ProtectedRoute>
         ),
       },

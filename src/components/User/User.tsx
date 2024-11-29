@@ -70,12 +70,20 @@ function User() {
     type: 'text',
     label: displayName,
   });
-  loggedInUserMenuOptions.push({
-    type: 'button',
-    label: 'Log out',
-    icon: LogOut,
-    onClick: useLogoutUser,
-  });
+  loggedInUserMenuOptions.push(
+    {
+      type: 'link',
+      label: 'Profile',
+      icon: UserIcon,
+      linkPath: '/profile',
+    },
+    {
+      type: 'button',
+      label: 'Log out',
+      icon: LogOut,
+      onClick: useLogoutUser,
+    }
+  );
 
   return (
     <Menu options={isLoggedIn ? loggedInUserMenuOptions : userMenuOptions}>

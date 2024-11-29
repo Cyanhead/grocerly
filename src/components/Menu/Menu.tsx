@@ -10,6 +10,8 @@ import {
 import { useClickOutside } from '../../hooks';
 import Icon from '../Icon';
 
+import { Link } from 'react-router-dom';
+
 const Menu = ({ children, options }: MenuPropsType) => {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -22,9 +24,26 @@ const Menu = ({ children, options }: MenuPropsType) => {
       </Button>
       {showMenu && (
         <Ul>
-          {options.map(({ type, label, icon, onClick }) => {
+          {options.map(({ type, label, icon, onClick, linkPath = '/' }) => {
             if (type === 'text')
               return <ListText key={label}>{label}</ListText>;
+
+            if (type === 'link')
+              return (
+                <ListButtonWrapper key={label}>
+                  <Button
+                    as={Link}
+                    to={linkPath}
+                    onClick={onClick}
+                    $variant="normal"
+                    $pad={20}
+                    $gap={12}
+                  >
+                    {icon && <Icon icon={icon} />}
+                    {label}
+                  </Button>
+                </ListButtonWrapper>
+              );
 
             if (
               // NOTE: equivalent of breakpoint getBreakpoint('xl')

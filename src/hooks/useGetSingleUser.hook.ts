@@ -1,5 +1,6 @@
+import useSWR from 'swr';
+import { getDocument } from '../helpers';
 import { Users } from '../types';
-import { useGetUsers } from './useGetUsers.hook';
 
 /**
  * Retrieves a single user from the database by its id and returns an object
@@ -20,10 +21,13 @@ export function useGetSingleUser(userId: string): {
   user: Users[0] | null;
   error: Error;
 } {
-  const { isLoading, data, error } = useGetUsers();
+  const { isLoading, data, error } = useSWR<Users[0] | undefined>(
+    ['users', userId],
+    ([collectionName, documentId]) =>
+      getDocument(collectionName, documentId as string)
+  );
 
-  if (!data) return { isLoading, user: null, error };
+  const user = data?.id === userId ? data : null;
 
-  const user = data.filter(user => user.id === userId)[0];
   return { isLoading, user, error };
 }
