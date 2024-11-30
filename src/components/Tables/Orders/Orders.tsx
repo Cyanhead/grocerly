@@ -136,7 +136,7 @@ function Orders({
                     <Cell style={{ textTransform: 'capitalize' }}>
                       <Status $text={order.status}>{order.status}</Status>
                     </Cell>
-                    <Cell>{parseTimestamp(order.createdAt)}</Cell>
+                    <Cell>{parseTimestamp(order.createdAt) ?? 'N/A'}</Cell>
                   </Row>
                 );
               })}

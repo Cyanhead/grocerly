@@ -13,7 +13,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { parseTimestamp } from '../../../helpers';
 import { MoreVertical } from 'lucide-react';
 import { SectionHeading2, TextLink } from '../../BaseStyled';
-import { Timestamp } from 'firebase/firestore';
+// import { Timestamp } from 'firebase/firestore';
 import { EmptyTableMessage } from '../Tables.styled';
 // import { useState } from 'react';
 // import {
@@ -225,26 +225,30 @@ function AllProducts({
 
             <Body>
               {tableList.map(product => {
-                function determineFirstSale(
-                  lastOrder: Timestamp,
-                  createdAt: Timestamp
-                ) {
-                  if (!lastOrder || !createdAt) return 'Never';
+                // function determineFirstSale(
+                //   lastOrder: Timestamp,
+                //   createdAt: Timestamp
+                // ) {
+                //   if (!lastOrder || !createdAt) return 'Never';
 
-                  const diff =
-                    lastOrder.toDate().getTime() - createdAt.toDate().getTime();
-                  return diff > 1000 * 60
-                    ? parseTimestamp(product.lastOrder, {
-                        hour: 'numeric',
-                        minute: 'numeric',
-                      })
-                    : 'Never';
-                }
+                //   const diff =
+                //     lastOrder.toDate().getTime() - createdAt.toDate().getTime();
+                //   return diff > 1000 * 60
+                //     ? parseTimestamp(product.lastOrder, {
+                //         hour: 'numeric',
+                //         minute: 'numeric',
+                //       })
+                //     : 'Never';
+                // }
 
-                const lastOrderedDateTime = determineFirstSale(
-                  product.lastOrder,
-                  product.createdAt
-                );
+                // const lastOrderedDateTime = determineFirstSale(
+                //   product.lastOrder,
+                //   product.createdAt
+                // );
+
+                const lastOrderedDate =
+                parseTimestamp(product.lastOrder) ?? 'Never';
+
 
                 return (
                   <Row key={product.id} item={product}>
@@ -263,8 +267,8 @@ function AllProducts({
                     </Cell>
                     <Cell>${product.price}</Cell>
                     <Cell>{product.stock}</Cell>
-                    <Cell title={lastOrderedDateTime}>
-                      {lastOrderedDateTime}
+                    <Cell title={lastOrderedDate}>
+                      {lastOrderedDate}
                     </Cell>
                     <Cell>
                       <MoreVertical

@@ -17,5 +17,6 @@ export type Products = {
   rating: 1 | 2 | 3 | 4 | 5;
   createdAt: Timestamp;
   updatedAt: Timestamp;
+  firstOrder: Timestamp;
   lastOrder: Timestamp;
 }[];

@@ -19,7 +19,6 @@ import Details from '../Details';
 import { DetailsPropsType } from '../Details/Details.type';
 import { useMemo, useState } from 'react';
 import { GalleryProvider } from '../../../components/Gallery/context';
-import { Timestamp } from 'firebase/firestore';
 import { Orders } from '../../../components/Tables';
 
 function ProductItem() {
@@ -111,21 +110,12 @@ function ProductItem() {
     return <div>Error loading orders: {ordersError.message}</div>;
   }
 
-  function determineFirstSale(lastOrder: Timestamp, createdAt: Timestamp) {
-    if (!lastOrder || !createdAt) return 'Never';
-
-    const diff = lastOrder.toDate().getTime() - createdAt.toDate().getTime();
-    return diff > 1000 * 60
-      ? parseTimestamp(lastOrder, { hour: 'numeric', minute: 'numeric' })
-      : 'Never';
-  }
-
   const productInfo: DetailsPropsType['stats'] = [
     { stat: 'Price', value: product.price, icon: DollarSign },
     { stat: 'In Stock', value: product.stock, icon: Package },
     { stat: 'Rating', value: product.rating ?? 'N/A', icon: Star },
     {
-      stat: 'Start Date',
+      stat: 'Date Added',
       value:
         parseTimestamp(product.createdAt, {
           hour: 'numeric',
@@ -135,7 +125,7 @@ function ProductItem() {
     },
     {
       stat: 'First sale',
-      value: determineFirstSale(product.lastOrder, product.createdAt),
+      value: parseTimestamp(product.firstOrder) ?? 'Never',
       icon: ShoppingBag,
     },
   ];

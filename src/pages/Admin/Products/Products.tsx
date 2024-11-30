@@ -67,7 +67,10 @@ function Products() {
 
   const latestSoldProducts = useMemo(() => {
     return [...products]
-      .sort((a, b) => b.lastOrder.toMillis() - a.lastOrder.toMillis())
+      .sort(
+        (a, b) =>
+          (b.lastOrder?.toMillis() ?? 0) - (a.lastOrder?.toMillis() ?? 0)
+      )
       .slice(0, 5);
   }, [products]);
 

@@ -11,7 +11,6 @@ import {
 import { useTheme } from '@table-library/react-table-library/theme';
 import { parseTimestamp } from '../../../helpers';
 import { SectionHeading2, TextLink } from '../../BaseStyled';
-import { Timestamp } from 'firebase/firestore';
 import { EmptyTableMessage } from '../Tables.styled';
 
 function LatestOrderedProducts({
@@ -82,26 +81,8 @@ function LatestOrderedProducts({
 
             <Body>
               {tableList.map(product => {
-                function determineFirstSale(
-                  lastOrder: Timestamp,
-                  createdAt: Timestamp
-                ) {
-                  if (!lastOrder || !createdAt) return 'Never';
-
-                  const diff =
-                    lastOrder.toDate().getTime() - createdAt.toDate().getTime();
-                  return diff > 1000 * 60
-                    ? parseTimestamp(product.lastOrder, {
-                        hour: 'numeric',
-                        minute: 'numeric',
-                      })
-                    : 'Never';
-                }
-
-                const lastOrderedDateTime = determineFirstSale(
-                  product.lastOrder,
-                  product.createdAt
-                );
+                const lastOrderedDate =
+                  parseTimestamp(product.lastOrder) ?? 'Never';
 
                 return (
                   <Row key={product.id} item={product}>
@@ -114,9 +95,7 @@ function LatestOrderedProducts({
                         {product.name}
                       </TextLink>
                     </Cell>
-                    <Cell title={lastOrderedDateTime}>
-                      {lastOrderedDateTime}
-                    </Cell>
+                    <Cell title={lastOrderedDate}>{lastOrderedDate}</Cell>
                   </Row>
                 );
               })}

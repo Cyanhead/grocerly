@@ -78,22 +78,20 @@ function User() {
     { stat: 'Address', value: user.address[0], icon: MapPin },
     {
       stat: 'First Order',
-      value: user.firstOrder
-        ? parseTimestamp(user.firstOrder, {
-            hour: 'numeric',
-            minute: 'numeric',
-          })
-        : 'Never',
+      value:
+        parseTimestamp(user.firstOrder, {
+          hour: 'numeric',
+          minute: 'numeric',
+        }) ?? 'Never',
       icon: CalendarPlus,
     },
     {
       stat: 'Latest Order',
-      value: user.lastOrder
-        ? parseTimestamp(user.lastOrder, {
-            hour: 'numeric',
-            minute: 'numeric',
-          })
-        : 'Never',
+      value:
+        parseTimestamp(user.lastOrder, {
+          hour: 'numeric',
+          minute: 'numeric',
+        }) ?? 'Never',
       icon: ShoppingBag,
     },
   ];

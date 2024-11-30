@@ -16,7 +16,6 @@ import { useState } from 'react';
 import { useAuthContext } from '../../context';
 import { useGetSingleUser, useLogoutUser } from '../../hooks';
 import { parseTimestamp } from '../../helpers';
-import { Timestamp } from 'firebase/firestore';
 import EditUser from './EditUser';
 import { Link } from 'react-router-dom';
 
@@ -142,16 +141,15 @@ function Profile() {
                 <Layout.FlexCol>
                   <Title>Timestamps</Title>
                   <Detail>
-                    <Key>Member Since:</Key>{' '}
-                    {parseTimestamp(createdAt as Timestamp)}
+                    <Key>Member Since:</Key> {parseTimestamp(createdAt)}
                   </Detail>
                   <Detail>
                     <Key>Last Updated:</Key>{' '}
-                    {parseTimestamp(updatedAt as Timestamp) ?? 'Never'}
+                    {parseTimestamp(updatedAt) ?? 'Never'}
                   </Detail>
                   <Detail>
                     <Key>First Order:</Key>{' '}
-                    {parseTimestamp(firstOrder as Timestamp) ?? 'Never'}
+                    {parseTimestamp(firstOrder) ?? 'Never'}
                   </Detail>
                 </Layout.FlexCol>
               </Card>

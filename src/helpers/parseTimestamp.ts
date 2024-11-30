@@ -16,22 +16,27 @@ type FormatOptions = {
 };
 
 /**
- * Returns a human-readable string representation of a Timestamp object,
- * or 'invalid date' if the object is not a valid Timestamp.
+ * Parses a Firestore Timestamp into a formatted date string.
  *
- * @param timestamp - The Timestamp object to be converted
- * @param config - An object containing formatting options
- * @returns A human-readable string version of the timestamp
+ * @param timestamp - The Firestore Timestamp to be parsed.
+ * @param config - Optional formatting options for the date string.
+ *   - year: Specifies the representation of the year. Default is 'numeric'.
+ *   - month: Specifies the representation of the month. Default is 'long'.
+ *   - day: Specifies the representation of the day. Default is 'numeric'.
+ *   - locale: The locale to use for formatting. Default is 'en-US'.
+ *   - hour, minute, second, hour12: Additional Intl.DateTimeFormat options.
+ *
+ * @returns The formatted date string, or null if the timestamp is invalid.
  */
-export const parseTimestamp = (
+export function parseTimestamp(
   timestamp: Timestamp,
   config?: FormatOptions
-): string => {
+): string | null {
   if (!isValidTimestamp(timestamp)) {
     console.warn(
       `parseTimestamp was called with an invalid timestamp: ${timestamp}`
     );
-    return '{invalid date}';
+    return null;
   }
 
   const {
@@ -52,4 +57,4 @@ export const parseTimestamp = (
   return new Intl.DateTimeFormat(locale, dateTimeFormatOptions).format(
     timestamp.toDate()
   );
-};
+}

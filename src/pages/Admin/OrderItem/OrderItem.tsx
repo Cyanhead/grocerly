@@ -67,7 +67,9 @@ function OrderItem() {
     {
       title: 'Date',
       icon: CalendarClockIcon,
-      value: parseTimestamp(createdAt, { hour: 'numeric', minute: 'numeric' }),
+      value:
+        parseTimestamp(createdAt, { hour: 'numeric', minute: 'numeric' }) ??
+        'N/A',
     },
   ];
 

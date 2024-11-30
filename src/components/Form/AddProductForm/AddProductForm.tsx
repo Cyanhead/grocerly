@@ -13,6 +13,7 @@ import {
   doc,
   FieldValue,
   serverTimestamp,
+  Timestamp,
   updateDoc,
 } from 'firebase/firestore';
 import { db, storage } from '../../../context/Firebase';
@@ -136,15 +137,9 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
 
     const productsDocRef = doc(db, 'products', productId);
 
-    type ProductData = Omit<
-      NewProductType,
-      'images' | 'createdAt' | 'updatedAt' | 'lastOrder'
-    > & {
+    type ProductData = Omit<NewProductType, 'images'> & {
       id: string;
       images: Products[0]['images'] | FieldValue;
-      createdAt: FieldValue;
-      updatedAt: FieldValue;
-      lastOrder: FieldValue;
     };
 
     const productData: ProductData = {
@@ -157,9 +152,10 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
       price: formData.price,
       stock: formData.stock,
       rating: 1,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-      lastOrder: serverTimestamp(),
+      createdAt: serverTimestamp() as Timestamp,
+      updatedAt: null as unknown as Timestamp,
+      firstOrder: null as unknown as Timestamp,
+      lastOrder: null as unknown as Timestamp,
     };
 
     try {
