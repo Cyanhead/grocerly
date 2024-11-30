@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from '../../../hooks';
 import PasswordInput from '../../../components/Form/PasswordInput';
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc, Timestamp } from 'firebase/firestore';
 import { Users } from '../../../types';
 import { logEvent } from 'firebase/analytics';
 
@@ -43,14 +43,14 @@ function SignUpForm() {
         admin: false,
         user: true,
       },
-
+      phone: null as unknown as string, // TODO: test if this works
       id: '',
       photoUrl: '',
       address: [],
-      firstOrder: null,
-      lastOrder: null,
-      createdAt: serverTimestamp(),
-      updatedAt: null,
+      firstOrder: null as unknown as Timestamp,
+      lastOrder: null as unknown as Timestamp,
+      createdAt: serverTimestamp() as Timestamp,
+      updatedAt: null as unknown as Timestamp,
     };
 
     try {

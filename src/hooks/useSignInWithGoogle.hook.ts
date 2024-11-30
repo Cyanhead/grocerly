@@ -6,7 +6,7 @@ import { useAuthContext } from '../context';
 import { googleAuthPopup } from '../helpers/handleGoogleAuth';
 import { getUserRoles } from '../helpers';
 import { auth, db } from '../context/Firebase';
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc, Timestamp } from 'firebase/firestore';
 import { Users } from '../types';
 
 /**
@@ -49,6 +49,7 @@ export function useSignInWithGoogle() {
       const userData: Users[0] = {
         name: user.displayName ?? '',
         email: user.email ?? '',
+        phone: null as unknown as string,
         roles: {
           admin: false,
           user: true,
@@ -57,10 +58,10 @@ export function useSignInWithGoogle() {
         id: '',
         photoUrl: '',
         address: [],
-        firstOrder: null,
-        lastOrder: null,
-        createdAt: serverTimestamp(),
-        updatedAt: null,
+        firstOrder: null as unknown as Timestamp,
+        lastOrder: null as unknown as Timestamp,
+        createdAt: serverTimestamp() as Timestamp, // NOTE: there's a bug where a google sign out and login rewrites the createdAt timestamp
+        updatedAt: null as unknown as Timestamp,
       };
 
       userData.id = user.uid;
