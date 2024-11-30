@@ -38,6 +38,7 @@ function Profile() {
     createdAt,
     updatedAt,
     firstOrder,
+    lastOrder,
   } = userData;
 
   const tabs = [
@@ -127,13 +128,13 @@ function Profile() {
                 <Title>Contact</Title>
                 <Layout.FlexCol>
                   <Detail>
-                    <Key>Phone:</Key> {phone ?? 'None'}
+                    <Key>Phone:</Key> {phone || 'None'}
                   </Detail>
                   <Detail>
-                    <Key>Address 1:</Key> {address[0] ?? 'None'}
+                    <Key>Address 1:</Key> {address[0] || 'None'}
                   </Detail>
                   <Detail>
-                    <Key>Address 2:</Key> {address[1] ?? 'None'}
+                    <Key>Address 2:</Key> {address[1] || 'None'}
                   </Detail>
                 </Layout.FlexCol>
               </Card>
@@ -141,15 +142,32 @@ function Profile() {
                 <Layout.FlexCol>
                   <Title>Timestamps</Title>
                   <Detail>
-                    <Key>Member Since:</Key> {parseTimestamp(createdAt)}
+                    <Key>Member Since:</Key>{' '}
+                    {parseTimestamp(createdAt, {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                    })}
                   </Detail>
                   <Detail>
                     <Key>Last Updated:</Key>{' '}
-                    {parseTimestamp(updatedAt) ?? 'Never'}
+                    {parseTimestamp(updatedAt, {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                    }) ?? 'Never'}
                   </Detail>
                   <Detail>
                     <Key>First Order:</Key>{' '}
-                    {parseTimestamp(firstOrder) ?? 'Never'}
+                    {parseTimestamp(firstOrder, {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                    }) ?? 'Never'}
+                  </Detail>
+                  <Detail>
+                    <Key>Last Order:</Key>{' '}
+                    {parseTimestamp(lastOrder, {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                    }) ?? 'Never'}
                   </Detail>
                 </Layout.FlexCol>
               </Card>
@@ -161,7 +179,7 @@ function Profile() {
               editableUserData={{
                 name,
                 isAdmin: roles.admin,
-                phone: phone ?? '',
+                phone: phone,
                 address,
               }}
               setShowEditUser={setShowEditUser}

@@ -1,8 +1,8 @@
 import { EditUserPropsType, UpdatedUserType } from './EditUser.type';
-import { Button, Layout, Modal } from '../../../components';
-import { Form, Input, Label } from './EditUser.styled';
+import { Layout, Modal } from '../../../components';
+import { Form, Input, Label, SubmitButton } from './EditUser.styled';
 import { useState } from 'react';
-import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../../context/Firebase';
 import { updateProfile } from 'firebase/auth';
 
@@ -17,8 +17,11 @@ function EditUser({
     name,
     isAdmin,
     phone,
-    address,
+    address1: address[0] ?? '',
+    address2: address[1] ?? '',
   });
+
+  console.log({ editUserFormData });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,14 +30,15 @@ function EditUser({
 
     const userDocRef = doc(db, 'users', userId);
 
-    const { isAdmin, ...rest } = editUserFormData;
+    const { isAdmin, address1, address2, ...rest } = editUserFormData;
     const updatedUser: UpdatedUserType = {
       ...rest,
+      address: [address1 ?? null, address2 ?? null],
       roles: {
         admin: isAdmin,
         user: true,
       },
-      updatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp() as Timestamp,
     };
 
     try {
@@ -121,11 +125,11 @@ function EditUser({
               type="text"
               name="address1"
               placeholder="Address 1"
-              value={editUserFormData.address[0]}
+              value={editUserFormData.address1}
               onChange={e =>
                 setEditUserFormData({
                   ...editUserFormData,
-                  address: [e.target.value, editUserFormData.address[1]],
+                  address1: e.target.value,
                 })
               }
               required
@@ -139,19 +143,19 @@ function EditUser({
               type="text"
               name="address2"
               placeholder="Address 2"
-              value={editUserFormData.address[1]}
+              value={editUserFormData.address2}
               onChange={e =>
                 setEditUserFormData({
                   ...editUserFormData,
-                  address: [editUserFormData.address[0], e.target.value],
+                  address2: e.target.value,
                 })
               }
             />
           </Layout.FlexCol>
         </Layout.Grid>
-        <Button type="submit" style={{ marginTop: '16px' }}>
+        <SubmitButton type="submit" disabled={isLoading}>
           {isLoading ? 'Updating...' : 'Update'}
-        </Button>
+        </SubmitButton>
       </Form>
     </Modal>
   );
