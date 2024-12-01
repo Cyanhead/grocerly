@@ -21,8 +21,6 @@ function EditUser({
     address2: address[1] ?? '',
   });
 
-  console.log({ editUserFormData });
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -65,6 +63,8 @@ function EditUser({
   return (
     <Modal closeModal={() => setShowEditUser(false)}>
       <Form onSubmit={handleSubmit}>
+        <h1>Edit User</h1>
+
         <Layout.Grid $cols={2} $gap={16}>
           <Layout.FlexCol>
             <Label htmlFor="name">Name</Label>

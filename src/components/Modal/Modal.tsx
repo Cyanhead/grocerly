@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { ModalPropsType } from './Modal.type';
-import { CloseButtonWrapper, Container, Wrapper } from './Modal.styled';
+import { CloseButtonWrapper, Overlay, Wrapper } from './Modal.styled';
 import { X } from 'lucide-react';
 import Icon from '../Icon';
 
@@ -100,23 +100,14 @@ const Modal = ({ children = 'empty modal', closeModal }: ModalPropsType) => {
   };
 
   return createPortal(
-    <Container
-      onClick={handleClickOutsideOfModal}
-      role="dialog"
-      aria-modal="true"
-    >
-      <Wrapper ref={modalRef} tabIndex={-1}>
+    <Overlay onClick={handleClickOutsideOfModal}>
+      <Wrapper ref={modalRef} tabIndex={-1} role="dialog" aria-modal="true">
         <CloseButtonWrapper onClick={closeModal}>
-          <Icon
-            icon={X}
-            size={32}
-            visuallyHidden="close modal"
-            isIconStandalone
-          />
+          <Icon icon={X} visuallyHidden="close modal" isIconStandalone />
         </CloseButtonWrapper>
         {children}
       </Wrapper>
-    </Container>,
+    </Overlay>,
     document.body
   );
 };

@@ -1,13 +1,17 @@
 import styled from 'styled-components';
-import { getColor } from '../../theme';
+import { getBreakpoint, getColor } from '../../theme';
 import { StyledButton } from '../Button/Button.styled';
 
 export const Wrapper = styled.div.attrs<{ $numOfCols?: number }>(props => ({
   $numOfCols: props.$numOfCols || 4,
 }))`
   display: grid;
-  grid-template-columns: repeat(${props => props.$numOfCols}, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
+
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
+    grid-template-columns: repeat(${props => props.$numOfCols}, 1fr);
+  }
 `;
 
 export const Preview = styled.img.attrs<{ $numOfCols?: number }>(props => ({
@@ -15,14 +19,16 @@ export const Preview = styled.img.attrs<{ $numOfCols?: number }>(props => ({
 }))`
   border: ${getColor('faintLine')};
 
-  width: 100%;
-
-  grid-row: 1 / span ${props => props.$numOfCols};
-  grid-column: 1 / span ${props => props.$numOfCols};
+  height: auto;
 
   aspect-ratio: 1 / 1;
-  width: 100%;
-  height: auto;
+  grid-row: 1 / span 2;
+  grid-column: 1 / span 2;
+
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
+    grid-row: 1 / span ${props => props.$numOfCols};
+    grid-column: 1 / span ${props => props.$numOfCols};
+  }
 `;
 
 export const ImageWrapper = styled.div`
@@ -32,9 +38,6 @@ export const ImageWrapper = styled.div`
 export const Image = styled.img.attrs<{ $active: boolean }>(props => ({
   $active: props.$active,
 }))`
-  grid-column-start: auto;
-  grid-column-end: span 1;
-
   aspect-ratio: 1 / 1;
   width: 100%;
   height: auto;
@@ -42,6 +45,11 @@ export const Image = styled.img.attrs<{ $active: boolean }>(props => ({
   border-radius: 2px;
   border: 2px solid
     ${props => (props.$active ? getColor('primary') : 'rgba(0, 0, 0, 0.1)')};
+
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
+    grid-column-start: auto;
+    grid-column-end: span 1;
+  }
 `;
 
 export const ImageButton = styled(StyledButton).attrs({
@@ -56,7 +64,4 @@ export const ImageButton = styled(StyledButton).attrs({
   cursor: pointer;
 
   padding: 0;
-
-  grid-column-start: auto;
-  grid-column-end: span 1;
 `;

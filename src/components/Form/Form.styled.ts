@@ -13,6 +13,7 @@ export const FormElement = styled.form`
   max-width: 700px;
   width: 100%;
   max-height: 85vh;
+  max-height: 85dvh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -21,7 +22,6 @@ export const FormElement = styled.form`
 
   margin: 8px auto;
   margin-bottom: 0;
-  padding: 20px;
   padding-bottom: 32px;
   border-radius: 2px;
 `;
@@ -57,7 +57,6 @@ export const TextArea = styled.textarea`
   background-color: ${getColor('white')};
 
   width: 100%;
-  min-width: 500px;
   height: 100px;
   border: 1px solid ${getColor('grey')};
   border-radius: 2px;

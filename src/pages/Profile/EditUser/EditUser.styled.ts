@@ -5,12 +5,14 @@ import {
   Label as AuthLabel,
 } from '../../../components/Form/AuthForm/AuthForm.styled';
 import { StyledButton } from '../../../components/Button/Button.styled';
-import { getFontWeight } from '../../../theme';
+import { getBreakpoint, getFontWeight } from '../../../theme';
 
 export const Form = styled(FormElement)`
   gap: 8px;
 
-  min-width: 700px;
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
+    width: 500px;
+  }
 `;
 
 export const Input = styled(FormInput)``;
