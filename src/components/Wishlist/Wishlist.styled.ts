@@ -25,8 +25,8 @@ export const Wrapper = styled.aside.attrs<{ $isVisible: boolean }>(props => ({
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 
   transition: all 500ms ease-in-out;
-  transform: ${props =>
-    props.$isVisible ? 'translateX(0)' : 'translateX(450px)'};
+  transform: translateX(${props => (props.$isVisible ? '0' : '100%')});
+
   opacity: ${props => (props.$isVisible ? '1' : '0')};
 
   @media screen and (max-width: ${getBreakpoint('md')}) {
