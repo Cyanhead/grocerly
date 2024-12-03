@@ -14,7 +14,7 @@ import { MenuPropsType } from '../Menu/Menu.type';
 import { useLogoutUser } from '../../hooks';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Icon from '../Icon';
-import { truncateString } from '../../helpers';
+import { formatUserName } from '../../helpers';
 import { UserPropsType } from './User.types';
 
 const TRUNCATION_LENGTH = 10;
@@ -27,24 +27,10 @@ function User({
   const { isLoggedIn, user } = state;
 
   const userName = user?.displayName ?? user?.email ?? 'Guest';
+  const displayName = formatUserName(userName, TRUNCATION_LENGTH);
+
   const navigate = useNavigate();
   const location = useLocation();
-
-  function formatUserName(userEnteredName: string) {
-    const names = userEnteredName.split(' ');
-
-    if (names.length === 1) {
-      return truncateString(userName, TRUNCATION_LENGTH);
-    }
-
-    const firstName = names[0];
-    const lastNameInitial = names[1][0];
-    const newName = `${firstName} ${lastNameInitial}.`;
-
-    return truncateString(newName, TRUNCATION_LENGTH);
-  }
-
-  const displayName = formatUserName(userName);
 
   // Check if "admin" is in the URL
   const isAdminPage = location.pathname.includes('admin');

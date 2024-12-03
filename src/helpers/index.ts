@@ -1,4 +1,5 @@
 export * from './arrays';
+export * from './formatUsername';
 export * from './generateId';
 export * from './getCollection';
 export * from './getDocument';
