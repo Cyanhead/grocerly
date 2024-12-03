@@ -45,7 +45,10 @@ function NavBar() {
             </WishlistAndCart>
             <Layout.FlexRow $justify="space-between" $align="center">
               <SearchBar />
-              <User />
+              <User
+                setShowWishlist={setShowWishlist}
+                setShowCart={setShowCart}
+              />
             </Layout.FlexRow>
           </TopRow>
           <BottomRow>

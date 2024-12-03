@@ -12,18 +12,23 @@ import VisuallyHidden from '../VisuallyHidden';
 import { useAuthContext } from '../../context';
 import { MenuPropsType } from '../Menu/Menu.type';
 import { useLogoutUser } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Icon from '../Icon';
 import { truncateString } from '../../helpers';
+import { UserPropsType } from './User.types';
 
 const TRUNCATION_LENGTH = 10;
 
-function User() {
+function User({
+  setShowCart = () => {},
+  setShowWishlist = () => {},
+}: UserPropsType) {
   const { state } = useAuthContext();
-
   const { isLoggedIn, user } = state;
 
   const userName = user?.displayName ?? user?.email ?? 'Guest';
+  const navigate = useNavigate();
+  const location = useLocation();
 
   function formatUserName(userEnteredName: string) {
     const names = userEnteredName.split(' ');
@@ -41,20 +46,22 @@ function User() {
 
   const displayName = formatUserName(userName);
 
-  const navigate = useNavigate();
+  // Check if "admin" is in the URL
+  const isAdminPage = location.pathname.includes('admin');
 
+  // Base menu options
   const userMenuOptions: MenuPropsType['options'] = [
     {
       type: 'button',
       label: 'Wishlist',
       icon: Heart,
-      onClick: () => console.log('Added to wishlist'),
+      onClick: () => setShowWishlist(true),
     },
     {
       type: 'button',
       label: 'My Cart',
       icon: ShoppingCart,
-      onClick: () => console.log('Added to cart'),
+      onClick: () => setShowCart(true),
     },
     {
       type: 'button',
@@ -64,13 +71,20 @@ function User() {
     },
   ];
 
-  const loggedInUserMenuOptions = [...userMenuOptions];
-  loggedInUserMenuOptions.pop();
-  loggedInUserMenuOptions.unshift({
-    type: 'text',
-    label: displayName,
-  });
-  loggedInUserMenuOptions.push(
+  // Filter out cart and wishlist for admin pages
+  const filteredMenuOptions = isAdminPage
+    ? userMenuOptions.filter(
+        option => option.label !== 'Wishlist' && option.label !== 'My Cart'
+      )
+    : userMenuOptions;
+
+  // Menu options for logged-in users
+  const loggedInUserMenuOptions: MenuPropsType['options'] = [
+    {
+      type: 'text',
+      label: displayName,
+    },
+    ...filteredMenuOptions.filter(option => option.label !== 'Login'),
     {
       type: 'link',
       label: 'Profile',
@@ -82,11 +96,11 @@ function User() {
       label: 'Log out',
       icon: LogOut,
       onClick: useLogoutUser,
-    }
-  );
+    },
+  ];
 
   return (
-    <Menu options={isLoggedIn ? loggedInUserMenuOptions : userMenuOptions}>
+    <Menu options={isLoggedIn ? loggedInUserMenuOptions : filteredMenuOptions}>
       {user?.photoURL ? (
         <Photo src={user?.photoURL} alt="" />
       ) : (
