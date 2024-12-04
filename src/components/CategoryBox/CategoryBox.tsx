@@ -4,29 +4,23 @@ import {
   Wrapper,
   Heading,
   TopRow,
-  Categories,
-  CategoryButton,
-  CategorySelect,
-  CategoryOption,
+  // Categories,
+  // CategoryButton,
+  // CategorySelect,
+  // CategoryOption,
 } from './CategoryBox.styled';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Carousel from '../Carousel';
 
-type Category = 'All' | 'Vegetables' | 'Fruits' | 'Dairy' | 'Meat';
-const categoryList: Category[] = [
-  'All',
-  'Vegetables',
-  'Fruits',
-  'Dairy',
-  'Meat',
-];
+// type Category = 'All' | 'Plant' | 'Animal';
+// const categoryList: Category[] = ['All', 'Plant', 'Animal'];
 
 function CategoryBox<T>({
   heading,
   items,
   card: Card,
 }: CategoryBoxPropsType<T>) {
-  const [activeCategory, setActiveCategory] = useState<Category>('All');
+  // const [activeCategory, setActiveCategory] = useState<Category>('All');
 
   return (
     <Container data-testid="CategoryBox">
@@ -34,7 +28,7 @@ function CategoryBox<T>({
         <TopRow>
           <Heading>{heading}</Heading>
           {/* // TODO: implement filter on button click */}
-          <Categories>
+          {/* <Categories>
             {categoryList.map(category => (
               <CategoryButton
                 key={category}
@@ -44,9 +38,9 @@ function CategoryBox<T>({
                 {category}
               </CategoryButton>
             ))}
-          </Categories>
+          </Categories> */}
           {/* // TODO: implement filter on select */}
-          <CategorySelect title="Category">
+          {/* <CategorySelect title="Category">
             {categoryList.map(category => (
               <CategoryOption
                 key={category}
@@ -55,7 +49,7 @@ function CategoryBox<T>({
                 {category}
               </CategoryOption>
             ))}
-          </CategorySelect>
+          </CategorySelect> */}
         </TopRow>
         <Carousel items={items} card={Card} />
       </Wrapper>

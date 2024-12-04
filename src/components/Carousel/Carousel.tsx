@@ -95,8 +95,16 @@ function Carousel<T>({ items, card: Card }: CarouselPropsType<T>) {
 
   return (
     <Container data-testid="Carousel">
-      <ArrowLeft icon={ArrowLeftIcon} onClick={handleCarouselLeft} />
-      <ArrowRight icon={ArrowRightIcon} onClick={handleCarouselRight} />
+      <ArrowLeft
+        icon={ArrowLeftIcon}
+        onClick={handleCarouselLeft}
+        disabled={itemCount === 1}
+      />
+      <ArrowRight
+        icon={ArrowRightIcon}
+        onClick={handleCarouselRight}
+        disabled={itemCount === 1}
+      />
       {batchedArrays.map((items, index) => {
         return (
           <Wrapper
@@ -106,7 +114,7 @@ function Carousel<T>({ items, card: Card }: CarouselPropsType<T>) {
             $width={wrapperWidth}
           >
             {items.map((item, index) => {
-              return <Card key={index} item={item} />;
+              return <Card key={index} item={item} {...item} />;
             })}
           </Wrapper>
         );

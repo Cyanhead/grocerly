@@ -1,6 +1,7 @@
 export * from './arrays';
 export * from './formatUsername';
 export * from './generateId';
+export * from './generateColor';
 export * from './getCollection';
 export * from './getDocument';
 export * from './getImageIdFromUrl';
