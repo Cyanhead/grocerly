@@ -101,6 +101,9 @@ export const Select = styled.select`
   border: 1px solid ${getColor('primary700')};
   border-radius: 2px;
   padding-left: 8px;
+  text-transform: capitalize;
 `;
 
-export const Option = styled.option``;
+export const Option = styled.option`
+  text-transform: capitalize;
+`;

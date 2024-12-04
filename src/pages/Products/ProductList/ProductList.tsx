@@ -22,6 +22,7 @@ import Filters from '../Filters';
 function ProductList({ allProducts }: ProductListPropsType) {
   const [products, setProducts] = useState(allProducts);
   const { data: categories, error } = useGetCategories(); // CONSIDER: passing loading and error too
+  const allCategories = ['all', ...(categories ?? [])];
 
   if (error) {
     console.error(error);
@@ -68,7 +69,7 @@ function ProductList({ allProducts }: ProductListPropsType) {
     <Container data-testid="Products">
       <Wrapper>
         <LeftColumn>
-          <Filters categories={categories} handleFilter={handleFilter} />
+          <Filters categories={allCategories} handleFilter={handleFilter} />
         </LeftColumn>
         <GridWrapper>
           <Header>
@@ -82,7 +83,7 @@ function ProductList({ allProducts }: ProductListPropsType) {
                 {!categories && <P>Error fetching categories!</P>}
                 {categories && (
                   <Select onChange={e => handleFilter(e.target.value)}>
-                    {categories.map((category, index) => (
+                    {allCategories.map((category, index) => (
                       <Option key={index} value={category}>
                         {category}
                       </Option>

@@ -186,8 +186,14 @@ function EditProductForm({
       updatedAt: serverTimestamp(),
     };
 
+    const productCategoriesDocRef = doc(db, 'product-categories', 'categories');
+
     try {
       await updateDoc(productsDocRef, updatedProductData);
+      await updateDoc(productCategoriesDocRef, {
+        allCategories: arrayUnion(updatedProductData.category),
+      });
+
       console.log('3. Product successfully updated!');
     } catch (error) {
       setStatus('error');

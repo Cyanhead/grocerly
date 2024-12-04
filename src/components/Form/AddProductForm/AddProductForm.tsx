@@ -158,7 +158,13 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
       lastOrder: null as unknown as Timestamp,
     };
 
+    const productCategoriesDocRef = doc(db, 'product-categories', 'categories');
+
     try {
+      await updateDoc(productCategoriesDocRef, {
+        allCategories: arrayUnion(formData.category),
+      });
+
       await updateDoc(productsDocRef, productData);
       console.log('3. Product successfully updated!');
     } catch (error) {

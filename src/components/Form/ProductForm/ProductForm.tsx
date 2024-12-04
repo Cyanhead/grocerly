@@ -11,6 +11,7 @@ import Layout from '../../Layout';
 import { NewProductStateType } from '../AddProductForm/AddProductForm.type';
 import { ExistingProductStateType } from '../EditProductForm/EditProductForm.type';
 import Gallery from '../../Gallery';
+import ProductCategorySelect from './ProductCategorySelect';
 
 function ProductForm<T extends NewProductStateType | ExistingProductStateType>({
   onSubmit,
@@ -63,13 +64,13 @@ function ProductForm<T extends NewProductStateType | ExistingProductStateType>({
         }
       />
 
-      <ProductFormInput
-        type="text"
-        label="Category"
-        name="category"
-        value={product.category}
-        onInputChange={e =>
-          stateSetter(prevState => ({ ...prevState, category: e.target.value }))
+      <ProductCategorySelect
+        category={product.category}
+        onSelectChange={e =>
+          stateSetter(prevState => ({
+            ...prevState,
+            category: e.target.value,
+          }))
         }
       />
 

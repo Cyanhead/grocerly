@@ -102,6 +102,7 @@ export const Select = styled.select`
   border-radius: 2px;
 
   transition: all 200ms;
+  text-transform: capitalize;
 
   &:hover {
     border: 1px solid ${getColor('primary')};

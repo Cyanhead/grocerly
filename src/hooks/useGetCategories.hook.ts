@@ -8,10 +8,8 @@ import { Categories } from '../types';
  *
  * - `isLoading`: A boolean indicating whether the data is currently being
  *   fetched.
- * - `data`: An array of strings representing the categories. The array always
- *   contains the string 'all', which is used as the default category when
- *   filtering products. The array may contain additional strings if there are
- *   categories defined in the database.
+ * - `data`: An array of strings representing the categories. The array may
+ *   contain additional strings if there are categories defined in the database.
  * - `error`: An error that occurred while fetching the data. If no error
  *   occurred, this property is `undefined`.
  *
@@ -24,7 +22,7 @@ export function useGetCategories() {
       getDocument(collectionName, documentId as string)
   );
 
-  const categories = data ? ['all', ...(data.allCategories ?? [])] : null;
+  const categories = data ? data.allCategories ?? [] : null;
 
   return { isLoading, data: categories, error };
 }
