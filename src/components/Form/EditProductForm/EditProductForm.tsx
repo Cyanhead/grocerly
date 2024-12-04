@@ -24,7 +24,7 @@ import {
   getImageIdFromUrl,
   resizeFile,
 } from '../../../helpers';
-import { Products } from '../../../types';
+import { Product } from '../../../types';
 
 function EditProductForm({
   product,
@@ -167,7 +167,7 @@ function EditProductForm({
     const productsDocRef = doc(db, 'products', product.id);
 
     const cleanUrls = await handleUploadImagesAndReturnUrls();
-    const imageGroups: Products[0]['images'] = cleanUrls.map(sizes => {
+    const imageGroups: Product['images'] = cleanUrls.map(sizes => {
       return {
         id: getImageIdFromUrl(sizes[0]),
         largeURL: sizes[0],

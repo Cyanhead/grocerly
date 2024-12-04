@@ -1,5 +1,5 @@
-import { Products } from '../../types';
+import { Product } from '../../types';
 
 export type ProductCardPropsType = {
-  product: Pick<Products[0], 'id' | 'name' | 'images' | 'price' | 'category'>;
+  product: Pick<Product, 'id' | 'name' | 'images' | 'price' | 'category'>;
 };

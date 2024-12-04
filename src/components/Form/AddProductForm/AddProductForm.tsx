@@ -24,7 +24,7 @@ import {
   getImageIdFromUrl,
   resizeFile,
 } from '../../../helpers';
-import { Products } from '../../../types';
+import { Product } from '../../../types';
 
 function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
   const [formData, setFormData] = useState<NewProductStateType>({
@@ -126,7 +126,7 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
 
     const productId = await createNewDocAndReturnId(formData);
     const urls = await handleUploadImagesAndReturnUrls(productId);
-    const imageGroups: Products[0]['images'] = urls.map(sizes => {
+    const imageGroups: Product['images'] = urls.map(sizes => {
       return {
         id: getImageIdFromUrl(sizes[0]),
         largeURL: sizes[0],
@@ -139,7 +139,7 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
 
     type ProductData = Omit<NewProductType, 'images'> & {
       id: string;
-      images: Products[0]['images'] | FieldValue;
+      images: Product['images'] | FieldValue;
     };
 
     const productData: ProductData = {

@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
-import { Products } from '../../types';
+import { Product } from '../../types';
 
-type CartProduct = Pick<Products[0], 'id' | 'name' | 'price'> & {
+type CartProduct = Pick<Product, 'id' | 'name' | 'price'> & {
   image: string;
   quantity: number;
 };

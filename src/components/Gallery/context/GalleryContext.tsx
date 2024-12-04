@@ -1,7 +1,7 @@
 import { createContext, useState, ReactNode } from 'react';
 
 import { GalleryContextType } from './types';
-import { Products } from '../../../types';
+import { Product } from '../../../types';
 
 export const GalleryContext = createContext<GalleryContextType | undefined>(
   undefined
@@ -17,7 +17,7 @@ function GalleryProvider({ children }: { children: ReactNode }) {
 
   const [newImagesToUpload, setNewImagesToUpload] = useState<File[]>([]);
   const [imagesToDeleteOnBackend, setImagesToDeleteOnBackend] = useState<
-    Products[0]['images']
+    Product['images']
   >([]);
 
   return (

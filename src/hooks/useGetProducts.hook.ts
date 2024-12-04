@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { getCollection } from '../helpers';
-import { Products } from '../types';
+import { Product } from '../types';
 
 /**
  * Retrieves all products from the database and returns an object with the
@@ -17,7 +17,7 @@ import { Products } from '../types';
  * @returns An object with the above properties.
  */
 export function useGetProducts() {
-  const { isLoading, data, error } = useSWR<Products>(
+  const { isLoading, data, error } = useSWR<Product[]>(
     'products',
     getCollection
   );

@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { getDocument } from '../helpers';
-import { Products } from '../types';
+import { Product } from '../types';
 
 /**
  * Retrieves a single product from the database by its id and returns an object
@@ -19,10 +19,10 @@ import { Products } from '../types';
  */
 export function useGetSingleProduct(productId: string): {
   isLoading: boolean;
-  product: Products[0] | null;
+  product: Product | null;
   error: Error;
 } {
-  const { isLoading, data, error } = useSWR<Products[0] | undefined>(
+  const { isLoading, data, error } = useSWR<Product | undefined>(
     ['products', productId],
     ([collectionName, documentId]) =>
       getDocument(collectionName, documentId as string)

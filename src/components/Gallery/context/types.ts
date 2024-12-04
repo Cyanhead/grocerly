@@ -1,6 +1,6 @@
-import { Products } from '../../../types';
+import { Product } from '../../../types';
 
-type Images = Products[0]['images'];
+type Images = Product['images'];
 
 export type GalleryContextType = {
   activeImageIndex: number;

@@ -1,6 +1,6 @@
 import { Timestamp } from 'firebase/firestore';
 
-export type Products = {
+export type Product = {
   id: string;
   name: string;
   otherNames: string[];
@@ -19,4 +19,4 @@ export type Products = {
   updatedAt: Timestamp;
   firstOrder: Timestamp;
   lastOrder: Timestamp;
-}[];
+};

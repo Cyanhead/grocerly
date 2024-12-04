@@ -1,7 +1,7 @@
-import { Products } from '../../../types';
+import { Product } from '../../../types';
 
 export type ExistingProductStateType = Omit<
-  Products[0],
+  Product,
   'rating' | 'stock' | 'lastOrder' | 'createdAt' | 'updatedAt'
 >;
 
