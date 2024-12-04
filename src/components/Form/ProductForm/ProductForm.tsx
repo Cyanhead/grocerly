@@ -2,7 +2,6 @@ import { ProductFormPropsType } from './ProductForm.type';
 import {
   FormElement as Form,
   Label,
-  OptionalTag,
   SubmitButton,
   Title,
 } from '../Form.styled';
@@ -12,6 +11,7 @@ import { NewProductStateType } from '../AddProductForm/AddProductForm.type';
 import { ExistingProductStateType } from '../EditProductForm/EditProductForm.type';
 import Gallery from '../../Gallery';
 import ProductCategorySelect from './ProductCategorySelect';
+import OtherNamesInput from './OtherNamesInput';
 
 function ProductForm<T extends NewProductStateType | ExistingProductStateType>({
   onSubmit,
@@ -22,12 +22,6 @@ function ProductForm<T extends NewProductStateType | ExistingProductStateType>({
   button,
 }: ProductFormPropsType<T>) {
   const isLoading = status === 'loading';
-
-  const joinedProductNames = product.otherNames.join(', ');
-  function convertCommaSeparatedToArray(text: string) {
-    if (!text) return [];
-    return text.split(',').map(name => name.trim());
-  }
 
   return (
     <Form onSubmit={onSubmit} aria-label="product-form">
@@ -46,21 +40,12 @@ function ProductForm<T extends NewProductStateType | ExistingProductStateType>({
         }
       />
 
-      <ProductFormInput
-        type="text"
-        label={
-          <>
-            Other Names <OptionalTag>(must be comma separated)</OptionalTag>
-          </>
-        }
-        name="other-names"
-        placeholder="Enter other product names..."
-        value={joinedProductNames}
-        onInputChange={e =>
-          stateSetter(prevState => ({
-            ...prevState,
-            otherNames: convertCommaSeparatedToArray(e.target.value),
-          }))
+      <OtherNamesInput
+        otherNames={product.otherNames}
+        setOtherNames={
+          stateSetter as unknown as React.Dispatch<
+            React.SetStateAction<string[]>
+          >
         }
       />
 
