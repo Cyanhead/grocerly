@@ -54,6 +54,7 @@ export const Section = styled.div`
 
 export const Heading = styled.h1`
   font-size: calc(24 / 16 * 1rem);
+  max-width: 600px;
 
   @media screen and (min-width: ${getBreakpoint('md')}) {
     font-size: calc(32 / 16 * 1rem);
@@ -76,6 +77,8 @@ export const P = styled.p`
 
 export const ImageWrapper = styled.div`
   align-self: flex-end;
+  aspect-ratio: 1.25;
+
   @media screen and (min-width: ${getBreakpoint('sm')}) {
     max-width: 576px;
   }
