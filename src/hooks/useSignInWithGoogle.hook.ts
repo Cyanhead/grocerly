@@ -7,7 +7,7 @@ import { googleAuthPopup } from '../helpers/handleGoogleAuth';
 import { getUserRoles } from '../helpers';
 import { auth, db } from '../context/Firebase';
 import { doc, serverTimestamp, setDoc, Timestamp } from 'firebase/firestore';
-import { Users } from '../types';
+import { User } from '../types';
 
 /**
  * Provides a function to handle Google sign in and a loading state indicator.
@@ -46,7 +46,7 @@ export function useSignInWithGoogle() {
         return;
       }
 
-      const userData: Users[0] = {
+      const userData: User = {
         name: user.displayName ?? '',
         email: user.email ?? '',
         phone: null as unknown as string,

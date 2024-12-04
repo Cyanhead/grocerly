@@ -1,7 +1,7 @@
 import { Timestamp } from 'firebase/firestore';
 import { Roles } from '../context/auth/types';
 
-export type Users = {
+export type User = {
   id: string;
   name: string;
   email: string;
@@ -13,4 +13,4 @@ export type Users = {
   lastOrder: Timestamp;
   createdAt: Timestamp;
   updatedAt: Timestamp;
-}[];
+};

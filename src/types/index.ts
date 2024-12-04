@@ -1,4 +1,4 @@
 export * from './categories';
 export * from './order';
 export * from './product';
-export * from './users';
+export * from './user';

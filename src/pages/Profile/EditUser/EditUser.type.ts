@@ -1,5 +1,5 @@
 import { Roles } from '../../../context/auth/types';
-import { Users } from '../../../types';
+import { User } from '../../../types';
 
 export type EditUserPropsType = {
   userId: string;
@@ -14,6 +14,6 @@ export type EditUserPropsType = {
 };
 
 export type UpdatedUserType = Pick<
-  Users[0],
+  User,
   'name' | 'address' | 'roles' | 'updatedAt'
 > & { phone: string };

@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { getCollection } from '../helpers';
-import { Users } from '../types';
+import { User } from '../types';
 
 /**
  * Retrieves all users from the database and returns an object with the
@@ -16,7 +16,7 @@ import { Users } from '../types';
  * @returns An object with the above properties.
  */
 export function useGetUsers() {
-  const { isLoading, data, error } = useSWR<Users>('users', getCollection);
+  const { isLoading, data, error } = useSWR<User[]>('users', getCollection);
 
   return { isLoading, data, error };
 }

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSignInWithGoogle } from '../../../hooks';
 import PasswordInput from '../../../components/Form/PasswordInput';
 import { doc, serverTimestamp, setDoc, Timestamp } from 'firebase/firestore';
-import { Users } from '../../../types';
+import { User } from '../../../types';
 import { logEvent } from 'firebase/analytics';
 
 function SignUpForm() {
@@ -36,7 +36,7 @@ function SignUpForm() {
 
     setIsLoading(true);
 
-    const userData: Users[0] = {
+    const userData: User = {
       name: username,
       email,
       roles: {
