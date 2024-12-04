@@ -105,21 +105,25 @@ function Product() {
               />
             </Header>
             <div>
-              <Category>{category}</Category>Also called
-              {otherNames.map((name, index) => {
-                if (otherNames.length === 1) {
-                  return <OtherName key={name}> {name}.</OtherName>;
-                }
-                return (
-                  <OtherName key={name}>
-                    {' '}
-                    {index === otherNames.length - 1 && 'or '}
-                    {name}
-                    {index !== otherNames.length - 1 && ', '}
-                    {index === otherNames.length - 1 && '.'}
-                  </OtherName>
-                );
-              })}
+              <Category>{category}</Category>
+              {otherNames.length !== 0 && (
+                <>
+                  Also called{' '}
+                  {otherNames.map((name, index) => {
+                    if (otherNames.length === 1) {
+                      return <OtherName key={name}> {name}.</OtherName>;
+                    }
+                    return (
+                      <OtherName key={name}>
+                        {index === otherNames.length - 1 && 'or '}
+                        {name}
+                        {index !== otherNames.length - 1 && ', '}
+                        {index === otherNames.length - 1 && '.'}
+                      </OtherName>
+                    );
+                  })}
+                </>
+              )}
             </div>
             {/*rating*/} {/* TODO: implement <Rating /> component */}
             <Brief>{about.split('.')[0]}.</Brief>

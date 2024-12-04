@@ -1,5 +1,5 @@
 import { CardPropsType } from './Card.type';
-import { Container, Image, Title } from './Card.styled';
+import { Container, Image, Link, Title } from './Card.styled';
 import defaultImage from '../../../../assets/images/categories/default.png';
 import { generateLightColorHsla } from '../../../../helpers';
 
@@ -21,10 +21,12 @@ function Card({ title, imagePath }: CardPropsType) {
   }, []);
 
   return (
-    <Container $bg_color={bg}>
-      <Image src={imagePath || defaultImage} alt="" />
-      <Title>{title}</Title>
-    </Container>
+    <Link to="/products">
+      <Container $bg_color={bg}>
+        <Image src={imagePath || defaultImage} alt="" />
+        <Title>{title}</Title>
+      </Container>
+    </Link>
   );
 }
 
