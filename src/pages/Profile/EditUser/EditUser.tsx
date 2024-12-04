@@ -12,11 +12,12 @@ function EditUser({
   setShowEditUser,
 }: EditUserPropsType) {
   const [isLoading, setIsLoading] = useState(false);
-  const { name, isAdmin, phone, address } = editableUserData;
+  const { name, isAdmin, phone, address, roles } = editableUserData;
   const [editUserFormData, setEditUserFormData] = useState({
     name,
     isAdmin,
     phone,
+    roles,
     address1: address[0] ?? '',
     address2: address[1] ?? '',
   });
@@ -33,8 +34,8 @@ function EditUser({
       ...rest,
       address: [address1 ?? null, address2 ?? null],
       roles: {
+        ...roles,
         admin: isAdmin,
-        user: true,
       },
       updatedAt: serverTimestamp() as Timestamp,
     };

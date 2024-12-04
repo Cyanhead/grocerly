@@ -51,8 +51,8 @@ export function useSignInWithGoogle() {
         email: user.email ?? '',
         phone: null as unknown as string,
         roles: {
+          superAdmin: false,
           admin: false,
-          user: true,
         },
 
         id: '',

@@ -10,9 +10,9 @@ import { Roles } from '../context/auth/types';
  * or the user document does not exist.
  */
 export async function getUserRoles(): Promise<Roles> {
-  const defaultRoles = {
+  const defaultRoles: Roles = {
+    superAdmin: false,
     admin: false,
-    user: false,
   };
   const user = auth.currentUser;
 

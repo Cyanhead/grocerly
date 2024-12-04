@@ -40,10 +40,10 @@ function SignUpForm() {
       name: username,
       email,
       roles: {
+        superAdmin: false,
         admin: false,
-        user: true,
       },
-      phone: null as unknown as string, // TODO: test if this works
+      phone: null as unknown as string,
       id: '',
       photoUrl: '',
       address: [],

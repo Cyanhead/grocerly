@@ -18,6 +18,7 @@ import {
   MobileAddProductButton,
   TableHeader,
 } from './Products.styled';
+import { useAuthContext } from '../../../context';
 
 function Products() {
   const {
@@ -31,6 +32,9 @@ function Products() {
     data: orders = [],
     error: ordersError,
   } = useGetOrders();
+
+  const { state } = useAuthContext();
+  const isSuperAdmin = state.roles.superAdmin;
 
   const [showAddProductModal, setShowAddProductModal] = useState(false);
 
@@ -124,18 +128,22 @@ function Products() {
       <Cell $span={[2, 4]} $scroll>
         <TableHeader>
           <SectionHeading2>All Products</SectionHeading2>
-          <AddProductButton
-            variant="ghost"
-            onClick={() => setShowAddProductModal(true)}
-          >
-            <Icon icon={Plus} />
-            Add Product
-          </AddProductButton>
-          <MobileAddProductButton
-            icon={Plus}
-            variant="ghost"
-            onClick={() => setShowAddProductModal(true)}
-          />
+          {isSuperAdmin && (
+            <>
+              <AddProductButton
+                variant="ghost"
+                onClick={() => setShowAddProductModal(true)}
+              >
+                <Icon icon={Plus} />
+                Add Product
+              </AddProductButton>
+              <MobileAddProductButton
+                icon={Plus}
+                variant="ghost"
+                onClick={() => setShowAddProductModal(true)}
+              />
+            </>
+          )}
         </TableHeader>
 
         <AllProducts products={products} />

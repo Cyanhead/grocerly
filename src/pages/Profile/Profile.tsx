@@ -181,6 +181,7 @@ function Profile() {
                 isAdmin: roles.admin,
                 phone: phone,
                 address,
+                roles,
               }}
               setShowEditUser={setShowEditUser}
             />

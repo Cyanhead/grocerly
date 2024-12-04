@@ -11,6 +11,7 @@ import {
 } from './Details.styled';
 import { Edit3, MoreVertical } from 'lucide-react';
 import { Icon, Menu } from '../../../components';
+import { useAuthContext } from '../../../context';
 
 function Details({
   type,
@@ -20,6 +21,9 @@ function Details({
   stats,
   setShowEditModal = () => {},
 }: DetailsPropsType) {
+  const { state } = useAuthContext();
+  const isSuperAdmin = state.roles.superAdmin;
+
   return (
     <Wrapper data-testid="Details" $span={[2, 1]}>
       <ImageWrapper>
@@ -44,32 +48,38 @@ function Details({
         ))}
       </StatsWrapper>
       {type === 'product' && (
-        <MenuWrapper>
-          <Menu
-            options={[
+        <>
+          {isSuperAdmin && (
+            <MenuWrapper>
               {
-                label: 'Edit',
-                onClick: () => setShowEditModal(true),
-                icon: Edit3,
-                type: 'button',
-              },
-              // TODO: enable delete when it's ready
-              // {
-              //   label: 'Delete',
-              //   onClick: () => {},
-              //   icon: Trash2,
-              //   type: 'button',
-              // },
-            ]}
-          >
-            <Icon
-              icon={MoreVertical}
-              size={20}
-              visuallyHidden="Product Menu"
-              isIconStandalone
-            />
-          </Menu>
-        </MenuWrapper>
+                <Menu
+                  options={[
+                    {
+                      label: 'Edit',
+                      onClick: () => setShowEditModal(true),
+                      icon: Edit3,
+                      type: 'button',
+                    },
+                    // TODO: enable delete when it's ready
+                    // {
+                    //   label: 'Delete',
+                    //   onClick: () => {},
+                    //   icon: Trash2,
+                    //   type: 'button',
+                    // },
+                  ]}
+                >
+                  <Icon
+                    icon={MoreVertical}
+                    size={20}
+                    visuallyHidden="Product Menu"
+                    isIconStandalone
+                  />
+                </Menu>
+              }
+            </MenuWrapper>
+          )}
+        </>
       )}
     </Wrapper>
   );

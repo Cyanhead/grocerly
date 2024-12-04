@@ -4,8 +4,8 @@ export const initialState: State = {
   isLoggedIn: false,
   user: null,
   roles: {
+    superAdmin: false,
     admin: false,
-    user: false,
   },
 };
 
@@ -24,8 +24,8 @@ export const reducer = (state: State, action: Action): State => {
         isLoggedIn: false,
         user: null,
         roles: {
+          superAdmin: false,
           admin: false,
-          user: false,
         },
       };
     default:

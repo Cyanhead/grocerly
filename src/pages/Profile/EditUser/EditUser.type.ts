@@ -1,3 +1,4 @@
+import { Roles } from '../../../context/auth/types';
 import { Users } from '../../../types';
 
 export type EditUserPropsType = {
@@ -7,6 +8,7 @@ export type EditUserPropsType = {
     isAdmin: boolean;
     phone: string;
     address: string[];
+    roles: Roles;
   };
   setShowEditUser: React.Dispatch<React.SetStateAction<boolean>>;
 };
