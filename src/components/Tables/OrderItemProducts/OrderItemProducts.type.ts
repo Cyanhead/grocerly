@@ -1,5 +1,5 @@
-import { Orders } from '../../../types';
+import { Order } from '../../../types';
 
 export type OrderItemProductsPropsType = {
-  products: Orders[0]['products'];
+  products: Order['products'];
 };

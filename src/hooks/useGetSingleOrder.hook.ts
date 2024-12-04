@@ -1,4 +1,4 @@
-import { Orders } from '../types';
+import { Order } from '../types';
 import { useGetOrders } from './useGetOrders.hook';
 
 /**
@@ -17,10 +17,10 @@ import { useGetOrders } from './useGetOrders.hook';
  */
 export function useGetSingleOrder(orderId: string): {
   isLoading: boolean;
-  order: Orders[0] | null;
+  order: Order | null;
   error: Error;
 } {
-  const { isLoading, data, error } = useGetOrders();
+  const { isLoading, data, error } = useGetOrders(); // TODO: use getDocument helper
 
   if (!data) return { isLoading, order: null, error };
 

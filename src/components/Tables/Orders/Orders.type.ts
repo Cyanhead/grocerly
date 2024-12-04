@@ -1,6 +1,6 @@
-import { Orders } from '../../../types';
+import { Order } from '../../../types';
 import { TablePropsType } from '../Tables.type';
 
 export type OrdersPropsType = TablePropsType & {
-  orders: Orders;
+  orders: Order[];
 };

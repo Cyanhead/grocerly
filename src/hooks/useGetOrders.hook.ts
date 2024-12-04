@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { getCollection } from '../helpers';
-import { Orders } from '../types';
+import { Order } from '../types';
 
 /**
  * Retrieves all orders from the database and returns an object with the
@@ -17,7 +17,7 @@ import { Orders } from '../types';
  * @returns An object with the above properties.
  */
 export function useGetOrders() {
-  const { isLoading, data, error } = useSWR<Orders>('orders', getCollection);
+  const { isLoading, data, error } = useSWR<Order[]>('orders', getCollection);
 
   return { isLoading, data, error };
 }
