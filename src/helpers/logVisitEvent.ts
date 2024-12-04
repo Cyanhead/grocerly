@@ -7,6 +7,12 @@ import { generateUniqueId } from './generateId';
 const VISIT_LOG_KEY = 'last-visit-log-timestamp';
 const VISIT_LOG_INTERVAL = 60 * 60 * 24 * 1000; // 1 day in milliseconds
 
+/**
+ * Logs a site visit event to Firebase Analytics and Firestore.
+ * This function will not log a new event if one has been logged within the past 24 hours.
+ * The function will also not log an event if Firebase Analytics is not available.
+ * @returns Promise<void>
+ */
 export async function logVisitEvent() {
   const lastLog = localStorage.getItem(VISIT_LOG_KEY);
   const now = Date.now();
