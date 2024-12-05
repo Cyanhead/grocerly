@@ -84,6 +84,7 @@ function GalleryEditor({ numOfCols = 4, images }: GalleryEditorPropsType) {
     setFileErrors([]);
   }
   function handleImageDelete(imageToRemove: string) {
+    // NOTE: still uploads a 'deleted' image to the backend
     const isUrl = imageToRemove.startsWith('https:');
     const currentImagesSet = new Set(currentImages);
 

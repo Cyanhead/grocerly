@@ -16,7 +16,7 @@ function EditUser({
   const [editUserFormData, setEditUserFormData] = useState({
     name,
     isAdmin,
-    phone,
+    phone: phone ?? '',
     roles,
     address1: address[0] ?? '',
     address2: address[1] ?? '',
