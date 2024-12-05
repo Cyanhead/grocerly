@@ -1,5 +1,6 @@
+import useSWR from 'swr';
+import { getDocument } from '../helpers';
 import { Order } from '../types';
-import { useGetOrders } from './useGetOrders.hook';
 
 /**
  * Retrieves a single order from the database by its id and returns an object
@@ -15,16 +16,15 @@ import { useGetOrders } from './useGetOrders.hook';
  *
  * @returns An object with the above properties.
  */
-export function useGetSingleOrder(orderId: string): {
-  isLoading: boolean;
-  order: Order | null;
-  error: Error;
-} {
-  const { isLoading, data, error } = useGetOrders(); // TODO: use getDocument helper
+export function useGetSingleOrder(orderId: string) {
+  const { data, error } = useSWR<Order | undefined>(
+    ['orders', orderId],
+    ([collectionName, documentId]) =>
+      getDocument(collectionName, documentId as string)
+  );
 
-  if (!data) return { isLoading, order: null, error };
-
-  const order = data.filter(order => order.id === orderId)[0];
+  const isLoading = !data && !error;
+  const order = data?.id === orderId ? data : null;
 
   return { isLoading, order, error };
 }

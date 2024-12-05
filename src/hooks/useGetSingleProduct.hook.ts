@@ -17,11 +17,7 @@ import { Product } from '../types';
  * @returns An object with the above properties if the product is found, or
  * `null` if not found.
  */
-export function useGetSingleProduct(productId: string): {
-  isLoading: boolean;
-  product: Product | null;
-  error: Error;
-} {
+export function useGetSingleProduct(productId: string) {
   const { isLoading, data, error } = useSWR<Product | undefined>(
     ['products', productId],
     ([collectionName, documentId]) =>
