@@ -107,3 +107,9 @@ export const Select = styled.select`
 export const Option = styled.option`
   text-transform: capitalize;
 `;
+
+export const Divider = styled.hr`
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+`;

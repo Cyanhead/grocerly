@@ -26,7 +26,7 @@ export const FlexCol = styled.div.attrs<LayoutFlexPropsType>(props => ({
   $pad: props.$pad || 0,
   $gap: props.$gap || 0,
   $justify: props.$justify || 'flex-start',
-  $align: props.$align || 'flex-start',
+  $align: props.$align || 'flex-start', // CONSIDER: stretch
   $width: props.$width || 'auto',
   $position: props.$position || 'static',
 }))`

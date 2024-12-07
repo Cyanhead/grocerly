@@ -57,31 +57,27 @@ export const Content = styled.main`
   padding: 16px;
   border: ${getColor('faintLine')};
 
-  /* min-height: 100%; */
+  min-height: 455px;
 `;
 
 export const Heading = styled(SectionHeading2)`
   text-transform: uppercase;
   padding-bottom: 12px;
-  /* border-bottom: ${getColor('faintLine')}; */
 `;
 
 export const Card = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 12px;
   border: ${getColor('faintLine')};
-  height: 100%;
 `;
 
 export const Title = styled.p`
-  /* font-size: calc(18 / 16 * 1rem); */
   font-weight: ${getFontWeight('medium')};
   text-transform: uppercase;
-  border-bottom: ${getColor('faintLine')};
-  padding-bottom: 12px;
 `;
-
-// export const Group = styled.div``;
 
 export const Detail = styled.p`
   margin: 4px 0;

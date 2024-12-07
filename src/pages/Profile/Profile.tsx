@@ -15,6 +15,7 @@ import { useGetSingleUser, useLogoutUser } from '../../hooks';
 import EditUser from './EditUser';
 import { Link } from 'react-router-dom';
 import UserInfo from './UserInfo';
+import Orders from './Orders';
 
 function Profile() {
   const [activeTab, setActiveTab] = useState(0);
@@ -26,7 +27,7 @@ function Profile() {
 
   if (!userData) return <Loader fullscreen />; // TEST
 
-  const { name, address, roles, phone } = userData;
+  const { id, name, address, roles, phone } = userData;
 
   const tabs = [
     { name: 'account', icon: User },
@@ -40,7 +41,7 @@ function Profile() {
     }
 
     if (activeTab === 1) {
-      return <Detail>Order up boys</Detail>;
+      return <Orders userId={id} />;
     }
 
     return <Detail>Feature coming soon.</Detail>;

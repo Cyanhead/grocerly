@@ -29,12 +29,6 @@ export const Image = styled.img`
   border: ${getColor('faintLine')};
 `;
 
-export const Divider = styled.hr`
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: none;
-`;
-
 export const StatsWrapper = styled.div`
   width: 100%;
 `;

@@ -1,6 +1,5 @@
 import { DetailsPropsType } from './Details.type';
 import {
-  Divider,
   MenuWrapper,
   Image,
   ImageWrapper,
@@ -10,7 +9,7 @@ import {
   Row,
 } from './Details.styled';
 import { Edit3, MoreVertical } from 'lucide-react';
-import { Icon, Menu } from '../../../components';
+import { Divider, Icon, Menu } from '../../../components';
 import { useAuthContext } from '../../../context';
 
 function Details({
