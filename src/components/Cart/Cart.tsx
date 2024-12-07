@@ -7,14 +7,16 @@ import {
   Title,
   Wrapper,
 } from '../Wishlist/Wishlist.styled';
-import { ModalBackground, SectionHeading2 } from '../BaseStyled';
+import { ModalBackground, SectionHeading2, TextLink } from '../BaseStyled';
 import Layout from '../Layout';
 import Button, { LinkButton } from '../Button';
 import Icon from '../Icon';
-import { ChevronLeft, ShoppingCart, Trash } from 'lucide-react';
+import { ChevronLeft, ShoppingCart, Trash, X } from 'lucide-react';
 import { CartPropsType } from './Cart.type';
 import { useClickOutside, useLockScroll } from '../../hooks';
 import { useCartContext } from '../../context';
+import Counter from '../Counter';
+import { RemoveButton } from './Cart.styled';
 
 function Cart({ isVisible, setIsVisible }: CartPropsType) {
   const { state: cart, dispatch } = useCartContext();
@@ -36,6 +38,16 @@ function Cart({ isVisible, setIsVisible }: CartPropsType) {
     });
   }
 
+  function handleCounterChange(productId: string, quantity: number) {
+    dispatch({
+      type: 'UPDATE_QUANTITY_IN_CART',
+      payload: {
+        id: productId,
+        quantity,
+      },
+    });
+  }
+
   return (
     <>
       <ModalBackground $show={isVisible} />
@@ -47,7 +59,7 @@ function Cart({ isVisible, setIsVisible }: CartPropsType) {
             <SectionHeading2>Cart</SectionHeading2>
           </Button>
           <Button $theme="danger" $variant="normal" onClick={handleRemoveAll}>
-            <Icon icon={Trash} />
+            <Icon icon={X} />
             Remove all
           </Button>
         </Layout.FlexRow>
@@ -76,22 +88,35 @@ function Cart({ isVisible, setIsVisible }: CartPropsType) {
               $align="stretch"
             >
               <Layout.FlexCol $gap={8} $justify="space-between">
-                <Title>{name}</Title>
+                <Title as={TextLink} to={`/products/${id}`} $isActive>
+                  {name}
+                </Title>
                 <Price>${price}</Price>
-                <Price>
-                  {quantity} {quantity === 1 ? 'item' : 'items'}
-                </Price>
+                <Counter
+                  count={quantity}
+                  setCount={quantity => handleCounterChange(id, quantity)}
+                />
               </Layout.FlexCol>
-              <Layout.FlexCol $align="flex-end">
-                <Button
+              <Layout.FlexCol $align="flex-end" $justify="space-between">
+                <RemoveButton
                   $theme="danger"
                   $variant="normal"
                   onClick={() => removeFromCart(id)}
                 >
-                  Remove
-                </Button>
-                {/* <Counter count={quantity} setCount={() => {}} /> */}
-                <Price>Subtotal: ${price * quantity}</Price>
+                  <Icon icon={Trash} /> Remove
+                </RemoveButton>
+
+                <Price>
+                  <span
+                    style={{
+                      color: '#555',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Subtotal:
+                  </span>{' '}
+                  ${price * quantity}
+                </Price>
               </Layout.FlexCol>
             </Layout.FlexRow>
           </Card>
@@ -103,7 +128,9 @@ function Cart({ isVisible, setIsVisible }: CartPropsType) {
               {cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
             </Price>
 
-            <Button onClick={() => setIsVisible(false)}>Checkout</Button>
+            <LinkButton to="/checkout" onClick={() => setIsVisible(false)}>
+              Checkout
+            </LinkButton>
           </Layout.FlexCol>
         )}
       </Wrapper>

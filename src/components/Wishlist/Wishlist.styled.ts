@@ -53,10 +53,12 @@ export const Card = styled.div`
 
 export const Image = styled.img`
   width: 112px;
+  aspect-ratio: 1;
 `;
 
 export const Title = styled(SectionHeading2)`
   font-size: calc(20 / 16 * 1rem);
+  text-transform: capitalize;
 `;
 
 export const Price = styled.p`
