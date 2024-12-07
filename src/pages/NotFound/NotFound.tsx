@@ -8,8 +8,9 @@ import not_found from '../../assets/images/page_not_found.svg';
 import { Button, Icon, SectionHeading } from '../../components';
 import { ArrowLeft, Home } from 'lucide-react';
 import { LinkButton } from '../../components/Button';
+import { NotFoundPropsType } from './NotFound.types';
 
-function NotFound() {
+function NotFound({ homeURL = '/', homeText = 'Home' }: NotFoundPropsType) {
   function handleGoToPrevPage() {
     window.history.back();
   }
@@ -22,8 +23,8 @@ function NotFound() {
           <Button $variant="secondary" onClick={handleGoToPrevPage}>
             <Icon icon={ArrowLeft} /> Go back
           </Button>
-          <LinkButton to="/admin">
-            <Icon icon={Home} /> Go to Dashboard
+          <LinkButton to={homeURL}>
+            <Icon icon={Home} /> Go to {homeText}
           </LinkButton>
         </ButtonGroup>
 

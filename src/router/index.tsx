@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: <div>Page Not Found!</div>,
+        element: <NotFound />,
       },
     ],
   },
@@ -120,7 +120,7 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: <NotFound />,
+        element: <NotFound homeText="Dashboard" homeURL="/admin" />,
       },
     ],
   },
