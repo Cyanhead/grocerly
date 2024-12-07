@@ -11,8 +11,9 @@ import { useClickOutside } from '../../hooks';
 import Icon from '../Icon';
 
 import { Link } from 'react-router-dom';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const Menu = ({ children, options }: MenuPropsType) => {
+const Menu = ({ children, hasChevron = false, options }: MenuPropsType) => {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   useClickOutside([menuRef], () => setShowMenu(false));
@@ -21,6 +22,11 @@ const Menu = ({ children, options }: MenuPropsType) => {
     <Container ref={menuRef}>
       <Button onClick={() => setShowMenu(!showMenu)} $variant="normal">
         {children}
+        {hasChevron && (
+          <>
+            {showMenu ? <Icon icon={ChevronUp} /> : <Icon icon={ChevronDown} />}
+          </>
+        )}
       </Button>
       {showMenu && (
         <Ul>

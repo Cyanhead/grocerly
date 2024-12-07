@@ -2,6 +2,7 @@ import { LucideProps } from 'lucide-react';
 
 export type MenuPropsType = {
   children: React.ReactNode;
+  hasChevron?: boolean;
   options: {
     type: 'text' | 'button' | 'link';
     label: string;

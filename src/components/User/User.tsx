@@ -1,5 +1,4 @@
 import {
-  ChevronDown,
   Heart,
   User as UserIcon,
   ShoppingCart,
@@ -86,14 +85,16 @@ function User({
   ];
 
   return (
-    <Menu options={isLoggedIn ? loggedInUserMenuOptions : filteredMenuOptions}>
+    <Menu
+      hasChevron={true}
+      options={isLoggedIn ? loggedInUserMenuOptions : filteredMenuOptions}
+    >
       {user?.photoURL ? (
         <Photo src={user?.photoURL} alt="" />
       ) : (
         <Icon icon={UserIcon} />
       )}
       <P>{displayName}</P>
-      <Icon icon={ChevronDown} />
       <VisuallyHidden>Check Menu</VisuallyHidden>
     </Menu>
   );

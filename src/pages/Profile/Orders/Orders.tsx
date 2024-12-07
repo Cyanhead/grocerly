@@ -18,6 +18,10 @@ function Orders({ userId }: OrdersPropsType) {
 
   const [showAllProducts, setShowAllProducts] = useState(false);
 
+  if (!ordersByUser.length) {
+    return <p>You haven't placed any orders!</p>;
+  }
+
   return (
     <Layout.FlexCol $align="stretch" $gap={16}>
       {ordersByUser.map(({ id, status, products = [], revenue, createdAt }) => {
