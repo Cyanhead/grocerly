@@ -19,11 +19,14 @@ import { Icon } from '..';
 import { ShoppingCart } from 'lucide-react';
 import { separateNumberByComma } from '../../helpers';
 import { useCartContext } from '../../context';
+import { toast } from 'react-hot-toast';
 
 function ProductCard({
-  product: { id, name, images, price, category },
+  product: { id, name, images, price, category, stock },
 }: ProductCardPropsType) {
-  const { dispatch } = useCartContext();
+  const { state: cart, dispatch } = useCartContext();
+
+  const isItemInCart = cart.some(item => item.id === id);
 
   const oldPrice = useMemo(() => {
     const multiplier = Math.random() + 1;
@@ -44,7 +47,12 @@ function ProductCard({
         quantity: 1,
       },
     });
+
+    toast.success(`${name} added to cart.`);
   }
+
+  const buttonMessage =
+    stock === 0 ? 'Out of stock' : isItemInCart ? 'Added' : 'Add';
 
   return (
     <Link to={`/products/${id}`}>
@@ -58,9 +66,12 @@ function ProductCard({
               <DiscountedPrice> ${price} </DiscountedPrice>
               <OldPrice> ${oldPrice} </OldPrice>
             </PriceGroup>
-            <AddButton onClick={handleAddToCart}>
-              <Icon icon={ShoppingCart} />
-              Add
+            <AddButton
+              onClick={handleAddToCart}
+              disabled={stock === 0 || isItemInCart}
+            >
+              {stock !== 0 && <Icon icon={ShoppingCart} />}
+              {buttonMessage}
             </AddButton>
           </Group>
         </TextWrapper>

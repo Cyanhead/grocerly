@@ -82,7 +82,7 @@ function Wishlist({ isVisible, setIsVisible }: WishlistPropsType) {
                   <Stock $stock={stock}>
                     {stock === 0 && 'Out of stock'}
                     {stock > 0 && stock < 10 && `Only ${stock} left`}
-                    {stock > 10 && 'In stock'}
+                    {stock >= 10 && 'In stock'}
                   </Stock>
                 </Layout.FlexCol>
                 <Layout.FlexCol $align="flex-end">

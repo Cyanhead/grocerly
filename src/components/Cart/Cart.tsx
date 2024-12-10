@@ -17,6 +17,9 @@ import { useClickOutside, useLockScroll } from '../../hooks';
 import { useCartContext } from '../../context';
 import Counter from '../Counter';
 import { RemoveButton } from './Cart.styled';
+import { toast } from 'react-hot-toast';
+
+// FIXME: doesn't scroll:
 
 function Cart({ isVisible, setIsVisible }: CartPropsType) {
   const { state: cart, dispatch } = useCartContext();
@@ -27,15 +30,19 @@ function Cart({ isVisible, setIsVisible }: CartPropsType) {
 
   function handleRemoveAll() {
     dispatch({ type: 'REMOVE_ALL_FROM_CART' });
+
+    toast.success('All items removed from cart.');
   }
 
-  function removeFromCart(productId: string) {
+  function removeFromCart(productId: string, productName: string) {
     dispatch({
       type: 'REMOVE_FROM_CART',
       payload: {
         id: productId,
       },
     });
+
+    toast.success(`${productName} removed from cart.`);
   }
 
   function handleCounterChange(productId: string, quantity: number) {
@@ -101,7 +108,7 @@ function Cart({ isVisible, setIsVisible }: CartPropsType) {
                 <RemoveButton
                   $theme="danger"
                   $variant="normal"
-                  onClick={() => removeFromCart(id)}
+                  onClick={() => removeFromCart(id, name)}
                 >
                   <Icon icon={Trash} /> Remove
                 </RemoveButton>

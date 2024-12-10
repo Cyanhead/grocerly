@@ -19,9 +19,10 @@ export const Preview = styled.img.attrs<{ $numOfCols?: number }>(props => ({
 }))`
   border: ${getColor('faintLine')};
 
+  width: 100%;
   height: auto;
 
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1;
   grid-row: 1 / span 2;
   grid-column: 1 / span 2;
 
@@ -38,7 +39,7 @@ export const ImageWrapper = styled.div`
 export const Image = styled.img.attrs<{ $active: boolean }>(props => ({
   $active: props.$active,
 }))`
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1;
   width: 100%;
   height: auto;
 

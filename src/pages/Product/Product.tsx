@@ -36,6 +36,8 @@ import { separateNumberByComma } from '../../helpers';
 import { ShoppingCart } from 'lucide-react';
 import { useCartContext } from '../../context';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Stock } from '../../components/Wishlist/Wishlist.styled';
 
 function Product() {
   const { id: productId = '' } = useParams();
@@ -47,6 +49,10 @@ function Product() {
     product,
     error: productError,
   } = useGetSingleProduct(productId);
+
+  const { state: cart } = useCartContext();
+
+  const isItemInCart = cart.some(item => item.id === productId);
 
   if (productIsLoading) {
     return <Loader fullscreen />;
@@ -61,7 +67,7 @@ function Product() {
     );
   }
 
-  const { name, otherNames, category, about, price, images } = product;
+  const { name, otherNames, category, about, price, images, stock } = product;
 
   function calcOldPrice(price: number) {
     return separateNumberByComma(price * 1.35, 2);
@@ -86,7 +92,16 @@ function Product() {
         quantity: count,
       },
     });
+
+    toast.success(`${name} added to cart.`);
   }
+
+  const buttonMessage =
+    stock === 0
+      ? 'Out of stock'
+      : isItemInCart
+      ? 'Added to cart'
+      : 'Add to cart';
 
   return (
     <Container>
@@ -126,6 +141,11 @@ function Product() {
               )}
             </div>
             {/*rating*/} {/* TODO: implement <Rating /> component */}
+            <Stock $stock={stock}>
+              {stock === 0 && 'Out of stock'}
+              {stock > 0 && stock < 10 && `Only ${stock} left`}
+              {stock >= 10 && 'In stock'}
+            </Stock>
             <Brief>{about.split('.')[0]}.</Brief>
             <Price>
               &#36;
@@ -138,8 +158,11 @@ function Product() {
               </Discount>
               <Counter count={count} setCount={setCount} />
             </Group>
-            <BuyButton onClick={() => handleAddToCart(productId)}>
-              <Icon icon={ShoppingCart} visuallyHidden="Cart" /> Add to cart
+            <BuyButton
+              onClick={() => handleAddToCart(productId)}
+              disabled={stock === 0 || isItemInCart}
+            >
+              <Icon icon={ShoppingCart} visuallyHidden="Cart" /> {buttonMessage}
             </BuyButton>
             <Contact>
               <SectionHeading2>Need assistance?</SectionHeading2>
