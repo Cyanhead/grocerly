@@ -12,7 +12,7 @@ export type Order = {
     id: string;
     image: string;
     name: string;
-    count: number;
+    quantity: number;
     price: number;
   }[];
   revenue: number;

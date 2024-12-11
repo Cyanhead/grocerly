@@ -53,7 +53,7 @@ function ProductItem() {
       (acc, order) => {
         const productItem = order.products.find(item => item.id === productId);
         if (!productItem) return acc;
-        return acc + productItem.price * productItem.count;
+        return acc + productItem.price * productItem.quantity;
       },
       0
     );
@@ -65,7 +65,7 @@ function ProductItem() {
     const numOfProductsSold = ordersThatIncludeProductId.reduce(
       (acc, order) => {
         const productItem = order.products.find(item => item.id === productId);
-        return productItem ? acc + productItem.count : acc;
+        return productItem ? acc + productItem.quantity : acc;
       },
       0
     );
@@ -79,7 +79,7 @@ function ProductItem() {
     const numOfProductsRefunded = refundedOrdersThatIncludeProductId.reduce(
       (acc, order) => {
         const productItem = order.products.find(item => item.id === productId);
-        return productItem ? acc + productItem.count : acc;
+        return productItem ? acc + productItem.quantity : acc;
       },
       0
     );

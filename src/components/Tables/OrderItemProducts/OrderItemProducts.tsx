@@ -13,12 +13,12 @@ import PhotoGroup from '../../PhotoGroup';
 import { TextLink } from '../../BaseStyled';
 
 function OrderItemProducts({ products }: OrderItemProductsPropsType) {
-  const nodes = products.map(({ id, image, name, count, price }) => {
+  const nodes = products.map(({ id, image, name, quantity, price }) => {
     return {
       id,
       image,
       name,
-      count,
+      quantity,
       price,
     };
   });
@@ -102,7 +102,7 @@ function OrderItemProducts({ products }: OrderItemProductsPropsType) {
 
                   {/* <Cell></Cell> */}
                   <Cell>${product.price}</Cell>
-                  <Cell>{product.count}</Cell>
+                  <Cell>{product.quantity}</Cell>
                 </Row>
               );
             })}

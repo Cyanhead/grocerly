@@ -54,7 +54,7 @@ function Products() {
 
     const totalOrders = orders.reduce((acc, order) => {
       const productCountPerOrder = order.products.reduce(
-        (incr, product) => incr + product.count,
+        (incr, product) => incr + product.quantity,
         0
       );
 
@@ -80,7 +80,7 @@ function Products() {
 
   const bestsellers = useMemo(() => {
     const soldProducts = orders.map(order => order.products).flat();
-    return soldProducts.sort((a, b) => b.count - a.count).slice(0, 5);
+    return soldProducts.sort((a, b) => b.quantity - a.quantity).slice(0, 5);
   }, [orders]);
 
   // Display a loading spinner while fetching products or orders

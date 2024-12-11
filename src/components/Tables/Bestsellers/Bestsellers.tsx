@@ -17,11 +17,11 @@ function Bestsellers({
   products,
   emptyTableMessage = 'No products found!',
 }: BestsellersPropsType) {
-  const nodes = products.map(({ id, name, count, price }) => {
+  const nodes = products.map(({ id, name, quantity, price }) => {
     return {
       id,
       name,
-      count,
+      quantity,
       price,
     };
   });
@@ -92,7 +92,7 @@ function Bestsellers({
                         {product.name}
                       </TextLink>
                     </Cell>
-                    <Cell>{product.count}</Cell>
+                    <Cell>{product.quantity}</Cell>
                     <Cell>${product.price}</Cell>
                   </Row>
                 );
