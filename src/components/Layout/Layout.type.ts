@@ -8,6 +8,7 @@ export type LayoutFlexPropsType = {
   $align?: CSSProperties['alignItems'];
   $width?: CSSProperties['width'];
   $position?: CSSProperties['position'];
+  $wrap?: CSSProperties['flexWrap'];
 };
 
 export type LayoutGridPropsType = LayoutFlexPropsType & {

@@ -11,6 +11,7 @@ export const FlexRow = styled.div.attrs<LayoutFlexPropsType>(props => ({
   $align: props.$align || 'flex-start',
   $width: props.$width || 'auto',
   $position: props.$position || 'static',
+  $wrap: props.$wrap || 'nowrap',
 }))`
   display: flex;
   flex-direction: row;
@@ -20,6 +21,7 @@ export const FlexRow = styled.div.attrs<LayoutFlexPropsType>(props => ({
   align-items: ${props => props.$align};
   width: ${props => props.$width};
   position: ${props => props.$position};
+  flex-wrap: ${props => props.$wrap};
 `;
 
 export const FlexCol = styled.div.attrs<LayoutFlexPropsType>(props => ({
@@ -29,6 +31,7 @@ export const FlexCol = styled.div.attrs<LayoutFlexPropsType>(props => ({
   $align: props.$align || 'flex-start', // CONSIDER: stretch
   $width: props.$width || 'auto',
   $position: props.$position || 'static',
+  // $wrap: props.$wrap || 'nowrap', // NOTE: not sure it's needed here
 }))`
   display: flex;
   flex-direction: column;
@@ -38,6 +41,7 @@ export const FlexCol = styled.div.attrs<LayoutFlexPropsType>(props => ({
   align-items: ${props => props.$align};
   width: ${props => props.$width};
   position: ${props => props.$position};
+  /* flex-wrap: ${props => props.$wrap}; */
 `;
 
 export const Grid = styled.div.attrs<LayoutGridPropsType>(props => ({

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import {
+  Checkout,
   Error as ErrorPage,
   ForgotPassword,
   Home,
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
             element: <Product />,
           },
         ],
+      },
+      {
+        path: '/checkout',
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/profile',
