@@ -15,6 +15,10 @@ export const Wrapper = styled(BaseWrapper)`
   }
 `;
 
+const HEADER_HEIGHT = 178;
+const MAIN_PADDING_TOP = 40;
+const MAIN_PADDING_BOTTOM = 40;
+
 export const Sidebar = styled.aside`
   border: ${getColor('faintLine')};
 
@@ -27,7 +31,14 @@ export const Sidebar = styled.aside`
   }
 
   @media screen and (min-width: ${getBreakpoint('md')}) {
+    position: sticky;
+    top: ${HEADER_HEIGHT + MAIN_PADDING_TOP}px;
+
     width: 200px;
+    height: calc(
+      100vh - ${HEADER_HEIGHT}px - ${MAIN_PADDING_TOP}px -
+        ${MAIN_PADDING_BOTTOM}px
+    );
 
     display: flex;
     flex-direction: column;
@@ -57,7 +68,7 @@ export const Content = styled.main`
   padding: 16px;
   border: ${getColor('faintLine')};
 
-  min-height: 455px;
+  /* min-height: 455px; */
 `;
 
 export const Heading = styled(SectionHeading2)`
