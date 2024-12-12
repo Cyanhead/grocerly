@@ -11,9 +11,9 @@ function Orders() {
   const { isLoading, data: orders = [], error } = useGetOrders();
 
   const mostRecentOrders = useMemo(() => {
-    return [...orders]
-      .sort((a, b) => b.createdAt.toMillis() - a.createdAt.toMillis())
-      .slice(0, 5);
+    return [...orders].sort(
+      (a, b) => b.createdAt.toMillis() - a.createdAt.toMillis()
+    );
   }, [orders]);
 
   // Memoize metrics calculation to avoid unnecessary recalculations

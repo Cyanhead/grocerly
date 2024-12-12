@@ -7,7 +7,7 @@ import {
   TextLink,
 } from '../../components';
 import { RemoveButton } from '../../components/Cart/Cart.styled';
-import { useCartContext } from '../../context';
+import { useAuthContext, useCartContext } from '../../context';
 import {
   Button,
   Card,
@@ -20,9 +20,45 @@ import {
   Wrapper,
 } from './Checkout.styled';
 import { toast } from 'react-hot-toast';
+import { createDocAndReturnIdAndDocRef } from '../../helpers/createDoc';
+import {
+  doc,
+  increment,
+  serverTimestamp,
+  Timestamp,
+  updateDoc,
+} from 'firebase/firestore';
+import { Order } from '../../types';
+import { db } from '../../context/Firebase';
+import { useState } from 'react';
+
+function getRandomStatus(): Order['status'] {
+  const statuses: Order['status'][] = [
+    'processing',
+    'cancelled',
+    'failed',
+    'refunded',
+    'completed',
+  ];
+  const randomIndex = Math.floor(Math.random() * statuses.length);
+  return statuses[randomIndex];
+}
 
 function Checkout() {
+  const [loading, setLoading] = useState(false);
   const { state: cart, dispatch } = useCartContext();
+  const { state } = useAuthContext();
+  const user = state.user;
+
+  if (!user) {
+    return (
+      <Container>
+        <h1>You must be logged in to checkout.</h1>
+      </Container>
+    );
+  }
+
+  const { uid: userId, displayName: userName } = user;
 
   function removeFromCart(productId: string) {
     dispatch({
@@ -43,6 +79,68 @@ function Checkout() {
         quantity,
       },
     });
+  }
+
+  async function handleCheckout() {
+    setLoading(true);
+    dispatch({ type: 'REMOVE_ALL_FROM_CART' });
+
+    const [orderId, orderRef] = await createDocAndReturnIdAndDocRef(
+      {},
+      'orders'
+    );
+
+    const orderData: Order = {
+      id: orderId,
+      status: getRandomStatus(),
+      createdAt: serverTimestamp() as Timestamp,
+      customer: {
+        id: userId,
+        name: userName ?? userId,
+      },
+      products: cart.map(({ id, image, name, quantity, price }) => ({
+        id,
+        image,
+        name,
+        quantity,
+        price,
+      })),
+      revenue: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+      netProfit: cart.reduce(
+        (acc, item) => acc + item.price * item.quantity - item.price,
+        0
+      ),
+    };
+
+    try {
+      await toast.promise(updateDoc(orderRef, orderData), {
+        loading: 'Placing order...',
+        success: 'Order successfully placed!',
+        error: 'Error when placing order!',
+      });
+
+      // update product stock and lastOrder
+      Promise.allSettled(
+        cart.map(async item => {
+          const docRef = doc(db, 'products', item.id);
+          await updateDoc(docRef, {
+            stock: increment(-item.quantity),
+            lastOrder: serverTimestamp(),
+          });
+        })
+      );
+
+      setLoading(false);
+
+      console.log('Product successfully updated!');
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log('Unknown error:', error);
+      }
+    }
   }
 
   return (
@@ -120,8 +218,9 @@ function Checkout() {
               )}
             </Price>
           </Layout.FlexRow>
-          <Button>Place order</Button>
-          {/* // CONSIDER: confirming address details first */}
+          <Button onClick={handleCheckout} disabled={loading || !cart.length}>
+            {loading ? 'Placing order...' : 'Place order'}
+          </Button>
         </Summary>
       </Wrapper>
     </Container>
