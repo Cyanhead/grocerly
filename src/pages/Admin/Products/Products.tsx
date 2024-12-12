@@ -49,7 +49,7 @@ function Products() {
       0
     );
     const totalOutOfStock = products.filter(
-      product => product.stock === 0
+      product => product.stock < 1
     ).length;
 
     const totalOrders = orders.reduce((acc, order) => {

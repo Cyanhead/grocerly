@@ -70,7 +70,7 @@ export const Stock = styled.p.attrs<{ $stock: number }>(props => ({
   $stock: props.$stock,
 }))`
   ${({ $stock }) => {
-    if ($stock === 0) {
+    if ($stock < 1) {
       return css`
         color: ${getColor('grey')};
       `;

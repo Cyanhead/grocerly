@@ -33,7 +33,7 @@ function AddProductForm({ closeFormModal }: AddProductFormPropsType) {
     about: '',
     otherNames: [],
     images: [],
-    category: '',
+    category: 'fruit',
     stock: 0,
   });
 

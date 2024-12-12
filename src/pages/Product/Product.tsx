@@ -97,11 +97,7 @@ function Product() {
   }
 
   const buttonMessage =
-    stock === 0
-      ? 'Out of stock'
-      : isItemInCart
-      ? 'Added to cart'
-      : 'Add to cart';
+    stock < 1 ? 'Out of stock' : isItemInCart ? 'Added to cart' : 'Add to cart';
 
   return (
     <Container>
@@ -142,7 +138,7 @@ function Product() {
             </div>
             {/*rating*/} {/* TODO: implement <Rating /> component */}
             <Stock $stock={stock}>
-              {stock === 0 && 'Out of stock'}
+              {stock < 1 && 'Out of stock'}
               {stock > 0 && stock < 10 && `Only ${stock} left`}
               {stock >= 10 && 'In stock'}
             </Stock>
@@ -160,7 +156,7 @@ function Product() {
             </Group>
             <BuyButton
               onClick={() => handleAddToCart(productId)}
-              disabled={stock === 0 || isItemInCart}
+              disabled={stock < 1 || isItemInCart}
             >
               <Icon icon={ShoppingCart} visuallyHidden="Cart" /> {buttonMessage}
             </BuyButton>

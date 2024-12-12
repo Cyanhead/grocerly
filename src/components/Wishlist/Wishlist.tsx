@@ -80,7 +80,7 @@ function Wishlist({ isVisible, setIsVisible }: WishlistPropsType) {
                   <Title>{name}</Title>
                   <Price>${price}</Price>
                   <Stock $stock={stock}>
-                    {stock === 0 && 'Out of stock'}
+                    {stock < 1 && 'Out of stock'}
                     {stock > 0 && stock < 10 && `Only ${stock} left`}
                     {stock >= 10 && 'In stock'}
                   </Stock>
@@ -93,7 +93,7 @@ function Wishlist({ isVisible, setIsVisible }: WishlistPropsType) {
                   >
                     Remove
                   </Button>
-                  <Button $variant="ghost" disabled={stock === 0}>
+                  <Button $variant="ghost" disabled={stock < 1}>
                     <Icon icon={ShoppingCart} />
                     Add
                   </Button>

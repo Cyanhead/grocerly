@@ -52,7 +52,7 @@ function ProductCard({
   }
 
   const buttonMessage =
-    stock === 0 ? 'Out of stock' : isItemInCart ? 'Added' : 'Add';
+    stock < 1 ? 'Out of stock' : isItemInCart ? 'Added' : 'Add';
 
   return (
     <Link to={`/products/${id}`}>
@@ -68,9 +68,9 @@ function ProductCard({
             </PriceGroup>
             <AddButton
               onClick={handleAddToCart}
-              disabled={stock === 0 || isItemInCart}
+              disabled={stock < 1 || isItemInCart}
             >
-              {stock !== 0 && <Icon icon={ShoppingCart} />}
+              {stock > 0 && <Icon icon={ShoppingCart} />}
               {buttonMessage}
             </AddButton>
           </Group>
