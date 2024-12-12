@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 import {
   Card,
+  Column,
   Image,
   Price,
   Title,
@@ -18,8 +19,6 @@ import { useCartContext } from '../../context';
 import Counter from '../Counter';
 import { RemoveButton } from './Cart.styled';
 import { toast } from 'react-hot-toast';
-
-// FIXME: doesn't scroll:
 
 function Cart({ isVisible, setIsVisible }: CartPropsType) {
   const { state: cart, dispatch } = useCartContext();
@@ -85,49 +84,51 @@ function Cart({ isVisible, setIsVisible }: CartPropsType) {
           </Layout.FlexCol>
         )}
 
-        {cart.map(({ id, name, price, image, quantity }) => (
-          <Card key={id}>
-            <Image src={image} alt={name} />
-            <Layout.FlexRow
-              $gap={8}
-              $width="100%"
-              $justify="space-between"
-              $align="stretch"
-            >
-              <Layout.FlexCol $gap={8} $justify="space-between">
-                <Title as={TextLink} to={`/products/${id}`} $isActive>
-                  {name}
-                </Title>
-                <Price>${price}</Price>
-                <Counter
-                  count={quantity}
-                  setCount={quantity => handleCounterChange(id, quantity)}
-                />
-              </Layout.FlexCol>
-              <Layout.FlexCol $align="flex-end" $justify="space-between">
-                <RemoveButton
-                  $theme="danger"
-                  $variant="normal"
-                  onClick={() => removeFromCart(id, name)}
-                >
-                  <Icon icon={Trash} /> Remove
-                </RemoveButton>
-
-                <Price>
-                  <span
-                    style={{
-                      color: '#555',
-                      fontWeight: 400,
-                    }}
+        <Column>
+          {cart.map(({ id, name, price, image, quantity }) => (
+            <Card key={id}>
+              <Image src={image} alt={name} />
+              <Layout.FlexRow
+                $gap={8}
+                $width="100%"
+                $justify="space-between"
+                $align="stretch"
+              >
+                <Layout.FlexCol $gap={8} $justify="space-between">
+                  <Title as={TextLink} to={`/products/${id}`} $isActive>
+                    {name}
+                  </Title>
+                  <Price>${price}</Price>
+                  <Counter
+                    count={quantity}
+                    setCount={quantity => handleCounterChange(id, quantity)}
+                  />
+                </Layout.FlexCol>
+                <Layout.FlexCol $align="flex-end" $justify="space-between">
+                  <RemoveButton
+                    $theme="danger"
+                    $variant="normal"
+                    onClick={() => removeFromCart(id, name)}
                   >
-                    Subtotal:
-                  </span>{' '}
-                  ${price * quantity}
-                </Price>
-              </Layout.FlexCol>
-            </Layout.FlexRow>
-          </Card>
-        ))}
+                    <Icon icon={Trash} /> Remove
+                  </RemoveButton>
+
+                  <Price>
+                    <span
+                      style={{
+                        color: '#555',
+                        fontWeight: 400,
+                      }}
+                    >
+                      Subtotal:
+                    </span>{' '}
+                    ${price * quantity}
+                  </Price>
+                </Layout.FlexCol>
+              </Layout.FlexRow>
+            </Card>
+          ))}
+        </Column>
         {cart.length !== 0 && (
           <Layout.FlexCol $align="flex-end">
             <Price style={{ marginBottom: '10px' }}>
