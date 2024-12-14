@@ -1,5 +1,5 @@
 import { WishlistPropsType } from './Wishlist.type';
-import { useWishlistContext } from '../../context';
+import { CartState, useCartContext, useWishlistContext } from '../../context';
 import {
   Card,
   Column,
@@ -16,25 +16,36 @@ import { ModalBackground, SectionHeading2 } from '../BaseStyled';
 import Layout from '../Layout';
 import { useRef } from 'react';
 import { useClickOutside, useLockScroll } from '../../hooks';
+import toast from 'react-hot-toast';
 
 function Wishlist({ isVisible, setIsVisible }: WishlistPropsType) {
-  const { state: wishlist, dispatch } = useWishlistContext();
+  const { state: wishlist, dispatch: wishlistDispatch } = useWishlistContext();
+  const { dispatch: cartDispatch } = useCartContext();
 
   const wishlistRef = useRef<HTMLDivElement>(null);
   useClickOutside([wishlistRef], () => setIsVisible(false));
   useLockScroll(isVisible);
 
   function handleRemoveAll() {
-    dispatch({ type: 'REMOVE_ALL_FROM_WISHLIST' });
+    wishlistDispatch({ type: 'REMOVE_ALL_FROM_WISHLIST' });
   }
 
   function removeFromWishlist(productId: string) {
-    dispatch({
+    wishlistDispatch({
       type: 'REMOVE_FROM_WISHLIST',
       payload: {
         id: productId,
       },
     });
+  }
+
+  function handleAddToCart(product: CartState[0]) {
+    cartDispatch({
+      type: 'ADD_TO_CART',
+      payload: product,
+    });
+
+    toast.success(`${product.name} added to cart.`);
   }
 
   return (
@@ -93,7 +104,13 @@ function Wishlist({ isVisible, setIsVisible }: WishlistPropsType) {
                   >
                     Remove
                   </Button>
-                  <Button $variant="ghost" disabled={stock < 1}>
+                  <Button
+                    $variant="ghost"
+                    disabled={stock < 1}
+                    onClick={() =>
+                      handleAddToCart({ id, name, price, image, quantity: 1 })
+                    }
+                  >
                     <Icon icon={ShoppingCart} />
                     Add
                   </Button>
@@ -101,7 +118,6 @@ function Wishlist({ isVisible, setIsVisible }: WishlistPropsType) {
               </Layout.FlexRow>
             </Card>
           ))}
-          {/* <button>Add all to cart</button> */}
         </Column>
       </Wrapper>
     </>

@@ -50,7 +50,7 @@ function PhotoGroup({ photos }: PhotoGroupPropsType) {
           </Row>
           <Row>
             <Image src={photos[3] || defaultPhoto} />
-            <Circle>+{photos.length - 4}</Circle>
+            <Circle>+{photos.length - 3}</Circle>
           </Row>
         </Group>
       );
