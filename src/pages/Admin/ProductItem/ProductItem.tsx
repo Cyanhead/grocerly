@@ -11,7 +11,7 @@ import {
   CalendarPlus,
   DollarSign,
   Package,
-  ShoppingBag,
+  // ShoppingBag,
   Star,
 } from 'lucide-react';
 import { parseTimestamp } from '../../../helpers';
@@ -123,11 +123,11 @@ function ProductItem() {
         }) ?? 'N/A',
       icon: CalendarPlus,
     },
-    {
-      stat: 'First sale',
-      value: parseTimestamp(product.firstOrder) ?? 'Never',
-      icon: ShoppingBag,
-    },
+    // {
+    //   stat: 'First sale',
+    //   value: parseTimestamp(product.firstOrder) ?? 'Never',
+    //   icon: ShoppingBag,
+    // },
   ];
 
   return (

@@ -9,7 +9,12 @@ import { Cell } from '../Admin.styled';
 import Details, { DetailsPropsType } from '../Details';
 import { useParams } from 'react-router-dom';
 import { parseTimestamp } from '../../../helpers';
-import { CalendarPlus, MapPin, ShoppingBag, UserSquare2 } from 'lucide-react';
+import {
+  // CalendarPlus,
+  MapPin,
+  ShoppingBag,
+  UserSquare2,
+} from 'lucide-react';
 import fallbackPhoto from '../../../assets/images/default_user_fade.svg';
 
 function User() {
@@ -76,15 +81,15 @@ function User() {
   const userInfo: DetailsPropsType['stats'] = [
     { stat: 'User ID', value: user.id, icon: UserSquare2 },
     { stat: 'Address', value: user.address[0], icon: MapPin },
-    {
-      stat: 'First Order',
-      value:
-        parseTimestamp(user.firstOrder, {
-          hour: 'numeric',
-          minute: 'numeric',
-        }) ?? 'Never',
-      icon: CalendarPlus,
-    },
+    // {
+    //   stat: 'First Order',
+    //   value:
+    //     parseTimestamp(user.firstOrder, {
+    //       hour: 'numeric',
+    //       minute: 'numeric',
+    //     }) ?? 'Never',
+    //   icon: CalendarPlus,
+    // },
     {
       stat: 'Latest Order',
       value:

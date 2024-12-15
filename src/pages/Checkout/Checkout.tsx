@@ -126,6 +126,7 @@ function Checkout() {
           await updateDoc(docRef, {
             stock: increment(-item.quantity),
             lastOrder: serverTimestamp(),
+            // firstOrder: serverTimestamp(),
           });
         })
       );
