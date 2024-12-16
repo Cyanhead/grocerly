@@ -3,7 +3,7 @@ import { Icon, SectionHeading2, Skeleton, TextLink } from '../../../components';
 import { Cell } from '../Admin.styled';
 import { P, Row, Status } from './OrderItem.styled';
 import { useGetOrders, useGetSingleOrder } from '../../../hooks';
-import { parseTimestamp } from '../../../helpers';
+import { parseTimestamp, separateNumberByComma } from '../../../helpers';
 import { OrderItemProducts, Orders } from '../../../components/Tables';
 import {
   BadgeDollarSign,
@@ -57,7 +57,9 @@ function OrderItem() {
     {
       title: 'Profit',
       icon: BadgeDollarSign,
-      value: `$${netProfit} (${((netProfit / revenue) * 100).toFixed(2)}%)`,
+      value: `$${separateNumberByComma(netProfit, 2)} (${separateNumberByComma(
+        (netProfit / revenue) * 100
+      )}%)`,
     },
     {
       title: 'Customer',

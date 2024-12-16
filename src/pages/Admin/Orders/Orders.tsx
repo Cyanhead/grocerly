@@ -39,7 +39,7 @@ function Orders() {
 
     return [
       { name: 'Claimed Revenue', value: claimedRevenue, prefix: '$' },
-      { name: 'Profit', value: percentageProfit, suffix: '%' },
+      { name: 'Profit', value: percentageProfit || 0, suffix: '%' },
       { name: 'All  ', value: orders.length },
       { name: 'Cancelled  ', value: cancelled },
     ];

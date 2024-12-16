@@ -79,7 +79,7 @@ function AllProducts({
     return (
       <>
         <SectionHeading2>{heading}</SectionHeading2>
-        <EmptyTableMessage>{emptyTableMessage}</EmptyTableMessage>;
+        <EmptyTableMessage>{emptyTableMessage}</EmptyTableMessage>
       </>
     );
 
@@ -247,8 +247,7 @@ function AllProducts({
                 // );
 
                 const lastOrderedDate =
-                parseTimestamp(product.lastOrder) ?? 'Never';
-
+                  parseTimestamp(product.lastOrder) ?? 'Never';
 
                 return (
                   <Row key={product.id} item={product}>
@@ -267,9 +266,7 @@ function AllProducts({
                     </Cell>
                     <Cell>${product.price}</Cell>
                     <Cell>{product.stock}</Cell>
-                    <Cell title={lastOrderedDate}>
-                      {lastOrderedDate}
-                    </Cell>
+                    <Cell title={lastOrderedDate}>{lastOrderedDate}</Cell>
                     <Cell>
                       <MoreVertical
                       // TODO: add menu with delete option
