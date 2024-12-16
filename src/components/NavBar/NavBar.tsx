@@ -3,8 +3,8 @@ import { LinkButton } from '../Button';
 import Icon from '../Icon';
 import Layout from '../Layout';
 import Logo from '../Logo';
-import SearchBar from '../Search/SearchBar';
-import SearchForm from '../Search/SearchForm';
+// import SearchBar from '../Search/SearchBar';
+// import SearchForm from '../Search/SearchForm';
 import User from '../User';
 import CartButton from './CartButton';
 import {
@@ -37,18 +37,22 @@ function NavBar() {
         <Wrapper>
           <TopRow>
             <Logo />
-            <SearchForm />
-
-            <WishlistAndCart>
-              <WishlistButton onClick={() => setShowWishlist(true)} />
-              <CartButton onClick={() => setShowCart(true)} />
-            </WishlistAndCart>
-            <Layout.FlexRow $justify="space-between" $align="center">
-              <SearchBar />
-              <User
-                setShowWishlist={setShowWishlist}
-                setShowCart={setShowCart}
-              />
+            {/* <SearchForm /> */}
+            <Layout.FlexRow
+              $align="center"
+              // TODO: delete this container when search bar is implemented
+            >
+              <WishlistAndCart>
+                <WishlistButton onClick={() => setShowWishlist(true)} />
+                <CartButton onClick={() => setShowCart(true)} />
+              </WishlistAndCart>
+              <Layout.FlexRow $justify="space-between" $align="center">
+                {/* <SearchBar /> */}
+                <User
+                  setShowWishlist={setShowWishlist}
+                  setShowCart={setShowCart}
+                />
+              </Layout.FlexRow>
             </Layout.FlexRow>
           </TopRow>
           <BottomRow>
