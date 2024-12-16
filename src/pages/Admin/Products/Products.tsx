@@ -10,7 +10,7 @@ import {
   Bestsellers,
   LatestOrderedProducts,
 } from '../../../components/Tables';
-import { Plus } from 'lucide-react';
+import { Plus, UploadCloud } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { GalleryProvider } from '../../../components/Gallery/context';
 import {
@@ -19,6 +19,7 @@ import {
   TableHeader,
 } from './Products.styled';
 import { useAuthContext } from '../../../context';
+import UploadProductsFromFile from './UploadProductsFromFile';
 
 function Products() {
   const {
@@ -37,6 +38,7 @@ function Products() {
   const isSuperAdmin = state.roles.superAdmin;
 
   const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [showUploadFileModal, setShowUploadFileModal] = useState(false);
 
   // Memoize metrics calculation to avoid unnecessary recalculations
   const metrics: MetricPropsType[] = useMemo(() => {
@@ -131,6 +133,13 @@ function Products() {
           {isSuperAdmin && (
             <>
               <AddProductButton
+                variant="secondary"
+                onClick={() => setShowUploadFileModal(true)}
+              >
+                <Icon icon={UploadCloud} />
+                Upload from products file
+              </AddProductButton>
+              <AddProductButton
                 variant="ghost"
                 onClick={() => setShowAddProductModal(true)}
               >
@@ -148,6 +157,14 @@ function Products() {
 
         <AllProducts products={products} />
       </Cell>
+
+      {showUploadFileModal && (
+        <Modal closeModal={() => setShowUploadFileModal(false)}>
+          <UploadProductsFromFile
+            closeModal={() => setShowUploadFileModal(false)}
+          />
+        </Modal>
+      )}
 
       {showAddProductModal && (
         <Modal closeModal={() => setShowAddProductModal(false)}>

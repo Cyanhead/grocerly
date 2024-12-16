@@ -40,6 +40,10 @@ const BaseStyles = css<ButtonPropsType>`
               ? getColor('danger700')
               : getColor('primary600')};
 
+          /* box-shadow: inset 0px 0px 0px 2px ${getColor(
+            'primary600'
+          )}; */ // NOTE: this is a better way to do it but it's not fully supported
+
           &:hover {
             background-color: ${$theme === 'danger'
               ? getColor('danger50')

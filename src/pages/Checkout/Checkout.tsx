@@ -85,10 +85,7 @@ function Checkout() {
     setLoading(true);
     dispatch({ type: 'REMOVE_ALL_FROM_CART' });
 
-    const [orderId, orderRef] = await createDocAndReturnIdAndDocRef(
-      {},
-      'orders'
-    );
+    const [orderId, orderRef] = await createDocAndReturnIdAndDocRef('orders');
 
     const orderData: Order = {
       id: orderId,
@@ -106,10 +103,10 @@ function Checkout() {
         price,
       })),
       revenue: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
-      netProfit: cart.reduce(
-        (acc, item) => acc + item.price * item.quantity - item.price,
-        0
-      ),
+      netProfit: cart.reduce((acc, item) => {
+        const profitMargin = Math.random() * (0.6 - 0.2) + 0.2;
+        return acc + item.price * item.quantity * profitMargin;
+      }, 0),
     };
 
     try {
