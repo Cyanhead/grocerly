@@ -12,10 +12,9 @@ import vegetable from '../../../assets/images/categories/vegetable.png';
 import tuber from '../../../assets/images/categories/tuber.png';
 import fruit from '../../../assets/images/categories/fruit.png';
 import poultry from '../../../assets/images/categories/poultry.png';
-// import grain from '../../../assets/images/categories/grain.png';
-// import snack from '../../../assets/images/categories/snack.png';
-// import baking from '../../../assets/images/categories/baking.png';
-// import cleaning from '../../../assets/images/categories/cleaning.png';
+import meat from '../../../assets/images/categories/meat.png';
+import seafood from '../../../assets/images/categories/seafood.png';
+import dairy from '../../../assets/images/categories/dairy.png';
 
 const imagesOfCategories: Record<string, string> = {
   berry,
@@ -26,6 +25,9 @@ const imagesOfCategories: Record<string, string> = {
   fruit,
   vegetable,
   poultry,
+  meat,
+  seafood,
+  dairy,
 };
 
 function Categories() {
