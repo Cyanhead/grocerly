@@ -1,20 +1,22 @@
 import { generateRandom } from './generateRandom';
 
-// generate any color from #100000 to #ffffff
-export const generateColorHex = () => {
-  let randomColor = generateRandom(1048576, 16777215).toString(16);
-  return `#${randomColor}`;
-};
+/**
+ * Generates a random hex color code.
+ * @returns {string} The hex color code in the format '#RRGGBB'
+ */
+export const generateColorHex = () =>
+  `#${((Math.random() * 0xffffff) << 0).toString(16)}`;
 
-// generate any bright color in hsla format taken from https://stackoverflow.com/questions/43193341/how-to-generate-random-pastel-or-brighter-color-in-javascript
-export const generateLightColorHsla = () => {
-  return (
-    'hsla(' +
-    Math.floor(360 * Math.random()) +
-    ',' +
-    Math.floor(25 + 70 * Math.random()) +
-    '%,' +
-    Math.floor(85 + 10 * Math.random()) +
-    '%, 0.6)'
-  );
-};
+/**
+ * Generates a light color in HSLA format (Hue, Saturation, Lightness, Alpha)
+ * with the following constraints:
+ * - Hue: between 0 and 360 degrees
+ * - Saturation: between 25% and 95%
+ * - Lightness: between 85% and 100%
+ * - Alpha: 60% (medium transparency)
+ */
+export const generateLightColorHsla = () =>
+  `hsla(${generateRandom(0, 360)},${generateRandom(25, 95)}%,${generateRandom(
+    85,
+    100
+  )}%, 0.6)`;

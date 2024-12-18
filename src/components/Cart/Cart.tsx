@@ -1,180 +1,149 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
-import { useCartContext } from '../../context/CartContext';
 import {
-  CartWrap,
-  CartTop,
-  CartTopLeft,
-  EmptyCartButton,
-  EmptyCartButtonSpan,
-  CartMid,
-  CartHeading,
-  CartP,
-  AddProductsButton,
-  CartItemsList,
-  CartItemWrap,
-  CartItemLeft,
-  ItemImg,
-  ItemDetails,
-  CartItemRight,
-  CartRow,
-  CartBottom,
-  CheckoutButton
-} from './cart.style';
-import { FiShoppingCart, FiTrash, FiChevronLeft } from 'react-icons/fi';
-import { Disabler, GreenSpan, IconWrap } from '../others.style';
-import ItemQuantityCounter from '../ItemQuantityCounter';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside.hook';
-import { useLockBodyScroll } from '../../hooks/useLockBodyScroll.hook';
+  Card,
+  Column,
+  Image,
+  Price,
+  Title,
+  Wrapper,
+} from '../Wishlist/Wishlist.styled';
+import { ModalBackground, SectionHeading2, TextLink } from '../BaseStyled';
+import Layout from '../Layout';
+import Button, { LinkButton } from '../Button';
+import Icon from '../Icon';
+import { ChevronLeft, ShoppingCart, Trash, X } from 'lucide-react';
+import { CartPropsType } from './Cart.type';
+import { useClickOutside, useLockScroll } from '../../hooks';
+import { useCartContext } from '../../context';
+import Counter from '../Counter';
+import { RemoveButton } from './Cart.styled';
+import { toast } from 'react-hot-toast';
 
-const Cart = () => {
-  const {
-    cartItems,
-    setCartItems,
-    totalQuantity,
-    setTotalQuantity,
-    totalPrice,
-    setTotalPrice,
-    showCart,
-    setShowCart,
-    onRemove
-  } = useCartContext();
+function Cart({ isVisible, setIsVisible }: CartPropsType) {
+  const { state: cart, dispatch } = useCartContext();
 
-  const clickOutRef = useRef(null);
-  useOnClickOutside(clickOutRef, () => setShowCart(false));
-  useLockBodyScroll(showCart);
+  const cartRef = useRef(null);
+  useClickOutside([cartRef], () => setIsVisible(false));
+  useLockScroll(isVisible);
 
-  const EmptyCart = () => {
-    return (
-      <CartMid>
-        {/* TODO: replace icon with svg */}
-        <IconWrap fontSize="8rem">
-          <FiShoppingCart />
-        </IconWrap>
-        <CartP
-          fontSize="1.25rem"
-          fontWght={props => props.theme.fontWght.medium}
-          textTrans="inherit"
-          textAlign="center"
-        >
-          There are no items in the cart ಥ_ಥ
-        </CartP>
-        <AddProductsButton
-          to="/products"
-          onClick={() => setShowCart(!showCart)}
-        >
-          Add products
-        </AddProductsButton>
-      </CartMid>
-    );
-  };
+  function handleRemoveAll() {
+    dispatch({ type: 'REMOVE_ALL_FROM_CART' });
 
-  const CartInterface = () => {
-    return (
-      <CartItemsList>
-        {cartItems?.map(item => {
-          return (
-            <CartItemWrap key={item?.id}>
-              <CartItemLeft>
-                <ItemImg src={item?.images[0]} alt="" />
-                <ItemDetails>
-                  <CartP> {item?.name} </CartP>
-                  <CartP> &#36;{item?.price} </CartP>
-                  <CartP>
-                    sub total:{' '}
-                    <GreenSpan
-                      fontWght={props => props.theme.fontWght.semibold}
-                    >
-                      &#36;{item.price * item.quantity}
-                    </GreenSpan>
-                  </CartP>
-                </ItemDetails>
-              </CartItemLeft>
-              <CartItemRight>
-                <ItemQuantityCounter item={item} mar="0" cart />
-                <IconWrap onClick={() => onRemove(item)} fgHover="red">
-                  <FiTrash />
-                </IconWrap>
-              </CartItemRight>
-            </CartItemWrap>
-          );
-        })}
-      </CartItemsList>
-    );
-  };
+    toast.success('All items removed from cart.');
+  }
 
-  const CartCheckout = () => {
-    return (
-      <CartBottom>
-        <CartRow>
-          <CartP
-            fontSize="1.25rem"
-            fontWght={props => props.theme.fontWght.medium}
-          >
-            Total price:
-          </CartP>
-          <CartP
-            fontSize="1.25rem"
-            fontWght={props => props.theme.fontWght.bold}
-          >
-            &#36;{totalPrice}
-          </CartP>
-        </CartRow>
-        <CheckoutButton>Checkout</CheckoutButton>
-      </CartBottom>
-    );
-  };
+  function removeFromCart(productId: string, productName: string) {
+    dispatch({
+      type: 'REMOVE_FROM_CART',
+      payload: {
+        id: productId,
+      },
+    });
 
-  const handleEmptyCart = () => {
-    setCartItems([]);
-    setTotalQuantity(0);
-    setTotalPrice(0);
-  };
+    toast.success(`${productName} removed from cart.`);
+  }
+
+  function handleCounterChange(productId: string, quantity: number) {
+    dispatch({
+      type: 'UPDATE_QUANTITY_IN_CART',
+      payload: {
+        id: productId,
+        quantity,
+      },
+    });
+  }
 
   return (
-    <CartWrap
-      centerCenter={cartItems.length === 0}
-      showCart={showCart}
-      ref={clickOutRef}
-    >
-      <CartTop>
-        <CartTopLeft>
-          <IconWrap
-            onClick={() => setShowCart(!showCart)}
-            mar="0 4px 0 0"
-            pad="8px"
-            bordRad="4px"
-            bgHover={props => props.theme.color.greyHover}
-            bgActive={props => props.theme.color.greyActive}
+    <>
+      <ModalBackground $show={isVisible} />
+
+      <Wrapper $isVisible={isVisible} ref={cartRef}>
+        <Layout.FlexRow $justify="space-between" $align="center">
+          <Button $variant="normal" onClick={() => setIsVisible(false)}>
+            <Icon icon={ChevronLeft} size={32} />
+            <SectionHeading2>Cart</SectionHeading2>
+          </Button>
+          <Button $theme="danger" $variant="normal" onClick={handleRemoveAll}>
+            <Icon icon={X} />
+            Remove all
+          </Button>
+        </Layout.FlexRow>
+        {cart.length === 0 && (
+          <Layout.FlexCol
+            $align="center"
+            $justify="center"
+            $gap={16}
+            style={{ flex: 1 }}
           >
-            <FiChevronLeft />
-          </IconWrap>
-          <CartHeading>
-            My Cart{' '}
-            <GreenSpan>
-              ({totalQuantity} item{totalQuantity === 1 ? '' : 's'})
-            </GreenSpan>
-          </CartHeading>
-        </CartTopLeft>
-        <Disabler disabled={cartItems.length === 0} onClick={handleEmptyCart}>
-          <EmptyCartButton>
-            <IconWrap fontSize="1.25rem" bg="transparent" bgHover="transparent">
-              <FiTrash />
-            </IconWrap>
-            <EmptyCartButtonSpan>Empty Cart</EmptyCartButtonSpan>
-          </EmptyCartButton>
-        </Disabler>
-      </CartTop>
-      {cartItems.length === 0 ? (
-        <EmptyCart />
-      ) : (
-        <>
-          <CartInterface />
-          <CartCheckout />
-        </>
-      )}
-    </CartWrap>
+            <SectionHeading2>Cart is empty</SectionHeading2>
+            <LinkButton to="/products">
+              <Icon icon={ShoppingCart} />
+              Shop now
+            </LinkButton>
+          </Layout.FlexCol>
+        )}
+
+        <Column>
+          {cart.map(({ id, name, price, image, quantity }) => (
+            <Card key={id}>
+              <Image src={image} alt={name} />
+              <Layout.FlexRow
+                $gap={8}
+                $width="100%"
+                $justify="space-between"
+                $align="stretch"
+              >
+                <Layout.FlexCol $gap={8} $justify="space-between">
+                  <Title as={TextLink} to={`/products/${id}`} $isActive>
+                    {name}
+                  </Title>
+                  <Price>${price}</Price>
+                  <Counter
+                    count={quantity}
+                    setCount={quantity => handleCounterChange(id, quantity)}
+                  />
+                </Layout.FlexCol>
+                <Layout.FlexCol $align="flex-end" $justify="space-between">
+                  <RemoveButton
+                    $theme="danger"
+                    $variant="normal"
+                    onClick={() => removeFromCart(id, name)}
+                  >
+                    <Icon icon={Trash} /> Remove
+                  </RemoveButton>
+
+                  <Price>
+                    <span
+                      style={{
+                        color: '#555',
+                        fontWeight: 400,
+                      }}
+                    >
+                      Subtotal:
+                    </span>{' '}
+                    ${price * quantity}
+                  </Price>
+                </Layout.FlexCol>
+              </Layout.FlexRow>
+            </Card>
+          ))}
+        </Column>
+        {cart.length !== 0 && (
+          <Layout.FlexCol $align="flex-end">
+            <Price style={{ marginBottom: '10px' }}>
+              Total: $
+              {cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
+            </Price>
+
+            <LinkButton to="/checkout" onClick={() => setIsVisible(false)}>
+              Checkout
+            </LinkButton>
+          </Layout.FlexCol>
+        )}
+      </Wrapper>
+    </>
   );
-};
+}
 
 export default Cart;

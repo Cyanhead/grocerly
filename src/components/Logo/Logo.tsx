@@ -1,16 +1,12 @@
-import React from 'react';
-
-import { LogoWrap, HomeLink, LogoImg } from './logo.style';
 import logo from '../../assets/images/Logo.svg';
+import { Image, Link } from './Logo.styled';
 
-const Logo = () => {
+function Logo({ ...delegated }) {
   return (
-    <LogoWrap>
-      <HomeLink to="/">
-        <LogoImg src={logo} alt="" />
-      </HomeLink>
-    </LogoWrap>
+    <Link to="/" data-testid="Logo" {...delegated}>
+      <Image src={logo} alt="logo" />
+    </Link>
   );
-};
+}
 
 export default Logo;

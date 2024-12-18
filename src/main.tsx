@@ -1,31 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import { Toaster } from 'react-hot-toast';
-
 import Firebase, { FirebaseContext } from './context/Firebase';
-import { ProductsListContext } from './context/ProductsListContext';
-import { CartContext } from './context/CartContext';
-import { WishlistContext } from './context/WIshlistContext';
-import { AuthContext } from './context/AuthContext';
-import { UsersListContext } from './context/UsersListContext';
+import { AuthProvider } from './context/auth/AuthContext';
+import { RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './theme/theme';
+import { GlobalStyle } from './theme/Global.style';
+import router from './router';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
 root.render(
   <React.StrictMode>
     <FirebaseContext.Provider value={Firebase}>
-      <ProductsListContext>
-        <CartContext>
-          <WishlistContext>
-            <AuthContext>
-              <UsersListContext>
-                <Toaster />
-                <App />
-              </UsersListContext>
-            </AuthContext>
-          </WishlistContext>
-        </CartContext>
-      </ProductsListContext>
+      <GlobalStyle theme={theme} />
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <Toaster />
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </ThemeProvider>
     </FirebaseContext.Provider>
   </React.StrictMode>
 );
